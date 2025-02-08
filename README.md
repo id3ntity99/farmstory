@@ -1,6 +1,6 @@
 # 1. 사전 준비
 
-1) Eclipse Foramatter
+1) Eclipse Formatter
 
 - ```git clone https://github.com/google/styleguide.git``` 실행
 - 이클립스 실행
@@ -9,6 +9,12 @@
 - 오른쪽 하단의 Apply 버튼을 눌러 변경 사항 저장.
 - 좌측 설정 선택 창에서 Java - Editor - Save Action에서 가장 위에 있는 "Perform the selected actions on save" 버튼을 눌러 체크.
 - 우측 하단의 Apply and close 버튼을 눌러 변경 사항 저장.
+- 
+2) VS Code Formatter
+- VS Code 실행
+- 좌측 창에서 "확장" 선택
+- Prettier Formatter 검색 후 설치
+- 이후 HTML, CSS, Javascript 코드를 작성하고 저장하면 자동으로 코드가 포맷 됨.
 
 포매터를 설정해주는 이유는, 개발자마다의 코드 포맷(서식)이 다르면 계속해서 ```git status```를 찍을 때마다 add/commit 해줘야 하는 파일들이 늘어나기 때문이다.
 git은 commit된 파일의 아주 사소한 변경 사항에도 반응한다.
