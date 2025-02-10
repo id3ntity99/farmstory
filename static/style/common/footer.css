@@ -1,0 +1,42 @@
+/* footer */
+footer {
+  width: 100%;
+  height: 100%;
+}
+
+footer > div {
+  margin: 0 auto;
+  width: 980px;
+  height: 120px;
+  position: absolute;
+  left: 470px;
+  right: 470px;
+  border-top: 1px solid #d1cab2;
+  box-sizing: border-box;
+}
+
+footer > div > img {
+  position: absolute;
+  width: 174px;
+  height: 64px;
+  left: 0px;
+  top: 1px;
+}
+
+footer > div > p {
+  position: absolute;
+  height: 71px;
+  left: 254.52px;
+  right: 16px;
+  top: 27px;
+  color: #7a7a7a;
+}
+
+footer > div > p > span {
+  color: #a6a6a6;
+}
+
+footer > div > p > span:nth-of-type(2) {
+  color: #a6a6a6;
+  float: right;
+}
