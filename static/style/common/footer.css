@@ -8,9 +8,7 @@ footer > div {
   margin: 0 auto;
   width: 980px;
   height: 120px;
-  position: absolute;
-  left: 470px;
-  right: 470px;
+  position: relative;
   border-top: 1px solid #d1cab2;
   box-sizing: border-box;
 }

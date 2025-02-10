@@ -1,4 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans+KR:wght@100..900&display=swap");
+/*초기화*/
+* {
+  margin: 0;
+  padding: 0;
+  font: normal 12px "noto sans koeran";
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #111;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
 /*header*/
 header {
   width: 100%;
@@ -62,19 +84,19 @@ header > .services > article > div {
 }
 
 header > .services > article > div:nth-child(1) {
-  background: url(/images/head_menu1.png) no-repeat;
+  background: url(/static/images/head_menu1.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(1):hover {
-  background: url(/images/head_menu1_ov.png) no-repeat;
+  background: url(/static/images/head_menu1_ov.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(2) {
-  background: url(/images/head_menu2.png) no-repeat;
+  background: url(/static/images/head_menu2.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(2):hover {
-  background: url(/images/head_menu2_ov.png) no-repeat;
+  background: url(/static/images/head_menu2_ov.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(2) {
@@ -88,24 +110,24 @@ header > .services > article > div:nth-child(2) img:nth-child(1) {
 }
 
 header > .services > article > div:nth-child(3) {
-  background: url(/images/head_menu3.png) no-repeat;
+  background: url(/static/images/head_menu3.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(3):hover {
-  background: url(/images/head_menu3_ov.png) no-repeat;
+  background: url(/static/images/head_menu3_ov.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(4) {
-  background: url(/images/head_menu4.png) no-repeat;
+  background: url(/static/images/head_menu4.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(4):hover {
-  background: url(/images/head_menu4_ov.png) no-repeat;
+  background: url(/static/images/head_menu4_ov.png) no-repeat;
 }
 header > .services > article > div:nth-child(5) {
-  background: url(/images/head_menu5.png) no-repeat;
+  background: url(/static/images/head_menu5.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(5):hover {
-  background: url(/images/head_menu5_ov.png) no-repeat;
+  background: url(/static/images/head_menu5_ov.png) no-repeat;
 }
