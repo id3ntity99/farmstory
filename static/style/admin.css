@@ -31,9 +31,8 @@ textarea {
 header {
   width: 980px;
   height: 60px;
-  background-image: url("/static/images/admin/admin_bg.jpg");
+  background-image: url('/static/images/admin/admin_bg.jpg');
   box-sizing: border-box;
-  border: 1px solid blue;
   padding: 12px;
 }
 header > p {
@@ -50,11 +49,11 @@ main {
   overflow: hidden;
 }
 
-main > aside {
+
+main>aside{
   float: left;
   width: 176px;
   height: 400px;
-  border: 1px solid red;
   box-sizing: border-box;
   padding: 10px;
 }
@@ -78,7 +77,6 @@ main > aside > ul > li {
 
 main > aside > ul > li.on > span {
   font-weight: bold;
-  text-decoration: underline;
 }
 
 main > aside > ul > li > ol {
@@ -97,31 +95,69 @@ main > aside ol > li > a:hover {
   text-decoration: underline;
 }
 
-main > section {
-  width: 804px;
-  height: 658px;
-  margin-top: 5px;
-  overflow: hidden;
+main>section{
+    width: 804px;
+    height: 658px;
+    margin-top: 5px;
+    overflow: hidden;
+    float: right;
 }
 
-main > section > article {
-  float: right;
-  width: 784px;
-  height: 193px;
-  border: 1px solid blue;
-  box-sizing: border-box;
+main > section > nav > h3 {
+    font-size: 17px;
+    font-weight: bold;
+    color: #3f3f3f;
+}
+
+main > section > article > h3 {
+    margin: 6px 0;
+}
+
+main > section > article > h3 > .more {
+    float: right;
+}
+
+main > section > article table {
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #333;
+}
+
+main  > section > article table tr {
+    border-bottom: 1px dotted #999;
+}
+
+main  > section > article table tr > th {
+    padding: 12px;
+    background-color: #fbfbfb;
+}
+
+main  > section > article table tr > td {
+    padding: 12px;
+    text-align: center;
+}
+
+main>section>article{
+    width: 784px;
+    height: 193px;
+    box-sizing: border-box;
+    margin-top: 12px;
 }
 
 /* 푸터 */
 footer {
-  width: 980px;
-  height: 41px;
-  padding: 12px;
-  background-image: url("/static/images/admin/admin_bg.jpg");
-  box-sizing: border-box;
-  border: 1px solid green;
+    width: 980px;
+    height: 41px;
+    padding: 12px;
+    background-image: url('/static/images/admin/admin_bg.jpg');
+    box-sizing: border-box;
 }
 
 footer > p {
-  color: #fff;
+    color: #999;
+}
+footer >p>span{
+    float: right;
 }

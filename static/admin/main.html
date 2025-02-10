@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <title>관리자 메인</title>
-    <link rel="stylesheet" href="/static/style/common/admin.css" />
-  </head>
-  <body>
+
+    <link rel="stylesheet" href="/static/style/admin.css">
+</head>
+<body>
     <div id="container">
       <header>
         <a href="#">
@@ -46,55 +47,106 @@
         </aside>
 
         <section>
-          <nav>
-            <h3>관리자 메인</h3>
-          </nav>
-          <article>
-            <h3>
-              <a href="#">상품현황</a>
-              <a href="#"> + 더보기</a>
-            </h3>
 
-            <table>
-              <tr>
-                <th>상품번호</th>
-                <th>상품명</th>
-                <th>구분</th>
-                <th>가격</th>
-                <th>재고</th>
-                <th>등록일</th>
-              </tr>
-              <tr>
-                <th>1011</th>
-                <th>사과 500g</th>
-                <th>과일</th>
-                <th>4,000원</th>
-                <th>100</th>
-                <th>2023-01-01</th>
-              </tr>
-              <tr>
-                <th>1011</th>
-                <th>사과 500g</th>
-                <th>과일</th>
-                <th>4,000원</th>
-                <th>100</th>
-                <th>2023-01-01</th>
-              </tr>
-              <tr>
-                <th>1011</th>
-                <th>사과 500g</th>
-                <th>과일</th>
-                <th>4,000원</th>
-                <th>100</th>
-                <th>2023-01-01</th>
-              </tr>
-            </table>
-          </article>
-          <article>
-            <h3>
-              <a href="#">주문현황</a>
-              <a href="#"> + 더보기</a>
-            </h3>
+            <nav>
+                <h3>관리자 메인</h3>
+            </nav>
+            <article>
+                <h3>
+                    <a href="#">상품현황</a>
+                    <a href="#" class="more"> + 더보기</a>
+                </h3>
+
+                <table>
+                    <tr>
+                        <th>상품번호</th>
+                        <th>상품명</th>
+                        <th>구분</th>
+                        <th>가격</th>
+                        <th>재고</th>
+                        <th>등록일</th>
+                    </tr>
+                    <tr>
+                        <th>1011</th>
+                        <th>사과 500g</th>
+                        <th>과일</th>
+                        <th>4,000원</th>
+                        <th>100</th>
+                        <th>2023-01-01</th>
+                    </tr>
+                    <tr>
+                        <th>1011</th>
+                        <th>사과 500g</th>
+                        <th>과일</th>
+                        <th>4,000원</th>
+                        <th>100</th>
+                        <th>2023-01-01</th>
+                    </tr>
+                    <tr>
+                        <th>1011</th>
+                        <th>사과 500g</th>
+                        <th>과일</th>
+                        <th>4,000원</th>
+                        <th>100</th>
+                        <th>2023-01-01</th>
+                    </tr>
+                </table>
+
+            </article>
+            <article>
+                <h3>
+                    <a href="#">주문현황</a>
+                    <a href="#" class="more"> + 더보기</a>
+                </h3>
+
+                <table>
+                    <tr>
+                        <th>주문번호</th>
+                        <th>상품명</th>
+                        <th>판매가격</th>
+                        <th>수량</th>
+                        <th>배송비</th>
+                        <th>합계</th>
+                        <th>주문자</th>
+                        <th>주문일</th>
+                    </tr>
+                    <tr>
+                        <th>1011</th>
+                        <th>사과 500g</th>
+                        <th>4,000원</th>
+                        <th>2개</th>
+                        <th>3,000원</th>
+                        <th>8,000원</th>
+                        <th>홍길동</th>
+                        <th>2023-01-01</th>
+                    </tr>
+                    <tr>
+                        <th>1011</th>
+                        <th>사과 500g</th>
+                        <th>4,000원</th>
+                        <th>2개</th>
+                        <th>3,000원</th>
+                        <th>8,000원</th>
+                        <th>홍길동</th>
+                        <th>2023-01-01</th>
+                    </tr>
+                    <tr>
+                        <th>1011</th>
+                        <th>사과 500g</th>
+                        <th>4,000원</th>
+                        <th>2개</th>
+                        <th>3,000원</th>
+                        <th>8,000원</th>
+                        <th>홍길동</th>
+                        <th>2023-01-01</th>
+                    </tr>
+                </table>
+            </rticle>
+            <Article>
+                <h3>
+                    <a href="#">회원현황</a>
+                    <a href="#" class="more"> + 더보기</a>
+                </h3>
 
             <table>
               <tr>
@@ -186,65 +238,11 @@
           </article>
         </section>
       </main>
-
-      <footer>
-        <p>
-          FARMSTORY ADMINISTRATOR Varsion 1.0.1
-          <span>Copyright(C)김철학(개발에 반하다.) All rights reserved.</span>
-        </p>
-      </footer>
-    </div>
-    <!-- Code injected by live-server -->
-    <script>
-      // <![CDATA[  <-- For SVG support
-      if ("WebSocket" in window) {
-        (function () {
-          function refreshCSS() {
-            var sheets = [].slice.call(document.getElementsByTagName("link"));
-            var head = document.getElementsByTagName("head")[0];
-            for (var i = 0; i < sheets.length; ++i) {
-              var elem = sheets[i];
-              var parent = elem.parentElement || head;
-              parent.removeChild(elem);
-              var rel = elem.rel;
-              if (
-                (elem.href && typeof rel != "string") ||
-                rel.length == 0 ||
-                rel.toLowerCase() == "stylesheet"
-              ) {
-                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, "");
-                elem.href =
-                  url +
-                  (url.indexOf("?") >= 0 ? "&" : "?") +
-                  "_cacheOverride=" +
-                  new Date().valueOf();
-              }
-              parent.appendChild(elem);
-            }
-          }
-          var protocol =
-            window.location.protocol === "http:" ? "ws://" : "wss://";
-          var address =
-            protocol + window.location.host + window.location.pathname + "/ws";
-          var socket = new WebSocket(address);
-          socket.onmessage = function (msg) {
-            if (msg.data == "reload") window.location.reload();
-            else if (msg.data == "refreshcss") refreshCSS();
-          };
-          if (
-            sessionStorage &&
-            !sessionStorage.getItem("IsThisFirstTime_Log_From_LiveServer")
-          ) {
-            console.log("Live reload enabled.");
-            sessionStorage.setItem("IsThisFirstTime_Log_From_LiveServer", true);
-          }
-        })();
-      } else {
-        console.error(
-          "Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading."
-        );
-      }
-      // ]]>
-    </script>
-  </body>
+    <footer>
+        <p> FARMSTORY ADMINISTRATOR Varsion 1.0.1
+        <span>Copyright(C)김철학(개발에 반하다.) All rights reserved.</span>
+    </p>
+    </footer>
+</div>
+</body>
 </html>
