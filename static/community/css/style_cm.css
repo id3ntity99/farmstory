@@ -1,0 +1,134 @@
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #111;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+/*header*/
+header {
+  width: 100%;
+  height: auto;
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+
+header > section {
+  width: 980px;
+  height: 100%;
+  margin: 0 auto;
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+
+/*header > .links*/
+header > .links > div {
+  width: 980px;
+  height: 30px;
+}
+
+header > .links > div > p {
+  float: right;
+  margin-top: 10px;
+}
+
+header > .links > div > p > a {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/*header > .logo*/
+header > .logo {
+  position: relative;
+  height: 100%;
+}
+
+header > .logo > div {
+  height: 65px;
+}
+
+header > .logo a:nth-child(1) {
+  position: absolute;
+  left: 40%;
+  bottom: 5px;
+}
+
+header > .logo a:nth-child(2) {
+  position: absolute;
+  right: 0%;
+  bottom: 9px;
+}
+
+/*header > .services*/
+header > .services > article {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: space-around;
+}
+
+header > .services > article > div {
+  width: 190px;
+  border-top: 4px solid #111;
+}
+
+
+header > .services > article > div:nth-child(2) {
+  background: url(./images/head_menu2.png) no-repeat;
+}
+
+header > .services > article > div:nth-child(2):hover {
+  background: url(./images/head_menu2_ov.png) no-repeat;
+}
+
+header > .services > article > div:nth-child(2) {
+  position: relative;
+}
+
+header > .services > article > div:nth-child(2) img:nth-child(1) {
+  position: absolute;
+  top: -23px;
+  right: 30%;
+}
+
+header > .services > article > div > a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 40px;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+main> .background {
+  width: 980px;
+  height: 184px;
+  margin: 0 auto;
+  border: 1px solid blue;
+  box-sizing: border-box;
+  position: relative;
+}
+
+main > .background > div img:nth-child(2) {
+  position: absolute;
+  width: 270px;
+  height: 37px;
+  left: 10px;
+  bottom: 10px;
+}
