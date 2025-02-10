@@ -1,18 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans+KR:wght@100..900&display=swap");
 /* 스타일 초기화 */
 * {
-    margin: 0;
-    padding: 0;
-    font: normal 12px '고딕';
+  margin: 0;
+  padding: 0;
+  font: normal 12px "noto sans koeran";
 }
 
 ul,
 ol {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
-    color: #111;
+  text-decoration: none;
+  color: #111;
 }
 
 input,
@@ -22,78 +23,77 @@ textarea {
 }
 
 #container {
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
 }
 
 /* 헤더 */
 header {
-    width: 980px;
-    height: 60px;
-    background-image: url('/static/images/admin/admin_bg.jpg');
-    box-sizing: border-box;
-    padding: 12px;
+  width: 980px;
+  height: 60px;
+  background-image: url('/static/images/admin/admin_bg.jpg');
+  box-sizing: border-box;
+  padding: 12px;
 }
 header > p {
-    float: right;            
+  float: right;
 }
 header > p > a {
-    color: #fff;
+  color: #fff;
 }
-
 
 /* 메인 */
-main{
-    width: 980px;
-    height: 658px;
-    overflow: hidden;
+main {
+  width: 980px;
+  height: 658px;
+  overflow: hidden;
 }
 
+
 main>aside{
-    float: left;
-    width: 176px;
-    height: 400px;
-    box-sizing: border-box;
-    padding: 10px;
+  float: left;
+  width: 176px;
+  height: 400px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 main > aside > h3 {
-    padding: 5px 20px;
-    border-radius: 20px;
-    background-color: rgb(229, 229, 229);
-    border: 1px solid rgb(204, 204, 204);            
-    font-size: 14px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  background-color: rgb(229, 229, 229);
+  border: 1px solid rgb(204, 204, 204);
+  font-size: 14px;
 }
 
 main > aside > ul {
-    padding: 16px;
-    box-sizing: border-box;    
+  padding: 16px;
+  box-sizing: border-box;
 }
 main > aside > ul > li {
-    line-height: 22px;
-    margin-top: 10px;
-    
+  line-height: 22px;
+  margin-top: 10px;
 }
 
 main > aside > ul > li.on > span {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 main > aside > ul > li > ol {
-    color:#111;
-    text-indent: 10px;
+  color: #111;
+  text-indent: 10px;
 }
 main > aside > ul > li > ol > li {
-    line-height: 22px;
+  line-height: 22px;
 }
 main > aside > ul > li > ol > li::before {
-    content: 'ㄴ';
-    margin-right: 4px;
+  content: "ㄴ";
+  margin-right: 4px;
 }
 
 main > aside ol > li > a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 main>section{
@@ -148,12 +148,12 @@ main>section>article{
     margin-top: 12px;
 }
 
+
 /* 회원목록 */
 section> article p{
     padding: 10px;
     text-align: center;
 }
-
 
 /* 푸터 */
 footer {
