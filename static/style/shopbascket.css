@@ -1,0 +1,149 @@
+/* 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  font: normal 12px "고딕";
+}
+
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #111;
+}
+input,
+textarea {
+  outline: none;
+}
+
+#wrapper {
+  width: 980px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/*헤더*/
+header {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+header .links {
+  float: right;
+}
+header .logo {
+  position: relative;
+  left: 40%;
+  top: 10px;
+  margin-bottom: 20px;
+}
+header .logo a:nth-of-type(2) {
+  position: relative;
+  left: 17%;
+}
+header .logo a:nth-of-type(3) {
+  position: absolute;
+  right: 1040px;
+  top: 60px;
+}
+header .nav {
+  width: 100%;
+  height: auto;
+}
+header .nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .nav ul li {
+  width: 196px;
+  height: 50px;
+  border-top: 4px solid black;
+  margin: 0 1.5px;
+}
+
+header .nav ul li a img {
+  display: block;
+}
+
+header .nav .line ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .background {
+  width: 980px;
+  height: 184px;
+  margin-bottom: 22px;
+}
+header .background a:nth-of-type(2) {
+  position: relative;
+  bottom: 50px;
+  left: 15px;
+}
+
+/*메인*/
+
+main {
+  width: 980px;
+  height: auto;
+}
+main .side {
+  min-width: 176px;
+  height: 650px;
+  float: left;
+  border-right: 1px solid #999;
+}
+main .side h1 {
+  margin-left: 10px;
+}
+main .side article {
+  width: 175px;
+  height: 233px;
+  background-image: url("/static/images/sub_aside_bg_lnb.png");
+  padding-top: 20px;
+}
+
+main .basket {
+  width: 762px;
+  height: 72px;
+  float: right;
+}
+main .basket h1 {
+  float: left;
+}
+main .basket p {
+  float: right;
+}
+main .whole {
+  float: right;
+}
+main .total {
+  float: right;
+}
+
+/*푸터*/
+
+footer {
+  width: 100%;
+  height: auto;
+}
+footer .footerline {
+}
+footer .footerimg {
+  float: left;
+  margin-right: 50px;
+}
+footer .text {
+  text-align: left;
+  box-sizing: border-box;
+  float: right;
+}
+footer .text p {
+  font-size: 10.83px;
+  color: #999;
+  margin-top: 20px;
+  margin-right: 15px;
+}
