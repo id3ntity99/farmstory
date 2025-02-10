@@ -18,7 +18,8 @@ a {
 
 input,
 textarea {
-  outline: none;
+    outline: none;
+    resize: none;
 }
 
 #container {
@@ -104,6 +105,7 @@ main>section{
 }
 
 main > section > nav > h3 {
+    padding-top: 8px;
     font-size: 17px;
     font-weight: bold;
     color: #3f3f3f;
@@ -131,7 +133,7 @@ main  > section > article table tr {
 
 main  > section > article table tr > th {
     padding: 12px;
-    background-color: #fbfbfb;
+    background-color: #fff;
 }
 
 main  > section > article table tr > td {
@@ -144,6 +146,13 @@ main>section>article{
     height: 193px;
     box-sizing: border-box;
     margin-top: 12px;
+}
+
+
+/* 회원목록 */
+section> article p{
+    padding: 10px;
+    text-align: center;
 }
 
 /* 푸터 */
