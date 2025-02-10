@@ -9,7 +9,6 @@
 - 오른쪽 하단의 `Apply` 버튼을 눌러 변경 사항 저장.
 - 좌측 설정 선택 창에서 `Java - Editor - Save Action`에서 가장 위에 있는 `"Perform the selected actions on save"` 버튼을 눌러 체크.
 - 우측 하단의 `Apply and close` 버튼을 눌러 변경 사항 저장 후 설정창 종료.
--
 
 2. VS Code Formatter
 
