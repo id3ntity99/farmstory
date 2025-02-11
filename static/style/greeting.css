@@ -1,96 +1,26 @@
-#wrapper > main > .banner {
-  width: 980px;
-  height: 100%;
-  margin: 0 auto;
-  margin-bottom: 10px;
-}
-
-#wrapper .banner > div {
-  width: 100%;
-  height: auto;
-  position: relative;
-}
-main > .banner > div > img:nth-child(2) {
-  z-index: 10;
-  position: absolute;
-  bottom: 10px;
-  left: 20px;
-}
-
-/*main > .side-menu*/
-main > .side-menu {
-  width: 100%;
-  height: 100%;
-  border: 1px solid blue;
-}
-
-main > .side-menu > article {
-  width: 980px;
-  height: 650px;
-  border: 1px solid red;
-  margin: 0 auto;
-  position: relative;
-}
-
-main > .side-menu .side-title {
-  background: url() no-repeat;
-  width: 180px;
-  height: 80px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 10;
-}
-
-main > .side-menu .side-title > img {
-  display: block;
-  margin: auto;
-  margin-top: 20px;
-}
-
-main > .side-menu > article > aside {
-  width: 176px;
-  height: 650px;
-  position: absolute;
-  left: 0;
-  top: 80px;
-  background: url(/static/images/sub_aside_bg_lnb.png) no-repeat;
-  padding: 30px 5px;
-}
-
-main > .side-menu > article > aside > .line {
-  position: absolute;
-  left: 170px;
-  top: 0;
-}
-
-main > .side-menu .side-content a {
-  display: block;
-  width: 177px;
-  height: 30px;
-  float: top;
-}
-
-main > .side-menu .side-content > a:nth-child(1) {
+main > .container .side-content > a:nth-child(1) {
   background: url(/static/images/sub_cate1_lnb1.png);
 }
 
-main > .side-menu .side-content > a:nth-child(2) {
+main > .container .side-content > a:nth-child(2) {
   background: url(/static/images/sub_cate1_lnb2.png);
 }
 
-main > .side-menu .side-content > a:nth-child(1):hover {
+main > .container .side-content > a:nth-child(1):hover {
   background: url(/static/images/sub_cate1_lnb1_ov.png);
 }
 
-main > .side-menu .side-content > a:nth-child(2):hover {
+main > .container .side-content > a:nth-child(2):hover {
   background: url(/static/images/sub_cate1_lnb2_ov.png);
 }
 
-main > .side-menu > article > .greeting-section {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 800px;
-  height: 600px;
+main > .container .content-area .content > p {
+  color: #666666;
+  line-height: 25px;
+}
+
+main > .container .content-area .content > h4 {
+  font-size: 16px;
+  font-weight: bolder;
+  color: #91ba23;
 }
