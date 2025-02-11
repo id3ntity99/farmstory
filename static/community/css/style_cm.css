@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  font: normal 12px "noto sans koeran";
+}
 
 ul,
 ol {
@@ -14,9 +19,11 @@ textarea {
   outline: none;
 }
 
-#wrapper {
+#warpper{
   width: 100%;
   height: 100%;
+  border: 1px solid purple;
+  box-sizing: border-box;
 }
 
 /*header*/
@@ -31,8 +38,6 @@ header > section {
   width: 980px;
   height: 100%;
   margin: 0 auto;
-  border: 1px solid red;
-  box-sizing: border-box;
 }
 
 /*header > .links*/
@@ -48,7 +53,6 @@ header > .links > div > p {
 
 header > .links > div > p > a {
   font-weight: bold;
-  font-size: 12px;
 }
 
 /*header > .logo*/
@@ -86,13 +90,20 @@ header > .services > article > div {
   border-top: 4px solid #111;
 }
 
+header > .services > article > div:nth-child(1) {
+  background: url(/static/images/head_menu1.png) no-repeat;
+}
+
+header > .services > article > div:nth-child(1):hover {
+  background: url(/static/images/head_menu1_ov.png) no-repeat;
+}
 
 header > .services > article > div:nth-child(2) {
-  background: url(./images/head_menu2.png) no-repeat;
+  background: url(/static/images/head_menu2.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(2):hover {
-  background: url(./images/head_menu2_ov.png) no-repeat;
+  background: url(/static/images/head_menu2_ov.png) no-repeat;
 }
 
 header > .services > article > div:nth-child(2) {
@@ -105,30 +116,135 @@ header > .services > article > div:nth-child(2) img:nth-child(1) {
   right: 30%;
 }
 
-header > .services > article > div > a{
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  line-height: 40px;
-  color: black;
-  font-size: 15px;
-  font-weight: bold;
+header > .services > article > div:nth-child(3) {
+  background: url(/static/images/head_menu3.png) no-repeat;
 }
 
-main> .background {
+header > .services > article > div:nth-child(3):hover {
+  background: url(/static/images/head_menu3_ov.png) no-repeat;
+}
+
+header > .services > article > div:nth-child(4) {
+  background: url(/static/images/head_menu4.png) no-repeat;
+}
+
+header > .services > article > div:nth-child(4):hover {
+  background: url(/static/images/head_menu4_ov.png) no-repeat;
+}
+header > .services > article > div:nth-child(5) {
+  background: url(/static/images/head_menu5.png) no-repeat;
+}
+
+header > .services > article > div:nth-child(5):hover {
+  background: url(/static/images/head_menu5_ov.png) no-repeat;
+}
+
+header .background {
   width: 980px;
   height: 184px;
-  margin: 0 auto;
-  border: 1px solid blue;
-  box-sizing: border-box;
+  margin-bottom: 22px;
+}
+header .background a:nth-of-type(2) {
   position: relative;
+  bottom: 50px;
+  left: 15px;
 }
 
-main > .background > div img:nth-child(2) {
+/*main*/
+
+main {
+  width: 980px;
+  height: 650px;
+  margin: auto;
+  border: 1px solid blue;
+  box-sizing: border-box;
+}
+
+main > .aside{
+  min-width: 176px;
+  height: 650px;
+  float: left;
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+
+main > .aside > p {
+  margin-left: 10px;
+}
+
+main > .aside > article {
+  width: 175px;
+  height: 233px;
+  background-image: url("/static/images/sub_aside_bg_lnb.png");
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+main > .top {
+  width: 762px;
+  height: 72px;
+  float: right;
+  position: relative;
+  border-bottom: 1px solid #c2c2c2;
+  box-sizing: border-box;
+}
+
+main > .top > nav > h1 {
   position: absolute;
-  width: 270px;
-  height: 37px;
-  left: 10px;
-  bottom: 10px;
+  bottom: 5px;
+  left: 0;
+}
+
+main > .top > nav > p {
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+  margin: 0;
+}
+
+main > .top > nav > p > span {
+  color:#91ba15;
+}
+
+
+/* footer */
+
+footer {
+  width: 100%;
+  height: auto;
+}
+
+footer > div {
+  margin: 0 auto;
+  width: 980px;
+  height: 120px;
+  position: relative;
+  border-top: 1px solid #d1cab2;
+  box-sizing: border-box;
+}
+
+footer > div > img {
+  position: absolute;
+  width: 174px;
+  height: 64px;
+  left: 0px;
+  top: 1px;
+}
+
+footer > div > p {
+  position: absolute;
+  height: 71px;
+  left: 254.52px;
+  right: 16px;
+  top: 27px;
+  color: #7a7a7a;
+}
+
+footer > div > p > span {
+  color: #a6a6a6;
+}
+
+footer > div > p > span:nth-of-type(2) {
+  color: #a6a6a6;
+  float: right;
 }
