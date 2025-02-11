@@ -19,7 +19,7 @@
       
       #wrapper {
         width: 980px;
-        height: auto;
+        height: 1199px;
         margin: 0 auto;
         box-sizing: border-box;
       }
@@ -39,6 +39,13 @@
         height: 184px;
         top: 142px;
         left: 470px;
+      }
+      main > .background div:nth-child(2) {
+        position: absolute;
+        top: 140px;
+      }
+      main > .background div:nth-child(1) {
+        position : relative;
       }
       main > aside {
         position: absolute;
@@ -63,9 +70,9 @@
         top: 80px;
       }
       main > aside a:nth-child(4){
-        position: absolute;
-        right: -3px;
+        position: relative;
         top: 105px;
+        right: 1px;
       }
       main > section {
         position: absolute;
@@ -78,12 +85,12 @@
 
       main > section table.basketList{
         margin-top: 10px;
-
+        border-spacing: 0;
       }
-      main > section table.basketList th{
+      main > section table.basketList thead {
         width: 762px;
         height: 38px;
-        background-color: #eeeeee;
+        background-color: #d1dee2;
       }
       main > section table.basketList img {
         width: 60px;
@@ -91,6 +98,7 @@
       }
       main > section table.basketList td {
         text-align: center;
+        color: #777777; 
         border-bottom: 1px solid #eeeeee;
       }
       main > section table.basketList td.none {
@@ -101,6 +109,7 @@
         font-weight: bold;
       }
       main > section table.basketList td:nth-child(9) {
+        color: #111;
         font-weight: bold;
       }
 
@@ -141,6 +150,7 @@
       }
       main > section > div > a:nth-child(3)::before {
         content: url(/images/sub_page_nav_ico.gif);
+        
       }
 
       main > section > article:nth-child(2) {
@@ -180,11 +190,12 @@
         color: #eee;
       }
       .btn:nth-child(2) {
-        width: 290.8px;
+        width: 277.8px;
         height: 20px;
         top: 218px;
         left: 7px;
-        margin-left: 3px;
+        margin: 5px;
+        margin-top: 10px;
       }
 
 
@@ -194,11 +205,10 @@
         box-sizing: border-box;
       }
       footer p {
-        position: absolute;
+        position: relative;
+        float: right;
         line-height: 18px;
         font-size: 10.8px;
-        right: 240px;
-        top: 1085px;
       }
     </style>
   </head>
@@ -257,9 +267,10 @@
           </section>
         </header>
 
-        <main>
+        <main class="shopping">
           <nav class="background">
-            <img src="/images/sub_top_bg.jpg" alt="메인배경">
+            <div><img src="/images/sub_top_bg.jpg" alt="메인배경"></div>
+            <div><img src="/images/sub_top_tit2.png" alt="MARKET"></div>
           </nav>
           <aside>
             <a href="#">
@@ -272,7 +283,7 @@
               <img src="/images/sub_aside_bg_lnb.png" alt="장보기선택1">
             </a>
             <a href="#">
-              <img src="/images/sub_cate2_lnb1_ov.png" alt="장보기선택2">
+              <img src="/images/sub_cate2_lnb1_ov.png" alt="장보기선택2" width="180px" height="29px">
             </a>
           </aside>
           <section>
@@ -286,7 +297,7 @@
               <article>
                 <a href="#">장바구니 전체(10)</a>
                 <table width="762" height="332" class="basketList">
-                  <tbody>
+                  <thead>
                     <tr>
                       <th>
                         <input type="checkbox">
@@ -300,7 +311,8 @@
                       <th>가격</th>
                       <th>소계</th>
                     </tr>
-                    
+                  </thead>
+                  <tbody>
                     <tr>
                       <td colspan="9" class="none">장바구니에 상품이 없습니다.</td>
                     </tr>
@@ -349,21 +361,23 @@
               </article>
               <article>
                 <table width="290.8" height="201px" class="total">
-                  <tbody>
+                  <thead>
                     <tr>
                       <th>전체합계</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <tr>
                       <td>상품수</td>
                       <td>1</td>
                     </tr>
                     <tr>
                       <td>상품금액</td>
-                      <td>12,000원</td>
+                      <td>27,000</td>
                     </tr>
                     <tr>
                       <td>할인금액</td>
-                      <td>1,200원</td>
+                      <td>5,000원</td>
                     </tr>
                     <tr>
                       <td>배송비</td>
@@ -371,11 +385,11 @@
                     </tr>
                     <tr>
                       <td>포인트</td>
-                      <td>120p</td>
+                      <td>4000원</td>
                     </tr>
                     <tr>
                       <td>전체주문금액</td>
-                      <td class="totalPrice">15,800</td>
+                      <td class="totalPrice">22,000</td>
                     </tr>
                   </tbody>
                 </table>
