@@ -1,3 +1,8 @@
+main {
+  width: 100%;
+  height: auto;
+}
+
 #wrapper > main > .page-banner {
   width: 980px;
   height: 100%;
@@ -19,70 +24,46 @@ main > .page-banner > div > img:nth-child(2) {
 
 /*main > .container*/
 main > .container {
-  display: inline-block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  overflow: hidden;
 }
 
 main > .container > article {
   width: 980px;
-  height: 650px;
+  height: auto;
   margin: 0 auto;
-  position: relative;
 }
-
-main > .container .side-title {
-  background: url() no-repeat;
-  width: 180px;
-  height: 80px;
-  position: absolute;
-  top: -80px;
-  z-index: 10;
-}
-
-main > .container .side-title > img {
-  display: block;
-  margin: auto;
-  margin-top: 20px;
-}
-
 main > .container .side-menu {
   float: left;
-  width: 100%;
+  width: 180px;
   height: 650px;
-  position: absolute;
-  top: 80px;
+}
+
+main > .container .side-content {
+  float: left;
+  width: 170px;
+  height: 230px;
   background: url(/static/images/sub_aside_bg_lnb.png) no-repeat;
-  padding: 30px 5px;
 }
 
 main > .container .line {
-  position: absolute;
-  left: 170px;
-  top: -80px;
+  position: relative;
+  top: -50px;
+  right: 0;
+}
+
+main > .container .side-title {
+  width: auto;
+  height: auto;
+  padding: 15px;
 }
 
 main > .container .side-content a {
-  display: block;
+  display: inline-block;
   width: 177px;
   height: 30px;
-  float: top;
-}
-
-main > .container .side-content > a:nth-child(1) {
-  background: url(/static/images/sub_cate1_lnb1.png);
-}
-
-main > .container .side-content > a:nth-child(2) {
-  background: url(/static/images/sub_cate1_lnb2.png);
-}
-
-main > .container .side-content > a:nth-child(1):hover {
-  background: url(/static/images/sub_cate1_lnb1_ov.png);
-}
-
-main > .container .side-content > a:nth-child(2):hover {
-  background: url(/static/images/sub_cate1_lnb2_ov.png);
+  margin-top: 27px;
 }
 
 main > .container .content-area {

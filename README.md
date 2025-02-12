@@ -1,4 +1,6 @@
-# 1. 사전 준비
+# 필독!!!!!
+
+## 1. 사전 준비
 
 1. Eclipse Formatter
 
@@ -15,6 +17,9 @@
 - VS Code 실행
 - 좌측 창에서 "확장" 선택
 - Prettier Formatter 검색 후 설치
+- 좌측 상단 `File - Preferences - Settings` 클릭 후 "Format on Save" 검색.
+- `Editor: Format on Save(Also modified elsewhere)` 아래의 체크박스 체크
+- 상단 검색창에 `Default Formatter` 검색 후 `Editor: Default Formatter(Also modified elsewhere)` 아래의 선택창에서 `Prettier - Code formatter` 선택.
 - 이후 HTML, CSS, Javascript 코드를 작성하고 저장하면 자동으로 코드가 포맷 됨.
 
 포매터를 설정해주는 이유는, 개발자마다의 코드 포맷(서식)이 다르면 계속해서 `git status`를 찍을 때마다 add/commit 해줘야 하는 파일들이 늘어나기 때문이다.
@@ -25,7 +30,12 @@ git은 `commit`된 파일의 아주 사소한 변경 사항에도 반응한다.
 
 또한, 포매터를 사용하면 코드의 가독성이 올라가는 효과도 있다.
 
-# 2. 브랜치 전략
+## 2. 브랜치 전략
 
 브랜치 전략으로는 **Github Flow**를 사용한다. 주 브랜치로 `master`브랜치를 사용하고 팀원들은 로컬 저장소에서 `feature/팀원아이디` 브랜치를 생성한다.
 코드를 변경할 때에는 **반드시** `feature/팀원아이디` 브랜치를 이용하고, 모든 변경이 끝나면 이를 `push`하고 `merge` 한다.
+
+## 3. 규칙
+
+1. CSS는 별도의 .css 파일을 생성하여 작성하고, /static/style/ 폴더에 저장한다.
+2. 위의 포매터는 반드시 설치한다.(누군 쓰고 누군 안쓰면 merge 할 때 충돌이 일어날 수도 있음)
