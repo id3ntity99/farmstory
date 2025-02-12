@@ -59,11 +59,14 @@ main > .container .side-title {
   padding: 15px;
 }
 
+main > .container .side-content {
+  padding-top: 27px;
+}
+
 main > .container .side-content a {
   display: inline-block;
   width: 177px;
   height: 30px;
-  margin-top: 27px;
 }
 
 main > .container .content-area {
