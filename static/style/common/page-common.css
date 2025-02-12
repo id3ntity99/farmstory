@@ -25,7 +25,7 @@ main > .page-banner > div > img:nth-child(2) {
 /*main > .container*/
 main > .container {
   width: 100%;
-  height: auto; /*FIXME height == 0*/
+  height: auto;
   overflow: hidden;
 }
 
