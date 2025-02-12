@@ -1,9 +1,9 @@
-main > .container .content-area .content > p {
+main .container .content-area .content > p {
   color: #666666;
   line-height: 25px;
 }
 
-main > .container .content-area .content > h4 {
+main .container .content-area .content > h4 {
   font-size: 16px;
   font-weight: bolder;
   color: #91ba23;
