@@ -3,9 +3,371 @@
     <head>
         <meta charset="UTF-8">
         <title>정보수정</title>
+        <style>
+             /* 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            font: normal 12px '고딕';
+        }
+
+        ul, ol {list-style: none;}
+        a {text-decoration: none; color: #111;}
+        input, textarea {outline: none;}
+
+        #wrapper {
+            width: 980px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+
+        /*헤더*/
+        header {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+        header .links {
+            float: right;
+        }
+        header .logo {
+            position: relative;
+            left: 40%;
+            top: 10px;
+            margin-bottom: 20px;
+        }
+        header .logo a:nth-of-type(2) {
+            position: relative;
+            left: 17%;
+        }
+        header .logo a:nth-of-type(3) {
+            position: absolute;
+            right: 1040px;
+            top: 60px;
+        }
+        header .nav {
+            width: 100%;
+            height: auto;
+        }
+        header .nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header .nav ul li {
+            width: 196px;
+            height: 50px;
+            border-top: 4px solid black;
+            margin: 0 1.5px;
+        }
+        
+        header .nav ul li a img {
+            display: block;
+        }
+        
+        header .nav .line ul{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header .background {
+            width: 980px;
+            height: 184px;
+            margin-bottom: 22px;
+        }
+        header .background a:nth-of-type(2) {
+            position: relative;
+            bottom: 50px;
+            left: 15px;
+        }
+        
+        
+        
+        
+        
+        
+
+        /*메인*/
+
+        main {
+            width: 980px;
+            height: auto;
+        }
+        main .side {
+            min-width: 176px;
+            height: 650px;
+            float: left;
+            border-right: 1px solid #999 ;
+            
+        }
+        main .side h1 {
+            margin-left: 10px;
+        }
+        main .side article {
+            width: 175px;
+            height: 233px;
+            background-image: url('/static/images/sub_aside_bg_lnb.png');
+            padding-top: 20px;
+        }
+        
+        
+        
+        main .order {
+            width: 762px;
+            height: 40px;
+            float: right;
+            margin-top: 20px;
+            border-bottom: 1px solid #c4c4c4;
+            margin-bottom: 50px;
+        }
+        
+        main .order p {
+            float: right;
+            position: relative;
+            top: -20px;
+            color: #adadad;
+            font-weight: bold;
+        }
+        main .order p:nth-of-type(1) {
+            color: rgb(133, 197, 37);
+        }
+        
+
+        main .setup {
+            width: 762px;
+            height: 187px;
+            text-align: left;
+            float: right;
+        }
+        main .setup table {
+            width: 100%;
+            height: auto;
+            border-width: 2px, 1px, 1px, 1px;
+            border-style: solid;
+            border-color: #111111;
+
+
+        }
+        main .setup table tr td:nth-of-type(1) {
+            background: #F5F8F9;
+            border: 1px solid #E9E9E9;
+        }
+        main .modify {
+            width: 762px;
+            height: 378px;
+            text-align: left;
+            float: right;
+        }
+        main .modify table {
+            width: 100%;
+            height: auto;
+            border: 2px 1px 1px 1px solid #111 ;
+        }
+        main .modify table tr td:nth-of-type(1) {
+            background: #F5F8F9;
+            border: 1px solid #E9E9E9;
+        }
+        
+
+
+
+
+
+        
+
+
+
+
+
+        /*푸터*/
+
+        footer {
+            width: 100%;
+            height: 120px;
+        }
+        
+        footer .footerimg {
+            float: left;
+            margin-right: 50px;
+        }
+        footer .text {
+            text-align: left;
+            
+            float: right;
+        }
+        footer .text p {
+            font-size: 10.83px;
+            color: #999;
+            margin-top: 20px;
+            margin-right: 15px;
+        }
+
+        </style>
 
     </head>
     <body>
+        <div id="wrapper">
+            <section>
+                <img src="/static/images/head_top_line.png" alt="">
+            </section>
+            <header>
+                <section class="links">
+                    <div>
+                      <p>
+                        <a href="">HOME | </a>
+                        <a href="">로그인 | </a>
+                        <a href="">회원가입 | </a>
+                        <a href="">나의정보 | </a>
+                        <a href="">로그아웃 | </a>
+                        <a href="">관리자 | </a>
+                        <a href="">고객센터</a>
+                      </p>
+                    </div>
+                  </section>
+                  <section class="logo">
+                    <div>
+                      <a href="#">
+                        <img src="/static/images/logo.png" />
+                      </a>
+                      <a href="#">
+                        <img src="/static/images/head_txt_img.png" />
+                      </a>
+                      <a href="#">
+                        <img src="/static/images/head_menu_badge.png" alt="">
+                      </a>
+                    </div>
+                  </section>
+                  <section class="nav">
+                    <ul>
+                        <li><a href="#"><img src="/static/images/head_menu1.png" alt="팜스토리소개"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu2.png" alt="장보기"></a> </li>
+                        <li><a href="#"><img src="/static/images/head_menu3.png" alt="농작물이야기"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu4.png" alt="이벤트"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu5.png" alt="커뮤니티"></a></li>
+                    </ul>
+                    <section class="background">
+                        <a href="#"><img src="/static/images/myinfo/myinfo_top_bg.jpg" alt="banner"></a>
+                        <a href="#"><img src="/static/images/myinfo/myinfo_top_tit.png " alt="background"></a>
+                    </section>
+
+                  </section>
+            </header>
+
+
+
+
+
+            <main> 
+                <section class="side">
+                    <h1><img src="/static/images/myinfo/myinfo_menu_tit.png" alt=""></h1>
+                        <article>    
+                            <ul>
+                                <li><a href="#"><img src="/static/images/myinfo/myinfo_menu1.png" alt="장바구니"></a></li>
+                                <li><a href="#"><img src="/static/images/myinfo/myinfo_menu2.png" alt="주문내역"></a></li>
+                                <li><a href="#"><img src="/static/images/myinfo/myinfo_menu3_ov.png" alt="정보수정"></a></li>
+                            </ul>
+                        </article>
+                </section>
+
+                <section class="order">
+                    <nav>
+                        <h1><a href="#"><img src="/static/images/myinfo/myinfo_nav_tit3.png" alt="정보수정"></a></h1>
+                        <p>정보수정</p>
+                        <p>= HOME>나의정보></p>
+                    </nav>
+                </section>
+                
+                <section class="setup">
+                    <h1>회원정보 설정</h1>
+                    <table >
+                        <tr>
+                            <td>아이디</td>
+                            <td>wnstj050505</td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호</td>
+                            <td><input type="password" name="pass" placeholder="비밀번호 입력"></td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호 확인</td>
+                            <td><input type="password" name="passok" placeholder="비밀번호 입력 확인"><a href="#">비밀번호 수정</a></td>
+                        </tr>
+                        <tr>
+                            <td>회원가입날짜</td>
+                            <td>2022-01-01 12:45:12</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section class="modify">
+                    <h1>개인정보 수정</h1>
+                    <table>
+                        <tr>
+                            <td>이름</td>
+                            <td><input type="text" name="name"></td>
+                        </tr>
+                        <tr>
+                            <td>별명</td>
+                            <td>
+                                공백없는 한글, 영문, 숫자 입력<br>
+                                <input type="text" name="nickname" placeholder="별명 입력">
+                                <a href="#">중복확인</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>이메일</td>
+                            <td><input type="text" name="email" placeholder="이메일 입력"><a href="#">인증번호 받기</a></td>
+                        </tr>
+                        <tr>
+                            <td>휴대폰</td>
+                            <td><input type="text" name="phone" placeholder="휴대폰 입력"></td>
+                        </tr>
+                        <tr>
+                            <td>주소</td>
+                            <td>
+                                <input type="text" name="mail" placeholder="우편번호"><a href="#">우편번호찾기</a><br>
+                                <input type="text" name="address" placeholder="주소 검색"><br>
+                                <input type="text" name="detailadd" placeholder="상세주소 입력">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>회원탈퇴</td>
+                            <td><a href="#">탈퇴하기</a></td>
+                        </tr>
+                    </table>
+                </section>
+
+                <article>
+                    <a href="#">취소</a>
+                    <a href="#">회원수정</a>
+                </article>
+
+                
+
+                
+            </main>
+
+
+
+
+            <footer>
+                
+                <img src="/static/images/footer_top_line.png" alt="">
+                 <section class="footerimg">
+                    <img src="/static/images/footer_logo.png" alt="푸터로고">
+                 </section>
+                 <section class="text">
+                    <p>(주)팜스토리/사업자등록번호 123-45-67890/통신판매업신고 제 2013-팜스토리구-123호/벤처기업확인 서울지방중소기업청 제 012345678-9-01234호<br>
+                    등록번호 팜스토리01234 (2013.04.01)/발행인:홍길동<br>
+                    대표 : 홍길동/이메일:email@mail.mail/전화:01)234-5678/경기도 성남시 잘한다구 신난다동 345<br>
+                    Copyright(C)홍길동 All rights reserved.</p>
+                 </section>
+            </footer>
+
+
+
+        </div>
         
     </body>
 </html>
