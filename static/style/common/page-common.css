@@ -69,6 +69,22 @@ main > .container .side-content a {
   float: top;
 }
 
+main > .container .side-content > a:nth-child(1) {
+  background: url(/static/images/sub_cate1_lnb1.png);
+}
+
+main > .container .side-content > a:nth-child(2) {
+  background: url(/static/images/sub_cate1_lnb2.png);
+}
+
+main > .container .side-content > a:nth-child(1):hover {
+  background: url(/static/images/sub_cate1_lnb1_ov.png);
+}
+
+main > .container .side-content > a:nth-child(2):hover {
+  background: url(/static/images/sub_cate1_lnb2_ov.png);
+}
+
 main > .container .content-area {
   float: right;
   width: 800px;
@@ -85,7 +101,8 @@ main > .container .content-area .content-title {
 }
 
 main > .container .content-area .content-title > span {
-  margin-top: 30px;
+  float: right;
+  margin-top: 8px;
   margin-right: 10px;
   font-size: 14px;
 }
