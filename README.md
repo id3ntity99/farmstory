@@ -17,6 +17,9 @@
 - VS Code 실행
 - 좌측 창에서 "확장" 선택
 - Prettier Formatter 검색 후 설치
+- 좌측 상단 `File - Preferences - Settings` 클릭 후 "Format on Save" 검색.
+- `Editor: Format on Save(Also modified elsewhere)` 아래의 체크박스 체크
+- 상단 검색창에 `Default Formatter` 검색 후 `Editor: Default Formatter(Also modified elsewhere)` 아래의 선택창에서 `Prettier - Code formatter` 선택.
 - 이후 HTML, CSS, Javascript 코드를 작성하고 저장하면 자동으로 코드가 포맷 됨.
 
 포매터를 설정해주는 이유는, 개발자마다의 코드 포맷(서식)이 다르면 계속해서 `git status`를 찍을 때마다 add/commit 해줘야 하는 파일들이 늘어나기 때문이다.
