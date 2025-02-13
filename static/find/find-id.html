@@ -1,11 +1,314 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <title>아이디 찾기</title>
+        <style>
+            /* 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  font: normal 12px "noto sans koeran";
+}
 
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #111;
+}
+input,
+textarea {
+  outline: none;
+}
 
+#wrapper {
+  width: 980px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/*=====================================================================*/
+
+/*헤더*/
+header {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+header .links {
+  float: right;
+}
+header .logo {
+  position: relative;
+  left: 40%;
+  top: 10px;
+  margin-bottom: 20px;
+}
+header .logo a:nth-of-type(2) {
+  position: relative;
+  left: 17%;
+}
+header .logo a:nth-of-type(3) {
+  position: absolute;
+  right: 1040px;
+  top: 60px;
+}
+header .nav {
+  width: 100%;
+  height: auto;
+}
+header .nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .nav ul li {
+  width: 196px;
+  height: 50px;
+  border-top: 4px solid black;
+  margin: 0 1.5px;
+}
+
+header .nav ul li a img {
+  display: block;
+}
+
+header .nav .line ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .background {
+  width: 980px;
+  height: 184px;
+  margin-bottom: 22px;
+}
+header .background a:nth-of-type(2) {
+  position: relative;
+  bottom: 50px;
+  left: 15px;
+}
+
+/*=====================================================================*/
+
+/*메인*/
+
+main {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+main .idfind h1 {
+    font-size: 14px;
+    font-weight: bold;
+}
+main .idfind table {
+    width: 100%;
+    height: auto;
+    border-top: 2px solid black;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+main .idfind table tr{
+    border: 1px solid #e9e9e9;
+}
+main .idfind table tr:nth-of-type(1) td:nth-of-type(2) input {
+    width: 164px;
+    padding: 4px;
+    margin-left: 10px;
+}
+main .idfind table tr td:nth-of-type(1) {
+  padding: 10px;
+  width: 100px;
+  height: 30px;
+  border-right: 1px solid #e9e9e9;
+  font-weight: bold;
+}
+main .idfind table tr:nth-of-type(2) {
+    padding: 10px;
+}
+main .idfind table tr:nth-of-type(2) td:nth-of-type(2) input:nth-of-type(1) {
+    width: 164px;
+    padding: 4px;
+    margin: 10px 5px 5px 10px;
+}
+main .idfind table tr:nth-of-type(2) td:nth-of-type(2) input:nth-of-type(2) {
+    width: 164px;
+    padding: 4px;
+    margin: 0 5px 10px 10px;
+}
+main .idfind table tr:nth-of-type(2) td:nth-of-type(3) a {
+    position: relative;
+    right: 128px;
+    bottom: 3px;
+}
+main .idfind table tr:nth-of-type(2) td:nth-of-type(3) a:nth-of-type(1) {
+    display: inline-block;
+    border: 1px solid #bebebe;
+    background-color: #efefef;
+    width: 85px;
+    height: 21px;
+    padding: 2px;
+    text-align: center;
+    margin: 5px;
+}
+main .idfind table tr:nth-of-type(2) td:nth-of-type(3) a:nth-of-type(2) {
+    display: inline-block;
+    border: 1px solid #bebebe;
+    background-color: #efefef;
+    text-align: center;
+    width: 34px;
+    height: 21px;
+    padding: 2px;
+    margin-left: 5px;
+}
+main .idfind .maintext {
+    margin-bottom: 25px;
+}
+main .idfind .maintext p {
+    font-weight: bold;
+    line-height: 20px;
+}
+main .idfind .mainbtn {
+    float: right;
+    margin-bottom: 50px;
+}
+main .idfind .mainbtn a {
+    display: inline-block;
+    border: 1px solid #bebebe;
+    padding: 10px;
+}
+/*=====================================================================*/
+
+/*푸터*/
+footer {
+  width: 100%;
+  height: 120px;
+}
+footer .footerimg {
+  float: left;
+  margin-right: 50px;
+}
+footer .text {
+  text-align: left;
+  float: right;
+}
+footer .text p {
+  font-size: 10.83px;
+  color: #999;
+  margin-top: 20px;
+  margin-right: 15px;
+}
+footer .endtext {
+    position: relative;
+    left: 883px;
+    font-size: 10.83px;
+    color: #999;
+}
+        </style>
 
     </head>
     <body>
+        <div id="wrapper">
+            <section>
+                <img src="/static/images/head_top_line.png" alt="">
+            </section>
+            <header>
+                <section class="links">
+                    <div>
+                      <p>
+                        <a href="">HOME | </a>
+                        <a href="">로그인 | </a>
+                        <a href="">회원가입 | </a>
+                        <a href="">나의정보 | </a>
+                        <a href="">로그아웃 | </a>
+                        <a href="">관리자 | </a>
+                        <a href="">고객센터</a>
+                      </p>
+                    </div>
+                  </section>
+                  <section class="logo">
+                    <div>
+                      <a href="#">
+                        <img src="/static/images/logo.png" />
+                      </a>
+                      <a href="#">
+                        <img src="/static/images/head_txt_img.png" />
+                      </a>
+                      <a href="#">
+                        <img src="/static/images/head_menu_badge.png" alt="">
+                      </a>
+                    </div>
+                  </section>
+                  <section class="nav">
+                    <ul>
+                        <li><a href="#"><img src="/static/images/head_menu1.png" alt="팜스토리소개"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu2.png" alt="장보기"></a> </li>
+                        <li><a href="#"><img src="/static/images/head_menu3.png" alt="농작물이야기"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu4.png" alt="이벤트"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu5.png" alt="커뮤니티"></a></li>
+                    </ul>
+                  </section>
+            </header>
+            <main>
+                <section class="idfind">
+                    <h1>아이디 찾기</h1>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>이름</td>
+                                <td>
+                                    <input type="text" name="name" placeholder="이름 입력">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>이메일</td>
+                                <td>
+                                    <input type="text" name="email" placeholder="이메일 입력"><br>
+                                    <input type="number" name="number" placeholder="인증번호 입력"></td>
+                                </td>
+                                <td><a href="#">인증번호 받기</a><br>
+                                <a href="#">확인</a></td>
+                        </tbody>
+                    </table>
+                    <section class="maintext">
+                        <p>
+                            회원가입시 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.<br>
+                            인증번호를 입력 후 확인 버튼을 누르세요.
+                        </p>
+                    </section>
+                    <section class="mainbtn">
+                        <a href="#">취소</a>
+                        <a href="#">다음</a>
+                    </section>
+
+                </section>
+            </main>
+            <footer>
+                
+                <img src="/static/images/footer_top_line.png" alt="">
+                 <section class="footerimg">
+                    <img src="/static/images/footer_logo.png" alt="푸터로고">
+                 </section>
+                 <section class="text">
+                    <p>(주)팜스토리/사업자등록번호 123-45-67890/통신판매업신고 제 2013-팜스토리구-123호/벤처기업확인 서울지방중소기업청 제 012345678-9-01234호<br>
+                    등록번호 팜스토리01234 (2013.04.01)/발행인:홍길동<br>
+                    대표 : 홍길동/이메일:email@mail.mail/전화:01)234-5678/경기도 성남시 잘한다구 신난다동 345<br>
+                    Copyright(C)홍길동 All rights reserved.</p>
+                 </section>
+                 <section class="endtext">
+                    <p>farmstory ver1.0.1</p>
+                 </section>
+                 
+            </footer>
+
+        </div>
         
     </body>
 </html>
