@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/style/common/header.css" />
     <link rel="stylesheet" href="/shopping/style/order.css" />
     <title>팜스토리</title>
+    <style></style>
   </head>
   <body>
     <div id="wrapper">
@@ -96,7 +97,7 @@
             <a href="#">HOME > 장보기 > </a>
           </div>
           <article>
-            <a href="#">장바구니 전체(10)</a>
+            <h2>장바구니 전체(10)</h2>
             <table width="762" height="332" class="basketList">
               <thead>
                 <tr>
@@ -159,121 +160,124 @@
               </tbody>
             </table>
           </article>
-          <article>
-            <table width="290.8" height="201px" class="total">
-              <thead>
-                <tr>
-                  <th>최종결제정보</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>상품수</td>
-                  <td>1</td>
-                </tr>
-                <tr>
-                  <td>상품금액</td>
-                  <td>27,000</td>
-                </tr>
-                <tr>
-                  <td>할인금액</td>
-                  <td>5,000원</td>
-                </tr>
-                <tr>
-                  <td>포인트사용</td>
-                  <td>2000p</td>
-                </tr>
-                <tr>
-                  <td>배송비</td>
-                  <td>5,000원</td>
-                </tr>
-                <tr>
-                  <td>포인트적립</td>
-                  <td>4000원</td>
-                </tr>
-                <tr>
-                  <td>전체주문금액</td>
-                  <td class="totalPrice">22,000</td>
-                </tr>
-              </tbody>
-            </table>
-            <a href="#" class="btn Order">주문하기</a>
-          </article>
-          <article>
-            <h2>주문정보 입력</h2>
-            <table>
-              <tbody>
-                <tr class="order">
-                  <td>주문자</td>
-                  <td>
-                    <input type="text" name="name" value="홍길동" />
-                  </td>
-                </tr>
-                <tr class="phone1">
-                  <td>휴대폰</td>
-                  <td>
-                    <input type="text" name="phone" value="010-1234-1001" />
-                  </td>
-                </tr>
-                <tr class="point">
-                  <td>포인트사용</td>
-                  <td>
-                    <input type="text" name="point" />
-                    <p class="btnUse">사용하기</p>
-                    <p class="pointInfo">사용가능 2,000</p>
-                  </td>
-                </tr>
-                <tr class="receiver">
-                  <td>받는분</td>
-                  <td>
-                    <input type="text" name="point" />
-                  </td>
-                </tr>
-                <tr class="phone2">
-                  <td>연락처</td>
-                  <td>
-                    <input type="text" name="point" />
-                  </td>
-                </tr>
-                <tr class="address">
-                  <td>배송주소</td>
-                  <td>
-                    <input type="text" name="zip" />
-                    <button type="buttonSearch">
-                      <img
-                        src="/images/user/btn_post_search.gif"
-                        alt="우편번호 검색"
+          <div>
+            <article>
+              <table width="290.8" height="201px" class="total">
+                <thead>
+                  <tr>
+                    <th>최종결제정보</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>상품수</td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <td>상품금액</td>
+                    <td>27,000</td>
+                  </tr>
+                  <tr>
+                    <td>할인금액</td>
+                    <td>5,000원</td>
+                  </tr>
+                  <tr>
+                    <td>포인트사용</td>
+                    <td>2000p</td>
+                  </tr>
+                  <tr>
+                    <td>배송비</td>
+                    <td>5,000원</td>
+                  </tr>
+                  <tr>
+                    <td>포인트적립</td>
+                    <td>4000원</td>
+                  </tr>
+                  <tr>
+                    <td>전체주문금액</td>
+                    <td class="totalPrice">22,000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <a href="#" class="btn Order">결제하기</a>
+            </article>
+            <article>
+              <h2>주문정보 입력</h2>
+              <table>
+                <tbody>
+                  <tr class="order">
+                    <td>주문자</td>
+                    <td>
+                      <input type="text" name="name" value="홍길동" />
+                    </td>
+                  </tr>
+                  <tr class="phone1">
+                    <td>휴대폰</td>
+                    <td>
+                      <input type="text" name="phone" value="010-1234-1001" />
+                    </td>
+                  </tr>
+                  <tr class="point">
+                    <td>포인트사용</td>
+                    <td>
+                      <input type="text" name="point" />
+                      <p class="btnUse">사용하기</p>
+                      <p class="pointInfo">사용가능 2,000</p>
+                    </td>
+                  </tr>
+                  <tr class="receiver">
+                    <td>받는분</td>
+                    <td>
+                      <input type="text" name="point" />
+                    </td>
+                  </tr>
+                  <tr class="phone2">
+                    <td>연락처</td>
+                    <td>
+                      <input type="text" name="point" />
+                    </td>
+                  </tr>
+                  <tr class="address">
+                    <td>배송주소</td>
+                    <td>
+                      <input type="text" name="zip" />
+                      <button type="buttonSearch">
+                        <img
+                          src="/images/user/btn_post_search.gif"
+                          alt="우편번호 검색"
+                        />
+                      </button>
+                      <input
+                        type="text"
+                        name="addr1"
+                        placeholder="기본주소 검색"
                       />
-                    </button>
-                    <input
-                      type="text"
-                      name="addr1"
-                      placeholder="기본주소 검색"
-                    />
-                    <input
-                      type="text"
-                      name="addr2"
-                      placeholder="상세주소 입력"
-                    />
-                  </td>
-                </tr>
-                <tr class="payment">
-                  <td>결제방법</td>
-                  <td>
-                    <input type="radio" />계좌이체
-                    <input type="radio" />신용카드
-                    <input type="radio" />체크카드 <input type="radio" />휴대폰
-                  </td>
-                </tr>
-                <tr class="etx">
-                  <td>기타</td>
-                  <td>
-                    <textarea name="etc" id="etc"></textarea>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </article>
+                      <input
+                        type="text"
+                        name="addr2"
+                        placeholder="상세주소 입력"
+                      />
+                    </td>
+                  </tr>
+                  <tr class="payment">
+                    <td>결제방법</td>
+                    <td>
+                      <input type="radio" />계좌이체
+                      <input type="radio" />신용카드
+                      <input type="radio" />체크카드
+                      <input type="radio" />휴대폰
+                    </td>
+                  </tr>
+                  <tr class="etx">
+                    <td>기타</td>
+                    <td>
+                      <textarea name="etc" id="etc"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
         </section>
       </main>
 

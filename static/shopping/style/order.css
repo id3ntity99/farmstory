@@ -21,7 +21,9 @@ input {
   margin: 0 auto;
   box-sizing: border-box;
 }
-
+h2 {
+  margin-left: 40px;
+}
 main {
   position: relative;
   width: 980px;
@@ -70,14 +72,20 @@ main > aside a:nth-child(4) {
   right: 1px;
 }
 main > section {
-  position: absolute;
-  right: 0px;
+  float: right;
   width: 802px;
-  height: 743px;
+  height: auto;
   box-sizing: border-box;
 }
 
+main > section > article {
+  margin-top: 50px;
+}
+
 main > section table.basketList {
+  width: 762px;
+  height: 294px;
+  margin-left: 40px;
   margin-top: 10px;
   border-spacing: 0;
 }
@@ -122,18 +130,12 @@ main > section table.total td.totalPrice {
   font-weight: bold;
 }
 
-main > section > div {
-  width: 802px;
+main > section > div:nth-child(1) {
   padding-top: 30px;
-  padding-left: 30px;
+  padding-left: 40px;
   border-bottom: 1px solid #c2c2c2;
-  margin-inline-start: 30px;
-}
-main > section > div > a:nth-child(1) {
-  margin-inline-start: -30px;
 }
 main > section > div > span {
-  margin-inline-end: 70px;
   float: right;
   font-weight: bold;
   color: #91ba15;
@@ -146,51 +148,47 @@ main > section > div > a:nth-child(3)::before {
   content: url(/images/sub_page_nav_ico.gif);
 }
 
-main > section > article:nth-child(2) {
-  width: 800px;
-  height: 430px;
-  top: 139px;
-  left: 40px;
-  padding-top: 30px;
-  padding-left: 30px;
-  box-sizing: border-box;
-}
-main > section > article:nth-child(3) {
-  position: absolute;
+main > section > div article:nth-child(1) {
+  float: right;
   width: 304.8px;
-  height: 262px;
-  top: 450px;
-  left: 488.2px;
+  height: auto;
   border: 1px solid #d7d7d7;
+  padding: 1px;
+  margin-top: 10px;
 }
-main > section > article:nth-child(3) {
-  position: absolute;
-  width: 304.8px;
-  height: 262px;
-  top: 450px;
-  left: 488.2px;
-  border: 1px solid #d7d7d7;
+main > section > div article:nth-child(1) table {
+  width: 290.8px;
+  height: 229px;
+  border-top: 1px solid #111111;
+  border-bottom: 1px solid #111111;
 }
 
-main > section > article:nth-child(4) {
-  width: 407.19px;
+main > section > div article:nth-child(2) {
+  float: left;
   height: 440.75px;
-  margin-left: 30px;
-  margin-top: -20px;
+  width: 447px;
+  margin-top: 40px;
 }
+main > section > div article:nth-child(2) table {
+  border-top: 1px solid #960d1a;
+  border-spacing: none;
+  margin-left: 40px;
+}
+
 input {
   border: 1px solid #d7d7d7;
 }
-main > section > article:nth-child(4) table > tbody > tr.order {
+main > section > div article:nth-child(2) table > tbody > tr.order {
+  height: 41px;
+  width: 105.19px;
+}
+main > section > div article:nth-child(2) table > tbody > tr.phone1 {
   height: 41px;
 }
-main > section > article:nth-child(4) table > tbody > tr.phone1 {
-  height: 41px;
-}
-main > section > article:nth-child(4) table > tbody > tr.point {
+main > section > div article:nth-child(2) table > tbody > tr.point {
   height: 59px;
 }
-main > section > article:nth-child(4) table > tbody > tr.point .btnUse {
+main > section > div article:nth-child(2) table > tbody > tr.point .btnUse {
   border: 1px solid #767676;
   background: #efefef;
   float: right;
@@ -200,46 +198,44 @@ main > section > article:nth-child(4) table > tbody > tr.point .btnUse {
   border-radius: 2.5px;
   text-align: center;
 }
-main > section > article:nth-child(4) table > tbody > tr.receiver {
+main > section > div article:nth-child(2) table > tbody > tr.receiver {
   height: 41px;
 }
-main > section > article:nth-child(4) table > tbody > tr.phone2 {
+main > section > div article:nth-child(2) table > tbody > tr.phone2 {
   height: 41px;
 }
-main > section > article:nth-child(4) table > tbody > tr.address {
+main > section > div article:nth-child(2) table > tbody > tr.address {
   height: 85.75px;
 }
-main > section > article:nth-child(4) table input[name="addr1"] {
+main > section > div article:nth-child(2) table input[name="addr1"] {
   display: block;
   width: 322px;
   margin: 2px 0;
 }
-main > section > article:nth-child(4) table input[name="addr2"] {
+main > section > div article:nth-child(2) table input[name="addr2"] {
   display: block;
   width: 322px;
 }
-main > section > article:nth-child(4) img {
+main > section > div article:nth-child(2) img {
   border: none;
 }
 
-main > section > article:nth-child(4) table > tbody > tr.payment {
+main > section > div article:nth-child(2) table > tbody > tr.payment {
   height: 44px;
 }
-main > section > article:nth-child(4) table > tbody > tr.etc {
+main > section > div article:nth-child(2) table > tbody > tr.etc {
   height: 87px;
 }
-main > section > article:nth-child(4) table {
-  border-top: 1px solid #be0808;
-  width: 430.75px;
-}
-main > section > article:nth-child(4) td:nth-child(1) {
+
+main > section > div article:nth-child(2) td:nth-child(1) {
   background: #f7f7f7;
   width: 105.19px;
   height: auto;
   padding: 10px;
+  border-bottom: 3px solid #efefef;
 }
-main > section > article:nth-child(4) td:nth-child(2) {
-  border-bottom: 1px solid #efefef;
+main > section > div article:nth-child(2) td:nth-child(2) {
+  border-bottom: 3px solid #efefef;
   padding-left: 5px;
 }
 h2 {
@@ -263,10 +259,7 @@ button[type="buttonSearch"] {
 .btn:nth-child(2) {
   width: 277.8px;
   height: 20px;
-  top: 218px;
-  left: 7px;
   margin: 5px;
-  margin-top: 10px;
 }
 textarea {
   width: 322px;
