@@ -33,8 +33,6 @@ main {
 main > .background {
   width: 980px;
   height: 184px;
-  top: 142px;
-  left: 470px;
 }
 main > .background div:nth-child(2) {
   position: absolute;
@@ -71,15 +69,22 @@ main > aside a:nth-child(4) {
   right: 1px;
 }
 main > section {
-  position: absolute;
-  right: 0px;
+  float: right;
   width: 802px;
-  height: 743px;
+  height: auto;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
+main > section > div a {
+  margin-left: 10px;
+}
+main > section > article {
+  margin-top: 34px;
+}
 main > section table.basketList {
+  width: 762px;
+  height: 294px;
+  margin-left: 40px;
   margin-top: 10px;
   border-spacing: 0;
 }
@@ -108,6 +113,10 @@ main > section table.basketList td:nth-child(9) {
   color: #111;
   font-weight: bold;
 }
+h2 {
+  margin-left: 40px;
+  margin-top: 20px;
+}
 
 main > section table.total {
   border-top: 1px solid #111;
@@ -124,18 +133,12 @@ main > section table.total td.totalPrice {
   font-weight: bold;
 }
 
-main > section > div {
-  width: 802px;
+main > section > div:nth-child(1) {
   padding-top: 30px;
   padding-left: 30px;
   border-bottom: 1px solid #c2c2c2;
-  margin-inline-start: 30px;
-}
-main > section > div > a:nth-child(1) {
-  margin-inline-start: -30px;
 }
 main > section > div > span {
-  margin-inline-end: 70px;
   float: right;
   font-weight: bold;
   color: #91ba15;
@@ -147,31 +150,13 @@ main > section > div > a:nth-child(3) {
 main > section > div > a:nth-child(3)::before {
   content: url(/images/sub_page_nav_ico.gif);
 }
-
-main > section > article:nth-child(2) {
-  width: 800px;
-  height: 430px;
-  top: 139px;
-  left: 40px;
-  padding-top: 30px;
-  padding-left: 30px;
-  box-sizing: border-box;
-}
-main > section > article:nth-child(3) {
-  position: absolute;
+main > section > div article:nth-child(1) {
+  float: right;
   width: 304.8px;
   height: 262px;
-  top: 450px;
-  left: 488.2px;
   border: 1px solid #d7d7d7;
-}
-main > section > article:nth-child(3) {
-  position: absolute;
-  width: 304.8px;
-  height: 262px;
-  top: 450px;
-  left: 488.2px;
-  border: 1px solid #d7d7d7;
+  padding: 1px;
+  margin-top: -30px;
 }
 
 .btn {
@@ -181,9 +166,11 @@ main > section > article:nth-child(3) {
   background-color: #960d1a;
   text-align: center;
   margin-top: 5px;
+  margin-left: 40px;
   cursor: pointer;
   color: #eee;
 }
+
 .btn:nth-child(2) {
   width: 277.8px;
   height: 20px;
