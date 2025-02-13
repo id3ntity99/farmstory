@@ -3,208 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>정보수정</title>
-        <style>
-             /* 초기화 */
-        * {
-            margin: 0;
-            padding: 0;
-            font: normal 12px '고딕';
-        }
-
-        ul, ol {list-style: none;}
-        a {text-decoration: none; color: #111;}
-        input, textarea {outline: none;}
-
-        #wrapper {
-            width: 980px;
-            height: auto;
-            margin: 0 auto;
-        }
-
-
-        /*헤더*/
-        header {
-            width: 100%;
-            height: auto;
-            margin: 0 auto;
-        }
-        header .links {
-            float: right;
-        }
-        header .logo {
-            position: relative;
-            left: 40%;
-            top: 10px;
-            margin-bottom: 20px;
-        }
-        header .logo a:nth-of-type(2) {
-            position: relative;
-            left: 17%;
-        }
-        header .logo a:nth-of-type(3) {
-            position: absolute;
-            right: 1040px;
-            top: 60px;
-        }
-        header .nav {
-            width: 100%;
-            height: auto;
-        }
-        header .nav ul {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        header .nav ul li {
-            width: 196px;
-            height: 50px;
-            border-top: 4px solid black;
-            margin: 0 1.5px;
-        }
-        
-        header .nav ul li a img {
-            display: block;
-        }
-        
-        header .nav .line ul{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        header .background {
-            width: 980px;
-            height: 184px;
-            margin-bottom: 22px;
-        }
-        header .background a:nth-of-type(2) {
-            position: relative;
-            bottom: 50px;
-            left: 15px;
-        }
-        
-        
-        
-        
-        
-        
-
-        /*메인*/
-
-        main {
-            width: 980px;
-            height: auto;
-        }
-        main .side {
-            min-width: 176px;
-            height: 650px;
-            float: left;
-            border-right: 1px solid #999 ;
-            
-        }
-        main .side h1 {
-            margin-left: 10px;
-        }
-        main .side article {
-            width: 175px;
-            height: 233px;
-            background-image: url('/static/images/sub_aside_bg_lnb.png');
-            padding-top: 20px;
-        }
-        
-        
-        
-        main .order {
-            width: 762px;
-            height: 40px;
-            float: right;
-            margin-top: 20px;
-            border-bottom: 1px solid #c4c4c4;
-            margin-bottom: 50px;
-        }
-        
-        main .order p {
-            float: right;
-            position: relative;
-            top: -20px;
-            color: #adadad;
-            font-weight: bold;
-        }
-        main .order p:nth-of-type(1) {
-            color: rgb(133, 197, 37);
-        }
-        
-
-        main .setup {
-            width: 762px;
-            height: 187px;
-            text-align: left;
-            float: right;
-        }
-        main .setup table {
-            width: 100%;
-            height: auto;
-            border-width: 2px, 1px, 1px, 1px;
-            border-style: solid;
-            border-color: #111111;
-
-
-        }
-        main .setup table tr td:nth-of-type(1) {
-            background: #F5F8F9;
-            border: 1px solid #E9E9E9;
-        }
-        main .modify {
-            width: 762px;
-            height: 378px;
-            text-align: left;
-            float: right;
-        }
-        main .modify table {
-            width: 100%;
-            height: auto;
-            border: 2px 1px 1px 1px solid #111 ;
-        }
-        main .modify table tr td:nth-of-type(1) {
-            background: #F5F8F9;
-            border: 1px solid #E9E9E9;
-        }
-        
-
-
-
-
-
-        
-
-
-
-
-
-        /*푸터*/
-
-        footer {
-            width: 100%;
-            height: 120px;
-        }
-        
-        footer .footerimg {
-            float: left;
-            margin-right: 50px;
-        }
-        footer .text {
-            text-align: left;
-            
-            float: right;
-        }
-        footer .text p {
-            font-size: 10.83px;
-            color: #999;
-            margin-top: 20px;
-            margin-right: 15px;
-        }
-
-        </style>
-
+        <link rel="stylesheet" href="/static/style/modify-info.css" />
     </head>
     <body>
         <div id="wrapper">
@@ -280,23 +79,26 @@
                 
                 <section class="setup">
                     <h1>회원정보 설정</h1>
-                    <table >
-                        <tr>
-                            <td>아이디</td>
-                            <td>wnstj050505</td>
-                        </tr>
-                        <tr>
-                            <td>비밀번호</td>
-                            <td><input type="password" name="pass" placeholder="비밀번호 입력"></td>
-                        </tr>
-                        <tr>
-                            <td>비밀번호 확인</td>
-                            <td><input type="password" name="passok" placeholder="비밀번호 입력 확인"><a href="#">비밀번호 수정</a></td>
-                        </tr>
-                        <tr>
-                            <td>회원가입날짜</td>
-                            <td>2022-01-01 12:45:12</td>
-                        </tr>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>아이디</td>
+                                <td>wnstj050505</td>
+                            </tr>
+                            <tr class="pass">
+                                <td>비밀번호</td>
+                                <td><input type="password" name="pass" placeholder="비밀번호 입력"></td>
+                            </tr>
+                            <tr class="passacc">
+                                <td>비밀번호 확인</td>
+                                <td><input type="password" name="passok" placeholder="비밀번호 입력 확인"></td>
+                                <td><a href="#">비밀번호 수정</a></td>
+                            </tr>
+                            <tr>
+                                <td>회원가입날짜</td>
+                                <td>2022-01-01 12:45:12</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </section>
 
@@ -307,17 +109,20 @@
                             <td>이름</td>
                             <td><input type="text" name="name"></td>
                         </tr>
-                        <tr>
+                        <tr class="nickname">
                             <td>별명</td>
                             <td>
                                 공백없는 한글, 영문, 숫자 입력<br>
                                 <input type="text" name="nickname" placeholder="별명 입력">
-                                <a href="#">중복확인</a>
                             </td>
+                            <td><a href="#">중복확인</a></td>
                         </tr>
                         <tr>
                             <td>이메일</td>
-                            <td><input type="text" name="email" placeholder="이메일 입력"><a href="#">인증번호 받기</a></td>
+                            <td>
+                                <input type="text" name="email" placeholder="이메일 입력">
+                            </td>
+                            <td><a href="#">인증번호 받기</a></td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
@@ -326,22 +131,24 @@
                         <tr>
                             <td>주소</td>
                             <td>
-                                <input type="text" name="mail" placeholder="우편번호"><a href="#">우편번호찾기</a><br>
-                                <input type="text" name="address" placeholder="주소 검색"><br>
-                                <input type="text" name="detailadd" placeholder="상세주소 입력">
+                                <input type="text" name="mail" placeholder="우편번호"><br>
+                                <input type="text" name="address" placeholder="주소 검색" class="line23"><br>
+                                <input type="text" name="detailadd" placeholder="상세주소 입력" class="line23">
                             </td>
+                            <td><a href="#">우편번호찾기</a></td>
                         </tr>
                         <tr>
                             <td>회원탈퇴</td>
                             <td><a href="#">탈퇴하기</a></td>
                         </tr>
                     </table>
+                    <div class="button">
+                        <a href="#">취소</a>
+                        <a href="#">회원수정</a>
+                    </article>
                 </section>
 
-                <article>
-                    <a href="#">취소</a>
-                    <a href="#">회원수정</a>
-                </article>
+                
 
                 
 

@@ -1,11 +1,196 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <title>아이디 찾기</title>
+        <style>
+            /* 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  font: normal 12px "noto sans koeran";
+}
+
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #111;
+}
+input,
+textarea {
+  outline: none;
+}
+
+#wrapper {
+  width: 980px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/*=====================================================================*/
+
+/*헤더*/
+header {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+header .links {
+  float: right;
+}
+header .logo {
+  position: relative;
+  left: 40%;
+  top: 10px;
+  margin-bottom: 20px;
+}
+header .logo a:nth-of-type(2) {
+  position: relative;
+  left: 17%;
+}
+header .logo a:nth-of-type(3) {
+  position: absolute;
+  right: 1040px;
+  top: 60px;
+}
+header .nav {
+  width: 100%;
+  height: auto;
+}
+header .nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .nav ul li {
+  width: 196px;
+  height: 50px;
+  border-top: 4px solid black;
+  margin: 0 1.5px;
+}
+
+header .nav ul li a img {
+  display: block;
+}
+
+header .nav .line ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .background {
+  width: 980px;
+  height: 184px;
+  margin-bottom: 22px;
+}
+header .background a:nth-of-type(2) {
+  position: relative;
+  bottom: 50px;
+  left: 15px;
+}
+
+/*=====================================================================*/
+
+/*메인*/
 
 
+/*=====================================================================*/
+
+/*푸터*/
+footer {
+  width: 100%;
+  height: 120px;
+}
+footer .footerimg {
+  float: left;
+  margin-right: 50px;
+}
+footer .text {
+  text-align: left;
+  box-sizing: border-box;
+  float: right;
+}
+footer .text p {
+  font-size: 10.83px;
+  color: #999;
+  margin-top: 20px;
+  margin-right: 15px;
+}
+footer .endtext {
+    position: relative;
+    left: 883px;
+    font-size: 10.83px;
+    color: #999;
+}
+        </style>
 
     </head>
     <body>
+        <div id="wrapper">
+            <section>
+                <img src="/static/images/head_top_line.png" alt="">
+            </section>
+            <header>
+                <section class="links">
+                    <div>
+                      <p>
+                        <a href="">HOME | </a>
+                        <a href="">로그인 | </a>
+                        <a href="">회원가입 | </a>
+                        <a href="">나의정보 | </a>
+                        <a href="">로그아웃 | </a>
+                        <a href="">관리자 | </a>
+                        <a href="">고객센터</a>
+                      </p>
+                    </div>
+                  </section>
+                  <section class="logo">
+                    <div>
+                      <a href="#">
+                        <img src="/static/images/logo.png" />
+                      </a>
+                      <a href="#">
+                        <img src="/static/images/head_txt_img.png" />
+                      </a>
+                      <a href="#">
+                        <img src="/static/images/head_menu_badge.png" alt="">
+                      </a>
+                    </div>
+                  </section>
+                  <section class="nav">
+                    <ul>
+                        <li><a href="#"><img src="/static/images/head_menu1.png" alt="팜스토리소개"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu2.png" alt="장보기"></a> </li>
+                        <li><a href="#"><img src="/static/images/head_menu3.png" alt="농작물이야기"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu4.png" alt="이벤트"></a></li>
+                        <li><a href="#"><img src="/static/images/head_menu5.png" alt="커뮤니티"></a></li>
+                    </ul>
+                  </section>
+            </header>
+            <main>
+
+            </main>
+            <footer>
+                
+                <img src="/static/images/footer_top_line.png" alt="">
+                 <section class="footerimg">
+                    <img src="/static/images/footer_logo.png" alt="푸터로고">
+                 </section>
+                 <section class="text">
+                    <p>(주)팜스토리/사업자등록번호 123-45-67890/통신판매업신고 제 2013-팜스토리구-123호/벤처기업확인 서울지방중소기업청 제 012345678-9-01234호<br>
+                    등록번호 팜스토리01234 (2013.04.01)/발행인:홍길동<br>
+                    대표 : 홍길동/이메일:email@mail.mail/전화:01)234-5678/경기도 성남시 잘한다구 신난다동 345<br>
+                    Copyright(C)홍길동 All rights reserved.</p>
+                 </section>
+                 <section class="endtext">
+                    <p>farmstory ver1.0.1</p>
+                 </section>
+            </footer>
+
+        </div>
         
     </body>
 </html>
