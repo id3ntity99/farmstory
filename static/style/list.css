@@ -44,3 +44,16 @@ main > .container .content > table > tbody > tr > td:nth-child(1) > img {
 main > .container .content > table > tbody > tr > td:nth-child(3) {
   text-align: left;
 }
+
+main > .container .content > span:nth-of-type(1) {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+main > .container .content > span:nth-of-type(2) {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+}
