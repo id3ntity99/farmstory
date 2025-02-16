@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style_cm.css" />
-    <title>팜스토리</title>
+    <title>오늘의 식단</title>
+    <link rel="stylesheet" href="/static/style/common/header.css" />
+    <link rel="stylesheet" href="/static/style/common/footer.css" />
+    <link rel="stylesheet" href="/static/style/common/page-common.css" />
+    <link rel="stylesheet" href="/static/style/diet.css" />
   </head>
   <body>
     <div id="wrapper">
       <header>
         <section class="links">
+          <img src="/static/images/head_top_line.png" alt="" />
           <div>
             <p>
               <a href="">HOME | </a>
@@ -53,56 +57,89 @@
             </div>
           </article>
         </section>
-        <section class="background">
-            <a>
-            <img src="../images/sub_top_bg.jpg" alt="main banner"/>
-            </a>
-            <a>
-            <img src="../images/sub_top_tit5.png" alt="community"/>
-            </a>
-        </section>
       </header>
-
       <main>
-         <section class="aside">
-          <p><img src="/static/images/sub_aside_cate5_tit.png" alt="커뮤니티"/></p>
+        <section class="page-banner">
+          <div>
+            <img src="/static/images/sub_top_bg.jpg" alt="" />
+            <img src="/static/images/sub_top_tit5.png" alt="" />
+          </div>
+        </section>
+        <section class="container">
           <article>
-            <ul>
-              <li>
-                <a href="#">
-                  <img src="/static/images/sub_cate5_lnb1_ov.png" alt="오늘의식단"/>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="/static/images/sub_cate5_lnb2.png" alt="오늘의식단"/>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="/static/images/sub_cate5_lnb3.png" alt="나도요리사"/>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="/static/images/sub_cate5_lnb4.png" alt="1:1고객문의"/>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="/static/images/sub_cate5_lnb5.png" alt="자주묻는질문"/>
-                </a>
-              </li>
-            </ul>
+            <aside class="side-menu">
+              <div class="side-title">
+                <img src="/static/images/sub_aside_cate5_tit.png" alt="" />
+              </div>
+              <div class="side-content">
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+              </div>
+              <img src="/static/images/sub_aside_bg_line.png" class="line" />
+            </aside>
+            <div class="content-area">
+              <div class="content-title">
+                <img src="/static/images/sub_nav_tit_cate5_tit2.png" alt="" />
+                <span>
+                  <a href="#">HOME </a>
+                  <a href="#">> 커뮤니티 > </a>
+                  <a href="#">오늘의식단 </a>
+                </span>
+              </div>
+              <div class="content">
+                <h3>글수정</h3>
+                <form action="https://naver.com" method="POST">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>제목</td>
+                        <td>
+                          <input
+                            type="text"
+                            name="diet-title"
+                            placeholder="제목을 입력하세요"
+                            id="diet-title"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>내용</td>
+                        <td>
+                          <textarea
+                            id="diet-content"
+                            name="diet-content"
+                          ></textarea>
+                        </td>
+                      </tr>
+                      <tr class="file-area">
+                        <td>파일</td>
+                        <td>
+                          <p>
+                            최대 2개 파일 첨부 가능, 각 파일당 최대 10MB까지
+                            가능
+                          </p>
+                          <div>
+                            <input type="file" />
+                          </div>
+                          <div>
+                            <input type="file" />
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <input type="submit" value="작성완료" class="btn" />
+                  <button class="btn">
+                    <a href="#"> 취소 </a>
+                  </button>
+                </form>
+              </div>
+            </div>
           </article>
-         </section>
-         <section class="top">
-          <nav>
-            <h1>
-              <img src="/static/images/sub_nav_tit_cate5_tit1.png">
-            </h1>
-            <p>= HOME>커뮤니티><span>공지사항</span></p>
-          </nav>
-         </section>
+        </section>
       </main>
       <footer>
         <div>
@@ -115,7 +152,6 @@
             대표: 김철수 / 이메일 : abc123@example.com / 전화 : 01) 234-5678 /
             부산광역시 부산진구 부전동 123 <br />
             <span>copyright© 김철수 All rights reserved.</span>
-            <span>farmstory ver1.0.1</span>
           </p>
         </div>
       </footer>
