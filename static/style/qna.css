@@ -96,6 +96,8 @@ main .content .file-area input {
 main .content .btn {
   border: 1px solid #d7d7d7;
   float: right;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 main .content > form > button {
