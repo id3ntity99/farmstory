@@ -60,13 +60,13 @@ main > aside a:nth-child(2) {
 }
 main > aside a:nth-child(3) {
   position: absolute;
-  right: 3px;
+  left: 3px;
   top: 80px;
 }
 main > aside a:nth-child(4) {
   position: relative;
   top: 105px;
-  right: 1px;
+  left: 3px;
 }
 main > section {
   float: right;
@@ -122,11 +122,12 @@ main > section table.total {
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
   margin-inline-start: 7px;
-  margin-inline-end: 7px;
   margin-block-start: 5px;
 }
 main > section table.total th {
   text-align: right;
+  position: relative;
+  left: -19px;
 }
 main > section table.total td.totalPrice {
   color: #960d1a;
@@ -149,6 +150,11 @@ main > section > div > a:nth-child(3) {
 }
 main > section > div > a:nth-child(3)::before {
   content: url(/images/sub_page_nav_ico.gif);
+  display: inline-block;
+  transform: scale(1.5);
+  position: relative;
+  right: 5px;
+  bottom: 3px;
 }
 main > section > div article:nth-child(1) {
   float: right;
