@@ -96,6 +96,7 @@ main .content .posts table td {
   height: 35px;
   background-color: #4b545e;
   border: none;
+  float: right;
 }
 
 #do-post > a {
