@@ -92,11 +92,11 @@ main .content .posts table td {
 }
 
 #do-post {
+  float: right;
   width: 60px;
   height: 35px;
   background-color: #4b545e;
   border: none;
-  float: right;
 }
 
 #do-post > a {
