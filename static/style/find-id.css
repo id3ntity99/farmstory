@@ -36,6 +36,7 @@
       margin: auto;
       margin-top: 50px;
       margin-bottom: 80px;
+      overflow: hidden;
   }
   main .idfind h1 {
       font-size: 14px;
