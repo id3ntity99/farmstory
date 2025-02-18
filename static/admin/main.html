@@ -3,43 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <title>관리자 메인</title>
-
     <link rel="stylesheet" href="/static/style/admin.css">
 </head>
 <body>
     <div id="container">
       <header>
-        <a href="#">
-          <img src="/static/images/admin/admin_logo.jpg" alt="logo" />
+        <a href="/static/admin/main.html">
+        <img src="/static/images/admin/admin_logo.jpg" alt="logo" />
         </a>
         <p>
-          <a href="#">HOME |</a>
+          <a href="/static/admin/main.html">HOME |</a>
           <a href="#">로그아웃 |</a>
           <a href="#">고객센터</a>
         </p>
       </header>
 
       <main>
-        <aside>
+        <aside id="manu">
           <h3>주요기능</h3>
           <ul>
             <li>
               <span>상품관리</span>
               <ol>
-                <li><a href="#">상품목록</a></li>
-                <li><a href="#">상품등록</a></li>
+                <li><a href="/static/admin/product-list.html">상품목록</a></li>
+                <li><a href="/static/admin/product-enroll.html">상품등록</a></li>
               </ol>
             </li>
             <li>
               <span>주문관리</span>
               <ol>
-                <li><a href="#">주문목록</a></li>
+                <li><a href="/static/admin/order-list.html">주문목록</a></li>
               </ol>
             </li>
             <li>
               <span>회원관리</span>
               <ol>
-                <li><a href="#">회원목록</a></li>
+                <li><a href="/static/admin/user-list.html">회원목록</a></li>
                 <li><a href="#">회원등록</a></li>
               </ol>
             </li>
@@ -53,8 +52,8 @@
             </nav>
             <article>
                 <h3>
-                    <a href="#">상품현황</a>
-                    <a href="#" class="more"> + 더보기</a>
+                    <a href="/static/admin/product-list.html">상품현황</a>
+                    <a href="/static/admin/product-list.html" class="more"> + 더보기</a>
                 </h3>
 
                 <table border="0">
@@ -96,8 +95,8 @@
             
             <Article>
                 <h3>
-                    <a href="#">주문현황</a>
-                    <a href="#" class="more"> + 더보기</a>
+                    <a href="/static/admin/order-list.html">주문현황</a>
+                    <a href="/static/admin/order-list.html" class="more"> + 더보기</a>
                 </h3>
 
             <table>
@@ -145,8 +144,8 @@
           </article>
           <article>
             <h3>
-              <a href="#">회원현황</a>
-              <a href="#" class="more"> + 더보기</a>
+              <a href="/static/admin/user-list.html">회원현황</a>
+              <a href="/static/admin/user-list.html" class="more"> + 더보기</a>
             </h3>
 
             <table>
