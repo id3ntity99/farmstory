@@ -172,21 +172,17 @@ main .modify table .nickname td:nth-of-type(3) {
 main .modify table .nickname td:nth-of-type(2) {
   line-height: 30px;
 }
+main .modify table .nickname td:nth-of-type(3) {
+  position: relative;
+  bottom: 40px;
+}
 main .modify table tr td:nth-of-type(3) {
-  background: #2E658A;
   display: block;
   width: 80px;
   height: 15px;
-  text-align: center;
-  padding: 5px;
   position: relative;
-  top: 9px;
-  right: 265%;
-  border-radius: 5px;
-  border: 1px solid #3e86b6;
-}
-main .modify table tr td:nth-of-type(3) a {
-  color: white;
+  top: 15px;
+  right: 305%;
 }
 main .modify table tr td .line23 {
   width: 330px;
