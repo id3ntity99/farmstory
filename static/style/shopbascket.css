@@ -172,6 +172,7 @@ main .total {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  margin-bottom: 30px;
 }
 
 main .total h3 {
@@ -201,7 +202,7 @@ main .total tr:last-of-type td:last-of-type {
 }
 main .total a {
   display: flex;
-  width: 290px;
+  width: 100%;
   height: 37px;
   justify-content: center;
   align-items: center;
