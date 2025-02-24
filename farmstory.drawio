@@ -1161,7 +1161,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="ObMsFz6R18lPdblv3kdb" name="UML">
-    <mxGraphModel dx="2174" dy="1819" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3185" dy="2307" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1414,7 +1414,7 @@
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-44" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-42">
           <mxGeometry y="52" width="335" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="U8bBAtRUVzXXZjNK8PlK-45" value="&lt;div&gt;+ DefaultService(dao: DataAccessObject&amp;lt;T&amp;gt;)&lt;/div&gt;+ insert(dto: T)&lt;br&gt;+ select(dto: T): T&lt;br&gt;+ selectAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)&lt;div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-42">
+        <mxCell id="U8bBAtRUVzXXZjNK8PlK-45" value="&lt;div&gt;+ DefaultService(dao: DataAccessObject&amp;lt;T&amp;gt;)&lt;div&gt;+ create(dto: T)&lt;br&gt;+ get(dto: T): T&lt;br&gt;+ getAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-42">
           <mxGeometry y="60" width="335" height="100" as="geometry" />
         </mxCell>
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=blockThin;endFill=0;endSize=10;" edge="1" parent="1" source="U8bBAtRUVzXXZjNK8PlK-46" target="U8bBAtRUVzXXZjNK8PlK-55">
@@ -1429,7 +1429,7 @@
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-48" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-46">
           <mxGeometry y="52" width="335" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="U8bBAtRUVzXXZjNK8PlK-49" value="&lt;div&gt;+ CountableService(dao: CountableDAO&amp;lt;T&amp;gt;)&lt;/div&gt;+ insert(dto: T)&lt;br&gt;+ select(dto: T): T&lt;br&gt;+ selectAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)&lt;div&gt;&lt;/div&gt;&lt;div&gt;+ count(): int&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-46">
+        <mxCell id="U8bBAtRUVzXXZjNK8PlK-49" value="&lt;div&gt;+ CountableService(dao: CountableDAO&amp;lt;T&amp;gt;)&lt;/div&gt;&lt;div&gt;+ create(dto: T)&lt;br&gt;+ get(dto: T): T&lt;br&gt;+ getAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)&lt;br&gt;&lt;/div&gt;+ count(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-46">
           <mxGeometry y="60" width="335" height="110" as="geometry" />
         </mxCell>
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-52" value="&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;br&gt;Service&amp;lt;T extends DataTransferObject&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -1447,11 +1447,14 @@
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-56" value="&lt;div&gt;+ create(dto: T)&lt;br&gt;+ get(dto: T): T&lt;br&gt;+ getAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)&lt;br&gt;&lt;/div&gt;+ count(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-55">
           <mxGeometry y="40" width="345" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="U8bBAtRUVzXXZjNK8PlK-61" value="Used the Adapter + Proxy pattern" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1240" y="-372" width="200" height="30" as="geometry" />
+        <mxCell id="U8bBAtRUVzXXZjNK8PlK-66" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1225" y="-580" width="210" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="U8bBAtRUVzXXZjNK8PlK-65" value="Both Service and CountableService are client interface to the Adapter.&lt;div&gt;The Adapter are the actual implementation of the Serive and CountableService interfaces; CountableDefaultService, DefaultService.&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;" vertex="1" parent="1">
-          <mxGeometry x="1230" y="-550" width="200" height="160" as="geometry" />
+        <mxCell id="U8bBAtRUVzXXZjNK8PlK-61" value="&lt;b&gt;Used the Adapter + Proxy pattern&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-66">
+          <mxGeometry width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U8bBAtRUVzXXZjNK8PlK-65" value="Both Service and CountableService are client-interface to the Adapters.&lt;div&gt;The Adapters are the actual implementation of the Serive and CountableService interfaces; CountableDefaultService, DefaultService.&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" parent="U8bBAtRUVzXXZjNK8PlK-66">
+          <mxGeometry x="5" y="30" width="200" height="160" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
