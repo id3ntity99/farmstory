@@ -1185,7 +1185,7 @@
         <mxCell id="Ou63yYAXtk8q72VnTGAW-14" value="+ insert(dto: T)&lt;br&gt;+ select(dto: T): T&lt;br&gt;+ selectAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ou63yYAXtk8q72VnTGAW-11" vertex="1">
           <mxGeometry y="40" width="300" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="Xxv4TYOopYMsg7OHLEDf-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;endFill=1;endSize=10;" edge="1" parent="1" source="Ou63yYAXtk8q72VnTGAW-15" target="Ou63yYAXtk8q72VnTGAW-11">
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;endFill=1;endSize=15;" edge="1" parent="1" source="Ou63yYAXtk8q72VnTGAW-15" target="Ou63yYAXtk8q72VnTGAW-11">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1358" y="87" />
@@ -1202,7 +1202,7 @@
         <mxCell id="e9vEBles_ua6F5UtDvVc-1" value="UserController" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1910" y="33" width="335" height="86" as="geometry" />
         </mxCell>
-        <mxCell id="e9vEBles_ua6F5UtDvVc-2" value="- LOGGER: Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="e9vEBles_ua6F5UtDvVc-1" vertex="1">
+        <mxCell id="e9vEBles_ua6F5UtDvVc-2" value="- LOGGER: org.slf4j.Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="e9vEBles_ua6F5UtDvVc-1" vertex="1">
           <mxGeometry y="26" width="335" height="26" as="geometry" />
         </mxCell>
         <mxCell id="e9vEBles_ua6F5UtDvVc-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="e9vEBles_ua6F5UtDvVc-1" vertex="1">
@@ -1220,31 +1220,31 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-1" value="DefaultService&amp;lt;T extends DataTransferObject&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="819.5" y="-542" width="358" height="145" as="geometry" />
+          <mxGeometry x="819.5" y="-542" width="358" height="156" as="geometry" />
         </mxCell>
-        <mxCell id="Xxv4TYOopYMsg7OHLEDf-2" value="- LOGGER: Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-1">
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-2" value="- LOGGER: org.slf4j.Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-1">
           <mxGeometry y="26" width="358" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-1">
           <mxGeometry y="52" width="358" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="Xxv4TYOopYMsg7OHLEDf-4" value="+ create(dto: T)&lt;div&gt;+ get(dto: T): T&lt;/div&gt;&lt;div&gt;+ getAll(): List&amp;lt;T&amp;gt;&lt;/div&gt;&lt;div&gt;+ update(dto: T)&lt;/div&gt;&lt;div&gt;+ delete(dto: T)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-1">
-          <mxGeometry y="60" width="358" height="85" as="geometry" />
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-4" value="&lt;div&gt;+ DefaultService(dao: DataAccessObject&amp;lt;T&amp;gt;)&lt;/div&gt;+ create(dto: T)&lt;div&gt;+ get(dto: T): T&lt;/div&gt;&lt;div&gt;+ getAll(): List&amp;lt;T&amp;gt;&lt;/div&gt;&lt;div&gt;+ update(dto: T)&lt;/div&gt;&lt;div&gt;+ delete(dto: T)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-1">
+          <mxGeometry y="60" width="358" height="96" as="geometry" />
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=blockThin;endFill=0;endSize=10;" edge="1" parent="1" source="Xxv4TYOopYMsg7OHLEDf-6" target="Ou63yYAXtk8q72VnTGAW-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-6" value="DefaultDAO&amp;lt;T extends DataTransferObject&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="803" y="307" width="358" height="145" as="geometry" />
+          <mxGeometry x="803" y="307" width="358" height="157" as="geometry" />
         </mxCell>
-        <mxCell id="Xxv4TYOopYMsg7OHLEDf-7" value="- LOGGER: Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-6">
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-7" value="- LOGGER: org.slf4j.Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-6">
           <mxGeometry y="26" width="358" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-6">
           <mxGeometry y="52" width="358" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="Xxv4TYOopYMsg7OHLEDf-9" value="+ insert(dto: T)&lt;div&gt;+ select(dto: T): T&lt;/div&gt;&lt;div&gt;+ selectAll(): List&amp;lt;T&amp;gt;&lt;/div&gt;&lt;div&gt;+ update(dto: T)&lt;/div&gt;&lt;div&gt;+ delete(dto: T)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-6">
-          <mxGeometry y="60" width="358" height="85" as="geometry" />
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-9" value="&lt;div&gt;+ DefaultDAO(helper: ConnectionHelper)&lt;/div&gt;+ insert(dto: T)&lt;div&gt;+ select(dto: T): T&lt;/div&gt;&lt;div&gt;+ selectAll(): List&amp;lt;T&amp;gt;&lt;/div&gt;&lt;div&gt;+ update(dto: T)&lt;/div&gt;&lt;div&gt;+ delete(dto: T)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-6">
+          <mxGeometry y="60" width="358" height="97" as="geometry" />
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=blockThin;endFill=0;endSize=10;" edge="1" parent="1" source="Xxv4TYOopYMsg7OHLEDf-13" target="Xxv4TYOopYMsg7OHLEDf-1">
           <mxGeometry relative="1" as="geometry" />
@@ -1252,7 +1252,7 @@
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-13" value="OrderService&amp;lt;OrderDTO&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="660" y="-829" width="218" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="Xxv4TYOopYMsg7OHLEDf-14" value="- LOGGER: Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-13">
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-14" value="- LOGGER: org.slf4j.Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-13">
           <mxGeometry y="26" width="218" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-15" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-13">
@@ -1267,7 +1267,7 @@
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-18" value="UserService&amp;lt;UserDTO&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1125" y="-829" width="196" height="145" as="geometry" />
         </mxCell>
-        <mxCell id="Xxv4TYOopYMsg7OHLEDf-19" value="- LOGGER: Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-18">
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-19" value="- LOGGER: org.slf4j.Logger" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-18">
           <mxGeometry y="26" width="196" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-20" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-18">
@@ -1275,6 +1275,21 @@
         </mxCell>
         <mxCell id="Xxv4TYOopYMsg7OHLEDf-21" value="+ join(): List&amp;lt;OrderDTO&amp;gt;&lt;div&gt;+ count(): int&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-18">
           <mxGeometry y="60" width="196" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;endFill=0;endSize=15;" edge="1" parent="1" source="Xxv4TYOopYMsg7OHLEDf-23" target="Ou63yYAXtk8q72VnTGAW-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-23" value="ConnectionHelper" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="169" y="51.5" width="335" height="99" as="geometry" />
+        </mxCell>
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-24" value="- dbName: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-23">
+          <mxGeometry y="26" width="335" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-25" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-23">
+          <mxGeometry y="52" width="335" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Xxv4TYOopYMsg7OHLEDf-26" value="&lt;div&gt;+ ConnectionHelper()&lt;/div&gt;+ getConnection: java.sql.Connection" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="Xxv4TYOopYMsg7OHLEDf-23">
+          <mxGeometry y="60" width="335" height="39" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
