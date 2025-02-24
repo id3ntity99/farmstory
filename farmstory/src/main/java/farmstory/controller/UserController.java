@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import farmstory.DataAccessObject;
-import farmstory.DefaultDAO;
-import farmstory.DefaultService;
-import farmstory.Service;
+import farmstory.CountableDAO;
+import farmstory.DataAccessException;
+import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
-import farmstory.service.UserService;
+import farmstory.service.CountableDefaultService;
+import farmstory.service.CountableService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,21 +22,25 @@ public class UserController extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class.getName());
 
-  public Service<UserDTO> service;
+  private CountableDAO<UserDTO> dao;
+  private CountableService<UserDTO> service;
 
   @Override
   public void init() throws ServletException {
-    DataAccessObject<UserDTO> dao = new DefaultDAO<UserDTO>(new ConnectionHelper("jdbc/farmstory"));
-    this.service = new DefaultService<>(dao);
+    ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+    dao = new UserDAO(helper);
+    service = new CountableDefaultService<>(dao);
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    // TODO Implement this method.
-    UserService userService = (UserService) service; // FIXME 예제코드. DefaultService에 없는 User 테이블에 대한
-                                                     // 특수한 쿼리를 사용해야할 경우에는 이처럼 형변환(casting)을 이용해
-                                                     // DefaultService를 UserService로 바꿔 메서드를 사용한다.
-    userService.join(); // FIXME 예제코드
+    try { // 예제 코드
+      UserDTO target = new UserDTO();
+      // target.setUid("abc123");
+      UserDTO dto = dao.select(target);
+    } catch (DataAccessException e) {
+      // TODO: handle exception
+    }
   }
 }
