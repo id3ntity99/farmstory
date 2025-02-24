@@ -13,7 +13,7 @@
 
 ### 2.2 C4 Model - System
 
-![Alt text](./images/C4%20Model%20-%20System.png.png)
+![Alt text](./images/C4%20Model%20-%20System.png)
 
 ### 2.3 C4 Model - Container
 
@@ -23,6 +23,6 @@
 
 ![Alt text](./images/C4%20Model%20-%20Component.png)
 
-### 2.4 C4 Model - Container
+### 2.5 UML Diagram
 
-![Alt text](<./images/UML(on%20progress).png>)
+![Alt text](./images/UML.png)
