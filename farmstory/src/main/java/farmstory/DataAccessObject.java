@@ -1,6 +1,7 @@
 package farmstory;
 
 import java.util.List;
+import farmstory.exception.DataAccessException;
 
 public interface DataAccessObject<T extends DataTransferObject> {
   void insert(T dto) throws DataAccessException;

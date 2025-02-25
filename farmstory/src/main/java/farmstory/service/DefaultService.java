@@ -1,9 +1,9 @@
 package farmstory.service;
 
 import java.util.List;
-import farmstory.DataAccessException;
 import farmstory.DataAccessObject;
 import farmstory.DataTransferObject;
+import farmstory.exception.DataAccessException;
 
 public class DefaultService<T extends DataTransferObject> implements Service<T> {
   private final DataAccessObject<T> dao;
