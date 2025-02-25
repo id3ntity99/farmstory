@@ -3,7 +3,7 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
+SET @@session.restrict_fk_on_non_standard_key=OFF;
 -- -----------------------------------------------------
 -- Schema Farmstory
 -- -----------------------------------------------------
@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`user` (
   `password` VARCHAR(64) NOT NULL,
   `name` VARCHAR(10) NOT NULL,
   `nickname` VARCHAR(8) NOT NULL,
+  `point` INT NULL DEFAULT 0,
+  `level` TINYINT NULL DEFAULT 0,
   `email` VARCHAR(254) NOT NULL,
   `phone_num` CHAR(13) NOT NULL,
   `zip` CHAR(5) NOT NULL,
@@ -36,10 +38,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `Farmstory`.`company`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Farmstory`.`company` (
+  `id` INT NOT NULL,
+  `company_name` VARCHAR(30) NOT NULL,
+  `manager_name` VARCHAR(45) NOT NULL,
+  `contact` VARCHAR(20) NOT NULL,
+  `addr` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `Farmstory`.`product`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Farmstory`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `company_id` INT NOT NULL,
   `name` VARCHAR(20) NOT NULL,
   `category` VARCHAR(10) NOT NULL,
   `price` INT NOT NULL,
@@ -49,7 +65,13 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`product` (
   `stock` INT NOT NULL DEFAULT 0,
   `image_id` INT NULL,
   `register_date` DATETIME NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`, `company_id`),
+  INDEX `fk_product_company1_idx` (`company_id` ASC) VISIBLE,
+  CONSTRAINT `fk_product_company1`
+    FOREIGN KEY (`company_id`)
+    REFERENCES `Farmstory`.`company` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -59,7 +81,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Farmstory`.`product_image` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
-  `location` VARCHAR(100) NULL,
+  `thumbnail_location` VARCHAR(100) NULL,
+  `info_location` VARCHAR(100) NULL,
+  `detail_location` VARCHAR(100) NULL,
   PRIMARY KEY (`id`, `product_id`),
   INDEX `fk_product_image_product_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `fk_product_image_product`
@@ -99,20 +123,20 @@ ENGINE = InnoDB;
 -- Table `Farmstory`.`wishlist`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Farmstory`.`wishlist` (
+  `id` INT NOT NULL,
   `user_id` VARCHAR(10) NOT NULL,
   `product_id` INT NOT NULL,
-  `amount` INT NULL DEFAULT 1,
-  PRIMARY KEY (`user_id`),
-  INDEX `fk_wishlist_user1_idx` (`user_id` ASC) VISIBLE,
+  `amount` INT NOT NULL DEFAULT 1,
   INDEX `fk_wishlist_product1_idx` (`product_id` ASC) VISIBLE,
-  CONSTRAINT `fk_wishlist_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `Farmstory`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_wishlist_product1`
     FOREIGN KEY (`product_id`)
     REFERENCES `Farmstory`.`product` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_wishlist_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `Farmstory`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -177,11 +201,46 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`article_file` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `Farmstory`.`point_history`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Farmstory`.`point_history` (
+  `id` INT NOT NULL,
+  `user_id` VARCHAR(10) NOT NULL,
+  `amount` INT NULL,
+  `description` VARCHAR(50) NULL,
+  `earn_date` DATE NULL,
+  PRIMARY KEY (`id`, `user_id`),
+  INDEX `fk_point_history_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_point_history_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `Farmstory`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Farmstory`.`term`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Farmstory`.`term` (
+  `id` INT NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `content` TEXT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Farmstory`.`event`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Farmstory`.`event` (
+  `id` INT NOT NULL,
+  `title` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
--- DB 계정 생성
-DROP USER if EXISTS 'farmstory'@'%';
-CREATE USER "farmstory"@"%" IDENTIFIED BY "1234";
-GRANT ALL PRIVILEGES ON `farmstory`.* TO "farmstory"@"%";
