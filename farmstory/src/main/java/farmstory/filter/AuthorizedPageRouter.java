@@ -15,7 +15,8 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  * 사용자가 로그인한 경우, 사용자가 요청한 페이지에 대한 권한을 확인하는 필터. <br>
- * 예를 들어, 로그인한 사용자는 아이디/비밀번호 찾기, 회원가입 페이지 등으로 접속할 수 없다.
+ * 예를 들어, 로그인한 사용자는 아이디/비밀번호 찾기, 회원가입 페이지 등으로 접속할 수 없다. 따라서 본 필터가 로그인한 사용자가 아이디/비밀번호 찾기, 회원가입 페이지
+ * 등으로 접속할 수 없도록 막아준다.
  */
 @WebFilter(urlPatterns = {"/order/*", "/article/write", "/wishlist/*", "/user/*"})
 public class AuthorizedPageRouter extends HttpFilter {
