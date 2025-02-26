@@ -16,13 +16,13 @@
           <img src="/farmstory/images/head_top_line.png" alt="" />
           <div>
             <p>
-              <a href="">HOME | </a>
-              <a href="">로그인 | </a>
-              <a href="">회원가입 | </a>
-              <a href="">나의정보 | </a>
-              <a href="">로그아웃 | </a>
-              <a href="">관리자 | </a>
-              <a href="">고객센터</a>
+              <a href="/farmstory">HOME | </a>
+              <a href="/farmstory/signin">로그인 | </a>
+              <a href="/farmstory/signup">회원가입 | </a>
+              <a href="/farmstory/user/info">나의정보 | </a>
+              <a href="/farmstory/signout">로그아웃 | </a>
+              <a href="/farmstory/admin">관리자 | </a>
+              <a href="#">고객센터</a>
             </p>
           </div>
         </section>

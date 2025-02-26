@@ -16,19 +16,19 @@
           <img src="/farmstory/images/head_top_line.png" alt="" />
           <div>
             <p>
-              <a href="">HOME | </a>
-              <a href="">로그인 | </a>
-              <a href="">회원가입 | </a>
-              <a href="">나의정보 | </a>
-              <a href="">로그아웃 | </a>
-              <a href="">관리자 | </a>
-              <a href="">고객센터</a>
+              <a href="/farmstory/index.jsp">HOME | </a>
+              <a href="/farmstory/signin">로그인 | </a>
+              <a href="/farmstory/signup">회원가입 | </a>
+              <a href="/farmstory/user/info">나의정보 | </a>
+              <a href="/farmstory/signout">로그아웃 | </a>
+              <a href="/farmstory/admin">관리자 | </a>
+              <a href="#">고객센터</a>
             </p>
           </div>
         </section>
         <section class="logo">
           <div>
-            <a href="#">
+            <a href="/">
               <img src="/farmstory/images/logo.png" />
             </a>
             <a href="#">
@@ -61,7 +61,7 @@
       <main>
         <section class="container">
           <div class="login-area">
-            <form action="#">
+            <form action="/farmstory/signin" method="POST">
               <table>
                 <tbody>
                   <tr>
@@ -98,9 +98,9 @@
               아직회원이 아니시면 회원으로 가입하세요 <br />
             </p>
             <span>
-              <a href="#">아이디 찾기 | </a>
-              <a href="#">비밀번호 찾기 | </a>
-              <a href="#">회원가입</a>
+              <a href="/farmstory/find/id">아이디 찾기 | </a>
+              <a href="/farmstory/find/password">비밀번호 찾기 | </a>
+              <a href="/signup">회원가입</a>
             </span>
           </div>
         </section>
