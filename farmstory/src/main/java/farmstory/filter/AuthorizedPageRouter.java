@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
  * 사용자가 로그인한 경우, 사용자가 요청한 페이지에 대한 권한을 확인하는 필터. <br>
  * 예를 들어, 로그인한 사용자는 아이디/비밀번호 찾기, 회원가입 페이지 등으로 접속할 수 없다.
  */
-@WebFilter(urlPatterns = {"/order/*", "/article/*", "/wishlist/*", "/user/*"})
+@WebFilter(urlPatterns = {"/order/*", "/article/write", "/wishlist/*", "/user/*"})
 public class AuthorizedPageRouter extends HttpFilter {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER =
@@ -35,8 +35,8 @@ public class AuthorizedPageRouter extends HttpFilter {
     HttpSession session = request.getSession();
     DataTransferObject user = (DataTransferObject) session.getAttribute("sessUser");
     if (user == null) { // 로그인 하지 않은 사용자가 요청한 경우
-      String msg = String.format("로그인 하지 않은 사용자(%s)가 요청한 페이지(%s)로의 접근이 유효하지 않음",
-          request.getRemoteAddr(), request.getRequestURL());
+      String msg =
+          String.format("유효하지 않은 접근 (%s ==> %s)", request.getRemoteAddr(), request.getRequestURL());
       LOGGER.warn(msg);
       response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     } else { // 로그인한 사용자가 요청한 경우
@@ -53,6 +53,7 @@ public class AuthorizedPageRouter extends HttpFilter {
       for (String pattern : urlPatterns) {
         String patternRoot = getRootPath(pattern);
 
+        // TODO Possibly vulnerable?
         if (patternRoot.contains(root)) {// 로그인한 사용자가 요청한 페이지로의 접근이 유효한 경우
           String msg = String.format("사용자가 요청한 페이지(%s)로의 접근이 유효함. %s로 라우팅...",
               request.getRequestURL(), request.getRequestURL());
