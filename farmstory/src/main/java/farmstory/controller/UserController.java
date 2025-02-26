@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
+import farmstory.DataTransferObject;
 import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
@@ -35,12 +36,13 @@ public class UserController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    try { // 예제 코드
-      UserDTO target = new UserDTO();
-      // target.setUid("abc123");
-      UserDTO dto = dao.select(target);
+    String targetId = (String) req.getSession().getAttribute("sessUser");
+    try {
+      UserDTO targetDto = new UserDTO();
+      targetDto.setId(targetId);
+
+      DataTransferObject dto = service.get(targetDto);
     } catch (DataAccessException e) {
-      // TODO: handle exception
     }
   }
 }
