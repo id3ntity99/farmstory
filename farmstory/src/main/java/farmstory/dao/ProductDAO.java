@@ -46,9 +46,11 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 
   }
 
-  @Override
-  public int count() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+
+@Override
+public int count() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
 }

@@ -4,11 +4,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
+import farmstory.DataAccessObject;
+import farmstory.DataTransferObject;
 import farmstory.dto.TermsDTO;
 import farmstory.dto.UserDTO;
 import farmstory.util.ConnectionHelper;
 
-public class TermsDAO implements CountableDAO<TermsDTO> {
+public class TermsDAO implements DataAccessObject<TermsDTO> {
   private static final Logger LOGGER = LoggerFactory.getLogger(TermsDAO.class.getName());
   private final ConnectionHelper helper;
 
@@ -44,11 +46,5 @@ public class TermsDAO implements CountableDAO<TermsDTO> {
   public void delete(TermsDTO dto) {
     // TODO Auto-generated method stub
 
-  }
-
-  @Override
-  public int count() {
-    // TODO Auto-generated method stub
-    return 0;
   }
 }
