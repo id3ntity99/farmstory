@@ -1,8 +1,8 @@
 package farmstory.service;
 
 import java.util.List;
-import farmstory.DataAccessException;
 import farmstory.DataTransferObject;
+import farmstory.exception.DataAccessException;
 
 /**
  * 추상 클래스. 싱글톤 패턴을 사용하지 않고, 내부적으로 사용되는 DAO를 생성자를 통해 인자로 전달 받는다. 구체적인 클래스 또는 인터페이스의 구현체를 type으로서 사용하는

@@ -2,8 +2,8 @@ package farmstory.service;
 
 import java.util.List;
 import farmstory.CountableDAO;
-import farmstory.DataAccessException;
 import farmstory.DataTransferObject;
+import farmstory.exception.DataAccessException;
 
 public class CountableDefaultService<T extends DataTransferObject> implements CountableService<T> {
 
