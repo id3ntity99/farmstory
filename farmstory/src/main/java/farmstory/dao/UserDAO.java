@@ -1,11 +1,17 @@
 package farmstory.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.UserDTO;
+import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
+import farmstory.util.Query;
 
 public class UserDAO implements CountableDAO<UserDTO> {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class.getName());
@@ -17,8 +23,28 @@ public class UserDAO implements CountableDAO<UserDTO> {
 
 
   @Override
-  public void insert(UserDTO dto) {
-    // TODO Auto-generated method stub
+  public void insert(UserDTO dto) throws DataAccessException {
+    try {
+      Connection conn = helper.getConnection();
+      PreparedStatement psmt = conn.prepareStatement(Query.INSERT_USER);
+      psmt.setString(1, dto.getId());
+      psmt.setString(2, dto.getPassword());
+      psmt.setString(3, dto.getName());
+      psmt.setString(4, dto.getNickname());
+      psmt.setString(5, dto.getEmail());
+      psmt.setString(6, dto.getPhoneNum());
+      psmt.setString(7, dto.getZip());
+      psmt.setString(8, dto.getAddress());
+      psmt.setString(9, dto.getAddressDetail());
+
+      psmt.executeUpdate();
+      conn.close();
+      psmt.close(); // TODO Current working position
+    } catch (NamingException | SQLException e) {
+      String msg = String.format("데이터베이스 작업 중 예외가 발생하였습니다: %s", e.getMessage());
+      throw new DataAccessException(msg, e);
+    }
+
   }
 
   @Override
