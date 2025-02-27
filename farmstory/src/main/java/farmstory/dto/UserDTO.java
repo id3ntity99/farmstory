@@ -13,6 +13,7 @@ public class UserDTO implements DataTransferObject {
   private String phoneNum;
   private String zip;
   private String address;
+  private String addressDetail;
   private String registerDate;
   private String leaveDate;
 
@@ -142,6 +143,17 @@ public class UserDTO implements DataTransferObject {
   }
 
 
+  public String getAddressDetail() {
+    return addressDetail;
+  }
+
+
+
+  public void setAddressDetail(String addressDetail) {
+    this.addressDetail = addressDetail;
+  }
+
+
 
   public String getRegisterDate() {
     return registerDate;
@@ -166,12 +178,11 @@ public class UserDTO implements DataTransferObject {
   }
 
 
-
   @Override
   public String toString() {
     return "UserDTO [id=" + id + ", password=" + password + ", name=" + name + ", nickname="
         + nickname + ", point=" + point + ", level=" + level + ", email=" + email + ", phoneNum="
-        + phoneNum + ", zip=" + zip + ", address=" + address + ", registerDate=" + registerDate
-        + ", leaveDate=" + leaveDate + "]";
+        + phoneNum + ", zip=" + zip + ", address=" + address + ", addressDetail=" + addressDetail
+        + ", registerDate=" + registerDate + ", leaveDate=" + leaveDate + "]";
   }
 }
