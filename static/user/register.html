@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/static/style/common/footer.css" />
     <link rel="stylesheet" href="/static/style/register.css" />
   </head>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="/static/js/register/register.js"></script>
   <body>
     <div id="wrapper">
       <header>
@@ -59,7 +61,7 @@
       </header>
       <main>
         <section class="container">
-          <form action="#">
+          <form action="">
             <h3 class="title">사이트 이용정보 입력</h3>
             <table>
               <tbody>
@@ -69,12 +71,13 @@
                     <input
                       class="register-input"
                       type="text"
-                      name="uid"
+                      name="id"
                       placeholder="아이디 입력"
                     />
-                    <button class="btn">
+                    <button type="button" class="btn">
                       <img src="/static/images/user/chk_id.gif" alt="" />
                     </button>
+                    <span class="result idResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -83,9 +86,10 @@
                     <input
                       class="register-input"
                       type="password"
-                      name="pass"
+                      name="password"
                       placeholder="비밀번호 입력"
                     />
+                    <span class="result passwordResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -94,9 +98,10 @@
                     <input
                       class="register-input"
                       type="password"
-                      name="pass_confirm"
+                      name="password_confirm"
                       placeholder="비밀번호 입력 확인"
                     />
+                    <span class="result passwordConfirmResult"></span>
                   </td>
                 </tr>
               </tbody>
@@ -113,6 +118,7 @@
                       name="name"
                       placeholder="이름 입력"
                     />
+                    <span class="result nameResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -125,9 +131,10 @@
                       name="nickname"
                       placeholder="별명 입력"
                     />
-                    <button class="btn">
+                    <button type="button" class="btn">
                       <img src="/static/images/user/chk_id.gif" alt="" />
                     </button>
+                    <span class="result nicknameResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -139,9 +146,10 @@
                       name="email"
                       placeholder="이메일 입력"
                     />
-                    <button class="btn">
+                    <button type="button" class="btn">
                       <img src="/static/images/user/chk_auth.gif" alt="" />
                     </button>
+                    <span class="result emailResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -153,6 +161,7 @@
                       name="phone_num"
                       placeholder="휴대폰 입력"
                     />
+                    <span class="result phoneNumResult"></span>
                   </td>
                 </tr>
                 <tr id="addr-area">
@@ -162,31 +171,34 @@
                       <input
                         class="register-input addr-input"
                         type="text"
-                        name="zip_code"
+                        name="zip"
                         placeholder="우편번호"
+                        readonly
                       />
-                      <button class="btn">
+                      <button type="button" class="btn" id="findPostCode">
                         <img src="/static/images/user/chk_post.gif" alt="" />
                       </button>
                     </div>
                     <input
                       class="register-input addr-input"
                       type="text"
-                      name="addr"
-                      placeholder="주소 검색"
+                      name="address"
+                      placeholder="주소"
+                      readonly
                     />
                     <input
                       class="register-input addr-input"
                       type="text"
-                      name="addr_detail"
-                      placeholder="상세주소 입력"
+                      name="address_detail"
+                      placeholder="상세주소"
                     />
+                    <span class="result addressDetailResult"></span>
                   </td>
                 </tr>
               </tbody>
             </table>
             <div id="form-btn">
-              <button>
+              <button type="button">
                 <a href="#">취소</a>
               </button>
               <input type="submit" value="회원가입" />

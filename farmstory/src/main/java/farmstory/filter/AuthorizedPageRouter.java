@@ -1,6 +1,7 @@
 package farmstory.filter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,20 +15,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * 사용자가 로그인한 경우, 사용자가 요청한 페이지에 대한 권한을 확인하는 필터. <br>
- * 예를 들어, 로그인한 사용자는 아이디/비밀번호 찾기, 회원가입 페이지 등으로 접속할 수 없다. 따라서 본 필터가 로그인한 사용자가 아이디/비밀번호 찾기, 회원가입 페이지
- * 등으로 접속할 수 없도록 막아준다.
+ * {@link WebFilter} 어노테이션의 urlPatterns는 로그인한 사용자만이 접속할 수 있는 페이지들이며, 로그인한 사용자는 urlPatterns에 없는 페이지에는
+ * 접근할 수 없다.
  */
-@WebFilter(urlPatterns = {"/order/*", "/article/write", "/wishlist/*", "/user/*"})
+@WebFilter(urlPatterns = {"/order/*", "/wishlist/*", "/user/*", "/article/write", "/article/delete",
+    "/article/modify", "/comment/write", "/comment/delete", "/comment/modify", "/admin/*"})
 public class AuthorizedPageRouter extends HttpFilter {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER =
       LoggerFactory.getLogger(AuthorizedPageRouter.class.getName());
-
-  private String getRootPath(String uri) {
-    int secondSeparatorIdx = uri.indexOf("/", uri.indexOf("/") + 1);
-    return "/" + uri.substring(0, secondSeparatorIdx);
-  }
 
   @Override
   protected void doFilter(HttpServletRequest request, HttpServletResponse response,
@@ -39,7 +35,7 @@ public class AuthorizedPageRouter extends HttpFilter {
       String msg =
           String.format("유효하지 않은 접근 (%s ==> %s)", request.getRemoteAddr(), request.getRequestURL());
       LOGGER.warn(msg);
-      response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+      response.sendError(HttpServletResponse.SC_FORBIDDEN);
     } else { // 로그인한 사용자가 요청한 경우
 
       String uri = request.getRequestURI();
@@ -47,26 +43,16 @@ public class AuthorizedPageRouter extends HttpFilter {
       // @WebFilter 어노테이션의 urlPatterns 변수 가져오기
       String[] urlPatterns = this.getClass().getAnnotation(WebFilter.class).urlPatterns();
 
-      // Request URI의 root path 추출(ex. /user/*에서 /user 추출)
-      String root = getRootPath(uri);
-
-      // 로그인한 사용자의 Request가 유효한 페이지에 대한 요청인지를 확인
-      for (String pattern : urlPatterns) {
-        String patternRoot = getRootPath(pattern);
-
-        // TODO Possibly vulnerable?
-        if (patternRoot.contains(root)) {// 로그인한 사용자가 요청한 페이지로의 접근이 유효한 경우
-          String msg = String.format("사용자가 요청한 페이지(%s)로의 접근이 유효함. %s로 라우팅...",
-              request.getRequestURL(), request.getRequestURL());
-          LOGGER.info(msg);
-          chain.doFilter(request, response);
-          break;
-        } else { // 유효하지 않은 경우
-          response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-        }
-
+      // TODO Possibly vulnerable?
+      // 로그인한 사용자가 @WebServlet의 urlPattenrs에 있는 페이지가 아닌 다른 페이지로 접근하려는 경우
+      if (Arrays.asList(urlPatterns).contains(uri)) {// 로그인한 사용자가 요청한 페이지로의 접근이 유효한 경우
+        String msg = String.format("사용자가 요청한 페이지(%s)로의 접근이 유효함. %s로 라우팅...",
+            request.getRequestURL(), request.getRequestURL());
+        LOGGER.info(msg);
+        chain.doFilter(request, response);
+      } else { // 유효하지 않은 경우
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST);
       }
-
     }
   }
 }
