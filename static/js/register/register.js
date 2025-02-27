@@ -19,6 +19,7 @@ const jsonObject = {
   detailAddress: "",
 };
 
+// '회원가입' 버튼을 클릭할 경우 실행되는 이벤트 핸들러 함수
 function onSubmit(event) {
   event.preventDefault();
   const inputs = document.getElementsByClassName("register-input");
@@ -30,15 +31,20 @@ function onSubmit(event) {
       break;
     }
   }
-  console.log(jsonObject);
-  //TODO Stringify and send jsonObject to server using HTTP POST.
+  //TODO 4. Stringify and send jsonObject to server using HTTP POST.
+  jsonString = JSON.stringify(jsonObject);
+  console.log(jsonString);
 }
 
+// 사용자의 입력값이 유효한 경우 사용되는 함수.
+// input 태그 옆의 span에 전달받은 메시지를 출력.
 function printValid(resultElement, validMessage) {
   resultElement.innerText = "✔ " + validMessage;
   resultElement.style.color = "green";
 }
 
+// 사용자의 입력값이 유효하지 않은 경우 사용되는 함수.
+// input 태그 옆의 span에 전달받은 메시지를 출력.
 function printInvalid(resultElement, invalidMessage) {
   resultElement.innerText = "❌ " + invalidMessage;
   resultElement.style.color = "red";
@@ -61,6 +67,7 @@ function validate(
   }
 }
 
+// Document 로딩이 끝난 후에 이벤트 핸들러 함수를 실행
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("main .container form");
   const idInput = document.querySelector(
@@ -84,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const phoneNumInput = document.querySelector(
     "main .container form input[name='phone_num']"
   );
-
   const idResult = document.getElementsByClassName("idResult")[0];
   const passwordResult = document.getElementsByClassName("passwordResult")[0];
   const pwConfirmResult = document.getElementsByClassName(
@@ -95,8 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailResult = document.getElementsByClassName("emailResult")[0];
   const phoneNumResult = document.getElementsByClassName("phoneNumResult")[0];
 
-  //Add eventListener to the input elements for checking formats
+  // 사용자가 input 태그에 값을 입력할때마다 이벤트 핸들러 함수들이 실행됨.
   idInput.addEventListener("keyup", () => {
+    // 매 키보드 입력마다 validate()함수를 호출
     validate(
       idInput,
       ID_REGEX,
@@ -106,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
+  // input 태그의 focusout 이벤트가 발생하면 태그의 value값이 jsonObject의 적절한 필드에 저장됨.
   idInput.addEventListener("focusout", (event) => {
     jsonObject.id = event.target.value;
   });
