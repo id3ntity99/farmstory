@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`user` (
   `phone_num` CHAR(13) NOT NULL,
   `zip` CHAR(5) NOT NULL,
   `address` VARCHAR(100) NOT NULL,
+  `address_detail` VARCHAR(50) NOT NULL,
   `register_date` DATETIME NULL,
   `leave_date` DATETIME NULL,
   PRIMARY KEY (`id`),
