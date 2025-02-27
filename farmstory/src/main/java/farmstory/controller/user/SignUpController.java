@@ -88,7 +88,8 @@ public class SignUpController extends HttpServlet {
       RequestDispatcher dispatcher = req.getRequestDispatcher("/");
       dispatcher.forward(req, resp);
     } catch (DataAccessException | IOException e) {
-      LOGGER.error("While handling user information, exception raised", e);
+      String msg = String.format("%s%n%s", e.getMessage(), e.getStackTrace());
+      LOGGER.error(msg);
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
   }
