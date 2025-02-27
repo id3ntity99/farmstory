@@ -1,10 +1,13 @@
 package farmstory.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
+import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
 public class ArticleDAO implements CountableDAO<ArticleDTO> {
@@ -18,7 +21,22 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
   @Override
   public void insert(ArticleDTO dto) {
-    // TODO Auto-generated method stub
+    String sql = "insert into `articles (title, content, writer) values (?,?,?)`";
+    
+    try {
+    	Connection conn = helper.getConnection();
+    	PreparedStatement psmt = conn.prepareStatement(sql);
+    	
+    	psmt.setString(1, dto.getTitle());
+    	psmt.setString(2, dto.getContent());
+    	psmt.setString(3, dto.getAuthor());
+    	
+    	psmt.executeUpdate();
+    	
+
+    }catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
   }
 
   @Override

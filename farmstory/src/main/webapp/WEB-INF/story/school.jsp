@@ -13,58 +13,7 @@
 
   <body>
     <div id="wrapper">
-      <header>
-        <section class="links">
-          <div>
-            <p>
-              <a href="/farmstory/index.html">HOME | </a>
-              <a href="/farmstory/user/login.html">로그인 | </a>
-              <a href="/farmstory/user/register.html">회원가입 | </a>
-              <a href="/farmstory/community/qna.html">고객센터</a>
-            </p>
-          </div>
-        </section>
-        <section class="logo">
-          <div>
-            <a href="#">
-              <img src="/farmstory/images/logo.png" alt="로고" />
-            </a>
-            <a href="#">
-              <img src="/farmstory/images/head_txt_img.png" />
-            </a>
-          </div>
-        </section>
-        <section class="services">
-          <article>
-            <div>
-              <a href="/farmstory/intro/greeting.html">
-                <img src="/farmstory/images/head_menu1.png" alt="팜스토리소개" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/shopping/list.html">
-                <img src="/farmstory/images/head_menu_badge.png" alt="30%" />
-                <img src="/farmstory/images/head_menu2.png" alt="장보기" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/story/story.html">
-                <img src="/farmstory/images/head_menu3.png" alt="농작물이야기" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/event/event-calendar.html">
-                <img src="/farmstory/images/head_menu4.png" alt="이벤트" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/community/notice.html">
-                <img src="/farmstory/images/head_menu5.png" alt="커뮤니티" />
-              </a>
-            </div>
-          </article>
-        </section>
-      </header>
+      <%@ include file="./_header.jsp" %>
 
       <main class="shopping">
         <nav class="background">
@@ -108,26 +57,44 @@
             <a href="#">HOME > 농작물이야기 > </a>
           </div>
           <article>
-            <p>게시판 글목록/글쓰기/글보기/글수정 화면 출력(커뮤니티 참고)</p>
+            <section class="list">
+          		<nav>
+          			<h1>글목록</h1>
+          			<form action="#">
+          				<select name="searchType" style="padding: 6px;">
+          					<option value="title">제목</option>
+          					<option value="content">내용</option>
+          					<option value="writer">글쓴이</option>
+          				</select>
+          				<input type="text" name="keyword" placeholder="검색 키워드 입력">
+          				<input type="submit" value="검색">
+          			</form>
+          		</nav>
+          	</section>
+			<table border="0">
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>날짜</th>
+					<th>조회</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>title</td>
+					<td>writer</td>
+					<td>2025.02.27</td>
+					<td>0</td>
+				</tr>
+			</table>
+			<div class="page">
+			</div>
           </article>
         </section>
       </main>
-
-      <footer>
-        <a href="#">
-          <img src="/farmstory/images/footer_top_line.png" alt="" /><br />
-          <img src="/farmstory/images/footer_logo.png" alt="푸터로고" />
-          <p>
-            (주)팜스토리 / 사업자등록번호 123-45-67890 / 통신판매업신고 제
-            2013-팜스토리구-123호 / 벤처기업 확인 서울지방중소기업청 제
-            012345678-9-01234호<br />
-            등록번호 팜스토리01234 (2013.04.01)/발행인 : 홍길동<br />
-            대표 : 홍길동 / 이메일 : email@mail.mail / 전화 : 01)234-5678 /
-            경기도 성남시 잘한다구 신난다동 345<br />
-            <span>Copyright(C)홍길동 All right reserved.</span>
-          </p>
-        </a>
-      </footer>
-    </div>
+      
+	<%@ include file="./_footer.jsp" %>
+	
+	</div>
   </body>
 </html>
