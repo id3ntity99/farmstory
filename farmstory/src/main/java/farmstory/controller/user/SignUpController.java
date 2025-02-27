@@ -1,10 +1,13 @@
 package farmstory.controller.user;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import farmstory.CountableDAO;
 import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
@@ -35,22 +38,25 @@ public class SignUpController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/login.jsp");
+    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/register.jsp");
     dispatcher.forward(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    LOGGER.info("Potential user accessed /signin...Checking form data");
-    String id = req.getParameter("id");
-    String password = req.getParameter("password");
-    String name = req.getParameter("name");
-    String nickname = req.getParameter("nickname");
-    String email = req.getParameter("email");
-    String phoneNum = req.getParameter("phone_num");
-    String zip = req.getParameter("zip");
-    String address = req.getParameter("address");
+    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+    Map<String, JsonElement> jsonMap = obj.asMap();
+    String id = jsonMap.get("id").getAsString();
+    String password = jsonMap.get("password").getAsString();
+    String name = jsonMap.get("name").getAsString();
+    String nickname = jsonMap.get("nickname").getAsString();
+    String email = jsonMap.get("email").getAsString();
+    String phoneNum = jsonMap.get("phoneNum").getAsString();
+    String zip = jsonMap.get("zip").getAsString();
+    String address = jsonMap.get("address").getAsString();
+    String addressDetail = jsonMap.get("addressDetail").getAsString();
+
     UserDTO dto = new UserDTO();
     dto.setId(id);
     dto.setPassword(password);
@@ -60,6 +66,7 @@ public class SignUpController extends HttpServlet {
     dto.setPhoneNum(phoneNum);
     dto.setZip(zip);
     dto.setAddress(address);
+    dto.setAddressDetail(addressDetail);
     try {
       int idCount = service.count();
       if (idCount > 0) {
