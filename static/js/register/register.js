@@ -6,6 +6,7 @@ const NICKNAME_REGEX = /^[a-zA-Zㄱ-힣0-9][a-zA-Zㄱ-힣0-9]*$/;
 const EMAIL_REGEX =
   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 const PHONE_NUM_REGEX = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
+const DETAIL_ADDRESS_REGEX = /[가-힣 1-9\-]+/g;
 const jsonObject = {
   id: "",
   password: "",
@@ -16,8 +17,27 @@ const jsonObject = {
   phoneNum: "",
   zip: "",
   address: "",
-  detailAddress: "",
+  addressDetail: "",
 };
+
+function findPostCode(zipInput, addressInput) {
+  // Put those information into proper input html tags
+  new daum.Postcode({
+    oncomplete: function (data) {
+      jsonObject.zip = data.zonecode;
+      zipInput.value = jsonObject.zip;
+      if (data.userSelectedType === "R") {
+        // 사용자가 도로명 주소를 선택한 경우
+        jsonObject.address = data.roadAddress;
+        addressInput.value = jsonObject.address;
+      } else if (data.userSelectedType === "J") {
+        // 사용자가 지번 주소를 선택한 경우
+        jsonObject.address = data.jibunAddress;
+        addressInput.value = jsonObject.address;
+      }
+    },
+  }).open();
+}
 
 // '회원가입' 버튼을 클릭할 경우 실행되는 이벤트 핸들러 함수
 function onSubmit(event) {
@@ -31,9 +51,15 @@ function onSubmit(event) {
       break;
     }
   }
-  //TODO 4. Stringify and send jsonObject to server using HTTP POST.
+  // jsonObject를 Stringify하고 서버로 HTTP POST 요청 전송
   jsonString = JSON.stringify(jsonObject);
-  console.log(jsonString);
+  fetch("/farmstory/signup", {
+    method: "POST",
+    body: jsonString,
+    header: {
+      "Content-type": "application/json;charset=UTF8",
+    },
+  });
 }
 
 // 사용자의 입력값이 유효한 경우 사용되는 함수.
@@ -73,23 +99,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const idInput = document.querySelector(
     "main .container form input[name='id']"
   );
+
   const passwordInput = document.querySelector(
     "main .container form input[name='password']"
   );
+
   const passwordConfirmInput = document.querySelector(
     "main .container form input[name='password_confirm']"
   );
+
   const nameInput = document.querySelector(
     "main .container form input[name='name']"
   );
+
   const nicknameInput = document.querySelector(
     "main .container form input[name='nickname']"
   );
+
   const emailInput = document.querySelector(
     "main .container form input[name='email']"
   );
+
   const phoneNumInput = document.querySelector(
     "main .container form input[name='phone_num']"
+  );
+
+  const zipInput = document.querySelector(
+    "main .container form input[name='zip']"
+  );
+
+  const addressInput = document.querySelector(
+    "main .container form input[name='address']"
+  );
+
+  const addressDetailInput = document.querySelector(
+    "main .container form input[name='address_detail']"
   );
   const idResult = document.getElementsByClassName("idResult")[0];
   const passwordResult = document.getElementsByClassName("passwordResult")[0];
@@ -100,6 +144,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const nicknameResult = document.getElementsByClassName("nicknameResult")[0];
   const emailResult = document.getElementsByClassName("emailResult")[0];
   const phoneNumResult = document.getElementsByClassName("phoneNumResult")[0];
+  const postCodeBtn = document.getElementById("findPostCode");
+  const addressDetailResult = document.getElementsByClassName(
+    "addressDetailResult"
+  )[0];
 
   // 사용자가 input 태그에 값을 입력할때마다 이벤트 핸들러 함수들이 실행됨.
   idInput.addEventListener("keyup", () => {
@@ -199,13 +247,29 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
-  emailInput.addEventListener("focusout", (event) => {
-    jsonObject.email = event.target.value;
+  phoneNumInput.addEventListener("focusout", (event) => {
+    jsonObject.phoneNum = event.target.value;
+  });
+
+  addressDetailInput.addEventListener("keyup", () => {
+    validate(
+      addressDetailInput,
+      DETAIL_ADDRESS_REGEX,
+      addressDetailResult,
+      "유효한 주소입니다.",
+      "유효하지 않은 주소입니다."
+    );
+  });
+
+  addressDetailInput.addEventListener("focusout", (event) => {
+    jsonObject.addressDetail = event.target.value;
   });
 
   //TODO 1. Use Zip-finding API, to get zip, address, detail address information
-  //     2. Put those information into proper input html tags
-  //     3. Save them into jsonObject after execution of the API.
+  postCodeBtn.addEventListener("click", () => {
+    findPostCode(zipInput, addressInput);
+  });
+
   form.addEventListener("submit", (event) => {
     onSubmit(event);
   });
