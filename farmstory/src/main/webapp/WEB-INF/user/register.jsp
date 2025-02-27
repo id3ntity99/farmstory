@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
     <link rel="stylesheet" href="/farmstory/style/register.css" />
   </head>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="/farmstory/js/register/register.js"></script>
   <body>
     <div id="wrapper">
       <header>
@@ -16,13 +18,13 @@
           <img src="/farmstory/images/head_top_line.png" alt="" />
           <div>
             <p>
-              <a href="">HOME | </a>
-              <a href="">로그인 | </a>
-              <a href="">회원가입 | </a>
-              <a href="">나의정보 | </a>
-              <a href="">로그아웃 | </a>
-              <a href="">관리자 | </a>
-              <a href="">고객센터</a>
+              <a href="/farmstory/index.jsp">HOME | </a>
+              <a href="/farmstory/signin">로그인 | </a>
+              <a href="/farmstory/signup">회원가입 | </a>
+              <a href="/farmstory/user/info">나의정보 | </a>
+              <a href="/farmstory/signout">로그아웃 | </a>
+              <a href="/farmstory/admin">관리자 | </a>
+              <a href="#">고객센터</a>
             </p>
           </div>
         </section>
@@ -60,7 +62,7 @@
       </header>
       <main>
         <section class="container">
-          <form action="#">
+          <form action="">
             <h3 class="title">사이트 이용정보 입력</h3>
             <table>
               <tbody>
@@ -70,12 +72,13 @@
                     <input
                       class="register-input"
                       type="text"
-                      name="uid"
+                      name="id"
                       placeholder="아이디 입력"
                     />
-                    <button class="btn">
+                    <button type="button" class="btn">
                       <img src="/farmstory/images/user/chk_id.gif" alt="" />
                     </button>
+                    <span class="result idResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -84,9 +87,10 @@
                     <input
                       class="register-input"
                       type="password"
-                      name="pass"
+                      name="password"
                       placeholder="비밀번호 입력"
                     />
+                    <span class="result passwordResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -95,9 +99,10 @@
                     <input
                       class="register-input"
                       type="password"
-                      name="pass_confirm"
+                      name="password_confirm"
                       placeholder="비밀번호 입력 확인"
                     />
+                    <span class="result passwordConfirmResult"></span>
                   </td>
                 </tr>
               </tbody>
@@ -114,6 +119,7 @@
                       name="name"
                       placeholder="이름 입력"
                     />
+                    <span class="result nameResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -126,9 +132,10 @@
                       name="nickname"
                       placeholder="별명 입력"
                     />
-                    <button class="btn">
+                    <button type="button" class="btn">
                       <img src="/farmstory/images/user/chk_id.gif" alt="" />
                     </button>
+                    <span class="result nicknameResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -140,9 +147,10 @@
                       name="email"
                       placeholder="이메일 입력"
                     />
-                    <button class="btn">
+                    <button type="button" class="btn">
                       <img src="/farmstory/images/user/chk_auth.gif" alt="" />
                     </button>
+                    <span class="result emailResult"></span>
                   </td>
                 </tr>
                 <tr>
@@ -154,6 +162,7 @@
                       name="phone_num"
                       placeholder="휴대폰 입력"
                     />
+                    <span class="result phoneNumResult"></span>
                   </td>
                 </tr>
                 <tr id="addr-area">
@@ -163,31 +172,34 @@
                       <input
                         class="register-input addr-input"
                         type="text"
-                        name="zip_code"
+                        name="zip"
                         placeholder="우편번호"
+                        readonly
                       />
-                      <button class="btn">
+                      <button type="button" class="btn" id="findPostCode">
                         <img src="/farmstory/images/user/chk_post.gif" alt="" />
                       </button>
                     </div>
                     <input
                       class="register-input addr-input"
                       type="text"
-                      name="addr"
-                      placeholder="주소 검색"
+                      name="address"
+                      placeholder="주소"
+                      readonly
                     />
                     <input
                       class="register-input addr-input"
                       type="text"
-                      name="addr_detail"
-                      placeholder="상세주소 입력"
+                      name="address_detail"
+                      placeholder="상세주소"
                     />
+                    <span class="result addressDetailResult"></span>
                   </td>
                 </tr>
               </tbody>
             </table>
             <div id="form-btn">
-              <button>
+              <button type="button">
                 <a href="#">취소</a>
               </button>
               <input type="submit" value="회원가입" />
