@@ -29,23 +29,7 @@ public class SignUpController extends HttpServlet {
   private CountableDAO<UserDTO> dao;
   private CountableDefaultService<UserDTO> service;
 
-  @Override
-  public void init() throws ServletException {
-    this.dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
-    this.service = new CountableDefaultService<>(dao);
-  }
-
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/register.jsp");
-    dispatcher.forward(req, resp);
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+  private UserDTO newUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
     String id = jsonMap.get("id").getAsString();
     String password = jsonMap.get("password").getAsString();
@@ -67,6 +51,27 @@ public class SignUpController extends HttpServlet {
     dto.setZip(zip);
     dto.setAddress(address);
     dto.setAddressDetail(addressDetail);
+
+    return dto;
+  }
+
+  @Override
+  public void init() throws ServletException {
+    this.dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
+    this.service = new CountableDefaultService<>(dao);
+  }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/register.jsp");
+    dispatcher.forward(req, resp);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
     try {
       int idCount = service.count();
       if (idCount > 0) {
@@ -77,9 +82,9 @@ public class SignUpController extends HttpServlet {
         resp.setContentType("application/json");
         resp.getWriter().println(json);
       } else {
+        UserDTO dto = newUser(obj);
         service.create(dto);
       }
-      service.create(dto);
       RequestDispatcher dispatcher = req.getRequestDispatcher("/");
       dispatcher.forward(req, resp);
     } catch (DataAccessException | IOException e) {
