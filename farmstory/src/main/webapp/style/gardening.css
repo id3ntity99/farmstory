@@ -1,4 +1,4 @@
-/*초기화*/
+
 * {
   margin: 0;
   padding: 0;
@@ -31,18 +31,49 @@ main {
   overflow: hidden;
 }
 
-main > .background {
-  width: 980px;
-  height: 184px;
-  top: 142px;
-  left: 470px;
+.shopping > .background > .subtop {
+    width: 980px;
+    height: 184px;
+    position: relative;
+    margin: 0 auto;
 }
-main > .background div:nth-child(2) {
-  position: absolute;
-  top: 140px;
+.croptalk {
+    /* border: 1px solid red; */
+    position: relative;
+    top: -40px;
 }
-main > .background div:nth-child(1) {
-  position: relative;
+.list {
+	position: relative;
+    min-height: 500px;
+    
+}
+
+.list > nav > form {
+    margin-left: 510px;
+    margin-bottom: 10px;
+}
+.list > table {
+
+    width: 750px;
+    height: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #111;
+}
+
+a.btn.btnWrite {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #f2f2f2;
+}
+.sub {
+    border-bottom: 1px solid #c2c2c2;
+    width: 718px;
+    margin-inline-start: 207px;
 }
 main > aside {
   position: absolute;
@@ -86,11 +117,10 @@ main > aside a:nth-child(6) {
 }
 
 main > section > div {
-  width: 802px;
+  width: 770px;
   padding-top: 30px;
   padding-left: 30px;
-  border-bottom: 1px solid #c2c2c2;
-  margin-inline-start: 208px;
+  margin-inline-start: 178px;
 }
 main > section > div > a:nth-child(1) {
   margin-inline-start: -30px;
@@ -99,11 +129,12 @@ main > section > div > span {
   float: right;
   font-weight: bold;
   color: #91ba15;
-  margin-inline-end: 70px;
+  padding: 10px;
 }
 main > section > div > a:nth-child(3) {
-  float: right;
-  margin-inline-end: 10px;
+ 	float: right;
+    margin-inline-end: -15px;
+    padding: 10px;
 }
 main > section > div > a:nth-child(3)::before {
   content: url(/images/sub_page_nav_ico.gif);
@@ -112,15 +143,6 @@ main > section > div > a:nth-child(3)::before {
   position: relative;
   right: 5px;
   bottom: 3px;
-}
-main > section > article {
-  float: right;
-  width: 802px;
-  height: 650px;
-}
-main > section > article p {
-  margin-top: 40px;
-  margin-left: 40px;
 }
 
 footer {
