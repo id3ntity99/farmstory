@@ -1,4 +1,9 @@
+<%@page import="farmstory.dto.OrderDTO"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	List<OrderDTO> basketList = (List<OrderDTO>) request.getAttribute("basketList");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,12 +21,12 @@
                   <img src="/farmstory/images/head_top_line.png" alt="" />
                   <div>
                     <p>
-                      <a href="">HOME | </a>
-                      <a href="">로그인 | </a>
-                      <a href="">회원가입 | </a>
-                      <a href="">나의정보 | </a>
-                      <a href="">로그아웃 | </a>
-                      <a href="">관리자 | </a>
+                      <a href="/farmstory">HOME | </a>
+                      <a href="/farmstory/signin.do">로그인 | </a>
+                      <a href="/farmstory/signup.do">회원가입 | </a>
+                      <a href="/farmstory/my/shopbasket.do">나의정보 | </a>
+                      <a href="/farmstory/signout.do">로그아웃 | </a>
+                      <a href="/farmstory/admin.do">관리자 | </a>
                       <a href="">고객센터</a>
                     </p>
                   </div>
@@ -88,11 +93,13 @@
                 </section>
 
                 <section class="whole">
-                    <h1>장바구니 전체(10)</h1>
+                    <h1>장바구니 전체((<%= basketList != null ? basketList.size() : 0 %>))</h1>
+                    <form action="shopbasket.do" method="post">
+                    <input type="hidden" name="action" value="deleteSelected">
                     <table>
                         <tbody>
                             <tr>
-                                <th><input type="checkbox"></th>
+                                <th><input type="checkbox" id="selectAll"></th>
                                 <th>이미지</th>
                                 <th>종류</th>
                                 <th>상품명</th>
@@ -102,20 +109,12 @@
                                 <th>가격</th>
                                 <th>소계</th>
                             </tr>
-                            <tr>
-                                <td>장바구니에 상품이 없습니다.</td>
-                            </tr>
-                            <tr>
-                                <th><input type="checkbox"></th>
-                                <td><img src="/farmstory/images/market_item1.jpg" alt="사과"></td>
-                                <td>과일</td>
-                                <td>사과 500g</td>
-                                <td>1</td>
-                                <td>10%</td>
-                                <td>40p</td>
-                                <td>4,000</td>
-                                <td>3,600원</td>
-                            </tr>
+                            <% if (basketList == null || basketList.isEmpty()) { %>
+                                    <tr>
+                                        <td colspan="10">장바구니에 상품이 없습니다.</td>
+                                    </tr>
+                                <% } else { 
+                                    for (OrderDTO item : basketList){ %>
                             <tr>
                                 <th><input type="checkbox"></th>
                                 <td><img src="/farmstory/images/market_item1.jpg" alt="사과"></td>
@@ -138,9 +137,23 @@
                                 <td>4,000</td>
                                 <td>3,600원</td>
                             </tr>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <td><img src="/farmstory/images/market_item1.jpg" alt="사과"></td>
+                                <td>과일</td>
+                                <td>사과 500g</td>
+                                <td>1</td>
+                                <td>10%</td>
+                                <td>40p</td>
+                                <td>4,000</td>
+                                <td>3,600원</td>
+                            </tr>
+                             <% } } %>
                         </tbody>
                     </table>
-                    <a href="#">선택삭제</a>
+                    <a href="#">
+                    <button type="submit">선택삭제</button>
+                    </a>
                 </section>
 
                 <section class="total">
@@ -149,11 +162,11 @@
                         <tbody>
                             <tr>
                                 <td>상품수</td>
-                                <td>1</td>
+                                <td><%= basketList != null ? basketList.size() : 0 %></td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td>27,000</td>
+                                <td><%= basketList != null ? basketList.stream().mapToInt(o -> o.getAmount() * 4000).sum() : 0 %>원</td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
@@ -169,10 +182,12 @@
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>22,000</td>
+                                <td><%= basketList != null ? basketList.stream().mapToInt(o -> o.getAmount() * 4000).sum() + 3000 : 0 %>원</td>
                             </tr>
                         </tbody>
                     </table>
+                    <form action="shopbasket.do" method="post">
+                        <input type="hidden" name="action" value="order">
                     <a href="#">주문하기</a>
                 </section>
             </main>
@@ -199,6 +214,11 @@
 
 
         </div>
-        
+        <script>
+            document.getElementById('selectAll').addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('input[name="orderIds"]');
+                checkboxes.forEach(cb => cb.checked = this.checked);
+            });
+        </script>
     </body>
 </html>
