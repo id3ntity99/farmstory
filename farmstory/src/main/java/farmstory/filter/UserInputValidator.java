@@ -54,7 +54,7 @@ public class UserInputValidator extends HttpFilter {
     validator.validate("zip", InputValidator.ZIP_REGEX);
     validator.validate("address", InputValidator.ADDR_REGEX);
     validator.validate("addressDetail", InputValidator.ADDR_REGEX);
-
+    System.out.println(obj.asMap().get("addressDetail").getAsString());
     validator.confirmPassword();
   }
 
@@ -77,6 +77,7 @@ public class UserInputValidator extends HttpFilter {
           chain.doFilter(request, response);
         } catch (InvalidUserInformationException | PasswordConfirmException e) {
           LOGGER.warn(e.getMessage(), e);
+          e.printStackTrace();
           response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
       }

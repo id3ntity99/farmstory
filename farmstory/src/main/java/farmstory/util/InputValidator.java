@@ -14,7 +14,7 @@ public class InputValidator {
       "^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$";
   public static final String PHONE_NUM_REGEX = "^01(?:0|1|[6-9])-(?:\\d{4})-\\d{4}$";
   public static final String ZIP_REGEX = "(\\d{3}-\\d{3}|\\d{5})";
-  public static final String ADDR_REGEX = "[가-힣 1-9\\-]+";
+  public static final String ADDR_REGEX = "^[가-힣 1-9\\-]+$";
   private final JsonObject obj;
 
   public InputValidator(JsonObject obj) {
@@ -24,7 +24,7 @@ public class InputValidator {
   public void validate(String key, String regex) throws InvalidUserInformationException {
     String value = obj.asMap().get(key).getAsString();
     if (!value.matches(regex)) {
-      String message = String.format("유효하지 않은 \"%s\" 데이터 입니다.", key);
+      String message = String.format("유효하지 않은 \"%s\" 데이터 \"%s\"입니다.", key, value);
       throw new InvalidUserInformationException(message);
     }
   }

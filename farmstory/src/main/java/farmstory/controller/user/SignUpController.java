@@ -29,7 +29,7 @@ public class SignUpController extends HttpServlet {
   private CountableDAO<UserDTO> dao;
   private CountableDefaultService<UserDTO> service;
 
-  private UserDTO newUser(JsonObject obj) {
+  private UserDTO toUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
     String id = jsonMap.get("id").getAsString();
     String password = jsonMap.get("password").getAsString();
@@ -82,7 +82,7 @@ public class SignUpController extends HttpServlet {
         resp.setContentType("application/json");
         resp.getWriter().println(json);
       } else {
-        UserDTO dto = newUser(obj);
+        UserDTO dto = toUser(obj);
         service.create(dto);
       }
       RequestDispatcher dispatcher = req.getRequestDispatcher("/");

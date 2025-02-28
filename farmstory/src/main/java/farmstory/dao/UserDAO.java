@@ -39,12 +39,11 @@ public class UserDAO implements CountableDAO<UserDTO> {
 
       psmt.executeUpdate();
       conn.close();
-      psmt.close(); // TODO Current working position
+      psmt.close();
     } catch (NamingException | SQLException e) {
       String msg = String.format("데이터베이스 작업 중 예외가 발생하였습니다: %s", e.getMessage());
       throw new DataAccessException(msg, e);
     }
-
   }
 
   @Override
