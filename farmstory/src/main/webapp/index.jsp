@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +21,7 @@
               <a href="/farmstory">HOME | </a>
               <a href="/farmstory/signin">로그인 | </a>
               <a href="/farmstory/signup">회원가입 | </a>
-              <a href="/farmstory/user/info">나의정보 | </a>
+              <a href="/farmstory/my/shopbascket">나의정보 | </a>
               <a href="/farmstory/signout">로그아웃 | </a>
               <a href="/farmstory/admin">관리자 | </a>
               <a href="#">고객센터</a>
