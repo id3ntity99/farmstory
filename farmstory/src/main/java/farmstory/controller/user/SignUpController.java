@@ -1,8 +1,10 @@
 package farmstory.controller.user;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.JsonElement;
@@ -28,6 +30,10 @@ public class SignUpController extends HttpServlet {
 
   private CountableDAO<UserDTO> dao;
   private CountableDefaultService<UserDTO> service;
+
+  private String stringify(BufferedReader reader) {
+    return reader.lines().collect(Collectors.joining());
+  }
 
   private UserDTO toUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
@@ -57,7 +63,7 @@ public class SignUpController extends HttpServlet {
 
   @Override
   public void init() throws ServletException {
-    this.dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
+    this.dao = new UserDAO(new ConnectionHelper("jdbc/farmstory"));
     this.service = new CountableDefaultService<>(dao);
   }
 
@@ -71,7 +77,8 @@ public class SignUpController extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+    String jsonString = stringify(req.getReader());
+    JsonObject obj = JsonParser.parseString(jsonString).getAsJsonObject();
     try {
       int idCount = service.count();
       if (idCount > 0) {
@@ -84,13 +91,13 @@ public class SignUpController extends HttpServlet {
       } else {
         UserDTO dto = toUser(obj);
         service.create(dto);
+        resp.sendRedirect("/farmstory/signin");
       }
-      RequestDispatcher dispatcher = req.getRequestDispatcher("/");
-      dispatcher.forward(req, resp);
     } catch (DataAccessException | IOException e) {
       String msg = String.format("%s%n%s", e.getMessage(), e.getStackTrace());
-      LOGGER.error(msg);
+      LOGGER.debug(msg);
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
+
   }
 }
