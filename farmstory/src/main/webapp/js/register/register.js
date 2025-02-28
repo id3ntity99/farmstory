@@ -50,6 +50,10 @@ async function send(jsonString) {
   }).then((res) => {
     if (res.redirected) {
       window.location.replace(res.url);
+    } else if (res.status === 500) {
+      //TODO handle 500 error
+    } else if (res.status === 409) {
+      //TODO handle conflict response(STatus code for 409 might not be 409)
     }
   });
 }
