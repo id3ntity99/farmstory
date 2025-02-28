@@ -14,7 +14,9 @@ public class InputValidator {
       "^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$";
   public static final String PHONE_NUM_REGEX = "^01(?:0|1|[6-9])-(?:\\d{4})-\\d{4}$";
   public static final String ZIP_REGEX = "(\\d{3}-\\d{3}|\\d{5})";
-  public static final String ADDR_REGEX = "^[가-힣 1-9\\-]+$";
+  public static final String ADDR_REGEX =
+      "(([가-힣A-Za-z·\\d~\\-\\.]{2,}(로|길).[\\d]+)|([가-힣A-Za-z·\\d~\\-\\.]+(읍|동)\\s)[\\d]+)";
+  public static final String ADDR_DETAIL_REGEX = "^[가-힣0-9\\\\s]+$";
   private final JsonObject obj;
 
   public InputValidator(JsonObject obj) {
