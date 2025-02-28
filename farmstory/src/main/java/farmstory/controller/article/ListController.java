@@ -1,6 +1,7 @@
 package farmstory.controller.article;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,11 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pg = req.getParameter("pg");
-		int total = dao.count();
+		int total = dao.count(); 
+		int lastPageNum = 
+		
+		List<ArticleDTO> articles = dao.selectAll();
+	
 	}
 	
 	@Override
