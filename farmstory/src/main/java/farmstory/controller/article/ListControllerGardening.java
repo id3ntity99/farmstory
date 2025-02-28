@@ -27,16 +27,18 @@ public class ListControllerGardening extends HttpServlet {
 	private static final long serialVersionUID = -6857825625588361308L;
     private static final Logger logger = LoggerFactory.getLogger(ListControllerGardening.class.getName());
 
-    private Service<ArticleDTO> service;
+    private CountableDefaultService<ArticleDTO> service;
     
     @Override
     public void init() throws ServletException {
-        // 1. DB 연결을 위한 ConnectionHelper 생성
-        ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+    	try {
+            ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+            ArticleDAO dao = new ArticleDAO(helper);
+            this.service = new CountableDefaultService<>(dao);
+    	}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
         
-        // 2. ArticleDAO 생성 후 DefaultService에 주입
-        DataAccessObject<ArticleDTO> dao = new ArticleDAO(helper);
-        this.service = new DefaultService<>(dao);
     }
     
 	@Override
@@ -60,7 +62,7 @@ public class ListControllerGardening extends HttpServlet {
             req.setAttribute("lastPageNum", lastPageNum);
 
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardening.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningList.jsp");
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {

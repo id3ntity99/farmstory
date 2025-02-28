@@ -31,12 +31,16 @@ public class ListControllerStory extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-        // 1. DB 연결을 위한 ConnectionHelper 생성
-        ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-        
-        // 2. ArticleDAO 생성 후 DefaultService에 주입
-        DataAccessObject<ArticleDTO> dao = new ArticleDAO(helper);
-        this.service = new DefaultService<>(dao);
+    	try {
+    		// 1. DB 연결을 위한 ConnectionHelper 생성
+            ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+            
+            // 2. ArticleDAO 생성 후 DefaultService에 주입
+            DataAccessObject<ArticleDTO> dao = new ArticleDAO(helper);
+            this.service = new DefaultService<>(dao);
+    	}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
     }
     
 	@Override
@@ -60,7 +64,7 @@ public class ListControllerStory extends HttpServlet {
             req.setAttribute("lastPageNum", lastPageNum);
 
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/story.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/storyList.jsp");
             dispatcher.forward(req, resp);
 
         } catch (Exception e) {

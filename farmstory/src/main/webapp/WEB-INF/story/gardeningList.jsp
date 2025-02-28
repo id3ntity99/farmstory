@@ -14,60 +14,9 @@
 
   <body>
     <div id="wrapper">
-      <header>
-        <section class="links">
-          <div>
-            <p>
-              <a href="/farmstory/index.jsp">HOME | </a>
-              <a href="/farmstory/user/login.jsp">로그인 | </a>
-              <a href="/farmstory/user/register.jsp">회원가입 | </a>
-              <a href="/farmstory/community/qna.jsp">고객센터</a>
-            </p>
-          </div>
-        </section>
-        <section class="logo">
-          <div>
-            <a href="#">
-              <img src="/farmstory/images/logo.png" alt="로고" />
-            </a>
-            <a href="#">
-              <img src="/farmstory/images/head_txt_img.png" />
-            </a>
-          </div>
-        </section>
-        <section class="services">
-          <article>
-            <div>
-              <a href="/farmstory/intro/greeting.jsp">
-                <img src="/farmstory/images/head_menu1.png" alt="팜스토리소개" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/shopping/list.jsp">
-                <img src="/farmstory/images/head_menu_badge.png" alt="30%" />
-                <img src="/farmstory/images/head_menu2.png" alt="장보기" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/listStory">
-                <img src="/farmstory/images/head_menu3.png" alt="농작물이야기" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/event/event-calendar.jsp">
-                <img src="/farmstory/images/head_menu4.png" alt="이벤트" />
-              </a>
-            </div>
-            <div>
-              <a href="/farmstory/community/notice.jsp">
-                <img src="/farmstory/images/head_menu5.png" alt="커뮤니티" />
-              </a>
-            </div>
-          </article>
-        </section>
-      </header>
+      <%@ include file="./_header.jsp" %>
 
-      <main class="shopping">
+      <main class="article">
         <nav class="background">
           <div class="subtop"><img src="/farmstory/images/sub_top_bg.jpg" alt="메인배경" /></div>
           <div class="croptalk"><img src="/farmstory/images/sub_top_tit3.png" alt="CropTalk" /></div>
@@ -129,17 +78,26 @@
                 <th>글쓴이</th>
                 <th>날짜</th>
                 <th>조회</th>
-             </tr>     
-             <c:forEach var="article" items="${requestScope.articles}">               
-	         <tr>
-	            <td>${pageStartNum}</td>
-	            <td><a href="/farmstory/article/view.do?no=${article.no}">${article.title}[${article.comment}]</a></td>
-	            <td>${article.nick}</td>
-	            <td>${article.wdate.substring(0,10)}</td>
-	            <td>${article.hit}</td>
-	       	 </tr>
-	       		<c:set var="pageStartNum" value="${pageStartNum - 1}" />
-            </c:forEach>
+             </tr>
+             <c:choose>
+             <c:when test="${not empty requestScope.article}">     
+	             <c:forEach var="article" items="${requestScope.article}">               
+			         <tr>
+			            <td>${pageStartNum}</td>
+			            <td><a href="/farmstory/article/view.do?no=${article.id}">${article.title}[${article.comment}]</a></td>
+			            <td>${article.nickname}</td>
+			            <td>${article.register_date.substring(0,10)}</td>
+			            <td>${article.view_number}</td>
+			       	 </tr>
+		       		<c:set var="pageStartNum" value="${pageStartNum - 1}" />
+	            </c:forEach>
+            </c:when>
+	            <c:otherwise>
+		            <tr>
+		                <td colspan="5" style="text-align:center; padding:20px;">게시물이 없습니다.</td>
+		            </tr>
+	        	</c:otherwise>
+            </c:choose>
           	</table>
           	<div class="page">
               	<c:if test="${pageGroupDTO.start >1}">
@@ -153,26 +111,12 @@
                	</c:if>
             </div>
 
-                <a href="/farmstory/article/write.do" class="btn btnWrite">글쓰기</a>
+                <a href="/farmstory/writeGardening" class="btn btnWrite">글쓰기</a>
           </div>
         </section>
       </main>
 
-      <footer>
-        <a href="#">
-          <img src="/farmstory/images/footer_top_line.png" alt="" /><br />
-          <img src="/farmstory/images/footer_logo.png" alt="푸터로고" />
-          <p>
-            (주)팜스토리 / 사업자등록번호 123-45-67890 / 통신판매업신고 제
-            2013-팜스토리구-123호 / 벤처기업 확인 서울지방중소기업청 제
-            012345678-9-01234호<br />
-            등록번호 팜스토리01234 (2013.04.01)/발행인 : 홍길동<br />
-            대표 : 홍길동 / 이메일 : email@mail.mail / 전화 : 01)234-5678 /
-            경기도 성남시 잘한다구 신난다동 345<br />
-            <span>Copyright(C)홍길동 All right reserved.</span>
-          </p>
-        </a>
-      </footer>
+      <%@ include file="./_footer.jsp" %>
     </div>
   </body>
 </html>

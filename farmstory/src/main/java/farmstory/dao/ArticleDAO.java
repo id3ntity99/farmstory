@@ -100,15 +100,80 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   }
   @Override
   public void update(ArticleDTO dto) {
-    // TODO Auto-generated method stub
+    String sql = "update `article` set `title`=?, `content`=? where `id`=?";
+    try {
+    	Connection conn = helper.getConnection();
+    	PreparedStatement psmt = conn.prepareStatement(sql);
+    	
+    	psmt.setString(1, dto.getTitle());
+        psmt.setString(2, dto.getContent());
+        psmt.setInt(3, dto.getId());
+
+        psmt.executeUpdate();
+    	
+    }catch (Exception e) {
+    	LOGGER.error(e.getMessage());
+	}
   }
   @Override
   public void delete(ArticleDTO dto) {
-    // TODO Auto-generated method stub
+    String sql = "delete from `article` where `id`=?";
+    
+    try {
+    	Connection conn = helper.getConnection();
+    	PreparedStatement psmt = conn.prepareStatement(sql);
+    	
+    	psmt.setInt(1, dto.getId());
+    	psmt.executeUpdate();
+    	
+    }catch (Exception e) {
+    	LOGGER.error(e.getMessage());
+	}
   }
   @Override
   public int count() {
-    // TODO Auto-generated method stub
-    return 0;
+    String sql = "select count(*) from `article`";
+    int count = 0;
+    
+    try {
+    	Connection conn = helper.getConnection();
+    	PreparedStatement psmt = conn.prepareStatement(sql);
+    	ResultSet rs = psmt.executeQuery();
+    	
+    	if(rs.next()) {
+    		count = rs.getInt(1);
+    	}
+    	
+    }catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
+    
+    return count;
+  }
+  
+  //추가 메서드: 특정 게시글 번호로 조회
+  public ArticleDTO findByNo(int no) {
+      String sql = "SELECT * FROM articles WHERE no = ?";
+      ArticleDTO article = null;
+
+      try (Connection conn = helper.getConnection();
+           PreparedStatement psmt = conn.prepareStatement(sql)) {
+
+          psmt.setInt(1, no);
+          ResultSet rs = psmt.executeQuery();
+
+          if (rs.next()) {
+              article = new ArticleDTO();
+              article.setId(rs.getInt("id"));
+              article.setTitle(rs.getString("title"));
+              article.setContent(rs.getString("content"));
+              article.setAuthor(rs.getString("author"));
+              article.setRegisterDate(rs.getString("regitserDate"));
+          }
+      } catch (Exception e) {
+          LOGGER.error("게시글 번호 조회 중 오류 발생: " + e.getMessage());
+      }
+
+      return article;
   }
 }

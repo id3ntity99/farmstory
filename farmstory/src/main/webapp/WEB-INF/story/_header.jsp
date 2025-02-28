@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <header>
         <section class="links">
           <div>
@@ -34,7 +34,7 @@
               </a>
             </div>
             <div>
-              <a href="/farmstory/story/story.html">
+              <a href="/farmstory/listGardening">
                 <img src="/farmstory/images/head_menu3.png" alt="농작물이야기" />
               </a>
             </div>
