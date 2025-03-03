@@ -2,6 +2,7 @@ package farmstory.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
@@ -71,8 +72,21 @@ public class UserDAO implements CountableDAO<UserDTO> {
   }
 
   @Override
-  public int count() {
-    // TODO Auto-generated method stub
-    return 0;
+  public int count(String colName, String condition) throws DataAccessException {
+    int count = 0;
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.COUNT_USER)) {
+      psmt.setString(1, colName);
+      psmt.setString(2, condition);
+
+      ResultSet rs = psmt.executeQuery();
+      if (rs.next()) {
+        count = rs.getInt(1);
+      }
+      rs.close();
+    } catch (NamingException | SQLException e) {
+      throw new DataAccessException("COUNT 쿼리를 실행하는 도중 예외가 발생하였습니다.", e);
+    }
+    return count;
   }
 }
