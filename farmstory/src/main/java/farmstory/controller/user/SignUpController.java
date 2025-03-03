@@ -1,10 +1,8 @@
 package farmstory.controller.user;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.JsonElement;
@@ -16,6 +14,7 @@ import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.service.CountableDefaultService;
 import farmstory.util.ConnectionHelper;
+import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,10 +29,6 @@ public class SignUpController extends HttpServlet {
 
   private CountableDAO<UserDTO> dao;
   private CountableDefaultService<UserDTO> service;
-
-  private String stringify(BufferedReader reader) {
-    return reader.lines().collect(Collectors.joining());
-  }
 
   private UserDTO toUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
@@ -63,7 +58,7 @@ public class SignUpController extends HttpServlet {
 
   @Override
   public void init() throws ServletException {
-    this.dao = new UserDAO(new ConnectionHelper("jdbc/farmstory"));
+    this.dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
     this.service = new CountableDefaultService<>(dao);
   }
 
@@ -77,24 +72,32 @@ public class SignUpController extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    String jsonString = stringify(req.getReader());
-    JsonObject obj = JsonParser.parseString(jsonString).getAsJsonObject();
+    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+    String pw = obj.get("password").getAsString();
+    String pwConfirm = obj.get("passwordConfirm").getAsString();
+    if (!pw.equals(pwConfirm)) {
+      LOGGER.debug("일치하지 않는 비밀번호 감지");
+      ResponseBodyWriter.write(false, "일치하지 않는 비밀번호입니다.", HttpServletResponse.SC_BAD_REQUEST, resp);
+      resp.flushBuffer();
+      return;
+    }
+    UserDTO dto = toUser(obj);
     try {
-      int idCount = service.count();
+      int idCount = service.count("id", dto.getId());
       if (idCount > 0) {
-        JsonObject json = new JsonObject();
-        json.addProperty("isSuccess", false);
-        json.addProperty("message", "Duplicate ID detected");
-        resp.setStatus(HttpServletResponse.SC_CONFLICT);
-        resp.setContentType("application/json");
-        resp.getWriter().println(json);
-      } else {
-        UserDTO dto = toUser(obj);
-        service.create(dto);
-        resp.sendRedirect("/farmstory/signin");
+        LOGGER.debug("중복되는 아이디를 감지하였습니다.");
+        ResponseBodyWriter.write(false, "아이디 중복", HttpServletResponse.SC_CONFLICT, resp);
+        resp.flushBuffer();
+        return;
       }
+
+      service.create(dto);
+      String msg = String.format("%s 유저를 성공적으로 생성하였습니다", dto.getId());
+      LOGGER.debug(msg);
+      resp.sendRedirect("/farmstory/signin");
+
     } catch (DataAccessException | IOException e) {
-      String msg = String.format("%s%n%s", e.getMessage(), e.getStackTrace());
+      String msg = String.format("%s%n%s", e.getMessage(), e.getCause().toString());
       LOGGER.debug(msg);
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
