@@ -108,7 +108,7 @@ public class CountableDefaultService<T extends DataTransferObject> implements Co
    * {@link farmstory.CountableDAO#count()} 메서드를 호출하고 호출 결과를 반환한다.
    */
   @Override
-  public int count() {
-    return dao.count();
+  public int count(String colName, String condition) throws DataAccessException {
+    return dao.count(colName, condition);
   }
 }
