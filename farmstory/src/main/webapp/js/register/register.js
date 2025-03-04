@@ -47,15 +47,16 @@ async function send(jsonString) {
     header: {
       "Content-type": "application/json;charset=UTF8",
     },
-  }).then((res) => {
-    if (res.redirected) {
-      window.location.replace(res.url);
-    } else if (res.status === 500) {
-      //TODO handle 500 error
-    } else if (res.status === 409) {
-      //TODO handle conflict response(STatus code for 409 might not be 409)
-    }
-  });
+  })
+    .then((res) => {
+      if (res.redirected) {
+        window.location.replace(res.url);
+      }
+    })
+    .catch((err) => {
+      //FIXME Handle err properly
+      console.log(err.message);
+    });
 }
 
 // '회원가입' 버튼을 클릭할 경우 실행되는 이벤트 핸들러 함수
@@ -63,7 +64,7 @@ async function onSubmit(event) {
   event.preventDefault();
   const inputs = document.getElementsByClassName("register-input");
   // 입력하지 않은 input이 있는지 확인
-  for (input of inputs) {
+  for (let input of inputs) {
     if (input.value === "") {
       //값이 입력되지 않은 input이 있는 경우
       alert(`${input.placeholder}(을)를 입력하지 않았습니다.`);
@@ -73,6 +74,16 @@ async function onSubmit(event) {
   // jsonObject를 Stringify하고 서버로 HTTP POST 요청 전송
   let jsonString = JSON.stringify(jsonObject);
   await send(jsonString);
+}
+
+function disableButton(target) {
+  target.disabled = true;
+  target.style.filter = "grayscale(100%)";
+}
+
+function enableButton(target) {
+  target.disabled = false;
+  target.style.filter = "none";
 }
 
 // 사용자의 입력값이 유효한 경우 사용되는 함수.
@@ -106,13 +117,33 @@ function validate(
   }
 }
 
+function validateDisable(
+  inputElement,
+  regex,
+  resultElement,
+  validMessage,
+  invalidMessage,
+  targetButton
+) {
+  let currentValue = "";
+  currentValue += inputElement.value;
+  if (currentValue.match(regex)) {
+    printValid(resultElement, validMessage);
+    enableButton(targetButton);
+  } else {
+    printInvalid(resultElement, invalidMessage);
+    disableButton(targetButton);
+  }
+}
+
 // Document 로딩이 끝난 후에 이벤트 핸들러 함수를 실행
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("main .container form");
+
+  // Inputs
   const idInput = document.querySelector(
     "main .container form input[name='id']"
   );
-
   const passwordInput = document.querySelector(
     "main .container form input[name='password']"
   );
@@ -148,6 +179,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const addressDetailInput = document.querySelector(
     "main .container form input[name='address_detail']"
   );
+
+  // Buttons
+  const idBtn = document.getElementsByClassName("idCheckBtn")[0];
+  const nicknameBtn = document.getElementsByClassName("nicknameCheckBtn")[0];
+  const emailAuthBtn = document.getElementsByClassName("emailAuthBtn")[0];
+
+  // Result spans
   const idResult = document.getElementsByClassName("idResult")[0];
   const passwordResult = document.getElementsByClassName("passwordResult")[0];
   const pwConfirmResult = document.getElementsByClassName(
@@ -162,15 +200,26 @@ document.addEventListener("DOMContentLoaded", () => {
     "addressDetailResult"
   )[0];
 
+  idBtn.style.filter = "grayscale(100%)";
+  nicknameBtn.style.filter = "grayscale(100%)";
+  emailAuthBtn.style.filter = "grayscale(100%)";
+
+  idBtn.disabled = true;
+  nicknameBtn.disabled = true;
+  emailAuthBtn.disabled = true;
+
+  idBtn.style.pointer = "none";
+
   // 사용자가 input 태그에 값을 입력할때마다 이벤트 핸들러 함수들이 실행됨.
   idInput.addEventListener("keyup", () => {
     // 매 키보드 입력마다 validate()함수를 호출
-    validate(
+    validateDisable(
       idInput,
       ID_REGEX,
       idResult,
-      "사용가능한 아이디입니다.",
-      "사용불가능한 아이디 입니다."
+      "유효한 아이디입니다.",
+      "유효하지 않은 아이디 입니다.",
+      idBtn
     );
   });
 
@@ -184,8 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
       passwordInput,
       PASSWORD_REGEX,
       passwordResult,
-      "사용가능한 비밀번호 입니다.",
-      "사용불가능한 비밀번호 입니다."
+      "유효한 비밀번호 입니다.",
+      "유효하지 않은 비밀번호 입니다."
     );
   });
 
@@ -223,12 +272,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   nicknameInput.addEventListener("keyup", () => {
-    validate(
+    validateDisable(
       nicknameInput,
       NICKNAME_REGEX,
       nicknameResult,
       "유효한 별명입니다.",
-      "유효하지 않은 별명입니다."
+      "유효하지 않은 별명입니다.",
+      nicknameBtn
     );
   });
 
@@ -237,12 +287,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   emailInput.addEventListener("keyup", () => {
-    validate(
+    validateDisable(
       emailInput,
       EMAIL_REGEX,
       emailResult,
       "유효한 이메일입니다.",
-      "유효하지 않은 이메일입니다."
+      "유효하지 않은 이메일입니다.",
+      emailAuthBtn
     );
   });
 

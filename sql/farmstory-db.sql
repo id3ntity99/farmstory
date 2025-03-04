@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- Table `Farmstory`.`company`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Farmstory`.`company` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `company_name` VARCHAR(30) NOT NULL,
   `manager_name` VARCHAR(45) NOT NULL,
   `contact` VARCHAR(20) NOT NULL,
