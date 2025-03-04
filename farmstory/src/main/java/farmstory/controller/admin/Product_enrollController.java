@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Product_enrollController extends HttpServlet{
 
 	private static final long serialVersionUID = 587656470097925202L;
-	private DataAccessObject ProductDAO;
+	private ProductDAO productDAO;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,33 +28,7 @@ public class Product_enrollController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter("name");
-		String category = req.getParameter("category");
-		int price = Integer.parseInt(req.getParameter("price"));
-        int point = Integer.parseInt(req.getParameter("point"));
-        int discountRate = Integer.parseInt(req.getParameter("discountRate"));
-		int deliveryFee = Integer.parseInt(req.getParameter("deliveryFee"));
-		int stock = Integer.parseInt(req.getParameter("stock"));
-		int imageId = Integer.parseInt(req.getParameter("imageId"));
-		String registerDate = req.getParameter("registerDate");
 		
-		ProductDTO dto = new ProductDTO();
-		dto.setName(name);
-		dto.setCategory(category);
-		dto.setPrice(price);
-		dto.setPoint(point);
-		dto.setDiscountRate(discountRate);
-		dto.setDeliveryFee(deliveryFee);
-		dto.setStock(stock);
-		dto.setImageId(imageId);
-		dto.setRegisterDate(registerDate);	
-		
-		DefaultService<ProductDTO> productService = new DefaultService(ProductDAO);
-		try {
-			productService.create(dto);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
 		
 		resp.sendRedirect("/farmstory/admin/product-list.do");
 	}

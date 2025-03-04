@@ -180,12 +180,8 @@ main>section>article{
 .pagination .current-page {
     margin: 0 5px;
     font-weight: bold;
-    color: #007BFF;
 }
 
-.pagination a:hover {
-    color: #007BFF;
-}
 
 
 /* 주문목록 */
