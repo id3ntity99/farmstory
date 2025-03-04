@@ -8,13 +8,13 @@ import java.util.List;
 import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import farmstory.CountableDAO;
+import farmstory.DataAccessObject;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 import farmstory.util.Query;
 
-public class UserDAO implements CountableDAO<UserDTO> {
+public class UserDAO implements DataAccessObject<UserDTO> {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class.getName());
   private final ConnectionHelper helper;
 
@@ -71,7 +71,6 @@ public class UserDAO implements CountableDAO<UserDTO> {
 
   }
 
-  @Override
   public int count(String colName, String condition) throws DataAccessException {
     int count = 0;
     try (Connection conn = helper.getConnection();
