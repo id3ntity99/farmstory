@@ -17,11 +17,19 @@ public class OrderDTO implements DataTransferObject {
     private String userName;
     private int totalPrice;
     
+    private UserDTO userDTO;
+    private ProductDTO prodDTO;
     
     
     
 	
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
+	}
 	
+	public UserDTO getUserDTO() {
+		return this.userDTO;
+	}
 	
 	public String getProductName() {
 		return productName;

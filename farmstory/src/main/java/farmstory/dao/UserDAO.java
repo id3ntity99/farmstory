@@ -47,9 +47,5 @@ public class UserDAO implements CountableDAO<UserDTO> {
   }
 
 
-@Override
-public List<OrderDTO> selectAll(int offset, int limit) {
-	// TODO Auto-generated method stub
-	return null;
-}
+
 }

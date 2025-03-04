@@ -53,19 +53,16 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 		return orderDTO;
 	}
 
-	@Override
-	public List<OrderDTO> selectAll(int offset, int limit) {
+	public List<OrderDTO> selectAll() {
 		String sql = "SELECT o.id, o.user_id, o.product_id, o.amount, o.placed_date, "
 				+ "p.name AS product_name, p.price AS product_price, p.delivery_fee AS delivery_fee, "
 				+ "u.name AS user_name " + "FROM `order` o " + "JOIN product p ON o.product_id = p.id "
-				+ "JOIN user u ON o.user_id = u.id " + "LIMIT ?, ?";
+				+ "JOIN user u ON o.user_id = u.id";
 
 		List<OrderDTO> orders = new ArrayList<>();
 
-		try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
-
-			psmt.setInt(1, offset); // offset 설정
-			psmt.setInt(2, limit); // limit 설정
+		try (Connection conn = helper.getConnection(); 
+				PreparedStatement psmt = conn.prepareStatement(sql)) {
 
 			ResultSet rs = psmt.executeQuery();
 
@@ -107,8 +104,7 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 	public void delete(OrderDTO dto) {
 		String sql = "DELETE FROM `order` WHERE id = ?";
 
-		try (Connection conn = helper.getConnection(); 
-				PreparedStatement psmt = conn.prepareStatement(sql)) {
+		try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
 
 			psmt.setInt(1, dto.getId());
 			int rowsAffected = psmt.executeUpdate();
@@ -143,9 +139,4 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 		return count;
 	}
 
-	@Override
-	public List<OrderDTO> selectAll() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

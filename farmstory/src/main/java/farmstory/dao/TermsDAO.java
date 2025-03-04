@@ -50,9 +50,5 @@ public class TermsDAO implements DataAccessObject<TermsDTO> {
   }
 
 
-@Override
-public List<OrderDTO> selectAll(int offset, int limit) {
-	// TODO Auto-generated method stub
-	return null;
-}
+
 }

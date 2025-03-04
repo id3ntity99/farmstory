@@ -54,11 +54,4 @@ public int count() {
 	return 0;
 }
 
-
-@Override
-public List<OrderDTO> selectAll(int offset, int limit) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
 }

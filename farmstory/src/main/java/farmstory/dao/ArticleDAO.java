@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
 import farmstory.dto.OrderDTO;
+import farmstory.dto.UserDTO;
 import farmstory.util.ConnectionHelper;
 
 public class ArticleDAO implements CountableDAO<ArticleDTO> {
@@ -51,9 +52,4 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 		return 0;
 	}
 
-	@Override
-	public List<OrderDTO> selectAll(int offset, int limit) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
