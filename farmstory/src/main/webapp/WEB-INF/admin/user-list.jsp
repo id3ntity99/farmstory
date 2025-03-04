@@ -60,17 +60,17 @@
 										<td>${user.id}</td>
 										<td>${user.Name}</td>
 										<td>${user.nickname}원</td>
-										<td>${order.email}</td>
-										<td>${order.phone_num}원</td>
-										<td>${order.level}원</td>
-										<td>${order.register_date}</td>
+										<td>${user.email}</td>
+										<td>${user.phone_num}원</td>
+										<td>${user.level}원</td>
+										<td>${user.register_date}</td>
 										<td><a href="/farmstory/user/view.do?no=${user.id}">[상세확인]</a></td>
 									</tr>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="10" style="text-align: center; padding: 20px;">게시물이
+									<td colspan="10" style="text-align: center; padding: 20px;">회원이
 										없습니다.</td>
 								</tr>
 							</c:otherwise>
