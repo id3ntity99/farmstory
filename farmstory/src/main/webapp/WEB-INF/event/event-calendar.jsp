@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/event.css" />
     <title>팜스토리</title>
+    
+    <script>
+    	async function loadEvents(){
+    		try{
+    			let response = await fetch("/farmstory/events");
+    			let events = await response.json();
+    			
+    			events.forEach(event => {
+    				console.log("이벤트 제목: ", event.title);
+    			});
+    			
+    		}catch (e) {
+				console.e(error);
+			}
+    	}
+    	document.addEventListener("DOMContentLoaded", loadEvents);
+
+    </script>
   </head>
 
   <body>
@@ -59,7 +77,7 @@
           </article>
         </section>
       </header>
-      <main class="shopping">
+      <main class="event">
         <nav class="background">
           <div><img src="/farmstory/images/sub_top_bg.jpg" alt="메인배경" /></div>
           <div>
