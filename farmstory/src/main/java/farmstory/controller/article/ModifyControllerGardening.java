@@ -1,7 +1,6 @@
 package farmstory.controller.article;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +17,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/writeGardening")
-public class WriteControllerGardening extends HttpServlet{
-	private static final long serialVersionUID = -8195103407449469536L;
-	private static final Logger logger = LoggerFactory.getLogger(WriteControllerGardening.class.getName());
+@WebServlet("/modifyGardening")
+public class ModifyControllerGardening extends HttpServlet{
+	private static final long serialVersionUID = -8195123407449469536L;
+	private static final Logger logger = LoggerFactory.getLogger(ModifyControllerGardening.class.getName());
 	
 	private DefaultService<ArticleDTO> service;
-	private DefaultService<ArticleDTO> fileService;
 	
 	@Override
 	public void init() throws ServletException {
@@ -40,7 +38,7 @@ public class WriteControllerGardening extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningWrite.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningModify.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -54,23 +52,13 @@ public class WriteControllerGardening extends HttpServlet{
 			String content = req.getParameter("content");
 			String author = req.getParameter("author");
 			
-			List<ArticleDTO> files = fileService.getAll(req);
-			
 			ArticleDTO dto = new ArticleDTO();
 			dto.setTitle(title);
 			dto.setContent(content);
-			dto.setFile(files.size());
 			dto.setAuthor(author);
 			dto.setViewNumber(0);
 			
-			String fileid = null;
-			
 			service.create(dto);
-	
-			
-			for(ArticleDTO fileDTO : files) {
-				fileDTO.setFileid(parseInt(fileid));
-			}
 			
 			resp.sendRedirect(req.getContextPath() + "/listGardening");
 			
@@ -81,11 +69,6 @@ public class WriteControllerGardening extends HttpServlet{
 		
 		
 		
-	}
-
-	private int parseInt(String fileid) {
-		
-		return 0;
 	}
 	
 

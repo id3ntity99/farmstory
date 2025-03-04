@@ -13,6 +13,7 @@ public class ArticleDTO implements DataTransferObject {
 	private int commentNumber;
 	private int viewNumber;
 	private String registerDate;
+	private int file;
 	
 	
 	public int getId() {
@@ -74,7 +75,16 @@ public class ArticleDTO implements DataTransferObject {
 	public String toString() {
 		return "ArticleDTO [id=" + id + ", userId=" + userId + ", title=" + title + ", author=" + author + ", content="
 				+ content + ", fileid=" + fileid + ", commentNumber=" + commentNumber + ", viewNumber=" + viewNumber
-				+ ", registerDate=" + registerDate + "]";
+				+ ", registerDate=" + registerDate + ", file=" + file + "]";
+	}
+	
+	private int getFile() {
+		return file;
+
+	}
+	public void setFile(int file) {
+		this.fileid = file;
+		
 	}
 	
 	

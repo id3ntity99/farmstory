@@ -12,6 +12,7 @@ import farmstory.dto.EventDTO;
 import farmstory.service.CountableDefaultService;
 import farmstory.service.DefaultService;
 import farmstory.util.ConnectionHelper;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,6 +51,11 @@ public class EventController extends HttpServlet {
 		}catch (Exception e) {
 			e.getMessage();
 		}
+		
+		 RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/event/event-calendar.jsp");
+         dispatcher.forward(req, resp);
 	}
+	
+	
 
 }

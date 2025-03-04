@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
-import farmstory.exception.DataAccessException;
+import farmstory.dto.OrderDTO;
 import farmstory.util.ConnectionHelper;
 
 public class ArticleDAO implements CountableDAO<ArticleDTO> {
@@ -99,6 +99,12 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
     
     return articles;
   }
+  
+	  @Override
+	public List<ArticleDTO> uploadFile() {
+		
+	}
+  
   @Override
   public void update(ArticleDTO dto) {
     String sql = "update `article` set `title`=?, `content`=? where `id`=?";
@@ -153,14 +159,14 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   }
   
   //추가 메서드: 특정 게시글 번호로 조회
-  public ArticleDTO findByNo(int no) {
-      String sql = "SELECT * FROM articles WHERE no = ?";
+  public ArticleDTO findByNo(int id) {
+      String sql = "SELECT * FROM `article` WHERE `id` = ?";
       ArticleDTO article = null;
 
       try (Connection conn = helper.getConnection();
            PreparedStatement psmt = conn.prepareStatement(sql)) {
 
-          psmt.setInt(1, no);
+          psmt.setInt(1, id);
           ResultSet rs = psmt.executeQuery();
 
           if (rs.next()) {
@@ -177,4 +183,9 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
       return article;
   }
+
+ 
+ 
+	
+
 }

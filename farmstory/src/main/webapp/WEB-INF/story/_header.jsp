@@ -4,8 +4,8 @@
           <div>
             <p>
               <a href="/farmstory/index.html">HOME | </a>
-              <a href="/farmstory/user/login.html">로그인 | </a>
-              <a href="/farmstory/user/register.html">회원가입 | </a>
+              <a href="/farmstory/user/login.html">로그아웃 | </a>
+              <a href="/farmstory/user/register.html">회원정보 | </a>
               <a href="/farmstory/community/qna.html">고객센터</a>
             </p>
           </div>

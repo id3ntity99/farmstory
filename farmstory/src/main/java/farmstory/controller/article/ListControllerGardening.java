@@ -6,13 +6,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import farmstory.CountableDAO;
-import farmstory.DataAccessObject;
 import farmstory.dao.ArticleDAO;
 import farmstory.dto.ArticleDTO;
 import farmstory.service.CountableDefaultService;
-import farmstory.service.DefaultService;
-import farmstory.service.Service;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
