@@ -9,7 +9,6 @@ import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.DataAccessObject;
-import farmstory.dto.OrderDTO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -106,11 +105,5 @@ public class UserDAO implements DataAccessObject<UserDTO> {
       throw new DataAccessException("COUNT 쿼리를 실행하는 도중 예외가 발생하였습니다.", e);
     }
     return count;
-  }
-
-  @Override
-  public List<OrderDTO> selectAll(int offset, int limit) {
-    // TODO Auto-generated method stub
-    return null;
   }
 }

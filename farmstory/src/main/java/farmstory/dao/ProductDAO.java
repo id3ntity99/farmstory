@@ -4,7 +4,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
-import farmstory.dto.OrderDTO;
 import farmstory.dto.ProductDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -54,11 +53,5 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
     return 0;
   }
 
-
-@Override
-public List<OrderDTO> selectAll(int offset, int limit) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 }

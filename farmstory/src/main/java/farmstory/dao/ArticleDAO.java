@@ -3,15 +3,12 @@ package farmstory.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
-import farmstory.dto.OrderDTO;
 import farmstory.util.ConnectionHelper;
 
 public class ArticleDAO implements CountableDAO<ArticleDTO> {
@@ -157,51 +154,6 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
     }
 
     return count;
-  }
-
-  @Override
-  public List<OrderDTO> selectAll(int offset, int limit) {
-    String sql = "SELECT o.id, o.user_id, o.product_id, o.amount, o.placed_date, "
-        + "p.name AS product_name, p.price AS product_price, p.delivery_fee AS delivery_fee, "
-        + "u.name AS user_name " + "FROM `order` o " + "JOIN product p ON o.product_id = p.id "
-        + "JOIN user u ON o.user_id = u.id " + "LIMIT ?, ?";
-
-    List<OrderDTO> orders = new ArrayList<>();
-
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql)) {
-
-      psmt.setInt(1, offset); // offset 설정
-      psmt.setInt(2, limit); // limit 설정
-
-      ResultSet rs = psmt.executeQuery();
-
-      while (rs.next()) {
-        OrderDTO order = new OrderDTO();
-        order.setId(rs.getInt("id"));
-        order.setUserId(rs.getString("user_id"));
-        order.setProductId(rs.getInt("product_id"));
-        order.setAmount(rs.getInt("amount"));
-        order.setPlacedDate(rs.getString("placed_date"));
-        order.setProductName(rs.getString("product_name"));
-        order.setProductPrice(rs.getInt("product_price"));
-        order.setDeliveryFee(rs.getInt("delivery_fee"));
-        order.setUserName(rs.getString("user_name"));
-
-        // 합계 계산: 가격 * 수량 + 배송비
-        int totalPrice = order.getProductPrice() * order.getAmount() + order.getDeliveryFee();
-        order.setTotalPrice(totalPrice);
-
-        orders.add(order);
-      }
-    } catch (SQLException e) {
-      LOGGER.error("SQL Error: " + e.getMessage(), e); // 로깅
-    } catch (NamingException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
-    }
-
-    return orders;
   }
 
   // 추가 메서드: 특정 게시글 번호로 조회
