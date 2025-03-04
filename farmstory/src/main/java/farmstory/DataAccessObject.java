@@ -1,7 +1,6 @@
 package farmstory;
 
 import java.util.List;
-
 import farmstory.dto.OrderDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -64,5 +63,5 @@ public interface DataAccessObject<T extends DataTransferObject> {
   void delete(T dto) throws DataAccessException;
 
 
-List<OrderDTO> selectAll(int offset, int limit);
+  List<OrderDTO> selectAll(int offset, int limit);
 }

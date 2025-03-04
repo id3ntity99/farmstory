@@ -8,8 +8,8 @@ import java.util.List;
 import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import farmstory.CountableDAO;
 import farmstory.DataAccessObject;
+import farmstory.dto.OrderDTO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -62,27 +62,27 @@ public class UserDAO implements DataAccessObject<UserDTO> {
   public void update(UserDTO dto) {
 
   }
-  
-  public UserDTO findUser(String name, String email) {
-	  
-	  UserDTO user = null;
-      String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
-      
-      try (Connection conn = helper.getConnection();
-           PreparedStatement psmt = conn.prepareStatement(sql)) {
-          psmt.setString(1, name);
-          psmt.setString(2, email);
-          ResultSet rs = psmt.executeQuery();
 
-          if (rs.next()) {
-              user = new UserDTO();
-              user.setId(rs.getString("id"));
-          }
-      } catch (Exception e) {
-          e.printStackTrace();
+  public UserDTO findUser(String name, String email) {
+
+    UserDTO user = null;
+    String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
+
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(sql)) {
+      psmt.setString(1, name);
+      psmt.setString(2, email);
+      ResultSet rs = psmt.executeQuery();
+
+      if (rs.next()) {
+        user = new UserDTO();
+        user.setId(rs.getString("id"));
       }
-      return user;
-	  
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return user;
+
   }
 
   @Override
@@ -108,10 +108,9 @@ public class UserDAO implements DataAccessObject<UserDTO> {
     return count;
   }
 
-
-@Override
-public List<OrderDTO> selectAll(int offset, int limit) {
-	// TODO Auto-generated method stub
-	return null;
-}
+  @Override
+  public List<OrderDTO> selectAll(int offset, int limit) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }
