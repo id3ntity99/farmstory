@@ -140,25 +140,35 @@
                     <span class="result nicknameResult"></span>
                   </td>
                 </tr>
-                <tr>
+                <tr id="emailArea">
                   <td>이메일</td>
                   <td>
-                    <input
-                      class="register-input"
-                      type="email"
-                      name="email"
-                      placeholder="이메일 입력"
-                    />
-                    <input
-                      id="emailCodeInput"
-                      class="register-input"
-                      type="text"
-                      placeholder="인증코드 입력"
-                      style="display: none"
-                    />
-                    <button type="button" class="btn emailAuthBtn">
-                      <img src="/farmstory/images/user/chk_auth.gif" alt="" />
-                    </button>
+                    <div>
+                      <input
+                        class="register-input email-input"
+                        type="email"
+                        name="email"
+                        placeholder="이메일 입력"
+                      />
+                      <button type="button" class="btn emailAuthBtn">
+                        <img src="/farmstory/images/user/chk_auth.gif" alt="" />
+                      </button>
+                    </div>
+                    <div id="emailCodeArea">
+                      <input
+                        id="emailCodeInput"
+                        class="register-input email-input"
+                        type="text"
+                        placeholder="인증코드 입력"
+                      />
+                      <button
+                        id="emailCodeBtn"
+                        type="button"
+                        class="btn emailAuthBtn"
+                      >
+                        인증하기
+                      </button>
+                    </div>
                     <span class="result emailResult"></span>
                   </td>
                 </tr>
