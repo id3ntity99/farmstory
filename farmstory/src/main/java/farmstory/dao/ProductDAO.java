@@ -48,7 +48,7 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 
 
   @Override
-  public int count(String colName, String condition) throws DataAccessException {
+  public int count() throws DataAccessException {
     // TODO Auto-generated method stub
     return 0;
   }
