@@ -14,6 +14,7 @@ public class ArticleDTO implements DataTransferObject {
 	private int viewNumber;
 	private String registerDate;
 	
+	
 	public int getId() {
 		return id;
 	}

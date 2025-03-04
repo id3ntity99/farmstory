@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/farmstory/style/find-id.css" />
         <link rel="stylesheet" href="/farmstory/style/common/header.css" />
         <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-        
+        <script src="/farmstory/js/findId.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -65,22 +65,23 @@
             <main>
                 <section class="idfind">
                     <h1>아이디 찾기</h1>
+                    <form id="findIdForm" action="/findId.do" method="post">
                     <table>
                         <tbody>
                             <tr>
                                 <td>이름</td>
                                 <td>
-                                    <input type="text" name="name" placeholder="이름 입력">
+                                    <input type="text" name="name" placeholder="이름 입력" required>
                                 </td>
-                            </tr>
+                            </tr> 
                             <tr>
                                 <td>이메일</td>
                                 <td>
-                                    <input type="text" name="email" placeholder="이메일 입력"><br>
-                                    <input type="number" name="number" placeholder="인증번호 입력"></td>
+                                    <input type="email" name="email" id="email" placeholder="이메일 입력" required><br>
+                                    <input type="text" name="authCode" id="authCode" placeholder="인증번호 입력"></td>
                                 </td>
-                                <td><a href="#">인증번호 받기</a><br>
-                                <a href="#">확인</a></td>
+                                <td><a href="#" id="sendCodeBtn">인증번호 받기</a><br>
+                                <a href="#" id="verifyCodeBtn">확인</a></td>
                         </tbody>
                     </table>
                     <section class="maintext">
@@ -91,9 +92,11 @@
                     </section>
                     <section class="mainbtn">
                         <a href="#">취소</a>
-                        <a href="#">다음</a>
+                        <a href="/farmstory/find/findIdResult.do" id="submitBtn">다음</a>
                     </section>
-
+					</form>
+					
+					
                 </section>
             </main>
             <footer>
@@ -113,6 +116,5 @@
               </footer>
 
         </div>
-        
     </body>
 </html>
