@@ -10,6 +10,49 @@ public class OrderDTO implements DataTransferObject {
 	private int amount;
 	private String placedDate;
 	
+	//추가 필드
+	private String productName;
+    private int productPrice;
+    private int deliveryFee;
+    private String userName;
+    private int totalPrice;
+    
+    
+    
+    
+	
+	
+	
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public int getProductPrice() {
+		return productPrice;
+	}
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
+	public int getDeliveryFee() {
+		return deliveryFee;
+	}
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public int getId() {
 		return id;
 	}

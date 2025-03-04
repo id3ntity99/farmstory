@@ -34,7 +34,7 @@
 					<h3>상품목록</h3>
 				</nav>
 				<article>
-					<form action="#" method="post">
+					<form action="/farmstory/admin/product-enroll.do" method="post" enctype="multipart/form-data">
 						<table border="0">
 							<tr>
 								<td>상품명</td>
@@ -102,7 +102,7 @@
 							</tr>
 						</table>
 						<p>
-							<a href="/farmstory/admin/product-list.html" class="btnCancel">취소</a>
+							<a href="/farmstory/admin/product-list.do" class="btnCancel">취소</a>
 							<input type="submit" id="btnSubmit" value="상품등록" />
 						</p>
 					</form>

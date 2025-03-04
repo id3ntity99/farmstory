@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
  * 접근할 수 없다.
  */
 @WebFilter(urlPatterns = {"/order/*", "/wishlist/*", "/user/*", "/article/write", "/article/delete",
-    "/article/modify", "/comment/write", "/comment/delete", "/comment/modify", "/admin/*"})
+    "/article/modify", "/comment/write", "/comment/delete", "/comment/modify"})
 public class AuthorizedPageRouter extends HttpFilter {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER =

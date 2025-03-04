@@ -3,6 +3,7 @@ package farmstory.service;
 import java.util.List;
 import farmstory.CountableDAO;
 import farmstory.DataTransferObject;
+import farmstory.dto.OrderDTO;
 import farmstory.exception.DataAccessException;
 
 /**
@@ -110,5 +111,9 @@ public class CountableDefaultService<T extends DataTransferObject> implements Co
   @Override
   public int count() throws DataAccessException {
     return dao.count();
+  }
+  
+  public List<OrderDTO> getAll(int offset, int limit) {
+      return dao.selectAll(offset, limit);  // DAO의 selectAll 메소드를 호출
   }
 }
