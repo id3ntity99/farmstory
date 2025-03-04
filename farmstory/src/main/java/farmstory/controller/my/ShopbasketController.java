@@ -8,7 +8,6 @@ import farmstory.CountableDAO;
 import farmstory.controller.user.SignUpController;
 import farmstory.dao.OrderDAO;
 import farmstory.dto.OrderDTO;
-import farmstory.exception.DataAccessException;
 import farmstory.service.CountableDefaultService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
@@ -51,13 +50,8 @@ public class ShopbasketController extends HttpServlet {
     // return;
     // }
 
-    try {
-      List<OrderDTO> basketList = ((OrderDAO) dao).selectAll();
-      req.setAttribute("basketList", basketList);
-    } catch (DataAccessException e) {
-      e.printStackTrace();
-      // FIXME Handle exception properly
-    }
+    List<OrderDTO> basketList = ((OrderDAO) dao).selectAll();
+    req.setAttribute("basketList", basketList);
 
     RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/my/shopbasket.jsp");
     dispatcher.forward(req, resp);

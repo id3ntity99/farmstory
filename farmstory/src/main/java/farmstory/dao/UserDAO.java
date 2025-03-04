@@ -9,13 +9,13 @@ import java.util.List;
 import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import farmstory.DataAccessObject;
+import farmstory.CountableDAO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 import farmstory.util.Query;
 
-public class UserDAO implements DataAccessObject<UserDTO> {
+public class UserDAO implements CountableDAO<UserDTO> {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class.getName());
   private final ConnectionHelper helper;
 
@@ -57,28 +57,28 @@ public class UserDAO implements DataAccessObject<UserDTO> {
   public List<UserDTO> selectAll() {
     return null;
   }
-  
+
   public List<UserDTO> selectResult() {
-	  List<UserDTO> dtos = new ArrayList<UserDTO>();
-	  String sql = "SELECT `name`, `id`, `email`, `regdate` FROM `user`";
-	  
-	  try (Connection conn = helper.getConnection();
-	             PreparedStatement pstmt = conn.prepareStatement(sql);
-	             ResultSet rs = pstmt.executeQuery()) {
-	            
-	            while (rs.next()) {
-	                UserDTO user = new UserDTO();
-	                user.setName(rs.getString("name"));
-	                user.setId(rs.getString("id"));
-	                user.setEmail(rs.getString("email"));
-	                user.setRegisterDate(rs.getString("registerDate"));
-	                dtos.add(user);
-	            }
-	        } catch (Exception e) {
-		LOGGER.error(e.getMessage());
-	}
-	  
-	  return dtos;
+    List<UserDTO> dtos = new ArrayList<UserDTO>();
+    String sql = "SELECT `name`, `id`, `email`, `regdate` FROM `user`";
+
+    try (Connection conn = helper.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery()) {
+
+      while (rs.next()) {
+        UserDTO user = new UserDTO();
+        user.setName(rs.getString("name"));
+        user.setId(rs.getString("id"));
+        user.setEmail(rs.getString("email"));
+        user.setRegisterDate(rs.getString("registerDate"));
+        dtos.add(user);
+      }
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+    }
+
+    return dtos;
   }
 
   @Override
@@ -110,6 +110,12 @@ public class UserDAO implements DataAccessObject<UserDTO> {
   @Override
   public void delete(UserDTO dto) {
 
+  }
+
+  @Override
+  public int count() throws DataAccessException, IllegalArgumentException {
+
+    return 0;
   }
 
   public int count(String colName, String condition) throws DataAccessException {
