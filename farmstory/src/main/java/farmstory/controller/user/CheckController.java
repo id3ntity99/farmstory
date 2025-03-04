@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/check")
 public class CheckController extends HttpServlet {
@@ -52,6 +53,9 @@ public class CheckController extends HttpServlet {
       } else {
         ResponseBodyWriter.write(true, "", HttpServletResponse.SC_OK, resp);
         // TODO: Store check status at HTTP session.
+        HttpSession session = req.getSession();
+        String attrName = String.format("%sChecked", type);
+        session.setAttribute(attrName, true);
         String msg = String.format("%s=%s에 대한 중복 검사를 성공적으로 완료하였습니다.", type, value);
         LOGGER.debug(msg);
       }

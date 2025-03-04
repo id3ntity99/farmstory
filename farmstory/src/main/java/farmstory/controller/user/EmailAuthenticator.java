@@ -15,6 +15,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -28,6 +30,7 @@ import jakarta.servlet.http.HttpSession;
 public class EmailAuthenticator extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(EmailAuthenticator.class.getName());
+  private static final String AUTH_CODE_ATTR_NAME = "emailAuthCode";
   private final Properties props = new Properties();
   private final Properties gmailConf = new Properties();
 
@@ -78,7 +81,27 @@ public class EmailAuthenticator extends HttpServlet {
           resp);
     }
     HttpSession session = req.getSession();
-    session.setAttribute("emailAuthCode", code);
+    session.setAttribute(AUTH_CODE_ATTR_NAME, code);
+    session.setMaxInactiveInterval(3 * 60); // 세션 만료 3분
+    resp.flushBuffer();
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    JsonObject json = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+    String userAuthCode = json.get("code").getAsString();
+
+    HttpSession session = req.getSession();
+    String sessAuthCode = Integer.toString((int) session.getAttribute("emailAuthCode"));
+
+    if (userAuthCode.endsWith(sessAuthCode)) {
+      ResponseBodyWriter.write(true, "", HttpServletResponse.SC_OK, resp);
+      session.removeAttribute(AUTH_CODE_ATTR_NAME);
+      session.setAttribute("emailAuthed", true);
+    } else {
+      ResponseBodyWriter.write(false, "올바르지 않은 인증코드", HttpServletResponse.SC_BAD_REQUEST, resp);
+    }
 
     resp.flushBuffer();
   }
