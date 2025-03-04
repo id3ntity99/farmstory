@@ -8,10 +8,11 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import farmstory.DataAccessObject;
 import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
-import farmstory.service.UserService;
+import farmstory.service.DefaultService;
 import farmstory.util.ConnectionHelper;
 import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.RequestDispatcher;
@@ -20,13 +21,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/signup")
 public class SignUpController extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(SignUpController.class.getName());
 
-  private UserService service;
+  private DefaultService<UserDTO> service;
 
   private UserDTO toUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
@@ -56,8 +58,8 @@ public class SignUpController extends HttpServlet {
 
   @Override
   public void init() throws ServletException {
-    UserDAO dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
-    this.service = new UserService(dao);
+    DataAccessObject<UserDTO> dao = new UserDAO(new ConnectionHelper("jdbc/farmstory"));
+    this.service = new DefaultService<>(dao);
   }
 
   @Override
@@ -70,6 +72,15 @@ public class SignUpController extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    HttpSession session = req.getSession();
+    String authCode = (String) session.getAttribute("emailAuthCode");
+
+    if (authCode == null) {
+      ResponseBodyWriter.write(false, "이메일 인증번호가 필요합니다.", HttpServletResponse.SC_BAD_REQUEST, resp);
+      resp.flushBuffer();
+      return;
+    }
+
     JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
     String pw = obj.get("password").getAsString();
     String pwConfirm = obj.get("passwordConfirm").getAsString();
@@ -81,14 +92,6 @@ public class SignUpController extends HttpServlet {
     }
     UserDTO dto = toUser(obj);
     try {
-      int idCount = service.count("id", dto.getId());
-      if (idCount > 0) {
-        LOGGER.debug("중복되는 아이디를 감지하였습니다.");
-        ResponseBodyWriter.write(false, "아이디 중복", HttpServletResponse.SC_CONFLICT, resp);
-        resp.flushBuffer();
-        return;
-      }
-
       service.create(dto);
       String msg = String.format("%s 유저를 성공적으로 생성하였습니다", dto.getId());
       LOGGER.debug(msg);

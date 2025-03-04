@@ -1,24 +1,46 @@
-const ID_REGEX = /^[a-z]+[a-z0-9]{4,19}$/g;
-
-async function send(event) {
-  const name = event.target.getAttribute;
-  await fetch(`/check?type=${event.target.name}&value=${event.target.name}`)
+async function doCheck(name, value, resultElement) {
+  await fetch(`/farmstory/check?type=${name}&value=${value}`)
     .then((response) => {
-      console.log(response);
+      if (response.status === 200) {
+        if (name === "id") {
+          printValid(resultElement, "사용 가능한 아이디 입니다!");
+        } else if (name === "nickname") {
+          printValid(resultElement, "사용 가능한 별명 입니다!");
+        }
+      }
     })
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {});
+    .catch((err) => {
+      if (err.status === 409) {
+        if (name === "id") {
+          printInvalid(resultElement, "이미 사용중인 아이디 입니다");
+        } else if (name === "nickname") {
+          printInvalid(resultElement, "이미 사용중인 별명 입니다");
+        }
+      }
+    });
 }
 
-function checkId() {}
+document.addEventListener("DOMContentLoaded", () => {
+  const idInput = document.querySelector(
+    "main .container form input[name='id']"
+  );
+  const nicknameInput = document.querySelector(
+    "main .container form input[name='nickname']"
+  );
 
-window.addEventListener("DOMContentLoaded", () => {
   const idBtn = document.getElementsByClassName("idCheckBtn")[0];
-  const idResult = document.getElementsByClassName("idResult")[0];
+  const nicknameBtn = document.getElementsByClassName("nicknameCheckBtn")[0];
 
-  idBtn.addEventListener("click", (event) => {
-    send(event);
+  const idResult = document.getElementsByClassName("idResult")[0];
+  const nicknameResult = document.getElementsByClassName("nicknameResult")[0];
+
+  idBtn.addEventListener("click", () => {
+    const value = idInput.value;
+    doCheck(idInput.name, value, idResult);
+  });
+
+  nicknameBtn.addEventListener("click", () => {
+    const value = nicknameInput.value;
+    doCheck(nicknameInput.name, value, nicknameResult);
   });
 });

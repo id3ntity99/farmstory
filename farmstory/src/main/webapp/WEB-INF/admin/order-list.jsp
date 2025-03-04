@@ -87,28 +87,36 @@
 								</c:otherwise>
 							</c:choose>
 						</table>
-						
-						<input type="submit" value="선택 삭제" style="border: none; background: none; cursor: pointer;"
-								onclick="return confirm('선택한 주문을 삭제하시겠습니까?');">
 
-						<div class="page">
-							<c:if test="${pageGroupDTO.start >1}">
-								<a
-									href="/farmstory/admin/order-list.do?pg=${pageGroupDTO.start - 1}"
-									class="prev">이전</a>
+						<input type="submit" value="선택 삭제"
+							style="border: none; background: none; cursor: pointer; padding: 10px;"
+							onclick="return confirm('선택한 주문을 삭제하시겠습니까?');">
+
+
+						<div class="pagination">
+							<%-- 이전 페이지 --%>
+							<c:if test="${currentPage > 1}">
+								<a href="/farmstory/admin/order-list.do?pg=${currentPage - 1}">이전</a>
 							</c:if>
-							<c:forEach var="num" begin="${pageGroupDTO.start}"
-								end="${pageGroupDTO.end}">
-								<a href="/farmstory/admin/order-list.do?pg=${num}"
-									class="num ${currentPage == num ? 'current':''}">${num}</a>
+
+							<%-- 페이지 번호 출력 --%>
+							<c:forEach var="i" begin="${startPage}" end="${endPage}">
+								<c:if test="${i == currentPage}">
+									<span class="current-page">${i}</span>
+								</c:if>
+								<c:if test="${i != currentPage}">
+									<a href="/farmstory/admin/order-list.do?pg=${i}">${i}</a>
+								</c:if>
 							</c:forEach>
-							<c:if test="${pageGroupDTO.end < lastPageNum}">
-								<a
-									href="/farmstory/admin/order-list.do?pg=${pageGroupDTO.end + 1}"
-									class="next">다음</a>
+
+							<%-- 다음 페이지 --%>
+							<c:if test="${currentPage < lastPageNum}">
+								<a href="/farmstory/admin/order-list.do?pg=${currentPage + 1}">다음</a>
 							</c:if>
-							
-								
+						</div>
+
+
+
 					</form>
 				</article>
 			</section>
@@ -119,10 +127,10 @@
 </html>
 
 <script>
-    // 전체 선택/해제 처리
-    function selectAll(source) {
-        checkboxes = document.getElementsByName('orderIds');
-        for(var i in checkboxes)
-            checkboxes[i].checked = source.checked;
-    }
+	// 전체 선택/해제 처리
+	function selectAll(source) {
+		checkboxes = document.getElementsByName('orderIds');
+		for ( var i in checkboxes)
+			checkboxes[i].checked = source.checked;
+	}
 </script>
