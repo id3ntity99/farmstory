@@ -85,6 +85,4 @@ public class OrderDTO implements DataTransferObject {
     return "OrderDTO [id=" + id + ", userId=" + userId + ", productId=" + productId + ", amount="
         + amount + ", placedDate=" + placedDate + "]";
   }
-
-
 }

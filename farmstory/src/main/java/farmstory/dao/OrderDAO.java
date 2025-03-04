@@ -17,12 +17,86 @@ import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
 public class OrderDAO implements CountableDAO<OrderDTO> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(OrderDAO.class.getName());
-  private final ConnectionHelper helper;
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderDAO.class.getName());
+	private final ConnectionHelper helper;
 
-  public OrderDAO(ConnectionHelper helper) {
-    this.helper = helper;
-  }
+	public OrderDAO(ConnectionHelper helper) {
+		this.helper = helper;
+	}
+
+	@Override
+	public void insert(OrderDTO dto) {
+
+	}
+
+	@Override
+	public OrderDTO select(OrderDTO dto) {
+		String sql = "select * from `order` where `id`=?";
+		OrderDTO orderDTO = null;
+
+		try {
+			Connection conn = helper.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, dto.getId());
+			ResultSet rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				orderDTO = new OrderDTO();
+				orderDTO.setId(rs.getInt("id"));
+				orderDTO.setUserId(rs.getString("user_id"));
+				orderDTO.setProductId(rs.getInt("product_id"));
+				orderDTO.setAmount(rs.getInt("amount"));
+				orderDTO.setPlacedDate(rs.getString("placed_date"));
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+
+		return orderDTO;
+	}
+
+	public List<OrderDTO> selectAll() {
+		String sql = "SELECT o.id, o.user_id, o.product_id, o.amount, o.placed_date, "
+				+ "p.name AS product_name, p.price AS product_price, p.delivery_fee AS delivery_fee, "
+				+ "u.name AS user_name " + "FROM `order` o " + "JOIN product p ON o.product_id = p.id "
+				+ "JOIN user u ON o.user_id = u.id";
+
+		List<OrderDTO> orders = new ArrayList<>();
+
+		try (Connection conn = helper.getConnection(); 
+				PreparedStatement psmt = conn.prepareStatement(sql)) {
+
+			ResultSet rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				OrderDTO order = new OrderDTO();
+				order.setId(rs.getInt("id"));
+				order.setUserId(rs.getString("user_id"));
+				order.setProductId(rs.getInt("product_id"));
+				order.setAmount(rs.getInt("amount"));
+				order.setPlacedDate(rs.getString("placed_date"));
+				order.setProductName(rs.getString("product_name"));
+				order.setProductPrice(rs.getInt("product_price"));
+				order.setDeliveryFee(rs.getInt("delivery_fee"));
+				order.setUserName(rs.getString("user_name"));
+
+				// 합계 계산: 가격 * 수량 + 배송비
+				int totalPrice = order.getProductPrice() * order.getAmount() + order.getDeliveryFee();
+				order.setTotalPrice(totalPrice);
+
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			LOGGER.error("SQL Error: " + e.getMessage(), e); // 로깅
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		return orders;
+	}
 
   @Override
   public void insert(OrderDTO dto) {
@@ -196,6 +270,7 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 
     return orders;
   }
+
 
   public void placeOrder(String userId) {
     String sql = "delete from `order` where `userId`=?";

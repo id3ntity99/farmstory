@@ -17,57 +17,65 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/order-list.do")
 public class Order_listController extends HttpServlet {
-
   private static final long serialVersionUID = 161266416260600026L;
   private static final Logger logger =
       LoggerFactory.getLogger(Order_listController.class.getName());
-
   private OrderService service;
+	private CountableDefaultService<OrderDTO> service;
 
-  @Override
-  public void init() throws ServletException {
-    try {
-      ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-      OrderDAO dao = new OrderDAO(helper);
-      this.service = new OrderService(dao);
-    } catch (Exception e) {
-      logger.error(e.getMessage());
-    }
-  }
+	@Override
+	public void init() throws ServletException {
+		try {
+			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+			OrderDAO dao = new OrderDAO(helper);
+			this.service = new CountableDefaultService<>(dao);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    try {
-      String pg = req.getParameter("pg");
-      int currentPage = (pg != null) ? Integer.parseInt(pg) : 1;
-      int pageSize = 10;
-      int offset = (currentPage - 1) * pageSize;
+		try {
+			// 전체 주문 목록 가져오기 (전체 데이터)
+            List<OrderDTO> orders = service.getAll();
 
-      // 주문 데이터 가져오기
-      List<OrderDTO> orders = service.getAll(offset, pageSize);
+            // 페이지 번호 파라미터 가져오기, 기본값은 1
+            String pg = req.getParameter("pg");
+            int currentPage = (pg != null) ? Integer.parseInt(pg) : 1;
 
-      // 총 데이터 개수
-      int total = orders.size();
-      int lastPageNum = (int) Math.ceil((double) total / pageSize);
+            int pageSize = 10; // 한 페이지에 보여줄 데이터 수
+            int total = orders.size(); // 전체 데이터 개수
+            int lastPageNum = (int) Math.ceil((double) total / pageSize); // 마지막 페이지 번호 계산
 
-      req.setAttribute("articles", orders);
-      req.setAttribute("currentPage", currentPage);
-      req.setAttribute("lastPageNum", lastPageNum);
+            // 현재 페이지에 해당하는 데이터만 추출
+            int startIndex = (currentPage - 1) * pageSize;
+            int endIndex = Math.min(startIndex + pageSize, total); // 페이지 마지막 인덱스
 
-      RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/order-list.jsp");
-      dispatcher.forward(req, resp);
+            // 페이지에 맞는 데이터만 가져오기 (subList)
+            List<OrderDTO> currentPageOrders = orders.subList(startIndex, endIndex);
 
-    } catch (Exception e) {
-      logger.error("게시글 목록 조회 중 오류 발생", e);
-      resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "서버 오류 발생");
-    }
-  }
+            // 페이지네이션 처리
+            req.setAttribute("articles", currentPageOrders);
+            req.setAttribute("currentPage", currentPage);
+            req.setAttribute("lastPageNum", lastPageNum);
 
+            // 페이지 범위 계산 (예: 1, 2, 3, 4, 5 페이지 범위)
+            int startPage = ((currentPage - 1) / 5) * 5 + 1;
+            int endPage = Math.min(startPage + 4, lastPageNum);
+            req.setAttribute("startPage", startPage);
+            req.setAttribute("endPage", endPage);
 
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {}
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/order-list.jsp");
+            dispatcher.forward(req, resp);
+		} catch (Exception e) {
+			logger.error("게시글 목록 조회 중 오류 발생", e);
+			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "서버 오류 발생");
+		}
+	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	}
 }

@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
+import farmstory.dto.OrderDTO;
+import farmstory.dto.UserDTO;
+import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
 public class ArticleDAO implements CountableDAO<ArticleDTO> {
@@ -106,18 +109,17 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   public void update(ArticleDTO dto) {
     String sql = "update `article` set `title`=?, `content`=? where `id`=?";
     try {
-      Connection conn = helper.getConnection();
-      PreparedStatement psmt = conn.prepareStatement(sql);
+    	Connection conn = helper.getConnection();
+    	PreparedStatement psmt = conn.prepareStatement(sql);
+    	psmt.setString(1, dto.getTitle());
+        psmt.setString(2, dto.getContent());
+        psmt.setInt(3, dto.getId());
+        psmt.executeUpdate();
+    	
+    }catch (Exception e) {
+    	LOGGER.error(e.getMessage());
+	}
 
-      psmt.setString(1, dto.getTitle());
-      psmt.setString(2, dto.getContent());
-      psmt.setInt(3, dto.getId());
-
-      psmt.executeUpdate();
-
-    } catch (Exception e) {
-      LOGGER.error(e.getMessage());
-    }
   }
 
   @Override

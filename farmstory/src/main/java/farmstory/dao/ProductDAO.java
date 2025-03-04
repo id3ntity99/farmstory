@@ -52,6 +52,4 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
     // TODO Auto-generated method stub
     return 0;
   }
-
-
 }
