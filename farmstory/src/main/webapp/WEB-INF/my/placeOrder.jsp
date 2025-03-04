@@ -14,7 +14,7 @@
 		OrderService orderService = new OrderService(orderDAO);
 		
 		// 주문 처리
-		orderService.placeOrder(userId);
+		//orderService.placeOrder(userId);
 		
 		// 완료 후 shopbasket.jsp로 리디렉션
 		response.sendRedirect("shopbasket.jsp");

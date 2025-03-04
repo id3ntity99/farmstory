@@ -10,11 +10,6 @@ import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
-<<<<<<< HEAD
-import farmstory.DataAccessObject;
-import farmstory.dto.OrderDTO;
-=======
->>>>>>> 11864a6bba3f6afd8d0d0dcb37d9dca978cab7f5
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;

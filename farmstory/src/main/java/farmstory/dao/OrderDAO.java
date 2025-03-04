@@ -64,13 +64,8 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 
     List<OrderDTO> orders = new ArrayList<>();
 
-<<<<<<< HEAD
-		try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
-=======
     try (Connection conn = helper.getConnection();
         PreparedStatement psmt = conn.prepareStatement(sql)) {
->>>>>>> 11864a6bba3f6afd8d0d0dcb37d9dca978cab7f5
-
       ResultSet rs = psmt.executeQuery();
 
       while (rs.next()) {
@@ -110,7 +105,6 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
     return orders;
   }
 
-<<<<<<< HEAD
 	@Override
 	public void update(OrderDTO dto) {
 
@@ -168,71 +162,10 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 		}
 		return count;
 	}
-=======
-  @Override
-  public void update(OrderDTO dto) {
-
-    String sql = "update `order` set `amount` = ? where `id` = ?";
-
-    try {
-      Connection conn = helper.getConnection();
-      PreparedStatement psmt = conn.prepareStatement(sql);
-      psmt.setInt(1, dto.getAmount());
-      psmt.setInt(2, dto.getId());
-      psmt.executeUpdate();
-      conn.close();
-      psmt.close();
-
-    } catch (Exception e) {
-      LOGGER.error(e.getMessage());
-    }
-
-  }
-
-  @Override
-  public void delete(OrderDTO dto) {
-    String sql = "DELETE FROM `order` WHERE id = ?;";
-
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql)) {
-      psmt.setInt(1, dto.getId());
-      int rowsAffected = psmt.executeUpdate();
-
-      if (rowsAffected > 0) {
-        LOGGER.info("주문 번호 " + dto.getId() + " 삭제 완료");
-      } else {
-        LOGGER.warn("주문 번호 " + dto.getId() + " 삭제 실패");
-      }
-
-    } catch (SQLException e) {
-      LOGGER.error("주문 삭제 오류: " + e.getMessage());
-    } catch (NamingException e1) {
-      e1.printStackTrace();
-    }
-  }
-
-  @Override
-  public int count() {
-    String sql = "SELECT COUNT(*) FROM `order`";
-    int count = 0;
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql);
-        ResultSet rs = psmt.executeQuery()) {
-
-      if (rs.next()) {
-        count = rs.getInt(1);
-      }
-    } catch (Exception e) {
-      LOGGER.error(e.getMessage());
-    }
-    return count;
-  }
->>>>>>> 11864a6bba3f6afd8d0d0dcb37d9dca978cab7f5
 
 	public void placeOrder(String userId) {
 		String sql = "delete from `order` where `userId`=?";
 
-<<<<<<< HEAD
 		try {
 			Connection conn = helper.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(sql);
@@ -244,20 +177,4 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 			LOGGER.error(e.getMessage());
 		}
 	}
-=======
-  public void placeOrder(String userId) {
-    String sql = "delete from `order` where `userId`=?";
-
-    try {
-      Connection conn = helper.getConnection();
-      PreparedStatement psmt = conn.prepareStatement(sql);
-      psmt.setString(1, userId);
-      psmt.executeUpdate();
-      conn.close();
-      psmt.close();
-    } catch (Exception e) {
-      LOGGER.error(e.getMessage());
-    }
-  }
->>>>>>> 11864a6bba3f6afd8d0d0dcb37d9dca978cab7f5
 }
