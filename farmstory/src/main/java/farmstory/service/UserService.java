@@ -1,29 +1,29 @@
 package farmstory.service;
 
-import java.util.Properties;
-import java.util.concurrent.ThreadLocalRandom;
 
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import farmstory.CountableDAO;
+import java.util.List;
 import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
+import farmstory.exception.DataAccessException;
 
-public class UserService extends CountableDefaultService<UserDTO>{
+public class UserService extends DefaultService<UserDTO> {
+  private UserDAO userDAO;
 
-	private UserDAO userDAO;
-	
-	public UserService(UserDAO dao) {
-		super(dao);
-		this.userDAO = dao;
-	}
-  
-	public UserDTO findUser(String name, String email) {
-		return userDAO.findUser(name, email);
-	}
+  public UserService(UserDAO dao) {
+    super(dao);
+    this.userDAO = dao;
+  }
+
+  public UserDTO findUser(String name, String email) {
+    return userDAO.findUser(name, email);
+  }
+
+  public List<UserDTO> findResult() {
+    return userDAO.selectResult();
+  }
+
+  public int count(String colName, String condition) throws DataAccessException {
+    return userDAO.count(colName, condition);
+  }
+
 }

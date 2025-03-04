@@ -17,10 +17,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/writeStory")
-public class WriteControllerStory extends HttpServlet{
-	private static final long serialVersionUID = -8195103407449469536L;
-	private static final Logger logger = LoggerFactory.getLogger(WriteControllerStory.class.getName());
+@WebServlet("/modifyGardening")
+public class ModifyControllerGardening extends HttpServlet{
+	private static final long serialVersionUID = -8195123407449469536L;
+	private static final Logger logger = LoggerFactory.getLogger(ModifyControllerGardening.class.getName());
 	
 	private DefaultService<ArticleDTO> service;
 	
@@ -38,7 +38,7 @@ public class WriteControllerStory extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/storyWrite.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningModify.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -60,7 +60,7 @@ public class WriteControllerStory extends HttpServlet{
 			
 			service.create(dto);
 			
-			resp.sendRedirect(req.getContextPath() + "/listStory");
+			resp.sendRedirect(req.getContextPath() + "/listGardening");
 			
 		} catch (DataAccessException e) {
 			logger.error(e.getMessage());

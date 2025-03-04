@@ -10,14 +10,17 @@ import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
+<<<<<<< HEAD
 import farmstory.DataAccessObject;
 import farmstory.dto.OrderDTO;
+=======
+>>>>>>> 11864a6bba3f6afd8d0d0dcb37d9dca978cab7f5
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 import farmstory.util.Query;
 
-public class UserDAO implements DataAccessObject<UserDTO> {
+public class UserDAO implements CountableDAO<UserDTO> {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class.getName());
   private final ConnectionHelper helper;
 
@@ -91,36 +94,64 @@ public class UserDAO implements DataAccessObject<UserDTO> {
 		return users;
   }
 
+  public List<UserDTO> selectResult() {
+    List<UserDTO> dtos = new ArrayList<UserDTO>();
+    String sql = "SELECT `name`, `id`, `email`, `regdate` FROM `user`";
+
+    try (Connection conn = helper.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery()) {
+
+      while (rs.next()) {
+        UserDTO user = new UserDTO();
+        user.setName(rs.getString("name"));
+        user.setId(rs.getString("id"));
+        user.setEmail(rs.getString("email"));
+        user.setRegisterDate(rs.getString("registerDate"));
+        dtos.add(user);
+      }
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+    }
+
+    return dtos;
+  }
+
   @Override
   public void update(UserDTO dto) {
 
   }
-  
-  public UserDTO findUser(String name, String email) {
-	  
-	  UserDTO user = null;
-      String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
-      
-      try (Connection conn = helper.getConnection();
-           PreparedStatement psmt = conn.prepareStatement(sql)) {
-          psmt.setString(1, name);
-          psmt.setString(2, email);
-          ResultSet rs = psmt.executeQuery();
 
-          if (rs.next()) {
-              user = new UserDTO();
-              user.setId(rs.getString("id"));
-          }
-      } catch (Exception e) {
-          e.printStackTrace();
+  public UserDTO findUser(String name, String email) {
+    UserDTO user = null;
+    String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
+
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(sql)) {
+      psmt.setString(1, name);
+      psmt.setString(2, email);
+      ResultSet rs = psmt.executeQuery();
+
+      if (rs.next()) {
+        user = new UserDTO();
+        user.setId(rs.getString("id"));
       }
-      return user;
-	  
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return user;
+
   }
 
   @Override
   public void delete(UserDTO dto) {
 
+  }
+
+  @Override
+  public int count() throws DataAccessException, IllegalArgumentException {
+
+    return 0;
   }
 
   public int count(String colName, String condition) throws DataAccessException {
@@ -140,7 +171,5 @@ public class UserDAO implements DataAccessObject<UserDTO> {
     }
     return count;
   }
-
-
-
 }
+

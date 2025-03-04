@@ -113,5 +113,4 @@ public class CountableDefaultService<T extends DataTransferObject> implements Co
   public int count() throws DataAccessException {
     return dao.count();
   }
-  
 }

@@ -10,7 +10,11 @@ import farmstory.dao.UserDAO;
 import farmstory.dto.OrderDTO;
 import farmstory.dto.UserDTO;
 import farmstory.service.CountableDefaultService;
+<<<<<<< HEAD
 import farmstory.service.DefaultService;
+=======
+import farmstory.service.CountableService;
+>>>>>>> 11864a6bba3f6afd8d0d0dcb37d9dca978cab7f5
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -25,7 +29,11 @@ public class User_listController extends HttpServlet {
     private static final long serialVersionUID = -4296729693079948400L;
     private static final Logger logger = LoggerFactory.getLogger(User_listController.class.getName());
 
+<<<<<<< HEAD
     private DefaultService<UserDTO> service;
+=======
+	private CountableService<UserDTO> service;
+>>>>>>> 11864a6bba3f6afd8d0d0dcb37d9dca978cab7f5
 
     @Override
     public void init() throws ServletException {

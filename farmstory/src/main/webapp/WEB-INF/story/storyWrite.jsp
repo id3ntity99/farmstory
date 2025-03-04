@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/farmstory/style/index.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
-    <link rel="stylesheet" href="/farmstory/style/gardening.css" />
+    <link rel="stylesheet" href="/farmstory/style/story.css" />
     <title>팜스토리</title>
     <style></style>
   </head>
@@ -18,8 +18,8 @@
 
       <main class="article">
         <nav class="background">
-          <div class="subtop"><img src="/farmstory/images/sub_top_bg.jpg" alt="메인배경" /></div>
-          <div class="croptalk"><img src="/farmstory/images/sub_top_tit3.png" alt="CropTalk" /></div>
+        	<div class="subtop"><img src="/farmstory/images/sub_top_bg.jpg" alt="메인배경" /></div>
+         	<div class="croptalk"><img src="/farmstory/images/sub_top_tit3.png" alt="CropTalk" /></div>
         </nav>
         <aside>
           <a href="#">
@@ -29,18 +29,18 @@
             <img src="/farmstory/images/sub_aside_cate3_tit.png" alt="농작물이야기" />
           </a>
           <a href="/farmstory/listStory">
-            <img src="/farmstory/images/sub_cate3_lnb1.png" alt="농작물이야기" />
+            <img src="/farmstory/images/sub_cate3_lnb1_ov.png" alt="농작물이야기" />
           </a>
           <a href="/farmstory/listGardening">
+            <img src="/farmstory/images/sub_cate3_lnb2.png" alt="텃밭가꾸기" />
+          </a>
+          <a href="/farmstory/listSchool">
             <img
-              src="/farmstory/images/sub_cate3_lnb2_ov.png"
-              alt="텃밭가꾸기"
+              src="/farmstory/images/sub_cate3_lnb3.png"
+              alt="귀농학교"
               width="175px"
               height="29px"
             />
-          </a>
-          <a href="/farmstory/listSchool">
-            <img src="/farmstory/images/sub_cate3_lnb3.png" alt="귀농학교" />
           </a>
           <a href="#">
             <img src="/farmstory/images/sub_aside_bg_lnb.png" alt="사이드메뉴" />
@@ -51,18 +51,18 @@
             <a href="#">
               <img
               	class="subnav"
-                src="/farmstory/images/sub_nav_tit_cate3_tit2.png"
-                alt="텃밭가꾸기"
+                src="/farmstory/images/sub_nav_tit_cate3_tit1.png"
+                alt="농작물이야기"
               />
             </a>
-            <span>텃밭가꾸기</span>
+            <span>농작물이야기</span>
             <a href="#">HOME > 농작물이야기 > </a>
           </div>
           <div class="write">
             <nav>
-              <h1>글쓰기</h1>
+              <h5>글쓰기</h5><br>
             </nav>
-			<form action="/farmstory/writeGardening" method="post" enctype="multipart/form-data">
+			<form action="/farmstory/writeStory" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="author" value="${sessUser.id}" readonly>
 				<table border=0>
 					<tr>
@@ -88,14 +88,14 @@
 				</table>
 				
 				<div class="btnWrite">
-					<a href="/farmstory/listGardening" class="btn btnCancel">취소</a>
+					<a href="/farmstory/listStory" class="btn btnCancel">취소</a>
 					<input type="submit" value="작성완료" class="btn btnComplete"/>
 				</div>
 			</form>
           </div>
-          
         </section>
       </main>
+
       <%@ include file="./_footer.jsp" %>
     </div>
   </body>

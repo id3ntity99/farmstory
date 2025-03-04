@@ -53,7 +53,7 @@ public class EmailAuthenticator extends HttpServlet {
     String sender = (String) props.get("gmail.sender");
     String appPassword = (String) props.get("gmail.password");
     String title = (String) props.get("gmail.title");
-    String content = String.format("<h3>팤스토리 인증 코드: %d</h3>", code);
+    String content = String.format("<h3>팜스토리 인증 코드: %d</h3>", code);
 
     Session mailSession = Session.getInstance(gmailConf, new Authenticator() {
       @Override
@@ -72,7 +72,7 @@ public class EmailAuthenticator extends HttpServlet {
       Transport.send(message);
       ResponseBodyWriter.write(true, "", HttpServletResponse.SC_OK, resp);
       String msg = String.format("%s로 인증코드를 전송하였음", email);
-      LOGGER.debug("");
+      LOGGER.debug(msg);
     } catch (MessagingException e) {
       ResponseBodyWriter.write(false, "인증번호 전송 실패", HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
           resp);
