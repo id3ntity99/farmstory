@@ -3,6 +3,7 @@ package farmstory.dao;
 import java.util.List;
 import farmstory.CountableDAO;
 import farmstory.dto.EventDTO;
+import farmstory.dto.OrderDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
@@ -49,5 +50,11 @@ public class EventDAO implements CountableDAO<EventDTO> {
     // TODO Auto-generated method stub
     return 0;
   }
+
+	@Override
+	public List<OrderDTO> selectAll(int offset, int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

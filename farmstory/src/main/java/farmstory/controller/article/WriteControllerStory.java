@@ -22,7 +22,7 @@ public class WriteControllerStory extends HttpServlet{
 	private static final long serialVersionUID = -8195103407449469536L;
 	private static final Logger logger = LoggerFactory.getLogger(WriteControllerStory.class.getName());
 	
-	private DefaultService service;
+	private DefaultService<ArticleDTO> service;
 	
 	@Override
 	public void init() throws ServletException {
@@ -38,7 +38,7 @@ public class WriteControllerStory extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/storyWriter.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/storyWrite.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -50,7 +50,7 @@ public class WriteControllerStory extends HttpServlet{
 		try {
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
-			String author = req.getParameter("writer");
+			String author = req.getParameter("author");
 			
 			ArticleDTO dto = new ArticleDTO();
 			dto.setTitle(title);
