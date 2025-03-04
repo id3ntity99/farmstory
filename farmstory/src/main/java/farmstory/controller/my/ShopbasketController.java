@@ -11,7 +11,6 @@ import farmstory.dto.OrderDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.service.CountableDefaultService;
 import farmstory.util.ConnectionHelper;
-import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -56,10 +55,8 @@ public class ShopbasketController extends HttpServlet {
       List<OrderDTO> basketList = ((OrderDAO) dao).selectAll();
       req.setAttribute("basketList", basketList);
     } catch (DataAccessException e) {
-      ResponseBodyWriter.write(false, "Internal server error",
-          HttpServletResponse.SC_INTERNAL_SERVER_ERROR, resp);
-      resp.flushBuffer();
-      return;
+      e.printStackTrace();
+      // FIXME Handle exception properly
     }
 
     RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/my/shopbasket.jsp");
