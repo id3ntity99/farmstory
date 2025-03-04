@@ -8,11 +8,10 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import farmstory.CountableDAO;
 import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
-import farmstory.service.CountableDefaultService;
+import farmstory.service.UserService;
 import farmstory.util.ConnectionHelper;
 import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.RequestDispatcher;
@@ -27,8 +26,7 @@ public class SignUpController extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(SignUpController.class.getName());
 
-  private CountableDAO<UserDTO> dao;
-  private CountableDefaultService<UserDTO> service;
+  private UserService service;
 
   private UserDTO toUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
@@ -58,8 +56,8 @@ public class SignUpController extends HttpServlet {
 
   @Override
   public void init() throws ServletException {
-    this.dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
-    this.service = new CountableDefaultService<>(dao);
+    UserDAO dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
+    this.service = new UserService(dao);
   }
 
   @Override

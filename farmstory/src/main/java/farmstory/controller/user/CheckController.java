@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import farmstory.CountableDAO;
 import farmstory.dao.UserDAO;
-import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
-import farmstory.service.CountableDefaultService;
-import farmstory.service.CountableService;
+import farmstory.service.UserService;
 import farmstory.util.ConnectionHelper;
 import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.ServletException;
@@ -22,13 +19,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CheckController extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(CheckController.class.getName());
-  private CountableService<UserDTO> service;
+  private UserService service;
 
   @Override
   public void init() throws ServletException {
     ConnectionHelper helper = new ConnectionHelper("jdbc/Farmstory");
-    CountableDAO<UserDTO> dao = new UserDAO(helper);
-    this.service = new CountableDefaultService<>(dao);
+    UserDAO dao = new UserDAO(helper);
+    this.service = new UserService(dao);
   }
 
   @Override
