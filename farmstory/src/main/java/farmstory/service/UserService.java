@@ -22,10 +22,8 @@ public class UserService extends CountableDefaultService<UserDTO>{
 		super(dao);
 		this.userDAO = dao;
 	}
+  
 	public UserDTO findUser(String name, String email) {
 		return userDAO.findUser(name, email);
 	}
-	
-	
-	
 }

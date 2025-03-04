@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.OrderDTO;
-import farmstory.dto.UserDTO;
+import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
 public class OrderDAO implements CountableDAO<OrderDTO> {
@@ -101,8 +101,7 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 
   }
   
-  
-  @Override
+@Override
 public int count() {
 	// TODO Auto-generated method stub
 	return 0;
@@ -121,5 +120,4 @@ public void placeOrder(String userId) {
 	} catch (Exception e) {
 		LOGGER.error(e.getMessage());
 	}  
-  }
 }

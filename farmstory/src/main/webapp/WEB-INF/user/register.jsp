@@ -75,7 +75,7 @@
                       name="id"
                       placeholder="아이디 입력"
                     />
-                    <button type="button" class="btn">
+                    <button type="button" name="id" class="btn idCheckBtn">
                       <img src="/farmstory/images/user/chk_id.gif" alt="" />
                     </button>
                     <span class="result idResult"></span>

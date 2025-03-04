@@ -39,8 +39,27 @@ function findPostCode(zipInput, addressInput) {
   }).open();
 }
 
+async function send(jsonString) {
+  await fetch("/farmstory/signup", {
+    method: "POST",
+    redirect: "follow",
+    body: jsonString,
+    header: {
+      "Content-type": "application/json;charset=UTF8",
+    },
+  }).then((res) => {
+    if (res.redirected) {
+      window.location.replace(res.url);
+    } else if (res.status === 500) {
+      //TODO handle 500 error
+    } else if (res.status === 409) {
+      //TODO handle conflict response(STatus code for 409 might not be 409)
+    }
+  });
+}
+
 // '회원가입' 버튼을 클릭할 경우 실행되는 이벤트 핸들러 함수
-function onSubmit(event) {
+async function onSubmit(event) {
   event.preventDefault();
   const inputs = document.getElementsByClassName("register-input");
   // 입력하지 않은 input이 있는지 확인
@@ -53,13 +72,7 @@ function onSubmit(event) {
   }
   // jsonObject를 Stringify하고 서버로 HTTP POST 요청 전송
   let jsonString = JSON.stringify(jsonObject);
-  fetch("/farmstory/signup", {
-    method: "POST",
-    body: jsonString,
-    header: {
-      "Content-type": "application/json;charset=UTF8",
-    },
-  });
+  await send(jsonString);
 }
 
 // 사용자의 입력값이 유효한 경우 사용되는 함수.
