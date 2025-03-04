@@ -13,6 +13,7 @@ import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.service.DefaultService;
+import farmstory.service.Service;
 import farmstory.util.ConnectionHelper;
 import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.RequestDispatcher;
@@ -28,7 +29,7 @@ public class SignUpController extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(SignUpController.class.getName());
 
-  private DefaultService<UserDTO> service;
+  private Service<UserDTO> service;
 
   private UserDTO toUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
@@ -52,7 +53,6 @@ public class SignUpController extends HttpServlet {
     dto.setZip(zip);
     dto.setAddress(address);
     dto.setAddressDetail(addressDetail);
-
     return dto;
   }
 
