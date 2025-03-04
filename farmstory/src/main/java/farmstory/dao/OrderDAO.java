@@ -1,14 +1,18 @@
 package farmstory.dao;
 
-import java.sql.*;
-import java.util.*;
-
 import javax.naming.NamingException;
-
-import org.slf4j.*;
 import farmstory.CountableDAO;
 import farmstory.dto.OrderDTO;
 import farmstory.dto.UserDTO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import farmstory.CountableDAO;
+import farmstory.dto.OrderDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
@@ -94,18 +98,32 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 		return orders;
 	}
 
-	@Override
-	public void update(OrderDTO dto) {
-		// TODO Auto-generated method stub
+  @Override
+  public void update(OrderDTO dto) {
+	  
+	  String sql = "update `order` set `amount` = ? where `id` = ?";
+	  
+      try {
+        Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(sql);
+        psmt.setInt(1, dto.getAmount());
+        psmt.setInt(2, dto.getId());
+        psmt.executeUpdate();
+        conn.close();
+        psmt.close();
 
-	}
-
-	@Override
+      } catch (Exception e) {
+        LOGGER.error(e.getMessage());
+      }
+	    
+	  }
+  
+  @Override
 	public void delete(OrderDTO dto) {
-		String sql = "DELETE FROM `order` WHERE id = ?";
+		String sql = "DELETE FROM `order` WHERE id = ?"
 
-		try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
-
+		try (Connection conn = helper.getConnection(); 
+				PreparedStatement psmt = conn.prepareStatement(sql)) {
 			psmt.setInt(1, dto.getId());
 			int rowsAffected = psmt.executeUpdate();
 
@@ -121,8 +139,8 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 			e1.printStackTrace();
 		}
 	}
-
-	@Override
+  
+  @Override
 	public int count() {
 		String sql = "SELECT COUNT(*) FROM `order`";
 		int count = 0;
@@ -139,4 +157,18 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 		return count;
 	}
 
+
+  public void placeOrder(String userId) {
+      String sql = "delete from `order` where `userId`=?";
+
+      try {
+          Connection conn = helper.getConnection();
+          PreparedStatement psmt = conn.prepareStatement(sql);
+          psmt.setString(1, userId);
+          psmt.executeUpdate();
+          conn.close();
+          psmt.close();
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+    }  
 }

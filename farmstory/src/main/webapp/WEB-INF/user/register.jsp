@@ -11,6 +11,8 @@
   </head>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="/farmstory/js/register/register.js"></script>
+  <script src="/farmstory/js/register/check.js"></script>
+  <script src="/farmstory/js/register/auth.js"></script>
   <body>
     <div id="wrapper">
       <header>
@@ -75,7 +77,7 @@
                       name="id"
                       placeholder="아이디 입력"
                     />
-                    <button type="button" class="btn">
+                    <button type="button" name="id" class="btn idCheckBtn">
                       <img src="/farmstory/images/user/chk_id.gif" alt="" />
                     </button>
                     <span class="result idResult"></span>
@@ -132,7 +134,7 @@
                       name="nickname"
                       placeholder="별명 입력"
                     />
-                    <button type="button" class="btn">
+                    <button type="button" class="btn nicknameCheckBtn">
                       <img src="/farmstory/images/user/chk_id.gif" alt="" />
                     </button>
                     <span class="result nicknameResult"></span>
@@ -147,7 +149,14 @@
                       name="email"
                       placeholder="이메일 입력"
                     />
-                    <button type="button" class="btn">
+                    <input
+                      id="emailCodeInput"
+                      class="register-input"
+                      type="text"
+                      placeholder="인증코드 입력"
+                      style="display: none"
+                    />
+                    <button type="button" class="btn emailAuthBtn">
                       <img src="/farmstory/images/user/chk_auth.gif" alt="" />
                     </button>
                     <span class="result emailResult"></span>

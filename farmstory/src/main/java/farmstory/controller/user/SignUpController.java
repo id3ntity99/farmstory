@@ -8,12 +8,13 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import farmstory.CountableDAO;
+import farmstory.DataAccessObject;
 import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
-import farmstory.service.CountableDefaultService;
+import farmstory.service.DefaultService;
 import farmstory.util.ConnectionHelper;
+import farmstory.util.ResponseBodyWriter;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,26 +27,9 @@ public class SignUpController extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(SignUpController.class.getName());
 
-  private CountableDAO<UserDTO> dao;
-  private CountableDefaultService<UserDTO> service;
+  private DefaultService<UserDTO> service;
 
-  @Override
-  public void init() throws ServletException {
-    this.dao = new UserDAO(new ConnectionHelper("jdbc/Farmstory"));
-    this.service = new CountableDefaultService<>(dao);
-  }
-
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/register.jsp");
-    dispatcher.forward(req, resp);
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+  private UserDTO toUser(JsonObject obj) {
     Map<String, JsonElement> jsonMap = obj.asMap();
     String id = jsonMap.get("id").getAsString();
     String password = jsonMap.get("password").getAsString();
@@ -67,24 +51,47 @@ public class SignUpController extends HttpServlet {
     dto.setZip(zip);
     dto.setAddress(address);
     dto.setAddressDetail(addressDetail);
+
+    return dto;
+  }
+
+  @Override
+  public void init() throws ServletException {
+    DataAccessObject<UserDTO> dao = new UserDAO(new ConnectionHelper("jdbc/farmstory"));
+    this.service = new DefaultService<>(dao);
+  }
+
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/register.jsp");
+    dispatcher.forward(req, resp);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+    String pw = obj.get("password").getAsString();
+    String pwConfirm = obj.get("passwordConfirm").getAsString();
+    if (!pw.equals(pwConfirm)) {
+      LOGGER.debug("일치하지 않는 비밀번호 감지");
+      ResponseBodyWriter.write(false, "일치하지 않는 비밀번호입니다.", HttpServletResponse.SC_BAD_REQUEST, resp);
+      resp.flushBuffer();
+      return;
+    }
+    UserDTO dto = toUser(obj);
     try {
-      int idCount = service.count();
-      if (idCount > 0) {
-        JsonObject json = new JsonObject();
-        json.addProperty("isSuccess", false);
-        json.addProperty("message", "Duplicate ID detected");
-        resp.setStatus(HttpServletResponse.SC_CONFLICT);
-        resp.setContentType("application/json");
-        resp.getWriter().println(json);
-      } else {
-        service.create(dto);
-      }
       service.create(dto);
-      RequestDispatcher dispatcher = req.getRequestDispatcher("/");
-      dispatcher.forward(req, resp);
+      String msg = String.format("%s 유저를 성공적으로 생성하였습니다", dto.getId());
+      LOGGER.debug(msg);
+      resp.sendRedirect("/farmstory/signin");
+
     } catch (DataAccessException | IOException e) {
-      LOGGER.error("While handling user information, exception raised", e);
+      String msg = String.format("%s%n%s", e.getMessage(), e.getCause().toString());
+      LOGGER.debug(msg);
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
+
   }
 }
