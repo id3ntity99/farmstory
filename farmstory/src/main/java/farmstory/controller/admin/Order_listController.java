@@ -2,13 +2,11 @@ package farmstory.controller.admin;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import farmstory.dao.OrderDAO;
 import farmstory.dto.OrderDTO;
-import farmstory.service.CountableDefaultService;
+import farmstory.service.OrderService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -19,10 +17,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/order-list.do")
 public class Order_listController extends HttpServlet {
-
-	private static final long serialVersionUID = 161266416260600026L;
-	private static final Logger logger = LoggerFactory.getLogger(Order_listController.class.getName());
-
+  private static final long serialVersionUID = 161266416260600026L;
+  private static final Logger logger =
+      LoggerFactory.getLogger(Order_listController.class.getName());
+  private OrderService service;
 	private CountableDefaultService<OrderDTO> service;
 
 	@Override
@@ -80,5 +78,4 @@ public class Order_listController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
-
 }

@@ -21,6 +21,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/signup")
 public class SignUpController extends HttpServlet {
@@ -71,6 +72,15 @@ public class SignUpController extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    HttpSession session = req.getSession();
+    String authCode = (String) session.getAttribute("emailAuthCode");
+
+    if (authCode == null) {
+      ResponseBodyWriter.write(false, "이메일 인증번호가 필요합니다.", HttpServletResponse.SC_BAD_REQUEST, resp);
+      resp.flushBuffer();
+      return;
+    }
+
     JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
     String pw = obj.get("password").getAsString();
     String pwConfirm = obj.get("passwordConfirm").getAsString();
