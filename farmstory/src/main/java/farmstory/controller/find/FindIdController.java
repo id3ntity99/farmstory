@@ -1,6 +1,8 @@
 package farmstory.controller.find;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import farmstory.CountableDAO;
 import farmstory.dao.OrderDAO;
@@ -30,13 +32,12 @@ public class FindIdController extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		this.dao = new UserDAO(new ConnectionHelper("jdbc/farmstory"));
-		this.service = new UserService(this.dao);
+	    this.service = new UserService(dao);
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//viewpost
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/find/find-id.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -45,19 +46,31 @@ public class FindIdController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//데이터 수신
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
-		
-		
-        UserDTO user = dao.findUser(name, email);
-
-        if (user != null) {
-            req.setAttribute("userId", user.getId());
-            req.getRequestDispatcher("/user/find_id_result.jsp").forward(req, resp);
-        } else {
-            req.setAttribute("error", "일치하는 회원 정보가 없습니다.");
-            req.getRequestDispatcher("/user/find_id.jsp").forward(req, resp);
+		// 클라이언트로부터 전달받은 데이터 (이름, 이메일)
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        
+        // 응답을 JSON 형태로 설정
+        resp.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+        
+        try {
+            UserDTO user = service.findUser(name, email);
+            if (user != null) {
+                // 6자리 랜덤 인증번호 생성 (예: 100000 ~ 999999)
+                String authCode = String.valueOf((int)(Math.random() * 900000) + 100000);
+                
+                // 실제 서비스에서는 이메일 발송 로직을 추가하여 사용자에게 인증번호를 보내야 합니다.
+                // 예제에서는 데모용으로 인증번호를 그대로 반환합니다.
+                out.write("{\"success\": true, \"authCode\": \"" + authCode + "\"}");
+            } else {
+                out.write("{\"success\": false}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.write("{\"success\": false}");
+        } finally {
+            out.close();
         }
     }
 }

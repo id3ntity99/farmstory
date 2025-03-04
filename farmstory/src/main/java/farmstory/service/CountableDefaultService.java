@@ -112,8 +112,4 @@ public class CountableDefaultService<T extends DataTransferObject> implements Co
   public int count() throws DataAccessException {
     return dao.count();
   }
-  
-  public List<OrderDTO> getAll(int offset, int limit) {
-      return dao.selectAll(offset, limit);  // DAO의 selectAll 메소드를 호출
-  }
 }

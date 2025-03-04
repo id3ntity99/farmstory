@@ -1,5 +1,6 @@
 package farmstory.service;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,11 +20,14 @@ public class UserService extends CountableDefaultService<UserDTO>{
 	private UserDAO userDAO;
 	
 	public UserService(UserDAO dao) {
-		super(dao);
+		super((CountableDAO<UserDTO>) dao);
 		this.userDAO = dao;
 	}
   
 	public UserDTO findUser(String name, String email) {
 		return userDAO.findUser(name, email);
+	}
+	public List<UserDTO> findResult(){
+		return userDAO.selectResult();
 	}
 }
