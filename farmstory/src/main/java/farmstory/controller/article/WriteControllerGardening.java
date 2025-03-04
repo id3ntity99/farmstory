@@ -30,7 +30,10 @@ public class WriteControllerGardening extends HttpServlet {
     try {
       ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
       ArticleDAO dao = new ArticleDAO(helper);
+      ArticleDAO fileDAO = new ArticleDAO(helper);
+      
       this.service = new DefaultService<>(dao);
+      this.fileService = new DefaultService<>(fileDAO);
 
     } catch (Exception e) {
       logger.error(e.getMessage());
@@ -49,44 +52,43 @@ public class WriteControllerGardening extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-
     try {
       String title = req.getParameter("title");
       String content = req.getParameter("content");
       String author = req.getParameter("author");
-
-      List<ArticleDTO> files = fileService.getAll();
+      
+      logger.info("Received data: title={}, content={}, author={}", title, content, author);
+      
+      //List<ArticleDTO> files = fileService.getAll();
 
       ArticleDTO dto = new ArticleDTO();
       dto.setTitle(title);
       dto.setContent(content);
-      dto.setFile(files.size());
+      //dto.setFile(files.size());
       dto.setAuthor(author);
-      dto.setViewNumber(0);
-
-      String fileid = null;
-
       service.create(dto);
-
-
+      
+      logger.debug(dto.toString());
+      
+      /*
+      int fileId = dto.getId();      
       for (ArticleDTO fileDTO : files) {
-        fileDTO.setFileid(parseInt(fileid));
+        fileDTO.setFileid(fileId);
+        fileService.create(fileDTO);
       }
+      */
 
       resp.sendRedirect(req.getContextPath() + "/listGardening");
 
     } catch (DataAccessException e) {
       logger.error(e.getMessage());
     }
+    
 
 
 
   }
 
-  private int parseInt(String fileid) {
-
-    return 0;
-  }
 
 
 }

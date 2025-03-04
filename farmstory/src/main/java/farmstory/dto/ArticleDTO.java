@@ -14,6 +14,8 @@ public class ArticleDTO implements DataTransferObject {
 	private int viewNumber;
 	private String registerDate;
 	private int file;
+	private String oName;
+	private String sName;
 	
 	
 	public int getId() {
@@ -75,7 +77,7 @@ public class ArticleDTO implements DataTransferObject {
 	public String toString() {
 		return "ArticleDTO [id=" + id + ", userId=" + userId + ", title=" + title + ", author=" + author + ", content="
 				+ content + ", fileid=" + fileid + ", commentNumber=" + commentNumber + ", viewNumber=" + viewNumber
-				+ ", registerDate=" + registerDate + ", file=" + file + "]";
+				+ ", registerDate=" + registerDate + ", file=" + file + ", oName=" + oName + ", sName=" + sName + "]";
 	}
 	
 	private int getFile() {
@@ -83,10 +85,23 @@ public class ArticleDTO implements DataTransferObject {
 
 	}
 	public void setFile(int file) {
-		this.fileid = file;
+		this.file = file;
 		
 	}
 	
+
+	public String getoName() {
+		return oName;
+	}
+	public void setoName(String oName) {
+		this.oName = oName;
+	}
+	public String getsName() {
+		return sName;
+	}
+	public void setsName(String sName) {
+		this.sName = sName;
+	}
 	
 
 }
