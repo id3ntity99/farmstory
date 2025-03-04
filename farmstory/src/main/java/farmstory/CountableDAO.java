@@ -35,5 +35,5 @@ public interface CountableDAO<T extends DataTransferObject> extends DataAccessOb
    * @throws DataAccessException DB 작업 중 예외가 발생
    * @throws IllegalArgumentException colName에 명시된 이름의 컬럼을 찾을 수 없을 때 발생하는 예외
    */
-  int count(String colName, String condition) throws DataAccessException, IllegalArgumentException;
+  int count() throws DataAccessException, IllegalArgumentException;
 }

@@ -18,5 +18,5 @@ public interface CountableService<T extends DataTransferObject> extends Service<
    * 
    * @return MySQL의 COUNT() 함수의 결과값
    */
-  int count(String colName, String condition) throws DataAccessException;
+  int count() throws DataAccessException;
 }

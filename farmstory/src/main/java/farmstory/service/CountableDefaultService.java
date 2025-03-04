@@ -53,7 +53,7 @@ public class CountableDefaultService<T extends DataTransferObject> implements Co
   /**
    * 본 {@link CountableService} 클래스가 내부적으로 사용할 DAO.
    */
-  private final CountableDAO<T> dao;
+  protected final CountableDAO<T> dao;
 
   /**
    * 생성자. 싱글톤 패턴의 <code>getInstance()</code> 대신 {@link CountableDAO}를 생성자 파라미터를 통해 전달받아 사용한다.
@@ -108,7 +108,7 @@ public class CountableDefaultService<T extends DataTransferObject> implements Co
    * {@link farmstory.CountableDAO#count()} 메서드를 호출하고 호출 결과를 반환한다.
    */
   @Override
-  public int count(String colName, String condition) throws DataAccessException {
-    return dao.count(colName, condition);
+  public int count() throws DataAccessException {
+    return dao.count();
   }
 }
