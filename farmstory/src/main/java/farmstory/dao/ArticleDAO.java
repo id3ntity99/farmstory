@@ -9,9 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
-import farmstory.dto.OrderDTO;
-import farmstory.dto.UserDTO;
-import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
 public class ArticleDAO implements CountableDAO<ArticleDTO> {
@@ -102,26 +99,25 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
     return articles;
   }
-  
-	  @Override
-	public List<ArticleDTO> uploadFile() {
-		
-	}
- 
+
+  public List<ArticleDTO> uploadFile() {
+    return null;
+  }
+
   @Override
   public void update(ArticleDTO dto) {
     String sql = "update `article` set `title`=?, `content`=? where `id`=?";
     try {
-    	Connection conn = helper.getConnection();
-    	PreparedStatement psmt = conn.prepareStatement(sql);
-    	psmt.setString(1, dto.getTitle());
-        psmt.setString(2, dto.getContent());
-        psmt.setInt(3, dto.getId());
-        psmt.executeUpdate();
-    	
-    }catch (Exception e) {
-    	LOGGER.error(e.getMessage());
-	}
+      Connection conn = helper.getConnection();
+      PreparedStatement psmt = conn.prepareStatement(sql);
+      psmt.setString(1, dto.getTitle());
+      psmt.setString(2, dto.getContent());
+      psmt.setInt(3, dto.getId());
+      psmt.executeUpdate();
+
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+    }
 
   }
 
@@ -160,28 +156,29 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
     return count;
   }
-  //추가 메서드: 특정 게시글 번호로 조회
+
+  // 추가 메서드: 특정 게시글 번호로 조회
   public ArticleDTO findByNo(int id) {
-      String sql = "SELECT * FROM `article` WHERE `id` = ?";
-      ArticleDTO article = null;
+    String sql = "SELECT * FROM `article` WHERE `id` = ?";
+    ArticleDTO article = null;
 
-      try (Connection conn = helper.getConnection();
-           PreparedStatement psmt = conn.prepareStatement(sql)) {
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(sql)) {
 
-          psmt.setInt(1, id);
-          ResultSet rs = psmt.executeQuery();
+      psmt.setInt(1, id);
+      ResultSet rs = psmt.executeQuery();
 
-          if (rs.next()) {
-              article = new ArticleDTO();
-              article.setId(rs.getInt("id"));
-              article.setTitle(rs.getString("title"));
-              article.setContent(rs.getString("content"));
-              article.setAuthor(rs.getString("author"));
-              article.setRegisterDate(rs.getString("regitserDate"));
-          }
-      } catch (Exception e) {
-          LOGGER.error("게시글 번호 조회 중 오류 발생: " + e.getMessage());
+      if (rs.next()) {
+        article = new ArticleDTO();
+        article.setId(rs.getInt("id"));
+        article.setTitle(rs.getString("title"));
+        article.setContent(rs.getString("content"));
+        article.setAuthor(rs.getString("author"));
+        article.setRegisterDate(rs.getString("regitserDate"));
       }
+    } catch (Exception e) {
+      LOGGER.error("게시글 번호 조회 중 오류 발생: " + e.getMessage());
+    }
 
     return article;
   }
