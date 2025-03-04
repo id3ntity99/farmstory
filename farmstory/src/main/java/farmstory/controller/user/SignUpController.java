@@ -73,34 +73,44 @@ public class SignUpController extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     HttpSession session = req.getSession();
-    String authCode = (String) session.getAttribute("emailAuthCode");
+    boolean isIdChecked = (boolean) session.getAttribute("idChecked");
+    boolean isNickChecked = (boolean) session.getAttribute("nicknameChecked");
+    boolean isEmailAuthed = (boolean) session.getAttribute("emailAuthed");
 
-    if (authCode == null) {
-      ResponseBodyWriter.write(false, "이메일 인증번호가 필요합니다.", HttpServletResponse.SC_BAD_REQUEST, resp);
+    if (!isIdChecked || !isNickChecked || !isEmailAuthed) {
+      LOGGER.debug("인증받지 않은 사용자 감지");
+      ResponseBodyWriter.write(false, "중복검사 또는 이메일 인증을 받지 않은 사용자",
+          HttpServletResponse.SC_BAD_REQUEST, resp);
       resp.flushBuffer();
       return;
-    }
+    } else {
+      session.removeAttribute("idChecked");
+      session.removeAttribute("nicknameChecked");
+      session.removeAttribute("emailAuthed");
+      JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
+      String pw = obj.get("password").getAsString();
+      String pwConfirm = obj.get("passwordConfirm").getAsString();
+      if (!pw.equals(pwConfirm)) {
+        LOGGER.debug("일치하지 않는 비밀번호 감지");
+        ResponseBodyWriter.write(false, "일치하지 않는 비밀번호입니다.", HttpServletResponse.SC_BAD_REQUEST,
+            resp);
+        resp.flushBuffer();
+        return;
+      }
 
-    JsonObject obj = JsonParser.parseReader(req.getReader()).getAsJsonObject();
-    String pw = obj.get("password").getAsString();
-    String pwConfirm = obj.get("passwordConfirm").getAsString();
-    if (!pw.equals(pwConfirm)) {
-      LOGGER.debug("일치하지 않는 비밀번호 감지");
-      ResponseBodyWriter.write(false, "일치하지 않는 비밀번호입니다.", HttpServletResponse.SC_BAD_REQUEST, resp);
-      resp.flushBuffer();
-      return;
-    }
-    UserDTO dto = toUser(obj);
-    try {
-      service.create(dto);
-      String msg = String.format("%s 유저를 성공적으로 생성하였습니다", dto.getId());
-      LOGGER.debug(msg);
-      resp.sendRedirect("/farmstory/signin");
+      try {
+        UserDTO dto = toUser(obj);
+        service.create(dto);
+        String msg = String.format("%s 유저를 성공적으로 생성하였습니다", dto.getId());
+        LOGGER.debug(msg);
+        resp.sendRedirect("/farmstory/signin");
 
-    } catch (DataAccessException | IOException e) {
-      String msg = String.format("%s%n%s", e.getMessage(), e.getCause().toString());
-      LOGGER.debug(msg);
-      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      } catch (DataAccessException | IOException e) {
+        String msg = String.format("%s%n%s", e.getMessage(), e.getCause().toString());
+        LOGGER.debug(msg);
+        resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      }
+
     }
 
   }
