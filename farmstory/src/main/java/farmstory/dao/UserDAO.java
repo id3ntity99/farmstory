@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import org.slf4j.Logger;
@@ -56,6 +57,29 @@ public class UserDAO implements DataAccessObject<UserDTO> {
   public List<UserDTO> selectAll() {
     return null;
   }
+  
+  public List<UserDTO> selectResult() {
+	  List<UserDTO> dtos = new ArrayList<UserDTO>();
+	  String sql = "SELECT `name`, `id`, `email`, `regdate` FROM `user`";
+	  
+	  try (Connection conn = helper.getConnection();
+	             PreparedStatement pstmt = conn.prepareStatement(sql);
+	             ResultSet rs = pstmt.executeQuery()) {
+	            
+	            while (rs.next()) {
+	                UserDTO user = new UserDTO();
+	                user.setName(rs.getString("name"));
+	                user.setId(rs.getString("id"));
+	                user.setEmail(rs.getString("email"));
+	                user.setRegisterDate(rs.getString("registerDate"));
+	                dtos.add(user);
+	            }
+	        } catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
+	  
+	  return dtos;
+  }
 
   @Override
   public void update(UserDTO dto) {
@@ -63,7 +87,6 @@ public class UserDAO implements DataAccessObject<UserDTO> {
   }
 
   public UserDTO findUser(String name, String email) {
-
     UserDTO user = null;
     String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
 
@@ -107,3 +130,4 @@ public class UserDAO implements DataAccessObject<UserDTO> {
     return count;
   }
 }
+
