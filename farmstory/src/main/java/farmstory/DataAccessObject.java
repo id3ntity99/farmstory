@@ -3,6 +3,7 @@ package farmstory;
 import java.util.List;
 
 import farmstory.dto.OrderDTO;
+import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
@@ -62,7 +63,4 @@ public interface DataAccessObject<T extends DataTransferObject> {
    * @throws DataAccessException DB 작업 중 예외가 발생
    */
   void delete(T dto) throws DataAccessException;
-
-
-List<OrderDTO> selectAll(int offset, int limit);
 }

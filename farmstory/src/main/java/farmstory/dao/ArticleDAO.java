@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
+import farmstory.dto.OrderDTO;
+import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
@@ -109,7 +111,6 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
     	psmt.setString(1, dto.getTitle());
         psmt.setString(2, dto.getContent());
         psmt.setInt(3, dto.getId());
-
         psmt.executeUpdate();
     	
     }catch (Exception e) {
