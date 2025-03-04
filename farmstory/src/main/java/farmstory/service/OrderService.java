@@ -1,5 +1,6 @@
 package farmstory.service;
 
+import java.util.List;
 import farmstory.dao.OrderDAO;
 import farmstory.dto.OrderDTO;
 
@@ -10,6 +11,10 @@ public class OrderService extends CountableDefaultService<OrderDTO> {
   public OrderService(OrderDAO dao) {
     super(dao);
     this.orderDAO = dao;
+  }
+
+  public List<OrderDTO> getAll(int offset, int limit) {
+    return orderDAO.selectAll(offset, limit);
   }
 
   public void placeOrder(String userId) {
