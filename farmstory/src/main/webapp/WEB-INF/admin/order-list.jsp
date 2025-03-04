@@ -114,9 +114,6 @@
 								<a href="/farmstory/admin/order-list.do?pg=${currentPage + 1}">다음</a>
 							</c:if>
 						</div>
-
-
-
 					</form>
 				</article>
 			</section>

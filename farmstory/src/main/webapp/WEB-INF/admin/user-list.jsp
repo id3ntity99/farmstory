@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>어드민 - 회원목록</title>
-	<link rel="stylesheet" href="/farmstory/style/admin.css">
-</head>	
+<meta charset="UTF-8">
+<title>어드민 - 회원목록</title>
+<link rel="stylesheet" href="/farmstory/style/admin.css">
+</head>
 <body>
 	<div id="container">
 		<%@ include file="./_header.jsp"%>
@@ -35,9 +36,13 @@
 					<h3>회원목록</h3>
 				</nav>
 				<article>
+					<form
+						action="${pageContext.request.contextPath}/admin/order-delete.do"
+						method="post"></form>
 					<table border="0">
 						<tr>
-							<th><input type="checkbox" name="check" id="checkbox"></th>
+							<th><input type="checkbox" id="select_all"
+								onclick="selectAll(this)"></th>
 							<th>아이디</th>
 							<th>이름</th>
 							<th>별명</th>
@@ -47,44 +52,53 @@
 							<th>가입일</th>
 							<th>확인</th>
 						</tr>
-						<tr>
-							<th><input type="checkbox" name="check" id="checkbox"></th>
-							<th>a101</th>
-							<th>김유신</th>
-							<th>유신101</th>
-							<th>yusin101@naver.com</th>
-							<th>010-1234-1001</th>
-							<th><textarea name="" id="" cols="2" rows="1"
-									placeholder="2" readonly></textarea></th>
-							<th>2023-01-01 13:06:14</th>
-							<th>[상세확인]</th>
-						</tr>
-						<tr>
-							<th><input type="checkbox" name="check" id="checkbox"></th>
-							<th>a102</th>
-							<th>김춘추</th>
-							<th>춘추102</th>
-							<th>chunchu102@naver.com</th>
-							<th>010-1234-1002</th>
-							<th><textarea name="" id="" cols="2" rows="1"
-									placeholder="2" readonly></textarea></th>
-							<th>2023-01-02 13:06:14</th>
-							<th>[상세확인]</th>
-						</tr>
-						<tr>
-							<th><input type="checkbox" name="check" id="checkbox"></th>
-							<th>a103</th>
-							<th>장보고</th>
-							<th>보고103</th>
-							<th>bogo103@naver.com</th>
-							<th>010-1234-1003</th>
-							<th><textarea name="" id="" cols="2" rows="1"
-									placeholder="2" readonly></textarea></th>
-							<th>2023-01-03 13:06:14</th>
-							<th>[상세확인]</th>
-						</tr>
+						<c:choose>
+							<c:when test="${not empty articles}">
+								<c:forEach var="order" items="${articles}">
+									<tr>
+										<td><input type="checkbox" name="userIds" value="${user.id}"></td>
+										<td>${user.id}</td>
+										<td>${user.Name}</td>
+										<td>${user.nickname}원</td>
+										<td>${order.email}</td>
+										<td>${order.phone_num}원</td>
+										<td>${order.level}원</td>
+										<td>${order.register_date}</td>
+										<td><a href="/farmstory/user/view.do?no=${user.id}">[상세확인]</a></td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="10" style="text-align: center; padding: 20px;">게시물이
+										없습니다.</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
 					</table>
-					<p>&lt; [1] [2] [3] [4] [5] &gt;</p>
+
+					<div class="pagination">
+						<%-- 이전 페이지 --%>
+						<c:if test="${currentPage > 1}">
+							<a href="/farmstory/admin/user-list.do?pg=${currentPage - 1}">이전</a>
+						</c:if>
+
+						<%-- 페이지 번호 출력 --%>
+						<c:forEach var="i" begin="${startPage}" end="${endPage}">
+							<c:if test="${i == currentPage}">
+								<span class="current-page">${i}</span>
+							</c:if>
+							<c:if test="${i != currentPage}">
+								<a href="/farmstory/admin/user-list.do?pg=${i}">${i}</a>
+							</c:if>
+						</c:forEach>
+
+						<%-- 다음 페이지 --%>
+						<c:if test="${currentPage < lastPageNum}">
+							<a href="/farmstory/admin/user-list.do?pg=${currentPage + 1}">다음</a>
+						</c:if>
+					</div>
+
 				</article>
 			</section>
 		</main>
@@ -92,3 +106,12 @@
 	</div>
 </body>
 </html>
+
+<script>
+	// 전체 선택/해제 처리
+	function selectAll(source) {
+		checkboxes = document.getElementsByName('userIds');
+		for ( var i in checkboxes)
+			checkboxes[i].checked = source.checked;
+	}
+</script>

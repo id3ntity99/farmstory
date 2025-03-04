@@ -7,6 +7,7 @@ import farmstory.dto.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -65,8 +66,7 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 
 		List<OrderDTO> orders = new ArrayList<>();
 
-		try (Connection conn = helper.getConnection(); 
-				PreparedStatement psmt = conn.prepareStatement(sql)) {
+		try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
 
 			ResultSet rs = psmt.executeQuery();
 
@@ -98,32 +98,31 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 		return orders;
 	}
 
-  @Override
-  public void update(OrderDTO dto) {
-	  
-	  String sql = "update `order` set `amount` = ? where `id` = ?";
-	  
-      try {
-        Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setInt(1, dto.getAmount());
-        psmt.setInt(2, dto.getId());
-        psmt.executeUpdate();
-        conn.close();
-        psmt.close();
+	@Override
+	public void update(OrderDTO dto) {
 
-      } catch (Exception e) {
-        LOGGER.error(e.getMessage());
-      }
-	    
-	  }
-  
-  @Override
+		String sql = "update `order` set `amount` = ? where `id` = ?";
+
+		try {
+			Connection conn = helper.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, dto.getAmount());
+			psmt.setInt(2, dto.getId());
+			psmt.executeUpdate();
+			conn.close();
+			psmt.close();
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+
+	}
+
+	@Override
 	public void delete(OrderDTO dto) {
-		String sql = "DELETE FROM `order` WHERE id = ?"
+		String sql = "DELETE FROM `order` WHERE id = ?";
 
-		try (Connection conn = helper.getConnection(); 
-				PreparedStatement psmt = conn.prepareStatement(sql)) {
+		try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
 			psmt.setInt(1, dto.getId());
 			int rowsAffected = psmt.executeUpdate();
 
@@ -139,8 +138,8 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 			e1.printStackTrace();
 		}
 	}
-  
-  @Override
+
+	@Override
 	public int count() {
 		String sql = "SELECT COUNT(*) FROM `order`";
 		int count = 0;
@@ -157,18 +156,18 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
 		return count;
 	}
 
+	public void placeOrder(String userId) {
+		String sql = "delete from `order` where `userId`=?";
 
-  public void placeOrder(String userId) {
-      String sql = "delete from `order` where `userId`=?";
-
-      try {
-          Connection conn = helper.getConnection();
-          PreparedStatement psmt = conn.prepareStatement(sql);
-          psmt.setString(1, userId);
-          psmt.executeUpdate();
-          conn.close();
-          psmt.close();
-    } catch (Exception e) {
-      LOGGER.error(e.getMessage());
-    }  
+		try {
+			Connection conn = helper.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setString(1, userId);
+			psmt.executeUpdate();
+			conn.close();
+			psmt.close();
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+	}
 }

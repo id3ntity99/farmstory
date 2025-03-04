@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.DataAccessObject;
+import farmstory.dto.OrderDTO;
 import farmstory.dto.UserDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -55,7 +57,38 @@ public class UserDAO implements DataAccessObject<UserDTO> {
 
   @Override
   public List<UserDTO> selectAll() {
-    return null;
+	  String sql = "SELECT * from `user`";
+	  List<UserDTO> users = new ArrayList<>();
+
+		try (Connection conn = helper.getConnection(); 
+				PreparedStatement psmt = conn.prepareStatement(sql)) {
+
+			ResultSet rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				UserDTO user = new UserDTO();
+				user.setId(rs.getString("id"));
+				user.setPassword(rs.getString("password"));
+				user.setName(rs.getString("name"));
+				user.setNickname(rs.getString("nickname"));
+				user.setPoint(rs.getInt("point"));
+				user.setLevel(rs.getInt("level"));
+				user.setEmail(rs.getString("email"));
+				user.setPhoneNum(rs.getString("phone_num"));
+				user.setZip(rs.getString("zip"));
+				user.setAddress(rs.getString("adderss"));
+				user.setRegisterDate(rs.getString("register_date"));
+				user.setLeaveDate(rs.getString("leave_date"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			LOGGER.error("SQL Error: " + e.getMessage(), e); // 로깅
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		return users;
   }
 
   @Override
