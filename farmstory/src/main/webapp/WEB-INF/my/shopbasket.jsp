@@ -1,74 +1,13 @@
 <%@page import="farmstory.dto.OrderDTO"%>
 <%@page import="java.util.List"%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	List<OrderDTO> basketList = (List<OrderDTO>) request.getAttribute("basketList");
 %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>장바구니</title>
-    <link rel="stylesheet" href="/farmstory/style/shopbascket.css" />
-    <link rel="stylesheet" href="/farmstory/style/common/header.css" />
-    <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-    </head>
-    <body>
-        <div id="wrapper">
-            <header>
-                <section class="links">
-                  <img src="/farmstory/images/head_top_line.png" alt="" />
-                  <div>
-                    <p>
-                      <a href="/farmstory">HOME | </a>
-                      <a href="/farmstory/signin.do">로그인 | </a>
-                      <a href="/farmstory/signup.do">회원가입 | </a>
-                      <a href="/farmstory/my/shopbasket.do">나의정보 | </a>
-                      <a href="/farmstory/signout.do">로그아웃 | </a>
-                      <a href="/farmstory/admin.do">관리자 | </a>
-                      <a href="">고객센터</a>
-                    </p>
-                  </div>
-                </section>
-                <section class="logo">
-                  <div>
-                    <a href="#">
-                      <img src="/farmstory/images/logo.png" />
-                    </a>
-                    <a href="#">
-                      <img src="/farmstory/images/head_txt_img.png" />
-                    </a>
-                  </div>
-                </section>
-                <section class="services">
-                  <article>
-                    <div>
-                      <a href="#"> </a>
-                    </div>
-                    <div>
-                      <a href="#">
-                        <img src="/farmstory/images/head_menu_badge.png" alt="30%" />
-                      </a>
-                    </div>
-                    <div>
-                      <a href="#"> </a>
-                    </div>
-                    <div>
-                      <a href="#"> </a>
-                    </div>
-                    <div>
-                      <a href="#"> </a>
-                    </div>
-                  </article>
-                </section>
-              </header>
+<%@ include file="./_header.jsp" %>
 
-
-
-
-
-            <main> 
+            <main>
+            <form action="shopbasket.do" method="post">
                 <section class="background">
                     <a href="#"><img src="/farmstory/images/myinfo/myinfo_top_bg.jpg" alt="banner"></a>
                     <a href="#"><img src="/farmstory/images/myinfo/myinfo_top_tit.png " alt="background"></a>
@@ -77,9 +16,9 @@
                     <h1><img src="/farmstory/images/myinfo/myinfo_menu_tit.png" alt=""></h1>
                         <article>    
                             <ul>
-                                <li><a href="/farmstory/my/shopbasket.html"><img src="/farmstory/images/myinfo/myinfo_menu1.png" alt="장바구니"></a></li>
-                                <li><a href="/farmstory/my/order-list.html"><img src="/farmstory/images/myinfo/myinfo_menu2.png" alt="주문내역"></a></li>
-                                <li><a href="/farmstory/my/modify-info.html"><img src="/farmstory/images/myinfo/myinfo_menu3.png" alt="정보수정"></a></li>
+                                <li><a href="/farmstory/my/shopbasket.do"><img src="/farmstory/images/myinfo/myinfo_menu1.png" alt="장바구니"></a></li>
+                                <li><a href="/farmstory/my/order-list.do"><img src="/farmstory/images/myinfo/myinfo_menu2.png" alt="주문내역"></a></li>
+                                <li><a href="/farmstory/my/modify-info.do"><img src="/farmstory/images/myinfo/myinfo_menu3.png" alt="정보수정"></a></li>
                             </ul>
                         </article>
                 </section>
@@ -91,11 +30,10 @@
                         <p>= HOME>나의정보></p>
                     </nav>
                 </section>
-
+                
                 <section class="whole">
-                    <h1>장바구니 전체((<%= basketList != null ? basketList.size() : 0 %>))</h1>
-                    <form action="shopbasket.do" method="post">
-                    <input type="hidden" name="action" value="deleteSelected">
+                    <h1>장바구니 전체(<%= basketList != null ? basketList.size() : 0 %>)</h1>
+                    
                     <table>
                         <tbody>
                             <tr>
@@ -109,12 +47,11 @@
                                 <th>가격</th>
                                 <th>소계</th>
                             </tr>
-                            <% if (basketList == null || basketList.isEmpty()) { %>
+                            
                                     <tr>
-                                        <td colspan="10">장바구니에 상품이 없습니다.</td>
+                                        <td>장바구니에 상품이 없습니다.</td>
                                     </tr>
-                                <% } else { 
-                                    for (OrderDTO item : basketList){ %>
+                                
                             <tr>
                                 <th><input type="checkbox"></th>
                                 <td><img src="/farmstory/images/market_item1.jpg" alt="사과"></td>
@@ -148,12 +85,10 @@
                                 <td>4,000</td>
                                 <td>3,600원</td>
                             </tr>
-                             <% } } %>
+                             
                         </tbody>
                     </table>
-                    <a href="#">
-                    <button type="submit">선택삭제</button>
-                    </a>
+                    <a href="#">선택삭제</a>
                 </section>
 
                 <section class="total">
@@ -162,11 +97,11 @@
                         <tbody>
                             <tr>
                                 <td>상품수</td>
-                                <td><%= basketList != null ? basketList.size() : 0 %></td>
+                                <td>?</td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td><%= basketList != null ? basketList.stream().mapToInt(o -> o.getAmount() * 4000).sum() : 0 %>원</td>
+                                <td>3600원</td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
@@ -182,43 +117,11 @@
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td><%= basketList != null ? basketList.stream().mapToInt(o -> o.getAmount() * 4000).sum() + 3000 : 0 %>원</td>
+                                <td>?원</td>
                             </tr>
                         </tbody>
                     </table>
-                    <form action="shopbasket.do" method="post">
-                        <input type="hidden" name="action" value="order">
                     <a href="#">주문하기</a>
                 </section>
             </main>
-
-
-
-
-            <footer>
-                <div>
-                  <img src="/farmstory/images/footer_logo.png" alt="" />
-                  <p>
-                    (주)팜스토리 / 사업자등록번호 123-45-67890 / 통신판매업신고 제
-                    2013-부산진구-123호 / 벤처기업확인 서울 지방중소기업청 제
-                    012345678-9-01234호<br />
-                    등록번호 팜스토리01234 (2013.04.01) / 발행인 : 홍길동 <br />
-                    대표: 김철수 / 이메일 : abc123@example.com / 전화 : 01) 234-5678 /
-                    부산광역시 부산진구 부전동 123 <br />
-                    <span>copyright© 김철수 All rights reserved.</span>
-                    <span>farmstory ver1.0.1</span>
-                  </p>
-                </div>
-              </footer>
-
-
-
-        </div>
-        <script>
-            document.getElementById('selectAll').addEventListener('change', function() {
-                const checkboxes = document.querySelectorAll('input[name="orderIds"]');
-                checkboxes.forEach(cb => cb.checked = this.checked);
-            });
-        </script>
-    </body>
-</html>
+ <%@ include file="./_footer.jsp" %>

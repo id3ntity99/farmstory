@@ -8,15 +8,15 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public final class ConnectionHelper {
-  private String farmstory;
+  private String dbName;
 
-  public ConnectionHelper(String farmstory) {
-    this.farmstory = farmstory;
+  public ConnectionHelper(String dbName) {
+    this.dbName = dbName;
   }
 
   public Connection getConnection() throws SQLException, NamingException {
     Context ctx = (Context) new InitialContext().lookup("java:comp/env");
-    DataSource ds = (DataSource) ctx.lookup("jdbc/farmstory");
+    DataSource ds = (DataSource) ctx.lookup("jdbc/dbName");
     return ds.getConnection();
   }
 }

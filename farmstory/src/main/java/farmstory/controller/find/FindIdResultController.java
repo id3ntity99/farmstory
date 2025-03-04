@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/my/findIdResult.do")
+@WebServlet("/find/findIdResult.do")
 public class FindIdResultController extends HttpServlet{
 
 	private static final long serialVersionUID = 124541279112446L;
@@ -18,7 +18,7 @@ public class FindIdResultController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//viewpost
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/my/find-id-result.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/find/find-id-result.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

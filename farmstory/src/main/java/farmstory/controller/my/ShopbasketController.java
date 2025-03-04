@@ -45,10 +45,11 @@ public class ShopbasketController extends HttpServlet{
 		HttpSession session = req.getSession();
 		String userId = (String) session.getAttribute("userId");
 		
-		if(userId == null) {
-			resp.sendRedirect(req.getContextPath() + "/user/login.do");
-			return;
-		}
+		//로그인 되지 않았을때 login.do로 넘어감 로그인 기능 활성화 되면 // 삭제할것.
+		//if (userId == null) {
+			//resp.sendRedirect(req.getContextPath() + "/user/login.do");
+			//return;
+		//}
 		
 		List<OrderDTO> basketList = ((OrderDAO) dao).selectAll();
 		req.setAttribute("basketList", basketList);
@@ -65,10 +66,12 @@ public class ShopbasketController extends HttpServlet{
 		HttpSession session = req.getSession();
 		String userId = (String)session.getAttribute("userId");
 		
-		if (userId == null) {
-			resp.sendRedirect(req.getContextPath() + "/user/login.do");
-			return;
-		}
+		//로그인 되지 않았을때 login.do로 넘어감 로그인 기능 활성화 되면 // 삭제할것.
+				//if (userId == null) {
+					//resp.sendRedirect(req.getContextPath() + "/user/login.do");
+					//return;
+				//}
+		
 		
 		OrderDAO orderDAO = (OrderDAO) dao;
 		
