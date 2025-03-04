@@ -16,6 +16,9 @@ import javax.mail.internet.MimeMessage;
 
 import com.google.gson.JsonObject;
 
+import farmstory.dao.UserDAO;
+import farmstory.service.UserService;
+import farmstory.util.ConnectionHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,6 +30,16 @@ import jakarta.servlet.http.HttpSession;
 public class EmailAuthController extends HttpServlet {
 
 	private static final long serialVersionUID = 12545621463L;
+	
+	private UserDAO dao;
+	private UserService service;
+	
+	@Override
+	public void init() throws ServletException {
+		this.dao = new UserDAO(new ConnectionHelper("jdbc/farmstory"));
+		this.service = new UserService(dao);
+	}
+	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
+	
         	$(document).ready(function() {
         	    // 이메일 인증번호 요청
         	    $("#sendCodeBtn").click(function(event) {

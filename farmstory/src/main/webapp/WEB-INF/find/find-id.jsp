@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/farmstory/style/find-id.css" />
         <link rel="stylesheet" href="/farmstory/style/common/header.css" />
         <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-        <script src="/farmstory/js/findId.js"></script>
+        <script src="/farmstory/js/findId2.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -65,7 +65,7 @@
             <main>
                 <section class="idfind">
                     <h1>아이디 찾기</h1>
-                    <form id="findIdForm" action="/findId.do" method="post">
+                    <form id="findIdForm" action="/farmstory/find/findId.do" method="post">
                     <table>
                         <tbody>
                             <tr>

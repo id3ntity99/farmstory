@@ -65,19 +65,19 @@
                         <tbody>
                             <tr>
                                 <td>이름</td>
-                                <td>홍길동</td>
+                                <td>${userDTO.name}</td>
                             </tr>
                             <tr>
                                 <td>아이디</td>
-                                <td>honggildong</td>
+                                <td>${userDTO.id}</td>
                             </tr>
                             <tr>
                                 <td>이메일</td>
-                                <td>honggildong@gmail.com</td>
+                                <td>${userDTO.email}</td>
                             </tr>
                             <tr>
                                 <td>가입일</td>
-                                <td>2022-11-16 10:20</td>
+                                <td>${userDTO.registerDate}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,8 +87,8 @@
                         </p>
                     </section>
                     <section class="mainbtn">
-                        <a href="#">로그인</a>
-                        <a href="/farmstory/find/find-pass.html">비밀번호 찾기</a>
+                        <a href="/farmstory/user/login.do">로그인</a>
+                        <a href="/farmstory/find/find-pass.do">비밀번호 찾기</a>
                     </section>
 
                 </section>

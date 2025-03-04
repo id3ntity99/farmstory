@@ -23,7 +23,7 @@ public class CheckController extends HttpServlet {
 
   @Override
   public void init() throws ServletException {
-    ConnectionHelper helper = new ConnectionHelper("jdbc/Farmstory");
+    ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
     UserDAO dao = new UserDAO(helper);
     this.service = new UserService(dao);
   }
@@ -33,6 +33,9 @@ public class CheckController extends HttpServlet {
       throws ServletException, IOException {
     String type = req.getParameter("type"); // 중복검사를 하고자 하는 데이터의 유형;
     String value = req.getParameter("value"); // 중복검사를 하고자 하는 실제 데이터
+
+    String message = String.format("%s에 대한 중복 검사 진행...", req.getQueryString());
+    LOGGER.debug(message);
 
     if (type == null || value == null) { // type 또는 value가 null인 경우
       ResponseBodyWriter.write(false, "유효하지 않은 타입\ntype={\"id\", \"nickname\"}",
@@ -48,6 +51,9 @@ public class CheckController extends HttpServlet {
         ResponseBodyWriter.write(false, msg, HttpServletResponse.SC_CONFLICT, resp);
       } else {
         ResponseBodyWriter.write(true, "", HttpServletResponse.SC_OK, resp);
+        // TODO: Store check status at HTTP session.
+        String msg = String.format("%s=%s에 대한 중복 검사를 성공적으로 완료하였습니다.", type, value);
+        LOGGER.debug(msg);
       }
     } catch (DataAccessException e) {
       String msg = String.format("%s%n%s", e.getCause().toString(), e.getMessage().toString());

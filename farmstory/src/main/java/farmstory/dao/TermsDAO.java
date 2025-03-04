@@ -3,12 +3,8 @@ package farmstory.dao;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import farmstory.CountableDAO;
 import farmstory.DataAccessObject;
-import farmstory.DataTransferObject;
-import farmstory.dto.OrderDTO;
 import farmstory.dto.TermsDTO;
-import farmstory.dto.UserDTO;
 import farmstory.util.ConnectionHelper;
 
 public class TermsDAO implements DataAccessObject<TermsDTO> {
@@ -48,11 +44,4 @@ public class TermsDAO implements DataAccessObject<TermsDTO> {
     // TODO Auto-generated method stub
 
   }
-
-
-@Override
-public List<OrderDTO> selectAll(int offset, int limit) {
-	// TODO Auto-generated method stub
-	return null;
-}
 }

@@ -1,5 +1,7 @@
 package farmstory.service;
 
+
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,19 +13,34 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import farmstory.CountableDAO;
+
 import farmstory.dao.UserDAO;
 import farmstory.dto.UserDTO;
+import farmstory.exception.DataAccessException;
 
-public class UserService extends CountableDefaultService<UserDTO>{
+public class UserService extends DefaultService<UserDTO> {
+  private UserDAO dao;
+
+  public UserService(UserDAO dao) {
+    super(dao);
+  }
 
 	private UserDAO userDAO;
 	
 	public UserService(UserDAO dao) {
-		super(dao);
+		super((CountableDAO<UserDTO>) dao);
 		this.userDAO = dao;
 	}
   
 	public UserDTO findUser(String name, String email) {
 		return userDAO.findUser(name, email);
 	}
+	public List<UserDTO> findResult(){
+		return userDAO.selectResult();
+	}
+  
+  public int count(String colName, String condition) throws DataAccessException {
+    return dao.count(colName, condition);
+  }
+
 }
