@@ -14,9 +14,13 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.JsonObject;
 
 import farmstory.dao.UserDAO;
+import farmstory.dto.UserDTO;
 import farmstory.service.UserService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.ServletException;
@@ -34,6 +38,8 @@ public class EmailAuthController extends HttpServlet {
 	private UserDAO dao;
 	private UserService service;
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public void init() throws ServletException {
 		this.dao = new UserDAO(new ConnectionHelper("jdbc/farmstory"));
@@ -45,6 +51,7 @@ public class EmailAuthController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json;charset=UTF-8");
 
+		String name = req.getParameter("name");
         String receiver = req.getParameter("email");
         JsonObject json = new JsonObject();
 
@@ -52,23 +59,35 @@ public class EmailAuthController extends HttpServlet {
         	json.addProperty("status", "error");
         	json.addProperty("message", "이메일을 입력하세요.");
         } else {
-            try {
-                // 인증번호 생성 (6자리 난수)
-                int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
-                String authCode = String.valueOf(code);
+            try {           	
+            	
+            	// 서비스 호출
+            	UserDTO user = service.findUser(name, receiver);
+            	
+            	if (receiver == null || receiver.trim().isEmpty()) {
+                    // 사용자 정보가 일치하지 않으면 인증번호 발송을 하지 않음
+                    json.addProperty("status", "error");
+                    json.addProperty("message", "입력한 이름과 이메일이 일치하지 않습니다.");
+            	} else {
+                    // 인증번호 생성 (6자리 난수)
+                    int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+                    String authCode = String.valueOf(code);
 
-                // 세션에 인증번호 저장 (5분 유지)
-                HttpSession session = req.getSession();
-                session.setAttribute("authCode", authCode);
-                session.setMaxInactiveInterval(300); // 5분
+                    logger.debug("authCode : " + authCode);
 
-                // 이메일 발송 메서드 호출
-                sendEmail(receiver, authCode);
+                    // 세션에 인증번호 저장 (5분 유지)
+                    HttpSession session = req.getSession();
+                    session.setAttribute("authCode", authCode);
+                    session.setMaxInactiveInterval(300); // 5분
 
-                json.addProperty("status", "success");
-                json.addProperty("message", "인증번호가 이메일로 전송되었습니다.");
+                    // 이메일 발송 메서드 호출
+                    sendEmail(receiver, authCode);
+
+                    json.addProperty("status", "success");
+                    json.addProperty("message", "인증번호가 이메일로 전송되었습니다.");
+                }
             } catch (Exception e) {
-                e.printStackTrace();
+            	logger.error(e.getMessage());
                 json.addProperty("status", "error");
                 json.addProperty("message", "이메일 전송 실패. 다시 시도해주세요.");
             }
