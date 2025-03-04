@@ -64,6 +64,28 @@ public class UserDAO implements DataAccessObject<UserDTO> {
     // TODO Auto-generated method stub
 
   }
+  
+  public UserDTO findUser(String name, String email) {
+	  
+	  UserDTO user = null;
+      String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
+      
+      try (Connection conn = helper.getConnection();
+           PreparedStatement psmt = conn.prepareStatement(sql)) {
+          psmt.setString(1, name);
+          psmt.setString(2, email);
+          ResultSet rs = psmt.executeQuery();
+
+          if (rs.next()) {
+              user = new UserDTO();
+              user.setId(rs.getString("id"));
+          }
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      return user;
+	  
+  }
 
   @Override
   public void delete(UserDTO dto) {
