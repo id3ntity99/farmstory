@@ -50,7 +50,7 @@ public class DefaultService<T extends DataTransferObject> implements Service<T> 
   /**
    * {@link DefaultService} 클래스가 내부적으로 사용할 DAO.
    */
-  private final DataAccessObject<T> dao;
+  protected final DataAccessObject<T> dao;
 
   /**
    * 생성자. 싱글톤 패턴의 <code>getInstance()</code> 대신 {@link DataAccessObject}를 생성자 파라미터를 통해 전달받아 사용한다.
