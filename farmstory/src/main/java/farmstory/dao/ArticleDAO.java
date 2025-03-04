@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.ArticleDTO;
+import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 
 public class ArticleDAO implements CountableDAO<ArticleDTO> {
@@ -130,7 +131,7 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
     	LOGGER.error(e.getMessage());
 	}
   }
-  @Override
+  
   public int count() {
     String sql = "select count(*) from `article`";
     int count = 0;

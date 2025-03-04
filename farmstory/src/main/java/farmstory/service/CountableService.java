@@ -2,6 +2,7 @@ package farmstory.service;
 
 import farmstory.CountableDAO;
 import farmstory.DataTransferObject;
+import farmstory.exception.DataAccessException;
 
 /**
  * {@link CountableDAO}를 사용하는 service 클래스를 위한 인터페이스.
@@ -17,5 +18,5 @@ public interface CountableService<T extends DataTransferObject> extends Service<
    * 
    * @return MySQL의 COUNT() 함수의 결과값
    */
-  int count();
+  int count() throws DataAccessException;
 }

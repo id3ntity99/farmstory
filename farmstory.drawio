@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.4 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.4" pages="5">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.18 Chrome/120.0.6099.199 Electron/28.1.2 Safari/537.36" modified="2025-03-01T13:38:30.610Z" version="22.1.18" etag="5Sm1vip7te5oyQPM6Qgj" type="device" pages="5">
   <diagram name="EventStorming" id="5_YWK2AsJThhMhMhg2Db">
-    <mxGraphModel dx="6471" dy="1897" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6464" dy="1863" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -139,7 +139,7 @@
         <mxCell id="99MIyzbU4Gj04lP_Bs7d-4" value="&lt;font color=&quot;#000000&quot;&gt;Change user information&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-2096" y="-70" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="99MIyzbU4Gj04lP_Bs7d-5" target="6dgYTNMcN5cRUHunFICJ-2">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="99MIyzbU4Gj04lP_Bs7d-5" target="6dgYTNMcN5cRUHunFICJ-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="99MIyzbU4Gj04lP_Bs7d-5" value="User information changed" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" parent="1" vertex="1">
@@ -166,7 +166,7 @@
         <mxCell id="6dgYTNMcN5cRUHunFICJ-41" value="&lt;font color=&quot;#000000&quot;&gt;Change&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;Password&lt;/font&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-1720" y="-330" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="NV7RWuxPwkH0owP8KRcs-21" target="6dgYTNMcN5cRUHunFICJ-2">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="NV7RWuxPwkH0owP8KRcs-21" target="6dgYTNMcN5cRUHunFICJ-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="NV7RWuxPwkH0owP8KRcs-21" value="User password changed" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" parent="1" vertex="1">
@@ -528,66 +528,66 @@
         <mxCell id="OXGYt_Xu44Y6toJyyfjl-8" value="Account creation&amp;nbsp;&lt;div&gt;policy&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" parent="1" vertex="1">
           <mxGeometry x="-1625" y="-560" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-1" target="GN9DhsuX2ZQaS_a1PxmU-3">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-1" target="GN9DhsuX2ZQaS_a1PxmU-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-1" value="Existing account found" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-1" value="Existing account found" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" parent="1" vertex="1">
           <mxGeometry x="-1725" y="-460" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" edge="1" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-3" target="6dgYTNMcN5cRUHunFICJ-2">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-3" target="6dgYTNMcN5cRUHunFICJ-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-3" value="Account already exists policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-3" value="Account already exists policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" parent="1" vertex="1">
           <mxGeometry x="-1625" y="-460" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-6" target="GN9DhsuX2ZQaS_a1PxmU-7">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-6" target="GN9DhsuX2ZQaS_a1PxmU-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-6" value="Sign up page access denied" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-6" value="Sign up page access denied" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" parent="1" vertex="1">
           <mxGeometry x="-2282" y="-450" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-7" target="GN9DhsuX2ZQaS_a1PxmU-10">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="GN9DhsuX2ZQaS_a1PxmU-7" target="GN9DhsuX2ZQaS_a1PxmU-10" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-2075" y="-330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-7" value="User alredy signed in policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-7" value="User alredy signed in policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" parent="1" vertex="1">
           <mxGeometry x="-2184" y="-450" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-10" value="Go to main page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-10" value="Go to main page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-2087" y="-450" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-22" value="&lt;font color=&quot;#000000&quot;&gt;User ID information&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66FFB3;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-22" value="&lt;font color=&quot;#000000&quot;&gt;User ID information&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66FFB3;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-1994.87" y="-330" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-26" value="Sign in" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-26" value="Sign in" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-2382" y="-70" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-27" value="User signed in" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-27" value="User signed in" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" parent="1" vertex="1">
           <mxGeometry x="-2279.75" y="-70" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-28" value="Successfully signed-in policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-28" value="Successfully signed-in policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" parent="1" vertex="1">
           <mxGeometry x="-2183.75" y="-70" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-29" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;User&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFFF99;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-29" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;User&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFFF99;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-2476.5" y="-330" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-37" value="&lt;font color=&quot;#000000&quot;&gt;Access Page&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-37" value="&lt;font color=&quot;#000000&quot;&gt;Access Page&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-2378.5" y="-330" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-38" value="Page accessed" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-38" value="Page accessed" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" parent="1" vertex="1">
           <mxGeometry x="-2276.25" y="-330" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-39" value="Page access denied" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-39" value="Page access denied" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FF8000;" parent="1" vertex="1">
           <mxGeometry x="-2277.25" y="-220" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-40" value="User alredy signed in policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-40" value="User alredy signed in policy" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#B266FF;" parent="1" vertex="1">
           <mxGeometry x="-2179.25" y="-220" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-41" value="Go to main page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="GN9DhsuX2ZQaS_a1PxmU-41" value="Go to main page" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#66B2FF;fontColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="-2082.25" y="-220" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="FFqCgAYwEWqlVZJHnrs9-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="FFqCgAYwEWqlVZJHnrs9-1">
+        <mxCell id="FFqCgAYwEWqlVZJHnrs9-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-2277.5" y="-79.95999999999981" as="targetPoint" />
           </mxGeometry>
@@ -1244,7 +1244,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="ObMsFz6R18lPdblv3kdb" name="UML">
-    <mxGraphModel dx="5018" dy="3191" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1685" dy="1566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1482,7 +1482,7 @@
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-30" value="&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;br&gt;CountableDAO&amp;lt;T extends DataTransferObject&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="350" y="18" width="345" height="126" as="geometry" />
         </mxCell>
-        <mxCell id="U8bBAtRUVzXXZjNK8PlK-31" value="&lt;div&gt;+ insert(dto: T)&lt;/div&gt;&lt;div&gt;+ select(dto: T): T&lt;/div&gt;&lt;div&gt;+ seelctAll(): List&amp;lt;T&amp;gt;&lt;/div&gt;&lt;div&gt;+ update(dto: T)&lt;/div&gt;+ count(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="U8bBAtRUVzXXZjNK8PlK-30" vertex="1">
+        <mxCell id="U8bBAtRUVzXXZjNK8PlK-31" value="&lt;div&gt;+ insert(dto: T)&lt;/div&gt;&lt;div&gt;+ select(dto: T): T&lt;/div&gt;&lt;div&gt;+ seelctAll(): List&amp;lt;T&amp;gt;&lt;/div&gt;&lt;div&gt;+ update(dto: T)&lt;/div&gt;+ count(columnName: String, value: String): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="U8bBAtRUVzXXZjNK8PlK-30" vertex="1">
           <mxGeometry y="40" width="345" height="86" as="geometry" />
         </mxCell>
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=blockThin;endFill=0;endSize=10;" parent="1" source="U8bBAtRUVzXXZjNK8PlK-42" target="U8bBAtRUVzXXZjNK8PlK-52" edge="1">
@@ -1512,7 +1512,7 @@
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-48" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="U8bBAtRUVzXXZjNK8PlK-46" vertex="1">
           <mxGeometry y="52" width="335" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="U8bBAtRUVzXXZjNK8PlK-49" value="&lt;div&gt;+ CountableService(dao: CountableDAO&amp;lt;T&amp;gt;)&lt;/div&gt;&lt;div&gt;+ create(dto: T)&lt;br&gt;+ get(dto: T): T&lt;br&gt;+ getAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)&lt;br&gt;&lt;/div&gt;+ count(): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="U8bBAtRUVzXXZjNK8PlK-46" vertex="1">
+        <mxCell id="U8bBAtRUVzXXZjNK8PlK-49" value="&lt;div&gt;+ CountableService(dao: CountableDAO&amp;lt;T&amp;gt;)&lt;/div&gt;&lt;div&gt;+ create(dto: T)&lt;br&gt;+ get(dto: T): T&lt;br&gt;+ getAll(): List&amp;lt;T&amp;gt;&lt;br&gt;+ update(dto: T)&lt;br&gt;+ delete(dto: T)&lt;br&gt;&lt;/div&gt;+ count(columnName: String, value: String): int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="U8bBAtRUVzXXZjNK8PlK-46" vertex="1">
           <mxGeometry y="60" width="335" height="110" as="geometry" />
         </mxCell>
         <mxCell id="U8bBAtRUVzXXZjNK8PlK-52" value="&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;br&gt;Service&amp;lt;T extends DataTransferObject&amp;gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
