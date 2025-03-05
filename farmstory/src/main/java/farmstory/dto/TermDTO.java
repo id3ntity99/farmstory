@@ -27,7 +27,9 @@ public class TermDTO implements DataTransferObject {
   }
 
   public String getContent() throws IOException {
-    return new String(content.readAllBytes());
+    String contentString = new String(content.readAllBytes());
+    this.content.close();
+    return contentString;
   }
 
   public void setContent(String content) {
