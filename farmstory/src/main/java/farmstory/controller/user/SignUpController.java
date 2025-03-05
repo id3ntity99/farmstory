@@ -101,10 +101,14 @@ public class SignUpController extends HttpServlet {
       try {
         UserDTO dto = toUser(obj);
         service.create(dto);
+        session.removeAttribute("idChecked");
+        session.removeAttribute("nicknameChecked");
+        session.removeAttribute("emailAuthed");
+        session.removeAttribute("agreed");
+
         String msg = String.format("%s 유저를 성공적으로 생성하였습니다", dto.getId());
         LOGGER.debug(msg);
         resp.sendRedirect("/farmstory/signin");
-
       } catch (DataAccessException | IOException e) {
         String msg = String.format("%s%n%s", e.getMessage(), e.getCause().toString());
         LOGGER.debug(msg);
