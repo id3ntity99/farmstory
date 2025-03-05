@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
     <link rel="stylesheet" href="/farmstory/style/login.css" />
+    <script type="text/javascript" src="/farmstory/js/signin/signin.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -61,7 +62,7 @@
       <main>
         <section class="container">
           <div class="login-area">
-            <form action="/farmstory/signin" method="POST">
+            <form id="login-form" action="/farmstory/signin" method="POST">
               <table>
                 <tbody>
                   <tr>
@@ -71,12 +72,14 @@
                     </td>
                     <td>
                       <input
+                        id="idInput"
                         class="login-input"
                         type="text"
-                        name="uid"
+                        name="id"
                         placeholder="아이디 입력"
                       />
                       <input
+						id="passwordInput"
                         class="login-input"
                         type="password"
                         name="pass"
