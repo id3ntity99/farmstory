@@ -60,17 +60,17 @@
 											<td><input type="checkbox" name="orderIds"
 												value="${order.id}"></td>
 											<td>${order.id}</td>
-											<td>${order.productName}</td>
+											<td>${order.product.name}</td>
 											<!-- 상품명 -->
-											<td>${order.productPrice}원</td>
+											<td>${order.product.price}원</td>
 											<!-- 판매가격 -->
 											<td>${order.amount}</td>
 											<!-- 수량 -->
-											<td>${order.deliveryFee}원</td>
+											<td>${order.product.deliveryFee}원</td>
 											<!-- 배송비 -->
 											<td>${order.totalPrice}원</td>
 											<!-- 합계 (판매가격 * 수량 + 배송비) -->
-											<td>${order.userName}</td>
+											<td>${order.user.name}</td>
 											<!-- 주문자 -->
 											<td>${order.placedDate}</td>
 											<!-- 주문일 -->

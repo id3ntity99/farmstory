@@ -74,7 +74,7 @@ public class UserDAO implements CountableDAO<UserDTO> {
 				user.setEmail(rs.getString("email"));
 				user.setPhoneNum(rs.getString("phone_num"));
 				user.setZip(rs.getString("zip"));
-				user.setAddress(rs.getString("adderss"));
+				user.setAddress(rs.getString("address"));
 				user.setRegisterDate(rs.getString("register_date"));
 				user.setLeaveDate(rs.getString("leave_date"));
 				users.add(user);

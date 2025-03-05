@@ -54,16 +54,17 @@
 						</tr>
 						<c:choose>
 							<c:when test="${not empty articles}">
-								<c:forEach var="order" items="${articles}">
+								<c:forEach var="user" items="${articles}">
 									<tr>
-										<td><input type="checkbox" name="userIds" value="${user.id}"></td>
+										<td><input type="checkbox" name="userIds"
+											value="${user.id}"></td>
 										<td>${user.id}</td>
-										<td>${user.Name}</td>
-										<td>${user.nickname}원</td>
+										<td>${user.name}</td>
+										<td>${user.nickname}</td>
 										<td>${user.email}</td>
-										<td>${user.phone_num}원</td>
-										<td>${user.level}원</td>
-										<td>${user.register_date}</td>
+										<td>${user.phoneNum}</td>
+										<td>${user.level}</td>
+										<td>${user.registerDate}</td>
 										<td><a href="/farmstory/user/view.do?no=${user.id}">[상세확인]</a></td>
 									</tr>
 								</c:forEach>

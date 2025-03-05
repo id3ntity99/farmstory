@@ -4,7 +4,7 @@
 		src="/farmstory/images/admin/admin_logo.jpg" alt="logo" />
 	</a>
 	<p>
-		<a href="/farmstory/admin/main.html">HOME |</a> <a href="#">로그아웃 |</a>
+		<a href="/farmstory/admin/main.do">HOME |</a> <a href="#">로그아웃 |</a>
 		<a href="#">고객센터</a>
 	</p>
 </header>
