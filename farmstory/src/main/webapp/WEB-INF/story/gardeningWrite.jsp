@@ -65,26 +65,24 @@
 			<form action="/farmstory/writeGardening" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="userId" value="${sessUser.id}" readonly>
 				<table border=0>
+				
 					<tr>
 						<th>제목</th>
 						<td><input type="text" name="title" placeholder="제목을 입력하세요."></td>
 					</tr>
+					
+					<tr>
+			            <th>작성자</th>
+			            <td><input type="text" name="author" placeholder="작성자를 입력하세요."></td>
+			        </tr>
+					
 					<tr>
 						<th>내용</th>
 						<td>
 							<textarea name="content"></textarea>
 						</td>
 					</tr>
-					<tr>
-						<th>파일</th>
-						<td>
-							<p style="margin-bottom: 6px;">
-								최대 2개 파일 첨부 가능, 각 파일 당 최대 10MB
-							</p>
-							<input type="file" name="file1">
-							<input type="file" name="file2">
-						</td>
-					</tr>	
+					
 				</table>
 				
 				<div class="btnWrite">
