@@ -91,7 +91,7 @@ public class UserDAO implements CountableDAO<UserDTO> {
 
   public List<UserDTO> selectResult() {
     List<UserDTO> dtos = new ArrayList<UserDTO>();
-    String sql = "SELECT `name`, `id`, `email`, `regdate` FROM `user`";
+    String sql = "SELECT `name`, `id`, `email`, `register_date` FROM `user`";
 
     try (Connection conn = helper.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class UserDAO implements CountableDAO<UserDTO> {
         user.setName(rs.getString("name"));
         user.setId(rs.getString("id"));
         user.setEmail(rs.getString("email"));
-        user.setRegisterDate(rs.getString("registerDate"));
+        user.setRegisterDate(rs.getString("register_Date"));
         dtos.add(user);
       }
     } catch (Exception e) {

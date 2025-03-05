@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/farmstory/style/find-id.css" />
         <link rel="stylesheet" href="/farmstory/style/common/header.css" />
         <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-        <script src="/farmstory/js/findId2.js"></script>
+        <script src="/farmstory/js/findId.js"></script>
     </head>
     <body>
         <div id="wrapper">

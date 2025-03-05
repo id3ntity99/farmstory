@@ -63,22 +63,24 @@
                     <h1>아이디 찾기 결과</h1>
                     <table>
                         <tbody>
+                        <c:forEach var="dto" items="${users}">
                             <tr>
                                 <td>이름</td>
-                                <td>${userDTO.name}</td>
+                                <td>${dto.name}</td>
                             </tr>
                             <tr>
                                 <td>아이디</td>
-                                <td>${userDTO.id}</td>
+                                <td>${dto.id}</td>
                             </tr>
                             <tr>
                                 <td>이메일</td>
-                                <td>${userDTO.email}</td>
+                                <td>${dto.email}</td>
                             </tr>
                             <tr>
                                 <td>가입일</td>
-                                <td>${userDTO.registerDate}</td>
+                                <td>${dto.registerDate}</td>
                             </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                     <section class="maintext">

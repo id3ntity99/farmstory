@@ -31,10 +31,9 @@ public class FindIdResultController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		List<UserDTO> users = dao.selectResult();
+		List<UserDTO> users = service.findResult();
 		req.setAttribute("users", users);
 		
-		//viewpost
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/find/find-id-result.jsp");
 		dispatcher.forward(req, resp);
 	}

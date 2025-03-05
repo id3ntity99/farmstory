@@ -16,7 +16,7 @@ public final class ConnectionHelper {
 
   public Connection getConnection() throws SQLException, NamingException {
     Context ctx = (Context) new InitialContext().lookup("java:comp/env");
-    DataSource ds = (DataSource) ctx.lookup(dbName);
+    DataSource ds = (DataSource) ctx.lookup("jdbc/farmstory");
     return ds.getConnection();
   }
 }
