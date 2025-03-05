@@ -144,7 +144,7 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 	@Override
 	public List<ProductDTO> selectAll() throws DataAccessException {
 		List<ProductDTO> productList = new ArrayList<>();
-		String sql = "SELECT * FROM product";
+		String sql = "SELECT * FROM product JOIN product_image ON product.id = product_image.product_id";
 
 		try (Connection conn = helper.getConnection();
 				PreparedStatement psmt = conn.prepareStatement(sql);
@@ -162,6 +162,9 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 				product.setStock(rs.getInt("stock"));
 				product.setImageId(rs.getInt("image_id"));
 				product.setRegisterDate(rs.getString("register_date"));
+				product.setThumbnailLocation(rs.getString("thumbnail_location"));
+				product.setInfoLocation(rs.getString("info_location"));
+				product.setDetailLocation(rs.getString("detail_location"));
 				productList.add(product);
 			}
 			return productList;
@@ -184,7 +187,23 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 
 	@Override
 	public void delete(ProductDTO dto) {
-		// TODO Auto-generated method stub
+		String sql = "DELETE FROM `product` WHERE id = ?";
+
+		try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
+			psmt.setInt(1, dto.getId());
+			int rowsAffected = psmt.executeUpdate();
+
+			if (rowsAffected > 0) {
+				LOGGER.info("상품 번호 " + dto.getId() + " 삭제 완료");
+			} else {
+				LOGGER.warn("상품 번호 " + dto.getId() + " 삭제 실패");
+			}
+
+		} catch (SQLException e) {
+			LOGGER.error("상품 삭제 오류: " + e.getMessage());
+		} catch (NamingException e1) {
+			e1.printStackTrace();
+		}
 
 	}
 

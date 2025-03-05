@@ -57,7 +57,7 @@
 										<tr>
 											<td><input type="checkbox" name="productIds"
 												value="${product.id}"></td>
-											<td><img src="${pageContext.request.contextPath}${product.thumbnailLocation}" alt="${product.name}">
+											<td><img src="${pageContext.request.contextPath}${product.thumbnailLocation}" alt="${product.name}" class="thumb">
 												</td>
 											<td>${product.id}</td>
 											<td>${product.name}</td>
