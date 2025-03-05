@@ -43,53 +43,74 @@ public class UserDAO implements CountableDAO<UserDTO> {
       conn.close();
       psmt.close();
     } catch (NamingException | SQLException e) {
-      String msg = String.format("데이터베이스 작업 중 예외가 발생하였습니다: %s", e.getMessage());
+      String msg = String.format("사용자 데이터 삽입 중 예외가 발생하였습니다%n%s%n%s", e.getCause(), e.getMessage());
       throw new DataAccessException(msg, e);
     }
   }
 
   @Override
-  public UserDTO select(UserDTO dto) {
-    return null;
+  public UserDTO select(UserDTO dto) throws DataAccessException {
+    UserDTO user = new UserDTO();
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.SELECT_USER)) {
+      ResultSet rs = psmt.executeQuery();
+      if (rs.next()) {
+        user.setId(rs.getString(1));
+        user.setPassword(rs.getString(2));
+        user.setName(rs.getString(3));
+        user.setNickname(rs.getString(4));
+        user.setPoint(rs.getInt(5));
+        user.setLevel(rs.getInt(6));
+        user.setEmail(rs.getString(7));
+        user.setPhoneNum(rs.getString(8));
+        user.setZip(rs.getString(9));
+        user.setAddress(rs.getString(10));
+        user.setAddressDetail(rs.getString(11));
+        user.setRegisterDate(rs.getString(12));
+        user.setLeaveDate(rs.getString(13));
+      }
+      rs.close();
+    } catch (NamingException | SQLException e) {
+      String msg = String.format("사용자 데이터 조회 중 예외가 발생하였습니다%n%s%n%s", e.getCause(), e.getMessage());
+      throw new DataAccessException(msg, e);
+    }
+    return user;
   }
 
   @Override
-  public List<UserDTO> selectAll() {
-	  String sql = "SELECT * from `user`";
-	  List<UserDTO> users = new ArrayList<>();
+  public List<UserDTO> selectAll() throws DataAccessException {
+    List<UserDTO> users = new ArrayList<>();
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.SELECT_ALL_USER)) {
 
-		try (Connection conn = helper.getConnection(); 
-				PreparedStatement psmt = conn.prepareStatement(sql)) {
+      ResultSet rs = psmt.executeQuery();
 
-			ResultSet rs = psmt.executeQuery();
+      while (rs.next()) {
+        UserDTO user = new UserDTO();
+        user.setId(rs.getString("id"));
+        user.setPassword(rs.getString("password"));
+        user.setName(rs.getString("name"));
+        user.setNickname(rs.getString("nickname"));
+        user.setPoint(rs.getInt("point"));
+        user.setLevel(rs.getInt("level"));
+        user.setEmail(rs.getString("email"));
+        user.setPhoneNum(rs.getString("phone_num"));
+        user.setZip(rs.getString("zip"));
+        user.setAddress(rs.getString("address"));
+        user.setRegisterDate(rs.getString("register_date"));
+        user.setLeaveDate(rs.getString("leave_date"));
+        users.add(user);
+      }
+    } catch (NamingException | SQLException e) {
+      String msg =
+          String.format("모든 사용자 데이터 조회 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
+      throw new DataAccessException(msg, e);
+    }
 
-			while (rs.next()) {
-				UserDTO user = new UserDTO();
-				user.setId(rs.getString("id"));
-				user.setPassword(rs.getString("password"));
-				user.setName(rs.getString("name"));
-				user.setNickname(rs.getString("nickname"));
-				user.setPoint(rs.getInt("point"));
-				user.setLevel(rs.getInt("level"));
-				user.setEmail(rs.getString("email"));
-				user.setPhoneNum(rs.getString("phone_num"));
-				user.setZip(rs.getString("zip"));
-				user.setAddress(rs.getString("address"));
-				user.setRegisterDate(rs.getString("register_date"));
-				user.setLeaveDate(rs.getString("leave_date"));
-				users.add(user);
-			}
-		} catch (SQLException e) {
-			LOGGER.error("SQL Error: " + e.getMessage(), e); // 로깅
-		} catch (NamingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		return users;
+    return users;
   }
 
-  public List<UserDTO> selectResult() {
+  public List<UserDTO> selectResult() throws DataAccessException {
     List<UserDTO> dtos = new ArrayList<UserDTO>();
     String sql = "SELECT `name`, `id`, `email`, `register_date` FROM `user`";
 
@@ -105,19 +126,39 @@ public class UserDAO implements CountableDAO<UserDTO> {
         user.setRegisterDate(rs.getString("register_Date"));
         dtos.add(user);
       }
-    } catch (Exception e) {
-      LOGGER.error(e.getMessage());
+    } catch (NamingException | SQLException e) {
+      String msg =
+          String.format("사용자 이름, 아이디, 이메일 조회 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
+      throw new DataAccessException(msg, e);
     }
 
     return dtos;
   }
 
   @Override
-  public void update(UserDTO dto) {
+  public void update(UserDTO dto) throws DataAccessException {
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.UPDATE_USER)) {
+      psmt.setString(1, dto.getPassword());
+      psmt.setString(2, dto.getName());
+      psmt.setString(3, dto.getNickname());
+      psmt.setInt(4, dto.getPoint());
+      psmt.setInt(5, dto.getLevel());
+      psmt.setString(6, dto.getEmail());
+      psmt.setString(7, dto.getPhoneNum());
+      psmt.setString(8, dto.getZip());
+      psmt.setString(9, dto.getAddress());
+      psmt.setString(10, dto.getAddressDetail());
+      psmt.setString(11, dto.getId());
 
+      psmt.executeUpdate();
+    } catch (NamingException | SQLException e) {
+      String msg = String.format("사용자 데이터 수정 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
+      throw new DataAccessException(msg, e);
+    }
   }
 
-  public UserDTO findUser(String name, String email) {
+  public UserDTO findUser(String name, String email) throws DataAccessException {
     UserDTO user = null;
     String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
 
@@ -131,28 +172,47 @@ public class UserDAO implements CountableDAO<UserDTO> {
         user = new UserDTO();
         user.setId(rs.getString("id"));
       }
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (NamingException | SQLException e) {
+      String msg =
+          String.format("모든 사용자 아이디 조회 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
+      throw new DataAccessException(msg, e);
     }
     return user;
 
   }
 
   @Override
-  public void delete(UserDTO dto) {
-
+  public void delete(UserDTO dto) throws DataAccessException {
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.DELETE_USER)) {
+      psmt.setString(1, dto.getId());
+      psmt.executeUpdate();
+    } catch (NamingException | SQLException e) {
+      String msg = String.format("사용자 데이터 삭제 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
+      throw new DataAccessException(msg, e);
+    }
   }
 
   @Override
   public int count() throws DataAccessException, IllegalArgumentException {
-
-    return 0;
+    int count = 0;
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.COUNT_USER)) {
+      ResultSet rs = psmt.executeQuery();
+      if (rs.next()) {
+        count = rs.getInt(1);
+      }
+    } catch (NamingException | SQLException e) {
+      String msg = String.format("사용자 데이터 삭제 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
+      throw new DataAccessException(msg, e);
+    }
+    return count;
   }
 
   public int count(String colName, String condition) throws DataAccessException {
     int count = 0;
     try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(Query.COUNT_USER)) {
+        PreparedStatement psmt = conn.prepareStatement(Query.COUNT_USER_WITH_COLNAME)) {
       psmt.setString(1, colName);
       psmt.setString(2, condition);
 
