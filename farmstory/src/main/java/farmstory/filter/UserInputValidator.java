@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * 유저가 입력한 값이 NULL인지 아닌지를 검사하지는 않으며, NULL 검사는 각 controller에서 수행한다. <br>
  * 
  */
-@WebFilter(urlPatterns = {"/signup", "/check"})
+@WebFilter(urlPatterns = {"/signup", "/check", "/signin"}) // TODO: Add /check URL.
 public class UserInputValidator extends HttpFilter {
   private static final long serialVersionUID = UUID.randomUUID().version();
   private static final Logger LOGGER = LoggerFactory.getLogger(UserInputValidator.class.getName());
