@@ -50,24 +50,5 @@ public class FindPassController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String id = req.getParameter("id");
-		String email = req.getParameter("email");
-		
-		UserDTO user = dao.findPass(id, email);
-		
 	}
 }
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-

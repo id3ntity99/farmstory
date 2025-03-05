@@ -59,8 +59,12 @@ public class FindIdController extends HttpServlet{
         try {
             UserDTO user = service.findUser(name, email);
             if (user != null) {
-                // 인증번호 요청 및 처리 로직 호출 (EmailAuthController)
-                out.write("{\"success\": true}");
+                // 6자리 랜덤 인증번호 생성 (예: 100000 ~ 999999)
+                String authCode = String.valueOf((int)(Math.random() * 900000) + 100000);
+                
+                // 실제 서비스에서는 이메일 발송 로직을 추가하여 사용자에게 인증번호를 보내야 합니다.
+                // 예제에서는 데모용으로 인증번호를 그대로 반환합니다.
+                out.write("{\"success\": true, \"authCode\": \"" + authCode + "\"}");
             } else {
                 out.write("{\"success\": false}");
             }

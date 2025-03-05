@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/farmstory/style/find-id.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
+    <script src="/farmstory/js/findId.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -66,7 +67,6 @@
             <main>
                 <section class="idfind">
                     <h1>아이디 찾기</h1>
-                    <form id="findIdForm" action="/farmstory/find/findId.do" method="post">
                     <table>
                         <tbody>
                             <tr>
@@ -95,7 +95,6 @@
                         <a href="#">취소</a>
                         <a href="/farmstory/find/findIdResult.do" id="submitBtn">다음</a>
                     </section>
-					</form>
 					
 					
                 </section>
@@ -119,11 +118,5 @@
 
 
         </div>
-        <script>
-            document.getElementById('selectAll').addEventListener('change', function() {
-                const checkboxes = document.querySelectorAll('input[name="orderIds"]');
-                checkboxes.forEach(cb => cb.checked = this.checked);
-            });
-        </script>
     </body>
 </html>
