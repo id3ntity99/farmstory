@@ -88,6 +88,8 @@ public class OrderDAO implements CountableDAO<OrderDTO> {
         UserDTO user = new UserDTO();
         user.setName(userName);
 
+        order.setUser(user);
+        order.setProduct(product);
         // 합계 계산: 가격 * 수량 + 배송비
         int totalPrice =
             order.getProduct().getPrice() * order.getAmount() + order.getProduct().getDeliveryFee();
