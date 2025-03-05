@@ -1,8 +1,17 @@
+<%@page import="farmstory.DataTransferObject"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="farmstory.dto.ArticleDTO"%>
+<%@page import="farmstory.dto.ProductDTO"%>
+<%@page import="java.util.List"%>
 <%@page import="farmstory.dto.UserDTO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <%
-	UserDTO user = (UserDTO) session.getAttribute("sessUser");
+	ArrayList<ProductDTO> prodList = (ArrayList<ProductDTO>) request.getAttribute("products");
+	ArrayList<ArticleDTO> artList = (ArrayList<ArticleDTO>) request.getAttribute("articles");
+	
+	pageContext.setAttribute("products", prodList);
+	pageContext.setAttribute("articles", artList);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,6 +99,7 @@
           <article>
             <div class="items">
               <ul>
+              <c:forEach var="product" items="${requestScope.products}">
                 <li>
                   <a href="#">
                     <img src="/farmstory/images/market_item1.jpg" alt="사과" />
@@ -103,6 +113,7 @@
                     <p class="current-price">3,600 원</p>
                   </a>
                 </li>
+              </c:forEach>
                 <li>
                   <a href="#">
                     <img src="/farmstory/images/market_item2.jpg" alt="사과" />
