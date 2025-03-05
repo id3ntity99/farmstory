@@ -14,11 +14,11 @@ public class UserService extends DefaultService<UserDTO> {
     this.userDAO = dao;
   }
 
-  public UserDTO findUser(String name, String email) {
+  public UserDTO findUser(String name, String email) throws DataAccessException {
     return userDAO.findUser(name, email);
   }
 
-  public List<UserDTO> findResult() {
+  public List<UserDTO> findResult() throws DataAccessException {
     return userDAO.selectResult();
   }
 
