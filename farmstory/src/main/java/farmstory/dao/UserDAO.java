@@ -137,6 +137,48 @@ public class UserDAO implements CountableDAO<UserDTO> {
     return user;
 
   }
+  public UserDTO findPass(String id, String email) {
+	  UserDTO user = null;
+	  String sql = "SELECT * FROM user WHERE `id` = ? AND `email` = ?";
+	  
+	  try (Connection conn = helper.getConnection();
+			  PreparedStatement psmt = conn.prepareStatement(sql)) {
+		  psmt.setString(1, id);
+		  psmt.setString(2, email);
+		  ResultSet rs = psmt.executeQuery();
+		  
+		  if (rs.next()) {
+			  user = new UserDTO();
+			  user.setId(rs.getString("id"));
+              user.setEmail(rs.getString("email"));
+
+		  }
+	  } catch (Exception e) {
+		  e.printStackTrace();
+	  }
+	  return user;
+	  
+  }
+  public boolean isUserValid(String id, String email) {
+	  
+	  String sql = "select count(*) from `user` where `id`=? and `email`=?";
+	  
+	  try {
+		  Connection conn = helper.getConnection();
+          PreparedStatement psmt = conn.prepareStatement(sql);
+          ResultSet rs = psmt.executeQuery();
+          
+          psmt.setString(1, id);
+          psmt.setString(2, email);
+          
+          if(rs.next()) {
+        	  return rs.getInt(1) > 0;
+          }
+	} catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
+	return false;
+  }
 
   @Override
   public void delete(UserDTO dto) {
