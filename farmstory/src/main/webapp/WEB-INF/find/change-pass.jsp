@@ -1,13 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>비밀번호 변경</title>
-        <link rel="stylesheet" href="/farmstory/style/change-pass.css" />
-        <link rel="stylesheet" href="/farmstory/style/common/header.css" />
-        <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
+        <title>장바구니</title>
+    <link rel="stylesheet" href="/farmstory/style/change-pass.css" />
+    <link rel="stylesheet" href="/farmstory/style/common/header.css" />
+    <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
     </head>
     <body>
         <div id="wrapper">
@@ -16,12 +17,12 @@
                   <img src="/farmstory/images/head_top_line.png" alt="" />
                   <div>
                     <p>
-                      <a href="">HOME | </a>
-                      <a href="">로그인 | </a>
-                      <a href="">회원가입 | </a>
-                      <a href="">나의정보 | </a>
-                      <a href="">로그아웃 | </a>
-                      <a href="">관리자 | </a>
+                      <a href="/farmstory">HOME | </a>
+                      <a href="/farmstory/signin.do">로그인 | </a>
+                      <a href="/farmstory/signup.do">회원가입 | </a>
+                      <a href="/farmstory/my/shopbasket.do">나의정보 | </a>
+                      <a href="/farmstory/signout.do">로그아웃 | </a>
+                      <a href="/farmstory/admin.do">관리자 | </a>
                       <a href="">고객센터</a>
                     </p>
                   </div>
@@ -58,6 +59,11 @@
                   </article>
                 </section>
               </header>
+
+
+
+
+
             <main>
                 <section class="idfind">
                     <h1>비밀번호 변경</h1>
@@ -91,7 +97,7 @@
 
                 </section>
             </main>
-            <footer>
+<footer>
                 <div>
                   <img src="/farmstory/images/footer_logo.png" alt="" />
                   <p>
@@ -107,7 +113,14 @@
                 </div>
               </footer>
 
+
+
         </div>
-        
+        <script>
+            document.getElementById('selectAll').addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('input[name="orderIds"]');
+                checkboxes.forEach(cb => cb.checked = this.checked);
+            });
+        </script>
     </body>
 </html>

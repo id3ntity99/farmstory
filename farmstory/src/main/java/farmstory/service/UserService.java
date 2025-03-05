@@ -17,6 +17,9 @@ public class UserService extends DefaultService<UserDTO> {
   public UserDTO findUser(String name, String email) {
     return userDAO.findUser(name, email);
   }
+  public UserDTO findPass(String id, String email) {
+	  return userDAO.findPass(id, email);
+  }
 
   public List<UserDTO> findResult() {
     return userDAO.selectResult();
