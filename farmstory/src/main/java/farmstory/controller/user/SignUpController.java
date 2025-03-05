@@ -65,8 +65,14 @@ public class SignUpController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/register.jsp");
-    dispatcher.forward(req, resp);
+    HttpSession session = req.getSession();
+    Object attr = session.getAttribute("agreed");
+    if (attr == null) {
+      resp.sendRedirect("/farmstory/terms");
+    } else {
+      RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/register.jsp");
+      dispatcher.forward(req, resp);
+    }
   }
 
   @Override
