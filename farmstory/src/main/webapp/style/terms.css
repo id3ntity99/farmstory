@@ -47,3 +47,19 @@ main > .container .terms-area table {
   padding: 2px;
   overflow: auto;
 }
+
+main > .container .btn-area {
+  margin: 0 auto;
+  width: 622px;
+  height: 70px;
+}
+
+main > .container .btn-area > button {
+  float: right;
+  margin-left: 10px;
+  width: 45px;
+  height: 30px;
+  background-color: white;
+  border: 1px solid #bebebe;
+  cursor: pointer;
+}
