@@ -3,8 +3,8 @@ package farmstory.util;
 public final class Query {
   public static final String INSERT_USER =
       "INSERT INTO `user` VALUES(?,SHA2(?, 256),?,?,0,0,?,?,?,?,?,NOW(),NULL);";
-  public static final String SELECT_USER = "SEELCT * FROM `user` WHERE `id` = ?;";
-  public static final String SELECT_ALL_USER = "SELECT * FROM `user` WHERE;";
+  public static final String SELECT_USER = "SELECT * FROM `user` WHERE `id` = ?;";
+  public static final String SELECT_ALL_USER = "SELECT * FROM `user`;";
   public static final String COUNT_USER_WITH_COLNAME =
       "SELECT COUNT(?) FROM `user` WHERE `id` = ?;";
   public static final String COUNT_USER = "SELECT COUNT(`id`) FROM `user`;";

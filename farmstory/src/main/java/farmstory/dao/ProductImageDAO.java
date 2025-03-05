@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import farmstory.CountableDAO;
+import farmstory.controller.admin.Product_enrollController;
 import farmstory.dto.ProductImageDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -18,7 +19,7 @@ import farmstory.util.ConnectionHelper;
 public class ProductImageDAO implements CountableDAO<ProductImageDTO> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductDAO.class.getName());
 	private final ConnectionHelper helper;
-
+	private static final Logger logger = LoggerFactory.getLogger(Product_enrollController.class.getName());
 	public ProductImageDAO(ConnectionHelper helper) {
 		this.helper = helper;
 	}
@@ -79,7 +80,7 @@ public class ProductImageDAO implements CountableDAO<ProductImageDTO> {
 		return 0;
 	}
 
-	public void insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
+	public int insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
 		// SQL 쿼리 정의
 		String sql = "INSERT INTO product_image (product_id, thumbnail_location, info_location, detail_location) "
 					+ "VALUES (?, ?, ?, ?)";
@@ -88,6 +89,7 @@ public class ProductImageDAO implements CountableDAO<ProductImageDTO> {
 		try (Connection conn = helper.getConnection(); 
 				PreparedStatement psmt = conn.prepareStatement(sql)) {
 
+			logger.debug("psmt : " + psmt);
 			// PreparedStatement에 값 설정
 			psmt.setInt(1, imageDTO.getProductid()); // productId
 			psmt.setString(2, imageDTO.getThumbnailLocation()); // thumbnailLocation
@@ -101,6 +103,7 @@ public class ProductImageDAO implements CountableDAO<ProductImageDTO> {
 			String msg = String.format("데이터베이스 작업 중 예외가 발생하였습니다: %s", e.getMessage());
 			throw new DataAccessException(msg, e);
 		}
+		return 0;
 	}
-
+	 
 }
