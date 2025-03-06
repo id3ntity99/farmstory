@@ -46,36 +46,40 @@ public class ChangePassController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-		String id = req.getParameter("id");
-		String password = req.getParameter("password");
-		String confirmPassword = req.getParameter("confirmPassword");
-		
-		JsonObject json = new JsonObject();
-		// 비밀번호 일치 여부 확인
-        if (!password.equals(confirmPassword)) {
-            json.addProperty("status", "error");
-            json.addProperty("message", "새 비밀번호가 일치하지 않습니다.");
-            resp.getWriter().write(json.toString());
-            return;
+            //변수명 통일: `userId`, `newPassword` 사용
+            String userId = req.getParameter("userId");
+            String newPassword = req.getParameter("newPassword");
+
+            logger.debug("Received userId: {}", userId);
+            logger.debug("Received newPassword: {}", newPassword);
+
+            JsonObject json = new JsonObject();
+
+            //비밀번호 검증
+            if (userId == null || newPassword == null || newPassword.trim().isEmpty()) {
+                json.addProperty("status", "error");
+                json.addProperty("message", "비밀번호를 입력해주세요.");
+                resp.getWriter().write(json.toString());
+                return;
+            }
+
+            //비밀번호 변경 실행
+            boolean isUpdated = dao.updatePass(userId, newPassword);
+
+            if (isUpdated) {
+                json.addProperty("status", "success");
+                json.addProperty("message", "비밀번호가 성공적으로 변경되었습니다.");
+            } else {
+                json.addProperty("status", "error");
+                json.addProperty("message", "비밀번호 변경에 실패하였습니다.");
+            }
+
+            PrintWriter out = resp.getWriter();
+            out.write(json.toString());
+            out.flush();
+        } catch (Exception e) {
+            logger.error("비밀번호 변경 중 오류 발생", e);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-
-        // 비밀번호 변경 시도
-        boolean isUpdated = dao.updatePass(id, password);
-
-        if (isUpdated) {
-            json.addProperty("status", "success");
-            json.addProperty("message", "비밀번호가 성공적으로 변경되었습니다.");
-        } else {
-            json.addProperty("status", "error");
-            json.addProperty("message", "비밀번호 변경에 실패하였습니다.");
-        }
-
-        PrintWriter out = resp.getWriter();
-        out.write(json.toString());
-        out.flush();
-		}catch (Exception e) {
-			e.printStackTrace();
-			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		}
     }
 }

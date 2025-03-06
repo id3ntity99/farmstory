@@ -233,4 +233,34 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 
     return 0; // 실패한 경우 0 반환
   }
+  private List<ProductDTO> productList(String id){
+	  List<ProductDTO> products = new ArrayList<ProductDTO>();
+	  String sql = "SELECT p.id, p.name, p.price, p.image_id, p.category, o.amount, o.placed_date " +
+              "FROM product p " +
+              "JOIN orders o ON p.id = o.product_id " +
+              "WHERE o.id = ? " +
+              "ORDER BY o.placed_date DESC";
+	  try {
+		  Connection conn = helper.getConnection();
+		  PreparedStatement psmt = conn.prepareStatement(sql);
+		  
+		  psmt.setString(1, id);
+		  ResultSet rs = psmt.executeQuery();
+		  
+		  while(rs.next()) {
+			  ProductDTO product = new ProductDTO();
+			  product.setId(rs.getInt("id"));
+			  product.setName(rs.getString("name"));
+			  product.setPrice(rs.getInt("price"));
+			  product.setImageId(rs.getInt("image_id"));
+			  product.setCategory(rs.getString("category"));
+			  product.setAmount(rs.getInt("amount"));
+			  product.setPlacedDate(rs.getString("placed_date"));
+			  products.add(product);
+		  }
+	} catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
+	  return products;
+  }
 }

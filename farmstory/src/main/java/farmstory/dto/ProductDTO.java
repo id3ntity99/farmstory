@@ -15,12 +15,29 @@ public class ProductDTO implements DataTransferObject {
   private int imageId;
   private ProductImageDTO image;
   private String registerDate;
-
+  private int amount;
+  private String placedDate;
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public int getAmount() {
+	return amount;
+}
+
+public void setAmount(int amount) {
+	this.amount = amount;
+}
+
+public String getPlacedDate() {
+	return placedDate;
+}
+
+public void setPlacedDate(String placedDate) {
+	this.placedDate = placedDate;
+}
+
+public void setId(int id) {
     this.id = id;
   }
 

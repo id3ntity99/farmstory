@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const changePassBtn = document.getElementById("signInBtn"); // '다음' 버튼
+    const signInBtn = document.getElementById("signInBtn"); // '다음' 버튼
     const userIdElement = document.getElementById("userId");
     const newPasswordInput = document.getElementById("newPass");
     const confirmPasswordInput = document.getElementById("confirmNewPass");
 
-    let isPasswordChanged = false; // 비밀번호 변경 성공 여부 확인 변수
 
     // 1️⃣ `sessionStorage`에서 사용자 아이디 가져와 자동 입력
     const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
@@ -17,12 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 2️⃣ '비밀번호 변경' 버튼 클릭 이벤트
-    changePassBtn.addEventListener("click", function(event){
+    signInBtn.addEventListener("click", function(event){
         event.preventDefault();
 
         const userId = userInfo.id;  // 가져온 사용자 ID
         const newPassword = newPasswordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
+		
+		console.log("전송할 userId:", userId);
+        console.log("전송할 newPassword:", newPassword);
 
         // 3️⃣ 입력값 검증 (비밀번호 길이, 일치 여부 확인)
         if (!newPassword || !confirmPassword) {
@@ -56,12 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
 		            alert(data.message);
 		            if (data.status === "success") {
 		                sessionStorage.removeItem("userInfo"); // 세션 스토리지 초기화
-		                window.location.href = "/farmstory/signin.do"; // 로그인 페이지로 이동
+		                window.location.href = "/farmstory/signin"; // 로그인 페이지로 이동
 		            }
 		        })
 		        .catch(error => console.error("비밀번호 변경 오류:", error));
-				console.log("userId:", userId);
-									console.log("newPassword:", newPassword);
-		    });
+					    });
 			
 		});
