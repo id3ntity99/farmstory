@@ -8,7 +8,6 @@ import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
-import farmstory.controller.admin.Product_enrollController;
 import farmstory.dto.ProductImageDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -105,5 +104,4 @@ public class ProductImageDAO implements CountableDAO<ProductImageDTO> {
     }
     return 0;
   }
-
 }

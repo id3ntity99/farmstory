@@ -5,10 +5,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>장바구니</title>
+        <title>비밀번호 변경</title>
     <link rel="stylesheet" href="/farmstory/style/change-pass.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
+    <script src="/farmstory/js/find/changePass.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -71,15 +72,15 @@
                         <tbody>
                             <tr>
                                 <td>아이디</td>
-                                <td>honggildong</td>
+                                <td id="userId">${dto.id}</td>
                             </tr>
                             <tr>
                                 <td>새 비밀번호</td>
-                                <td><input type="password" name="newpass" placeholder="새 비밀번호 입력"></td>
+                                <td><input type="password" name="newpass" id="newPass" placeholder="새 비밀번호 입력"></td>
                             </tr>
                             <tr>
                                 <td>새 비밀번호 확인</td>
-                                <td><input type="password" name="newpassok" placeholder="새 비밀번호 입력"></td>
+                                <td><input type="password" name="newpassok" id="confirmNewPass" placeholder="새 비밀번호 입력"></td>
                             </tr>
                             
                         </tbody>
@@ -92,7 +93,7 @@
                     </section>
                     <section class="mainbtn">
                         <a href="#">취소</a>
-                        <a href="#">다음</a>
+                        <a href="/farmstory/user/signin" id="signInBtn">다음</a>
                     </section>
 
                 </section>
@@ -116,11 +117,6 @@
 
 
         </div>
-        <script>
-            document.getElementById('selectAll').addEventListener('change', function() {
-                const checkboxes = document.querySelectorAll('input[name="orderIds"]');
-                checkboxes.forEach(cb => cb.checked = this.checked);
-            });
-        </script>
+
     </body>
 </html>

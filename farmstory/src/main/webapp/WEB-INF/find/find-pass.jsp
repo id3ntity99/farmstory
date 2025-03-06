@@ -5,10 +5,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>장바구니</title>
+        <title>비밀번호 찾기</title>
     <link rel="stylesheet" href="/farmstory/style/find-id.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
+    <script src="/farmstory/js/find/findPass.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -78,12 +79,12 @@
                             <tr>
                                 <td>이메일</td>
                                 <td>
-                                    <input type="text" name="email" id="email" placeholder="이메일 입력"><br>
-                                    <input type="text" name="number" id="number" placeholder="인증번호 입력"></td>
+                                    <input type="text" name="email" id="email" placeholder="이메일 입력" required"><br>
+                                    <input type="text" name="authCode" id="authCode" placeholder="인증번호 입력"></td>
                                 </td>
                                 <td>
-                                	<a>인증번호 받기</a><br>
-                                	<a>확인</a>
+                                	<a href="#" id="sendCodeBtn">인증번호 받기</a><br>
+                                	<a href="#" id="verifyCodeBtn">확인</a>
                                 </td>
                         </tbody>
                     </table>
@@ -96,7 +97,7 @@
                     </section>
                     <section class="mainbtn">
                         <a href="/farmstory/user/signUp.do">취소</a>
-                        <a href="/farmstory/find/changePass.do">다음</a>
+                        <a href="/farmstory/find/changePass.do" id="nextBtn">다음</a>
                     </section>
 
                 </section>

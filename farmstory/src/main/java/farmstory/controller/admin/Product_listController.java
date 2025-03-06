@@ -1,18 +1,7 @@
 package farmstory.controller.admin;
 
 import java.io.IOException;
-import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import farmstory.dao.OrderDAO;
-import farmstory.dao.ProductDAO;
-import farmstory.dto.OrderDTO;
-import farmstory.dto.ProductDTO;
-import farmstory.service.CountableDefaultService;
-import farmstory.service.CountableService;
-import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,23 +10,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/product-list.do")
-public class Product_listController extends HttpServlet {
+public class Product_listController extends HttpServlet{
 
 	private static final long serialVersionUID = 1421234456356053821L;
-
-	private static final Logger logger = LoggerFactory.getLogger(Product_listController.class.getName());
-	private CountableService<ProductDTO> service;
-
-	public void init() throws ServletException {
-		try {
-			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-			ProductDAO dao = new ProductDAO(helper);
-			this.service = new CountableDefaultService<>(dao);
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -79,10 +55,12 @@ public class Product_listController extends HttpServlet {
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "서버 오류 발생");
 		}
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 	}
+	
+	
 
 }

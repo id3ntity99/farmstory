@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -182,7 +181,6 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
   @Override
   public void update(ProductDTO dto) {
     // TODO Auto-generated method stub
-
   }
 
   @Override
@@ -254,5 +252,4 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 
     return 0; // 실패한 경우 0 반환
   }
-
 }

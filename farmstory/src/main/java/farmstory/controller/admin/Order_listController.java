@@ -18,9 +18,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/order-list.do")
 public class Order_listController extends HttpServlet {
-	private static final long serialVersionUID = 161266416260600026L;
-	private static final Logger logger = LoggerFactory.getLogger(Order_listController.class.getName());
-	private CountableService<OrderDTO> service;
+  private static final long serialVersionUID = 161266416260600026L;
+  private static final Logger logger =
+      LoggerFactory.getLogger(Order_listController.class.getName());
+  private CountableService<OrderDTO> service;
 
   @Override
   public void init() throws ServletException {
@@ -60,7 +61,6 @@ public class Order_listController extends HttpServlet {
       req.setAttribute("articles", currentPageOrders);
       req.setAttribute("currentPage", currentPage);
       req.setAttribute("lastPageNum", lastPageNum);
-      
       req.setAttribute("pageName", "order-list");
 
       // 페이지 범위 계산 (예: 1, 2, 3, 4, 5 페이지 범위)

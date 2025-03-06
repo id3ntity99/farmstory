@@ -21,7 +21,6 @@ import jakarta.servlet.http.Part;
 
 @WebServlet("/admin/product-enroll.do")
 public class Product_enrollController extends HttpServlet {
-
   private static final long serialVersionUID = 587656470097925202L;
   private static final Logger logger =
       LoggerFactory.getLogger(Product_enrollController.class.getName());

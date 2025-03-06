@@ -110,6 +110,59 @@ public class UserDAO implements CountableDAO<UserDTO> {
 
     return users;
   }
+  
+  public UserDTO selectUserById(String id) {
+	  String sql = "select  from user where id=?";
+	  UserDTO user = null;
+	  try {
+		  Connection conn = helper.getConnection();
+		  PreparedStatement psmt = conn.prepareStatement(sql);
+		  psmt.setString(1, id);
+		  ResultSet rs = psmt.executeQuery();
+		  if (rs.next()) {
+			  	user = new UserDTO();
+		        user.setId(rs.getString("id"));
+		        user.setPassword(rs.getString("password"));
+		        user.setName(rs.getString("name"));
+		        user.setNickname(rs.getString("nickname"));
+		        user.setPoint(rs.getInt("point"));
+		        user.setLevel(rs.getInt("level"));
+		        user.setEmail(rs.getString("email"));
+		        user.setPhoneNum(rs.getString("phone_num"));
+		        user.setZip(rs.getString("zip"));
+		        user.setAddress(rs.getString("address"));
+		        user.setRegisterDate(rs.getString("register_date"));
+		        user.setLeaveDate(rs.getString("leave_date"));
+		}
+		
+	} catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
+	  return user;
+  }
+  public boolean modifyUser(UserDTO user) {
+	  
+	  String sql = "UPDATE user SET name=?, nickname=?, email=?, phone_num=?, address=?, addressDetail=? WHERE id=?";
+	  
+	  try {
+		  Connection conn = helper.getConnection();
+		  PreparedStatement psmt = conn.prepareStatement(sql);
+		  psmt.setString(1, user.getName());
+		  psmt.setString(2, user.getNickname());
+		  psmt.setString(3, user.getEmail());
+		  psmt.setString(4, user.getPhoneNum());
+		  psmt.setString(5, user.getAddress());
+		  psmt.setString(6, user.getAddressDetail());
+		  psmt.setString(7, user.getId());
+		  return psmt.executeUpdate() > 0;
+		
+	} catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
+	  
+	return false;
+	  
+  }
 
  public UserDTO selectResult(String email) {
     UserDTO user = null;
@@ -201,6 +254,25 @@ public class UserDAO implements CountableDAO<UserDTO> {
     return null;
 
   }
+  public boolean updatePass(String id, String password){
+	  
+	  	String sql = "update user set password = ? where id = ?";
+	  	
+	  	try {
+	  		Connection conn = helper.getConnection();
+	  		PreparedStatement psmt = conn.prepareStatement(sql);
+	  		
+	  		psmt.setString(1, password);
+	  		psmt.setString(2, id);
+	  		
+	  		int result = psmt.executeUpdate();
+	  		return result > 0;
+			
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+	    return false;
+	  }
 
   public boolean isUserValid(String id, String email) {
 
@@ -233,6 +305,19 @@ public class UserDAO implements CountableDAO<UserDTO> {
       String msg = String.format("사용자 데이터 삭제 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
       throw new DataAccessException(msg, e);
     }
+  }
+  public boolean deleteUser(String id) {
+	  String sql = "DELETE FROM user WHERE id=?";
+	  
+	  try {
+		  Connection conn = helper.getConnection();
+		  PreparedStatement psmt = conn.prepareStatement(sql);
+		  psmt.setString(1, id);
+		  return psmt.executeUpdate() > 0;
+	} catch (Exception e) {
+		LOGGER.error(e.getMessage());
+	}
+	return false;
   }
 
   @Override
