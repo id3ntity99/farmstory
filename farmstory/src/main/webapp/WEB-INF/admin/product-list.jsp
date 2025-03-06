@@ -64,10 +64,6 @@
 							
 						<a href="/farmstory/admin/product-enroll.do"
 							class="productRegister">상품등록</a>
-					<p>
-						선택 삭제 <a href="/farmstory/admin/product-enroll.do"
-							class="productRegister">상품등록</a>
-					</p>
 					<p>&lt; [1] [2] [3] [4] [5] &gt;</p>
 				</article>
 			</section>
