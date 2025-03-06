@@ -1,7 +1,17 @@
 package farmstory.controller.admin;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import farmstory.DataAccessObject;
+import farmstory.dao.ProductDAO;
+import farmstory.dto.ProductDTO;
+import farmstory.service.DefaultService;
+import farmstory.service.Service;
+import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,10 +23,14 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Product_listController extends HttpServlet{
 
 	private static final long serialVersionUID = 1421234456356053821L;
+	private static final Logger logger = LoggerFactory.getLogger(Product_listController.class.getName());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+			DataAccessObject<ProductDTO> dao = new ProductDAO(helper);
+			Service<ProductDTO> service = new DefaultService<ProductDTO>(dao);
 			// 전체 상품 목록 가져오기 (전체 데이터)
 			List<ProductDTO> products = service.getAll();
 

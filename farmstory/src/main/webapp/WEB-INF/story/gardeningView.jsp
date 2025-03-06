@@ -113,13 +113,12 @@
                 <section class="commentForm">
                     <h3>댓글쓰기</h3>
                     <form name="formComment" action="#">
-                    	<input type="hidden" name="parent" value="${articleDTO.no}">
-                    	<input type="hidden" name="writer" value="${sessUser.uid}">
-                        <textarea class="textarea" name="content" placeholder="댓글내용입력">
-                        </textarea>
-                    	<div>
-                            <a href="#" class="btn btnCancel">취소</a>
-                            <input type="submit" value="작성완료" class="btn btnComplete"/>
+                    	<input type="hidden" name="parent" value="${articleDTO.articleId}">
+                    	<input type="hidden" name="writer" value="${articleDTO.author}">
+                        <textarea class="textarea" name="content" placeholder="댓글 내용 입력"></textarea>
+                    	<div class="btnComment">
+                            <a href="#" class="btn btnCancelComment">취소</a>
+                            <input type="submit" value="작성완료" class="btn btnCompleteComment"/>
                         </div>
                     </form>
                 </section>
