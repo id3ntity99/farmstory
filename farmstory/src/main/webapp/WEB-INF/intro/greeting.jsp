@@ -73,8 +73,8 @@
                 <img src="/farmstory/images/sub_aside_cate1_tit.png" alt="" />
               </div>
               <div class="side-content">
-                <a href="#"> </a>
-                <a href="#"> </a>
+                <a href="/farmstory/greeting.do"> </a>
+                <a href="/farmstory/map.do"> </a>
               </div>
               <img src="/farmstory/images/sub_aside_bg_line.png" class="line" />
             </aside>
