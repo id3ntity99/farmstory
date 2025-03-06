@@ -5,7 +5,7 @@ import farmstory.DataTransferObject;
 public class CommentDTO implements DataTransferObject {
 	
 	private int id;
-	private int article_id;
+	private int articleId;
 	private String author;
 	private String content;
 	private String register_date;
@@ -16,11 +16,11 @@ public class CommentDTO implements DataTransferObject {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getArticle_id() {
-		return article_id;
+	public int getArticleId() {
+		return articleId;
 	}
-	public void setArticle_id(int article_id) {
-		this.article_id = article_id;
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
 	}
 	public String getAuthor() {
 		return author;
@@ -42,7 +42,7 @@ public class CommentDTO implements DataTransferObject {
 	}
 	@Override
 	public String toString() {
-		return "CommentDAO [id=" + id + ", article_id=" + article_id + ", author=" + author + ", content=" + content
+		return "CommentDAO [id=" + id + ", article_id=" + articleId + ", author=" + author + ", content=" + content
 				+ ", register_date=" + register_date + "]";
 	}
 	
