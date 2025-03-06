@@ -103,82 +103,18 @@
                 <li>
                   <a href="#">
                     <img src="/farmstory/images/market_item1.jpg" alt="사과" />
-                    <p class="category">과일</p>
+                    <p class="category">${product.category}</p>
                     <p>
-                      사과 <br />
-                      500g <br />
+                   	  ${product.name}
                     </p>
-                    <s>4,000</s>
-                    <span>10%↓</span>
-                    <p class="current-price">3,600 원</p>
+                    <s>${product.price}</s>
+                    <span>${product.discountRate}%↓</span>
+                    <p class="current-price">
+                    	${Math.round(product.price - (product.price * (product.discountRate / 100)))}원
+                    </p>
                   </a>
                 </li>
               </c:forEach>
-                <li>
-                  <a href="#">
-                    <img src="/farmstory/images/market_item2.jpg" alt="사과" />
-                    <p class="category">과일</p>
-                    <p>
-                      사과 <br />
-                      500g <br />
-                    </p>
-                    <s>4,000</s>
-                    <span>10%↓</span>
-                    <p class="current-price">3,600 원</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/farmstory/images/market_item3.jpg" alt="사과" />
-                    <p class="category">과일</p>
-                    <p>
-                      사과 <br />
-                      500g <br />
-                    </p>
-                    <s>4,000</s>
-                    <span>10%↓</span>
-                    <p class="current-price">3,600 원</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/farmstory/images/market_item4.jpg" alt="사과" />
-                    <p class="category">과일</p>
-                    <p>
-                      사과 <br />
-                      500g <br />
-                    </p>
-                    <s>4,000</s>
-                    <span>10%↓</span>
-                    <p class="current-price">3,600 원</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/farmstory/images/market_item5.jpg" alt="사과" />
-                    <p class="category">과일</p>
-                    <p>
-                      사과 <br />
-                      500g <br />
-                    </p>
-                    <s>4,000</s>
-                    <span>10%↓</span>
-                    <p class="current-price">3,600 원</p>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <img src="/farmstory/images/market_item6.jpg" alt="사과" />
-                    <p class="category">과일</p>
-                    <p>
-                      사과 <br />
-                      500g <br />
-                    </p>
-                    <s>4,000</s>
-                    <span>10%↓</span>
-                    <p class="current-price">3,600 원</p>
-                  </a>
-                </li>
               </ul>
             </div>
           </article>
@@ -208,61 +144,16 @@
               <img src="/farmstory/images/main_latest1_img.jpg" alt="" />
               <table border="0">
                 <tbody>
+                <c:forEach var="article" items="${requestScope.articles}">
                   <tr>
                     <td>
                       <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
+                      ${article.content}
                       </a>
                     </td>
-                    <td>2022-01-01</td>
+                    <td>${article.registerDate}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
+                </c:forEach>
                 </tbody>
               </table>
             </div>

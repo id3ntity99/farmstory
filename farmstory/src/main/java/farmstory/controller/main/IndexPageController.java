@@ -29,11 +29,6 @@ public class IndexPageController extends HttpServlet {
   private CountableService<ProductDTO> prodService;
   private CountableService<ArticleDTO> artService;
 
-  private int resize(int size) {
-    float fSzie = size;
-    return Math.round(fSzie / 10);
-  }
-
   @Override
   public void init() throws ServletException {
     ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
@@ -49,6 +44,7 @@ public class IndexPageController extends HttpServlet {
     try {
       // ATTENTION Insert dummy data into product and article tables, or null pointer exception will
       // be thrown
+      // TODO Upload real images for products and retrieve them
       List<ProductDTO> products = prodService.getAll();
       List<ArticleDTO> articles = artService.getAll();
       req.setAttribute("products", products);
