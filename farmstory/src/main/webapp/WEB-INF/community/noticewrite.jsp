@@ -105,7 +105,9 @@
               </div>
               <div class="content">
                 <h3>글쓰기</h3>
-                <form action="#" method="POST">
+                <form action="noticeWrite.do" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="userId" value="${sessUser.id}" readonly>
+				<table border=0>
                   <table>
                     <tbody>
                       <tr>
@@ -113,9 +115,10 @@
                         <td>
                           <input
                             type="text"
-                            name="diet-title"
+                            name="title"
                             placeholder="제목을 입력하세요"
                             id="diet-title"
+                            required
                           />
                         </td>
                       </tr>
@@ -124,7 +127,8 @@
                         <td>
                           <textarea
                             id="diet-content"
-                            name="diet-content"
+                            name="content"
+                            required
                           ></textarea>
                         </td>
                       </tr>
