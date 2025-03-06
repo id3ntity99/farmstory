@@ -143,6 +143,10 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public void insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
+        String sql = "INSERT INTO product_image (product_id, thumbnail_location, info_location, detail_location) "
+                   + "VALUES (?, ?, ?, ?)";
 
 	public void insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
 		String sql = "INSERT INTO product_image (product_id, thumbnail_location, info_location, detail_location) "
@@ -165,5 +169,4 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 			e1.printStackTrace();
 		}
 	}
-
 }
