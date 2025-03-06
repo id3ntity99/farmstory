@@ -9,71 +9,6 @@
     <link rel="stylesheet" href="/farmstory/style/find-id.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-    <script>
-    document.addEventListener('DOMContentLoaded', function(){
-    	// 인증번호 받기 버튼 클릭 이벤트
-        document.querySelector("#sendVerificationCodeBtn").addEventListener('click', function(event) {
-            event.preventDefault();
-            
-            var userId = document.getElementById('id').value;
-            var email = document.getElementById('email').value;
-
-            // 아이디와 이메일 입력 확인
-            if (!userId || !email) {
-                alert("아이디와 이메일을 모두 입력해주세요.");
-                return;
-            }
-
-            // 서버에 인증번호 요청
-            fetch("/farmstory/findPass.do", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ id: userId, email: email })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("인증번호가 이메일로 전송되었습니다.");
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("서버와 연결할 수 없습니다. 나중에 다시 시도해주세요.");
-            });
-        });
-
-        // 인증번호 확인 버튼 클릭 이벤트
-        document.querySelector("#verifyCodeBtn").addEventListener('click', function(event) {
-            event.preventDefault();
-
-            var code = document.getElementById('number').value;
-
-            fetch("/farmstory/verifyCode.do", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ code: code })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = "/farmstory/find/changePass.do"; // 인증 성공 시 비밀번호 변경 페이지로 이동
-                } else {
-                    alert(data.message); // 인증 실패 시 메시지 출력
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("서버와 연결할 수 없습니다. 나중에 다시 시도해주세요.");
-            });
-        });
-    }
-    </script>
     </head>
     <body>
         <div id="wrapper">
@@ -146,8 +81,10 @@
                                     <input type="text" name="email" id="email" placeholder="이메일 입력"><br>
                                     <input type="text" name="number" id="number" placeholder="인증번호 입력"></td>
                                 </td>
-                                <td><a><button type="button" id="sendVerificationCodeBtn" style="none">인증번호 받기</button></a><br>
-                                <a><button id="verifyCodeBtn">확인</button></a></td>
+                                <td>
+                                	<a>인증번호 받기</a><br>
+                                	<a>확인</a>
+                                </td>
                         </tbody>
                     </table>
                     <section class="maintext">
@@ -159,7 +96,7 @@
                     </section>
                     <section class="mainbtn">
                         <a href="/farmstory/user/signUp.do">취소</a>
-                        <a href="/farmstory/find/findPass.do">다음</a>
+                        <a href="/farmstory/find/changePass.do">다음</a>
                     </section>
 
                 </section>

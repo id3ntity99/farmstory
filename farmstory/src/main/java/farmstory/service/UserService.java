@@ -17,12 +17,12 @@ public class UserService extends DefaultService<UserDTO> {
   public UserDTO findUser(String name, String email) throws DataAccessException {
     return userDAO.findUser(name, email);
   }
-  public UserDTO findPass(String id, String email) {
+  public UserDTO findPass(String id, String email) throws DataAccessException {
 	  return userDAO.findPass(id, email);
   }
 
-  public List<UserDTO> findResult() throws DataAccessException {
-    return userDAO.selectResult();
+  public UserDTO findResult(String email) throws DataAccessException {
+    return userDAO.selectResult(email);
   }
 
   public int count(String colName, String condition) throws DataAccessException {

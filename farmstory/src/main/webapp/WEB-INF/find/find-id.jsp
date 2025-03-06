@@ -59,11 +59,6 @@
                   </article>
                 </section>
               </header>
-
-
-
-
-
             <main>
                 <section class="idfind">
                     <h1>아이디 찾기</h1>
@@ -93,7 +88,7 @@
                     </section>
                     <section class="mainbtn">
                         <a href="#">취소</a>
-                        <a href="/farmstory/find/findIdResult.do" id="submitBtn">다음</a>
+                        <a href="/farmstory/find/findIdResult.do" id="nextBtn">다음</a>
                     </section>
 					
 					

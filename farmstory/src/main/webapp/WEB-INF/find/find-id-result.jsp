@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/farmstory/style/find-id-result.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
+    <script src="/farmstory/js/findIdResult.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -68,25 +69,23 @@
                 <section class="idfind">
                     <h1>아이디 찾기 결과</h1>
                     <table>
-                        <tbody>
-                        <c:forEach var="dto" items="${users}">
+                        <tbody id="userInfo">
                             <tr>
                                 <td>이름</td>
-                                <td>${dto.name}</td>
+                                <td id="userName">${dto.name}</td>
                             </tr>
                             <tr>
                                 <td>아이디</td>
-                                <td>${dto.id}</td>
+                                <td id="userId">${dto.id}</td>
                             </tr>
                             <tr>
                                 <td>이메일</td>
-                                <td>${dto.email}</td>
+                                <td id="userEmail">${dto.email}</td>
                             </tr>
                             <tr>
                                 <td>가입일</td>
-                                <td>${dto.registerDate}</td>
+                                <td id="userRegisterDate">${dto.registerDate}</td>
                             </tr>
-                            </c:forEach>
                         </tbody>
                     </table>
                     <section class="maintext">

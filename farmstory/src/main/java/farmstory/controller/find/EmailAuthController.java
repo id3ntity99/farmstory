@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/find/emailauth.do")
+@WebServlet("/find/emailAuth.do")
 public class EmailAuthController extends HttpServlet {
 
     private static final long serialVersionUID = 12545621463L;
@@ -50,6 +50,10 @@ public class EmailAuthController extends HttpServlet {
 
         String name = req.getParameter("name");
         String receiver = req.getParameter("email");
+        
+        logger.debug("name : " + name + ", receiver : " + receiver);
+        
+        
         JsonObject json = new JsonObject();
 
         if (receiver == null || receiver.trim().isEmpty()) {
