@@ -30,12 +30,12 @@
           <img src="/farmstory/images/head_top_line.png" alt="" />
           <div>
             <p>
-               <a href="/farmstory/index.do">HOME | </a>
+              <a href="/farmstory/index.do">HOME | </a>
               <a href="/farmstory/signin">로그인 | </a>
               <a href="/farmstory/signup">회원가입 | </a>
               <a href="/farmstory/my/shopbasket.do">나의정보 | </a>
               <a href="/farmstory/signout">로그아웃 | </a>
-              <a href="/farmstory/admin">관리자 | </a>
+              <a href="/farmstory/admin/main.do">관리자 | </a>
               <a href="">고객센터</a>
             </p>
           </div>
@@ -53,18 +53,18 @@
         <section class="services">
           <article>
             <div>
-              <a href="#"> </a>
+              <a href="#" style = "display: block; width: 100%; height: 100%;"> </a>
             </div>
             <div>
-              <a href="#">
+              <a href="#" style = "display: block; width: 100%; height: 100%;">
                 <img src="/farmstory/images/head_menu_badge.png" alt="30%" />
               </a>
             </div>
             <div>
-              <a href="#"> </a>
+              <a href="/farmstory/listStory" style = "display: block; width: 100%; height: 100%;"> </a>
             </div>
             <div>
-              <a href="#"> </a>
+              <a href="/farmstory/events" style = "display: block; width: 100%; height: 100%;"> </a>
             </div>
             <div>
               <a href="/farmstory/notice.do" style = "display: block; width: 100%; height: 100%;"> </a>
@@ -138,7 +138,7 @@
                       <td></td>
                       <td>
                         <button id="do-post">
-                          <a href="/farmstory/CommunityWrite.do"> 글쓰기 </a>
+                          <a href="/farmstory/noticeWrite.do"> 글쓰기 </a>
                         </button>
                       </td>
                     </tr>

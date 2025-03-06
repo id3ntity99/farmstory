@@ -52,19 +52,19 @@
         </section>
         <section class="services">
           <article>
-            <div>
-              <a href="#"> </a>
+             <div>
+              <a href="#" style = "display: block; width: 100%; height: 100%;"> </a>
             </div>
             <div>
-              <a href="#">
+              <a href="#" style = "display: block; width: 100%; height: 100%;">
                 <img src="/farmstory/images/head_menu_badge.png" alt="30%" />
               </a>
             </div>
             <div>
-              <a href="#"> </a>
+              <a href="/farmstory/listStory" style = "display: block; width: 100%; height: 100%;"> </a>
             </div>
             <div>
-              <a href="#"> </a>
+              <a href="/farmstory/events" style = "display: block; width: 100%; height: 100%;"> </a>
             </div>
             <div>
               <a href="/farmstory/notice.do" style = "display: block; width: 100%; height: 100%;"> </a>
