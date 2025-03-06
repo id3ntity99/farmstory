@@ -4,11 +4,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>나도 요리사</title>
+    <title>공지사항</title>
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
-    <link rel="stylesheet" href="/farmstory/style/common/page-common.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-    <link rel="stylesheet" href="/farmstory/style/iam-cooker.css" />
+    <link rel="stylesheet" href="/farmstory/style/common/page-common.css" />
+    <link rel="stylesheet" href="/farmstory/style/diet.css" />
       <style>
     .side-content {
   	display: flex;
@@ -22,6 +22,7 @@
   	text-align: center;
 	}
     </style>
+    
   </head>
   <body>
     <div id="wrapper">
@@ -30,7 +31,7 @@
           <img src="/farmstory/images/head_top_line.png" alt="" />
           <div>
             <p>
-             <a href="/farmstory/index.do">HOME | </a>
+              <a href="/farmstory/index.do">HOME | </a>
               <a href="/farmstory/signin">로그인 | </a>
               <a href="/farmstory/signup">회원가입 | </a>
               <a href="/farmstory/my/shopbasket.do">나의정보 | </a>
@@ -53,7 +54,7 @@
         <section class="services">
           <article>
             <div>
-              <a href="#"> </a>
+              <a href="#"></a>
             </div>
             <div>
               <a href="#">
@@ -86,7 +87,7 @@
                 <img src="/farmstory/images/sub_aside_cate5_tit.png" alt="" />
               </div>
               <div class="side-content">
-                  <a href="/farmstory/notice.do">공지사항</a>
+                <a href="/farmstory/notice.do">공지사항</a>
                 <a href="/farmstory/diet.do">오늘의식단</a>
                 <a href="/farmstory/iam-cooker.do">나도요리사</a>
                 <a href="/farmstory/qna.do">1:1고객문의</a>
@@ -96,15 +97,15 @@
             </aside>
             <div class="content-area">
               <div class="content-title">
-                <img src="/farmstory/images/sub_nav_tit_cate5_tit3.png" alt="" />
                 <span>
                   <a href="#">HOME </a>
                   <a href="#">> 커뮤니티 > </a>
-                  <a href="#">나도요리사 </a>
+                  <a href="#">글쓰기 </a>
                 </span>
               </div>
               <div class="content">
-                <form action="">
+                <h3>글쓰기</h3>
+                <form action="#" method="POST">
                   <table>
                     <tbody>
                       <tr>
@@ -112,42 +113,42 @@
                         <td>
                           <input
                             type="text"
-                            name="cooker-title"
+                            name="diet-title"
                             placeholder="제목을 입력하세요"
-                            id="cooker-title"
+                            id="diet-title"
                           />
-                        </td>
-                      </tr>
-
-                      <tr class="file-area">
-                        <td>파일</td>
-                        <td>
-                          <div class="download">
-                            <a href="#">2021년 상반기 매출현황.xls</a>
-                            <span>7회 다운로드</span>
-                          </div>
-                          <div>
-                            <a href="#">교육 운영 관리자료</a>
-                            <span>7회 다운로드</span>
-                          </div>
                         </td>
                       </tr>
                       <tr>
                         <td>내용</td>
                         <td>
                           <textarea
-                            id="cooker-content"
-                            name="cooker-content"
+                            id="diet-content"
+                            name="diet-content"
                           ></textarea>
+                        </td>
+                      </tr>
+                      <tr class="file-area">
+                        <td>파일</td>
+                        <td>
+                          <p>
+                            최대 2개 파일 첨부 가능, 각 파일당 최대 10MB까지
+                            가능
+                          </p>
+                          <div>
+                            <input type="file" />
+                          </div>
+                          <div>
+                            <input type="file" />
+                          </div>
                         </td>
                       </tr>
                     </tbody>
                   </table>
+                  <input type="submit" value="작성완료" class="btn" />
                   <button class="btn">
-                    <a href="#"> 목록 </a>
+                    <a href="#"> 취소 </a>
                   </button>
-                  <input type="submit" value="수정" class="btn" />
-                  <input type="submit" value="삭제" class="btn" />
                 </form>
               </div>
             </div>
