@@ -54,6 +54,7 @@ public class ListControllerGardening extends HttpServlet {
 			int pageStartNum = total -(currentPageNum -1) * pageSize;
 			
 			List<ArticleDTO> articles = dao.getPagedList(currentPageNum, pageSize);
+
 			
             ArticleDTO dto = new ArticleDTO();
             ArticleDTO currentPage = service.get(dto);
@@ -66,10 +67,12 @@ public class ListControllerGardening extends HttpServlet {
           
             //List<ArticleDTO> articles = service.getAll();
             
-            logger.debug("articles: " + articles);
+            //logger.debug("articles: " + articles);
             
+
             req.setAttribute("articles", articles);
     		req.setAttribute("currentPageNum", currentPage);
+
     		req.setAttribute("lastPageNum", lastPageNum);
     		req.setAttribute("pageGroupDTO", pageGroupDTO);
     		req.setAttribute("pageStartNum", pageStartNum);

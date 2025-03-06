@@ -25,33 +25,13 @@ public class ShopbasketController extends HttpServlet {
   private static final long serialVersionUID = 124541245425112446L;
   private static final Logger logger = LoggerFactory.getLogger(SignUpController.class.getName());
 
-  CountableDAO<OrderDTO> dao;
-  CountableDefaultService<OrderDTO> service;
-
-
-
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    this.dao = new OrderDAO(new ConnectionHelper("jdbc/farmstory"));
-    this.service = new CountableDefaultService<OrderDTO>(dao);
-  }
-
+  
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
 
-    HttpSession session = req.getSession();
-    String userId = (String) session.getAttribute("userId");
-
-    // 로그인 되지 않았을때 login.do로 넘어감 로그인 기능 활성화 되면 // 삭제할것.
-    // if (userId == null) {
-    // resp.sendRedirect(req.getContextPath() + "/user/login.do");
-    // return;
-    // }
-
-    List<OrderDTO> basketList = ((OrderDAO) dao).selectAll();
-    req.setAttribute("basketList", basketList);
+    
 
     RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/my/shopbasket.jsp");
     dispatcher.forward(req, resp);
@@ -62,43 +42,7 @@ public class ShopbasketController extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
 
-    String action = req.getParameter("action");
-    HttpSession session = req.getSession();
-    String userId = (String) session.getAttribute("userId");
+    
 
-    // 로그인 되지 않았을때 login.do로 넘어감 로그인 기능 활성화 되면 // 삭제할것.
-    // if (userId == null) {
-    // resp.sendRedirect(req.getContextPath() + "/user/login.do");
-    // return;
-    // }
-
-
-    OrderDAO orderDAO = (OrderDAO) dao;
-
-    switch (action) {
-
-      case "update":
-        int orderId = Integer.parseInt(req.getParameter("orderId"));
-        int amount = Integer.parseInt(req.getParameter("amount"));
-        OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setId(orderId);
-        orderDTO.setAmount(amount);
-        orderDAO.update(orderDTO);
-        break;
-
-      case "delete":
-        int deleteId = Integer.parseInt(req.getParameter("orderId"));
-        OrderDTO deleteorderDTO = new OrderDTO();
-        deleteorderDTO.setId(deleteId);
-        orderDAO.delete(deleteorderDTO);
-        break;
-
-      case "order":
-        orderDAO.placeOrder(userId);
-        break;
-    }
-    resp.sendRedirect(req.getContextPath() + "/my/shopbasket.do");
   }
 }
-
-

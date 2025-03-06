@@ -4,11 +4,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>장바구니</title>
+        <title>아이디 찾기</title>
     <link rel="stylesheet" href="/farmstory/style/find-id.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-    <script src="/farmstory/js/findId.js"></script>
+    <script src="/farmstory/js/find/findId.js"></script>
     </head>
     <body>
         <div id="wrapper">
