@@ -9,6 +9,7 @@ public class CommentDTO implements DataTransferObject {
 	private String author;
 	private String content;
 	private String register_date;
+	
 	public int getId() {
 		return id;
 	}
