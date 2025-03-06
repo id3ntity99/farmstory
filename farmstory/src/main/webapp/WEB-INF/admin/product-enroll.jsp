@@ -15,16 +15,20 @@
 				<ul>
 					<li><span>상품관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/product-list.do">상품목록</a></li>
-							<li><a href="/farmstory/admin/product-enroll.do">상품등록</a></li>
+							<li class="${pageName == 'product-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/product-list.do">상품목록</a></li>
+							<li class="${pageName == 'product-enroll' ? 'active' : ''}"><a
+								href="/farmstory/admin/product-enroll.do">상품등록</a></li>
 						</ol></li>
 					<li><span>주문관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/order-list.do">주문목록</a></li>
+							<li class="${pageName == 'order-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/order-list.do">주문목록</a></li>
 						</ol></li>
 					<li><span>회원관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/user-list.do">회원목록</a></li>
+							<li class="${pageName == 'user-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/user-list.do">회원목록</a></li>
 							<li><a href="#">회원등록</a></li>
 						</ol></li>
 				</ul>
@@ -56,8 +60,8 @@
 							</tr>
 							<tr>
 								<td>포인트</td>
-								<td><input type="text" name="point" id="point" value="100"/> 포인트는 가격의
-									1%</td>
+								<td><input type="text" name="point" id="point" value="100" />
+									포인트는 가격의 1%</td>
 							</tr>
 							<tr>
 								<td>할인</td>
@@ -71,11 +75,11 @@
 							</tr>
 							<tr>
 								<td>배송비</td>
-								<td><label><input type="radio" name="delivery" value="2000">2,000원</label>
-									<label><input type="radio" name="delivery" value="3000">3,000원</label>
-									<label><input type="radio" name="delivery" value="5000">5,000원</label>
-									<label><input type="radio" name="delivery" value="0">무료</label>
-								</td>
+								<td><label><input type="radio" name="delivery"
+										value="2000">2,000원</label> <label><input type="radio"
+										name="delivery" value="3000">3,000원</label> <label><input
+										type="radio" name="delivery" value="5000">5,000원</label> <label><input
+										type="radio" name="delivery" value="0">무료</label></td>
 							</tr>
 							<tr>
 								<td>재고</td>

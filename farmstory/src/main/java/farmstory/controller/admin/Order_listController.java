@@ -61,6 +61,7 @@ public class Order_listController extends HttpServlet {
       req.setAttribute("articles", currentPageOrders);
       req.setAttribute("currentPage", currentPage);
       req.setAttribute("lastPageNum", lastPageNum);
+      req.setAttribute("pageName", "order-list");
 
       // 페이지 범위 계산 (예: 1, 2, 3, 4, 5 페이지 범위)
       int startPage = ((currentPage - 1) / 5) * 5 + 1;

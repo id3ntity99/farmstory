@@ -166,61 +166,16 @@
               <img src="/farmstory/images/main_latest2_img.jpg" alt="" />
               <table border="0">
                 <tbody>
+                <c:forEach var="article" items="${requestScope.articles}">
                   <tr>
                     <td>
                       <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
+                      ${article.content}
                       </a>
                     </td>
-                    <td>2022-01-01</td>
+                    <td>${article.registerDate}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
+                </c:forEach>
                 </tbody>
               </table>
             </div>
@@ -233,61 +188,16 @@
               <img src="/farmstory/images/main_latest3_img.jpg" alt="" />
               <table border="0">
                 <tbody>
+                <c:forEach var="article" items="${requestScope.articles}">
                   <tr>
                     <td>
                       <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
+                      ${article.content}
                       </a>
                     </td>
-                    <td>2022-01-01</td>
+                    <td>${article.registerDate}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="#">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Alias aliquam reiciendis facere sit doloribus aut illo
-                        dignissimos, error omnis dolore iste nam inventore!
-                        Quidem ex sit modi placeat voluptatem. Voluptate.
-                      </a>
-                    </td>
-                    <td>2022-01-01</td>
-                  </tr>
+                </c:forEach>
                 </tbody>
               </table>
             </div>
@@ -329,51 +239,16 @@
               <img src="/farmstory/images/main_sub2_notice_tit.png" alt="" />
               <table>
                 <tbody>
+                <c:forEach var="article" items="${requestScope.articles}">
                   <tr>
                     <td>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Alias modi eius officiis molestias similique ad, facilis
-                      ipsam culpa! Vel consectetur exercitationem commodi
-                      assumenda ut quis aliquam illum doloribus, veniam quasi!
+                      <a href="#">
+                      ${article.content}
+                      </a>
                     </td>
-                    <td>22-01-01</td>
+                    <td>${article.registerDate}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Alias modi eius officiis molestias similique ad, facilis
-                      ipsam culpa! Vel consectetur exercitationem commodi
-                      assumenda ut quis aliquam illum doloribus, veniam quasi!
-                    </td>
-                    <td>22-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Alias modi eius officiis molestias similique ad, facilis
-                      ipsam culpa! Vel consectetur exercitationem commodi
-                      assumenda ut quis aliquam illum doloribus, veniam quasi!
-                    </td>
-                    <td>22-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Alias modi eius officiis molestias similique ad, facilis
-                      ipsam culpa! Vel consectetur exercitationem commodi
-                      assumenda ut quis aliquam illum doloribus, veniam quasi!
-                    </td>
-                    <td>22-01-01</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Alias modi eius officiis molestias similique ad, facilis
-                      ipsam culpa! Vel consectetur exercitationem commodi
-                      assumenda ut quis aliquam illum doloribus, veniam quasi!
-                    </td>
-                    <td>22-01-01</td>
-                  </tr>
+                </c:forEach>
                 </tbody>
               </table>
             </div>

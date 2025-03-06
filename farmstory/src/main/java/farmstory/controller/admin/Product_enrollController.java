@@ -3,22 +3,15 @@ package farmstory.controller.admin;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import farmstory.DataAccessObject;
-import farmstory.dao.OrderDAO;
 import farmstory.dao.ProductDAO;
 import farmstory.dao.ProductImageDAO;
 import farmstory.dto.ProductDTO;
 import farmstory.dto.ProductImageDTO;
 import farmstory.exception.DataAccessException;
-import farmstory.service.CountableDefaultService;
-import farmstory.service.DefaultService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,107 +21,121 @@ import jakarta.servlet.http.Part;
 
 @WebServlet("/admin/product-enroll.do")
 public class Product_enrollController extends HttpServlet {
+  private static final long serialVersionUID = 587656470097925202L;
+  private static final Logger logger =
+      LoggerFactory.getLogger(Product_enrollController.class.getName());
+  private ProductDAO productDAO;
+  private ProductImageDAO productImageDAO;
 
-	private static final long serialVersionUID = 587656470097925202L;
-	private static final Logger logger = LoggerFactory.getLogger(Product_enrollController.class.getName());
-	private ProductDAO productDAO;
-	private ProductImageDAO productImageDAO;
+  @Override
+  public void init() throws ServletException {
+    try {
+      ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+      productDAO = new ProductDAO(helper);
+      productImageDAO = new ProductImageDAO(helper);
+    } catch (Exception e) {
+      // logger 사용 시 이제 정상적으로 인스턴스 메서드를 호출할 수 있습니다.
+      logger.error(e.getMessage(), e); // logger 인스턴스를 통해 error 메서드를 호출
+    }
+  }
 
-	@Override
-	public void init() throws ServletException {
-		try {
-			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-			productDAO = new ProductDAO(helper);
-			productImageDAO = new ProductImageDAO(helper);
-		} catch (Exception e) {
-			// logger 사용 시 이제 정상적으로 인스턴스 메서드를 호출할 수 있습니다.
-			logger.error(e.getMessage(), e); // logger 인스턴스를 통해 error 메서드를 호출
-		}
-	}
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    req.setAttribute("pageName", "product-enroll");
+    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-enroll.jsp");
+    dispatcher.forward(req, resp);
+  }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-enroll.jsp");
-		dispatcher.forward(req, resp);
-	}
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    try {
+      String name = req.getParameter("prodName");
+      String category = req.getParameter("cateNo");
+      int price = Integer.parseInt(req.getParameter("prodPrice"));
+      int point = price / 100;
+      int discountRate = Integer.parseInt(req.getParameter("prodDiscount"));
+      int deliveryFee = Integer.parseInt(req.getParameter("delivery"));
+      int stock = Integer.parseInt(req.getParameter("prodStock"));
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			String name = req.getParameter("prodName");
-			String category = req.getParameter("cateNo");
-			int price = Integer.parseInt(req.getParameter("prodPrice"));
-			int point = price / 100;
-			int discountRate = Integer.parseInt(req.getParameter("prodDiscount"));
-			int deliveryFee = Integer.parseInt(req.getParameter("delivery"));
-			int stock = Integer.parseInt(req.getParameter("prodStock"));
+      ProductDTO productDTO = new ProductDTO();
+      productDTO.setName(name);
+      productDTO.setCategory(category);
+      productDTO.setPrice(price);
+      productDTO.setPoint(point);
+      productDTO.setDiscountRate(discountRate);
+      productDTO.setDeliveryFee(deliveryFee);
+      productDTO.setStock(stock);
 
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setName(name);
-			productDTO.setCategory(category);
-			productDTO.setPrice(price);
-			productDTO.setPoint(point);
-			productDTO.setDiscountRate(discountRate);
-			productDTO.setDeliveryFee(deliveryFee);
-			productDTO.setStock(stock);
+      productDAO.insert(productDTO);
 
-			productDAO.insert(productDTO);
+      int productId = productDTO.getId();
+      logger.info("상품 등록 성공: ID = {}", productId);
 
-			int productId = productDTO.getId();
-			logger.info("상품 등록 성공: ID = {}", productId);
+      String uploadDir = getServletContext().getRealPath("/uploads");
+      File uploadDirectory = new File(uploadDir);
+      if (!uploadDirectory.exists()) {
+        uploadDirectory.mkdir();
+      }
 
-			String uploadDir = getServletContext().getRealPath("/uploads");
-			File uploadDirectory = new File(uploadDir);
-			if (!uploadDirectory.exists()) {
-				uploadDirectory.mkdir();
-			}
+      String thumbnailLocation = saveImage(req.getPart("multImage1"), uploadDir);
+      String infoLocation = saveImage(req.getPart("multImage2"), uploadDir);
+      String detailLocation = saveImage(req.getPart("multImage3"), uploadDir);
 
-			String thumbnailLocation = saveImage(req.getPart("multImage1 "), uploadDir);
-			String infoLocation = saveImage(req.getPart("multImage2"), uploadDir);
-			String detailLocation = saveImage(req.getPart("multImage3"), uploadDir);
+      // 상품 이미지 DTO 생성 및 저장
+      ProductImageDTO imageDTO = new ProductImageDTO();
+      imageDTO.setProductid(productId);
+      if (thumbnailLocation != null) {
+        imageDTO.setThumbnailLocation(thumbnailLocation);
+      }
+      if (infoLocation != null) {
+        imageDTO.setInfoLocation(infoLocation);
+      }
+      if (detailLocation != null) {
+        imageDTO.setDetailLocation(detailLocation);
+      }
+
+      // 이미지 DTO가 유효하면 DB에 저장
+      if (imageDTO.getThumbnailLocation() != null || imageDTO.getInfoLocation() != null
+          || imageDTO.getDetailLocation() != null) {
+
+        productImageDAO.insert(imageDTO);
+      }
+
+      resp.sendRedirect("/farmstory/admin/product-list.do");
 
 
-			// 상품 이미지 DTO 생성 및 저장
-			ProductImageDTO imageDTO = new ProductImageDTO();
-			imageDTO.setProductid(productId);
-			imageDTO.setThumbnailLocation(thumbnailLocation);
-			imageDTO.setInfoLocation(infoLocation);
-			imageDTO.setDetailLocation(detailLocation);
+    } catch (DataAccessException e) {
+      logger.error("상품 등록 오류", e);
+      req.setAttribute("error", "상품 등록에 실패했습니다. 다시 시도해주세요.");
+      RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-enroll.jsp");
+      dispatcher.forward(req, resp);
+    } catch (Exception e) {
+      logger.error("예기치 못한 오류", e);
+      req.setAttribute("error", "알 수 없는 오류가 발생했습니다.");
+      RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-enroll.jsp");
+      dispatcher.forward(req, resp);
+    }
+  }
 
-			productImageDAO.insertProductImage(imageDTO);
+  private String saveImage(Part part, String uploadDir) throws IOException {
+    if (part == null || part.getSize() == 0) {
+      return null; // 이미지가 없으면 null 반환
+    }
+    String fileName = UUID.randomUUID().toString(); // 파일 이름을 UUID로 생성하여 충돌 방지
+    String fileExtension = getFileExtension(part.getSubmittedFileName());
+    String filePath = uploadDir + File.separator + fileName + fileExtension;
 
-			resp.sendRedirect("/farmstory/admin/product-list.do");
+    part.write(filePath);
 
-		} catch (DataAccessException e) {
-			logger.error("상품 등록 오류", e);
-			req.setAttribute("error", "상품 등록에 실패했습니다. 다시 시도해주세요.");
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-enroll.jsp");
-			dispatcher.forward(req, resp);
-		} catch (Exception e) {
-			logger.error("예기치 못한 오류", e);
-			req.setAttribute("error", "알 수 없는 오류가 발생했습니다.");
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-enroll.jsp");
-			dispatcher.forward(req, resp);
-		}
-	}
+    return "/uploads/" + fileName + fileExtension; // 저장된 파일 경로 반환
+  }
 
-	private String saveImage(Part part, String uploadDir) throws IOException {
-		String fileName = UUID.randomUUID().toString(); // 파일 이름을 UUID로 생성하여 충돌 방지
-		String fileExtension = getFileExtension(part.getSubmittedFileName());
-		String filePath = uploadDir + File.separator + fileName + fileExtension;
-
-		if (part.getSize() > 0) {
-			part.write(filePath); // 파일을 지정된 위치에 저장
-		}
-
-		return "/uploads/" + fileName + fileExtension; // 저장된 파일 경로 반환
-	}
-
-	private String getFileExtension(String fileName) {
-		if (fileName != null && fileName.lastIndexOf('.') > 0) {
-			return fileName.substring(fileName.lastIndexOf('.'));
-		}
-		return "";
-	}
-
+  private String getFileExtension(String fileName) {
+    if (fileName != null && fileName.lastIndexOf('.') > 0) {
+      return fileName.substring(fileName.lastIndexOf('.'));
+    }
+    return "";
+  }
 }
