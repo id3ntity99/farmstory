@@ -11,10 +11,12 @@ import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
+import farmstory.dto.CompanyDTO;
 import farmstory.dto.ProductDTO;
 import farmstory.dto.ProductImageDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
+import farmstory.util.Query;
 
 public class ProductDAO implements CountableDAO<ProductDTO> {
   private static final Logger LOGGER = LoggerFactory.getLogger(ProductDAO.class.getName());
@@ -24,13 +26,38 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
     this.helper = helper;
   }
 
+  private ProductDTO createProduct(ResultSet rs) throws SQLException {
+    ProductDTO product = new ProductDTO();
+    ProductImageDTO image = new ProductImageDTO();
+    CompanyDTO company = new CompanyDTO();
+    product.setId(rs.getInt("id"));
+    company.setId(rs.getInt("company_id"));
+    company.setManagerName(rs.getString("manager_name"));
+    company.setContact(rs.getString("contact"));
+    company.setAddress(rs.getString("addr"));
+    product.setCompany(company);
+    product.setName(rs.getString("name"));
+    product.setCategory(rs.getString("category"));
+    product.setPrice(rs.getInt("price"));
+    product.setPoint(rs.getInt("point"));
+    product.setDiscountRate(rs.getInt("discount_rate"));
+    product.setDeliveryFee(rs.getInt("delivery_fee"));
+    product.setStock(rs.getInt("stock"));
+    image.setId(rs.getInt("image_id"));
+    image.setThumbnailLocation(rs.getString("thumbnail_location"));
+    image.setInfoLocation(rs.getString("info_location"));
+    image.setDetailLocation(rs.getString("detail_location"));
+    product.setImage(image);
+    product.setRegisterDate("register_date");
+    return product;
+  }
+
+  // TODO Use ACID transaction to insert company, product, and product_image data
   @Override
   public void insert(ProductDTO dto) throws DataAccessException {
-    String sql =
-        "INSERT INTO product (id, company_id, name, category, price, point, discount_rate, delivery_fee, stock, image_id, register_date) "
-            + "VALUES (?, 1, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
     try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        PreparedStatement psmt =
+            conn.prepareStatement(Query.INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
       psmt.setInt(1, dto.getId());
       psmt.setString(2, dto.getName());
       psmt.setString(3, dto.getCategory());
@@ -78,11 +105,8 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
       } else {
         throw new DataAccessException("상품 등록에 실패했습니다.", null);
       }
-    } catch (SQLException e) {
-      LOGGER.error("SQL Error: " + e.getMessage(), e);
+    } catch (NamingException | SQLException e) {
       throw new DataAccessException("상품을 등록하는 도중 예외가 발생했습니다.", e);
-    } catch (NamingException e1) {
-      e1.printStackTrace();
     }
   }
 
@@ -98,85 +122,41 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
       if (rowsAffected == 0) {
         throw new DataAccessException("상품 이미지 ID 업데이트에 실패했습니다.", null);
       }
-    } catch (SQLException e) {
-      LOGGER.error("SQL Error: " + e.getMessage(), e);
+    } catch (NamingException | SQLException e) {
       throw new DataAccessException("상품 이미지 ID를 업데이트하는 도중 예외가 발생했습니다.", e);
-    } catch (NamingException e1) {
-      e1.printStackTrace();
     }
   }
 
   @Override
   public ProductDTO select(ProductDTO dto) throws DataAccessException {
-    String sql = "SELECT * FROM product WHERE id = ?";
-
+    ProductDTO product = null;
     try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql)) {
+        PreparedStatement psmt = conn.prepareStatement(Query.SELECT_PRODUCT)) {
       psmt.setInt(1, dto.getId());
       ResultSet rs = psmt.executeQuery();
       if (rs.next()) {
-        ProductDTO product = new ProductDTO();
-        product.setId(rs.getInt("id"));
-        product.setCompany_id(rs.getInt("company_id"));
-        product.setName(rs.getString("name"));
-        product.setCategory(rs.getString("category"));
-        product.setPrice(rs.getInt("price"));
-        product.setPoint(rs.getInt("point"));
-        product.setDiscountRate(rs.getInt("discount_rate"));
-        product.setDeliveryFee(rs.getInt("delivery_fee"));
-        product.setStock(rs.getInt("stock"));
-        product.setImageId(rs.getInt("image_id"));
-        product.setRegisterDate(rs.getString("register_date"));
-        return product;
+        product = createProduct(rs);
       }
-      return null;
-    } catch (SQLException e) {
-      LOGGER.error("SQL Error: " + e.getMessage(), e);
+    } catch (NamingException | SQLException e) {
       throw new DataAccessException("상품을 조회하는 도중 예외가 발생했습니다.", e);
-    } catch (NamingException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
     }
-    return dto;
+    return product;
   }
 
   @Override
   public List<ProductDTO> selectAll() throws DataAccessException {
     List<ProductDTO> productList = new ArrayList<>();
-    String sql =
-        "SELECT * FROM product JOIN product_image ON product.id = product_image.product_id";
-
     try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql);
+        PreparedStatement psmt = conn.prepareStatement(Query.SELECT_ALL_PRODUCT);
         ResultSet rs = psmt.executeQuery()) {
       while (rs.next()) {
-        ProductDTO product = new ProductDTO();
-        product.setId(rs.getInt("id"));
-        product.setCompany_id(rs.getInt("company_id"));
-        product.setName(rs.getString("name"));
-        product.setCategory(rs.getString("category"));
-        product.setPrice(rs.getInt("price"));
-        product.setPoint(rs.getInt("point"));
-        product.setDiscountRate(rs.getInt("discount_rate"));
-        product.setDeliveryFee(rs.getInt("delivery_fee"));
-        product.setStock(rs.getInt("stock"));
-        product.setImageId(rs.getInt("image_id"));
-        product.setRegisterDate(rs.getString("register_date"));
-        product.setThumbnailLocation(rs.getString("thumbnail_location"));
-        product.setInfoLocation(rs.getString("info_location"));
-        product.setDetailLocation(rs.getString("detail_location"));
+        ProductDTO product = createProduct(rs);
         productList.add(product);
       }
-      return productList;
-    } catch (SQLException e) {
-      LOGGER.error("SQL Error: " + e.getMessage(), e);
+    } catch (NamingException | SQLException e) {
       throw new DataAccessException("상품 목록을 조회하는 도중 예외가 발생했습니다.", e);
-    } catch (NamingException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
     }
     return productList;
-
   }
 
   @Override

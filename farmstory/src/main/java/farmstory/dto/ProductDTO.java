@@ -4,7 +4,7 @@ import farmstory.DataTransferObject;
 
 public class ProductDTO implements DataTransferObject {
   private int id;
-  private int company_id;
+  private CompanyDTO company;
   private String name;
   private String category;
   private int price;
@@ -13,43 +13,8 @@ public class ProductDTO implements DataTransferObject {
   private int deliveryFee;
   private int stock;
   private int imageId;
+  private ProductImageDTO image;
   private String registerDate;
-
-  private String thumbnailLocation; // 썸네일 이미지 경로
-  private String infoLocation; // 상품 정보 이미지 경로
-  private String detailLocation;
-
-  public String getThumbnailLocation() {
-    return thumbnailLocation;
-  }
-
-  public void setThumbnailLocation(String thumbnailLocation) {
-    this.thumbnailLocation = thumbnailLocation;
-  }
-
-  public String getInfoLocation() {
-    return infoLocation;
-  }
-
-  public void setInfoLocation(String infoLocation) {
-    this.infoLocation = infoLocation;
-  }
-
-  public String getDetailLocation() {
-    return detailLocation;
-  }
-
-  public void setDetailLocation(String detailLocation) {
-    this.detailLocation = detailLocation;
-  }
-
-  public int getCompany_id() {
-    return company_id;
-  }
-
-  public void setCompany_id(int company_id) {
-    this.company_id = company_id;
-  }
 
   public int getId() {
     return id;
@@ -57,6 +22,14 @@ public class ProductDTO implements DataTransferObject {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public CompanyDTO getCompany() {
+    return company;
+  }
+
+  public void setCompany(CompanyDTO company) {
+    this.company = company;
   }
 
   public String getName() {
@@ -123,6 +96,14 @@ public class ProductDTO implements DataTransferObject {
     this.imageId = imageId;
   }
 
+  public ProductImageDTO getImage() {
+    return image;
+  }
+
+  public void setImage(ProductImageDTO image) {
+    this.image = image;
+  }
+
   public String getRegisterDate() {
     return registerDate;
   }
@@ -138,6 +119,6 @@ public class ProductDTO implements DataTransferObject {
         + ", stock=" + stock + ", imageId=" + imageId + ", registerDate=" + registerDate + "]";
   }
 
-	
+
 
 }
