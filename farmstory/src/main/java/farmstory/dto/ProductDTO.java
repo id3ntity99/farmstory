@@ -12,32 +12,32 @@ public class ProductDTO implements DataTransferObject {
   private int discountRate;
   private int deliveryFee;
   private int stock;
-  private int imageId;
   private ProductImageDTO image;
   private String registerDate;
   private int amount;
   private String placedDate;
+
   public int getId() {
     return id;
   }
 
   public int getAmount() {
-	return amount;
-}
+    return amount;
+  }
 
-public void setAmount(int amount) {
-	this.amount = amount;
-}
+  public void setAmount(int amount) {
+    this.amount = amount;
+  }
 
-public String getPlacedDate() {
-	return placedDate;
-}
+  public String getPlacedDate() {
+    return placedDate;
+  }
 
-public void setPlacedDate(String placedDate) {
-	this.placedDate = placedDate;
-}
+  public void setPlacedDate(String placedDate) {
+    this.placedDate = placedDate;
+  }
 
-public void setId(int id) {
+  public void setId(int id) {
     this.id = id;
   }
 
@@ -105,14 +105,6 @@ public void setId(int id) {
     this.stock = stock;
   }
 
-  public int getImageId() {
-    return imageId;
-  }
-
-  public void setImageId(int imageId) {
-    this.imageId = imageId;
-  }
-
   public ProductImageDTO getImage() {
     return image;
   }
@@ -131,11 +123,10 @@ public void setId(int id) {
 
   @Override
   public String toString() {
-    return "ProductDTO [id=" + id + ", name=" + name + ", category=" + category + ", price=" + price
-        + ", point=" + point + ", discountRate=" + discountRate + ", deliveryFee=" + deliveryFee
-        + ", stock=" + stock + ", imageId=" + imageId + ", registerDate=" + registerDate + "]";
+    return "ProductDTO [id=" + id + ", company=" + company + ", name=" + name + ", category="
+        + category + ", price=" + price + ", point=" + point + ", discountRate=" + discountRate
+        + ", deliveryFee=" + deliveryFee + ", stock=" + stock + ", image=" + image
+        + ", registerDate=" + registerDate + ", amount=" + amount + ", placedDate=" + placedDate
+        + "]";
   }
-
-
-
 }
