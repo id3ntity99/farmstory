@@ -81,7 +81,7 @@
 								</c:when>
 								<c:otherwise>
 									<tr>
-										<td colspan="10" style="text-align: center; padding: 20px;">주문이
+										<td colspan="10" style="text-align: center; padding: 20px;">게시물이
 											없습니다.</td>
 									</tr>
 								</c:otherwise>
