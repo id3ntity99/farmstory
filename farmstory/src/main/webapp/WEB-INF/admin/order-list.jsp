@@ -16,16 +16,19 @@
 				<ul>
 					<li><span>상품관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/product-list.do">상품목록</a></li>
-							<li><a href="/farmstory/admin/product-enroll.do">상품등록</a></li>
+							<li class="${pageName == 'product-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/product-list.do">상품목록</a></li>
+							<li class="${pageName == 'product-enroll' ? 'active' : ''}"><a
+								href="/farmstory/admin/product-enroll.do">상품등록</a></li>
 						</ol></li>
 					<li><span>주문관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/order-list.do">주문목록</a></li>
+							<li class="${pageName == 'order-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/order-list.do">주문목록</a></li>
 						</ol></li>
-					<li><span>회원관리</span>
+					<li class="${pageName == 'user-list' ? 'active' : ''}"><span>회원관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/user-list.do">회원목록</a></li>
+							<li class="${pageName == 'user-list' ? 'active' : ''}"><a href="/farmstory/admin/user-list.do">회원목록</a></li>
 							<li><a href="#">회원등록</a></li>
 						</ol></li>
 				</ul>
@@ -81,7 +84,7 @@
 								</c:when>
 								<c:otherwise>
 									<tr>
-										<td colspan="10" style="text-align: center; padding: 20px;">게시물이
+										<td colspan="10" style="text-align: center; padding: 20px;">주문이
 											없습니다.</td>
 									</tr>
 								</c:otherwise>

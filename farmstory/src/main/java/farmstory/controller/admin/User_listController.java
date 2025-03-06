@@ -67,6 +67,8 @@ public class User_listController extends HttpServlet {
             int endPage = Math.min(startPage + 4, lastPageNum);
             req.setAttribute("startPage", startPage);
             req.setAttribute("endPage", endPage);
+            
+            req.setAttribute("pageName", "user-list");
 
             // JSP로 전달
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/user-list.jsp");

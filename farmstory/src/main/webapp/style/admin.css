@@ -111,6 +111,9 @@ main>aside {
 	text-decoration: underline;
 }
 
+.active {
+    text-decoration: underline;
+}
 /* 메인 공통 */
 main>section {
 	width: 804px;
