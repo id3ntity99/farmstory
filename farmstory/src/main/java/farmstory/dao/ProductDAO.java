@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -71,6 +70,7 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
       ResultSet rs = psmt.executeQuery();
       if (rs.next()) {
         ProductDTO product = new ProductDTO();
+        ProductImageDTO image = new ProductImageDTO();
         product.setId(rs.getInt("id"));
         product.setName(rs.getString("name"));
         product.setCategory(rs.getString("category"));
@@ -79,7 +79,8 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
         product.setDiscountRate(rs.getInt("discount_rate"));
         product.setDeliveryFee(rs.getInt("delivery_fee"));
         product.setStock(rs.getInt("stock"));
-        product.setImageId(rs.getInt("image_id"));
+        image.setId(rs.getInt("image_id"));
+        product.setImage(image);
         product.setRegisterDate(rs.getString("register_date"));
         return product;
       }
@@ -97,13 +98,15 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
   @Override
   public List<ProductDTO> selectAll() throws DataAccessException {
     List<ProductDTO> productList = new ArrayList<>();
-    String sql = "SELECT * FROM product";
+    String sql = "SELECT * FROM product"; // TODO: JOIN 쿼리와 트랜잭션을 이용해 Product#image에 ProductImageDTO
+                                          // 객체를 할당할 것.
 
     try (Connection conn = helper.getConnection();
         PreparedStatement psmt = conn.prepareStatement(sql);
         ResultSet rs = psmt.executeQuery()) {
       while (rs.next()) {
         ProductDTO product = new ProductDTO();
+        ProductImageDTO image = new ProductImageDTO();
         product.setId(rs.getInt("id"));
         product.setName(rs.getString("name"));
         product.setCategory(rs.getString("category"));
@@ -112,7 +115,8 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
         product.setDiscountRate(rs.getInt("discount_rate"));
         product.setDeliveryFee(rs.getInt("delivery_fee"));
         product.setStock(rs.getInt("stock"));
-        product.setImageId(rs.getInt("image_id"));
+        image.setId(rs.getInt("image_id"));
+        product.setImage(image);
         product.setRegisterDate(rs.getString("register_date"));
         productList.add(product);
       }
