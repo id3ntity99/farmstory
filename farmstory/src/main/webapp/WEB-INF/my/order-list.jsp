@@ -72,9 +72,9 @@
                     <h1><img src="/farmstory/images/myinfo/myinfo_menu_tit.png" alt=""></h1>
                         <article>    
                             <ul>
-                                <li><a href="/farmstory/my/shopbasket.html"><img src="/farmstory/images/myinfo/myinfo_menu1.png" alt="장바구니"></a></li>
-                                <li><a href="/farmstory/my/order-list.html"><img src="/farmstory/images/myinfo/myinfo_menu2.png" alt="주문내역"></a></li>
-                                <li><a href="/farmstory/my/modify-info.html"><img src="/farmstory/images/myinfo/myinfo_menu3.png" alt="정보수정"></a></li>
+                                <li><a href="/farmstory/my/shopbasket.do"><img src="/farmstory/images/myinfo/myinfo_menu1.png" alt="장바구니"></a></li>
+                                <li><a href="/farmstory/my/orderList.do"><img src="/farmstory/images/myinfo/myinfo_menu2.png" alt="주문내역"></a></li>
+                                <li><a href="/farmstory/my/modifyInfo.do"><img src="/farmstory/images/myinfo/myinfo_menu3.png" alt="정보수정"></a></li>
                             </ul>
                         </article>
                 </section>

@@ -5,11 +5,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>장바구니</title>
+        <title>아이디 변경 결과</title>
     <link rel="stylesheet" href="/farmstory/style/find-id-result.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
-    <script src="/farmstory/js/findIdResult.js"></script>
+    <script src="/farmstory/js/find/findIdResult.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -119,11 +119,5 @@
 
 
         </div>
-        <script>
-            document.getElementById('selectAll').addEventListener('change', function() {
-                const checkboxes = document.querySelectorAll('input[name="orderIds"]');
-                checkboxes.forEach(cb => cb.checked = this.checked);
-            });
-        </script>
     </body>
 </html>
