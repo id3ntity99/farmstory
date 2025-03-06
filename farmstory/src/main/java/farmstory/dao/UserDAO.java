@@ -254,7 +254,11 @@ public class UserDAO implements CountableDAO<UserDTO> {
     return null;
 
   }
-  public boolean updatePass(String id, String password){
+  public boolean updatePass(String id, String newPassword){
+	  
+	  if (id == null || newPassword == null || newPassword.trim().isEmpty()) {
+          return false; // 입력값이 잘못된 경우 변경 불가
+      }
 	  
 	  	String sql = "update user set password = ? where id = ?";
 	  	
@@ -262,11 +266,11 @@ public class UserDAO implements CountableDAO<UserDTO> {
 	  		Connection conn = helper.getConnection();
 	  		PreparedStatement psmt = conn.prepareStatement(sql);
 	  		
-	  		psmt.setString(1, password);
+	  		psmt.setString(1, newPassword);
 	  		psmt.setString(2, id);
 	  		
-	  		int result = psmt.executeUpdate();
-	  		return result > 0;
+	 
+	  		return psmt.executeUpdate() > 0;
 			
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
