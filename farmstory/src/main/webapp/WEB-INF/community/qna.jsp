@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
     <link rel="stylesheet" href="/farmstory/style/common/page-common.css" />
     <link rel="stylesheet" href="/farmstory/style/qna.css" />
+    <style>
+    .side-content {
+  	display: flex;
+  	flex-direction: column; 
+  	align-items: center; 
+  	justify-content: center; 
+  	height: 100%; 
+	}
+
+	.side-content a {
+  	text-align: center;
+	}
+    </style>
+    
   </head>
   <body>
     <div id="wrapper">
@@ -17,19 +31,19 @@
           <img src="/farmstory/images/head_top_line.png" alt="" />
           <div>
             <p>
-              <a href="">HOME | </a>
-              <a href="">로그인 | </a>
-              <a href="">회원가입 | </a>
-              <a href="">나의정보 | </a>
-              <a href="">로그아웃 | </a>
-              <a href="">관리자 | </a>
+               <a href="/farmstory/index.do">HOME | </a>
+              <a href="/farmstory/signin">로그인 | </a>
+              <a href="/farmstory/signup">회원가입 | </a>
+              <a href="/farmstory/my/shopbasket.do">나의정보 | </a>
+              <a href="/farmstory/signout">로그아웃 | </a>
+              <a href="/farmstory/admin">관리자 | </a>
               <a href="">고객센터</a>
             </p>
           </div>
         </section>
         <section class="logo">
           <div>
-            <a href="#">
+            <a href="/farmstory/index.do">
               <img src="/farmstory/images/logo.png" />
             </a>
             <a href="#">
@@ -54,7 +68,7 @@
               <a href="#"> </a>
             </div>
             <div>
-              <a href="#"> </a>
+              <a href="/farmstory/notice.do" style = "display: block; width: 100%; height: 100%;"> </a>
             </div>
           </article>
         </section>
@@ -73,11 +87,11 @@
                 <img src="/farmstory/images/sub_aside_cate5_tit.png" alt="" />
               </div>
               <div class="side-content">
-                <a href="#"> </a>
-                <a href="#"> </a>
-                <a href="#"> </a>
-                <a href="#"> </a>
-                <a href="#"> </a>
+               <a href="/farmstory/notice.do">공지사항</a>
+                <a href="/farmstory/diet.do">오늘의식단</a>
+                <a href="/farmstory/iam-cooker.do">나도요리사</a>
+                <a href="/farmstory/qna.do">1:1고객문의</a>
+                <a href="/farmstory/faq.do">자주묻는질문</a>
               </div>
               <img src="/farmstory/images/sub_aside_bg_line.png" class="line" />
             </aside>
