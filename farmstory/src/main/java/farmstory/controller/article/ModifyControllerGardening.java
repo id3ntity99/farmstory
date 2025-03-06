@@ -5,11 +5,9 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import farmstory.dao.ArticleDAO;
 import farmstory.dto.ArticleDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.service.CountableDefaultService;
-import farmstory.service.DefaultService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

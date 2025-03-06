@@ -65,10 +65,11 @@ public class WriteControllerGardening extends HttpServlet {
       dto.setContent(content);
       //dto.setFile(files.size());
       dto.setAuthor(author);
+      service.create(dto);
       
       logger.debug(dto.toString());
       
-      service.create(dto);
+      
       
       /*
       int fileId = dto.getId();      

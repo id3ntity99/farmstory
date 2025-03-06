@@ -59,7 +59,7 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
       //글번호
       ResultSet rs = psmt.getGeneratedKeys();
       if(rs.next()) {
-    	 int articleId = rs.getInt(1);
+    	 int id = rs.getInt(1);
       }
      
       rs.close();
@@ -92,7 +92,10 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
         articleDTO.setAuthor(rs.getString("author"));
         articleDTO.setRegisterDate(rs.getString("registerDate"));
       }
-
+      
+      rs.close();
+      psmt.close();
+      conn.close();
 
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
@@ -100,6 +103,44 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
     return articleDTO;
 
+  }
+  
+  public List<ArticleDTO> getPagedList(int currentPageNum, int pageSize) {
+	List<ArticleDTO> articles = new ArrayList<>();
+	int offset = (currentPageNum -1 ) * pageSize;
+    String sql = "select `id`, `title`, `content`,`author`, `register_date` from `article` order by `id` desc limit ? offset ?";
+ 
+
+    try {
+      Connection conn = helper.getConnection();
+      PreparedStatement psmt = conn.prepareStatement(sql);
+      psmt.setInt(1, pageSize);
+      psmt.setInt(2, offset);
+
+      ResultSet rs = psmt.executeQuery();
+
+      while (rs.next()) {
+        ArticleDTO articleDTO = new ArticleDTO();
+        articleDTO.setId(rs.getInt("id"));
+        articleDTO.setTitle(rs.getString("title"));
+        articleDTO.setContent(rs.getString("content"));
+        articleDTO.setAuthor(rs.getString("author"));
+        articleDTO.setRegisterDate(rs.getString("register_date"));
+
+        articles.add(articleDTO);
+        
+        
+      }
+      rs.close();
+      psmt.close();
+      conn.close();
+      LOGGER.debug("게시글 수 : " + articles.size());
+      
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+    }
+
+    return articles;
   }
 
   @Override

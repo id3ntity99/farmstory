@@ -6,11 +6,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import farmstory.DataAccessObject;
 import farmstory.dao.ArticleDAO;
 import farmstory.dto.ArticleDTO;
-import farmstory.service.DefaultService;
-import farmstory.service.Service;
+import farmstory.dto.PageGroupDTO;
+import farmstory.service.CountableDefaultService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -25,43 +24,55 @@ public class ListControllerSchool extends HttpServlet {
 	private static final long serialVersionUID = -6857825635581561308L;
     private static final Logger logger = LoggerFactory.getLogger(ListControllerSchool.class.getName());
 
-    private Service<ArticleDTO> service;
-    
+    private CountableDefaultService<ArticleDTO> service;
+    ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+    ArticleDAO dao = new ArticleDAO(helper);
+
     @Override
     public void init() throws ServletException {
     	try {
-    		// 1. DB 연결을 위한 ConnectionHelper 생성
-            ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
             
-            // 2. ArticleDAO 생성 후 DefaultService에 주입
-            DataAccessObject<ArticleDTO> dao = new ArticleDAO(helper);
-            this.service = new DefaultService<>(dao);
+            this.service = new CountableDefaultService<>(dao);
+            
     	}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+        
     }
     
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			String pg = req.getParameter("pg");
 
-            List<ArticleDTO> articles = service.getAll();
-
-            String pg = req.getParameter("pg");
+			int total = service.getAll().size(); // 전체 게시글 개수 가져오기
+			int pageSize = 10; // 한 페이지당 보여줄 게시글 개수
+			
+			int currentPageNum = (pg != null) ? Integer.parseInt(pg) : 1;
+			int lastPageNum = (int) Math.ceil((double) total / pageSize);
+			int pageStartNum = total -(currentPageNum -1) * pageSize;
+			
+			List<ArticleDTO> articles = dao.getPagedList(currentPageNum, pageSize);
+			
+            ArticleDTO dto = new ArticleDTO();
+            ArticleDTO currentPage = service.get(dto);
             
-            int currentPage = (pg != null) ? Integer.parseInt(pg) : 1;
             
-            int total = service.getAll().size(); // 전체 게시글 개수 가져오기
+           
+            logger.debug("current: " + currentPageNum + ", start: " + pageStartNum + ", last: " + lastPageNum);
             
-            int pageSize = 10; // 한 페이지당 보여줄 게시글 개수
+            PageGroupDTO pageGroupDTO = getCurrentPageGroup(currentPageNum, lastPageNum);
+          
+            //List<ArticleDTO> articles = service.getAll();
             
-            int lastPageNum = (int) Math.ceil((double) total / pageSize);
+            logger.debug("articles: " + articles);
             
             req.setAttribute("articles", articles);
-            req.setAttribute("currentPage", currentPage);
-            req.setAttribute("lastPageNum", lastPageNum);
-
-
+    		req.setAttribute("currentPageNum", currentPage);
+    		req.setAttribute("lastPageNum", lastPageNum);
+    		req.setAttribute("pageGroupDTO", pageGroupDTO);
+    		req.setAttribute("pageStartNum", pageStartNum);
+    		
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/schoolList.jsp");
             dispatcher.forward(req, resp);
 
@@ -75,5 +86,21 @@ public class ListControllerSchool extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 	}
+	
+	public PageGroupDTO getCurrentPageGroup(int currentPageNum, int lastPageNum) {
+        int groupSize = 10; // 한 그룹당 페이지 개수 (예: 1~5, 6~10)
+
+        int currentGroup = (currentPageNum - 1) / groupSize +1 ; // 현재 페이지 그룹 번호
+        int startPage = (currentGroup - 1) * groupSize + 1; // 해당 그룹의 첫 페이지
+        int endPage = startPage + groupSize - 1; // 해당 그룹의 마지막 페이지
+
+        // 마지막 페이지 번호보다 크면 마지막 페이지 번호로 제한
+        if (endPage > lastPageNum) {
+            endPage = lastPageNum;
+        }
+
+        return new PageGroupDTO(startPage, endPage, currentGroup);
+    }
+    
 
 }

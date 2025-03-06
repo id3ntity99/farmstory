@@ -61,7 +61,7 @@
           <div class="list">
             <nav>
               <h1>글목록</h1>
-               	<form action="/farmstory/article/search.do">
+               	<form action="#">
                   	<select name="searchType">
                     	<option value="title">제목</option>
                     	<option value="content">내용</option>
@@ -84,7 +84,7 @@
 	             <c:forEach var="articles" items="${requestScope.articles}">               
 			         <tr>
 			            <td>${pageStartNum}</td>
-			            <td><a href="/farmstory/article/view.do?no=${articles.id}">${articles.title}[${articles.commentNumber}]</a></td>
+			            <td><a href="/farmstory/viewGardening?no=${articles.id}">${articles.title}[${articles.commentNumber}]</a></td>
 			            <td>${articles.author}</td>
 			            <td>${articles.registerDate.substring(0,10)}</td>
 			            <td>${articles.viewNumber}</td>
@@ -101,13 +101,13 @@
           	</table>
           	<div class="page">
               	<c:if test="${pageGroupDTO.start >1}">
-                  	<a href="/farmstory/article/list.do?pg=${pageGroupDTO.start - 1}" class="prev">이전</a>
+                  	<a href="/farmstory/listGardening?pg=${pageGroupDTO.start - 1}" class="prev">이전</a>
                 </c:if>
                 <c:forEach var="num" begin="${pageGroupDTO.start}" end="${pageGroupDTO.end}">
-                   	<a href="/farmstory/article/list.do?pg=${num}" class="num ${currentPage == num ? 'current':''}">${num}</a>
+                   	<a href="/farmstory/listGardening?pg=${num}" class="num ${currentPageNum == num ? 'current':''}">${num}</a>
                 </c:forEach>
              	<c:if test="${pageGroupDTO.end < lastPageNum}">
-                  	<a href="/farmstory/article/list.do?pg=${pageGroupDTO.end + 1}" class="next">다음</a>
+                  	<a href="/farmstory/listGardening?pg=${pageGroupDTO.end + 1}" class="next">다음</a>
                	</c:if>
             </div>
 

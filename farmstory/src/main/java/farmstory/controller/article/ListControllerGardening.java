@@ -25,14 +25,13 @@ public class ListControllerGardening extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(ListControllerGardening.class.getName());
 
     private CountableDefaultService<ArticleDTO> service;
-    private PageGroupDTO pageService;
-    
+    ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+    ArticleDAO dao = new ArticleDAO(helper);
 
     @Override
     public void init() throws ServletException {
     	try {
-            ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-            ArticleDAO dao = new ArticleDAO(helper);
+            
             this.service = new CountableDefaultService<>(dao);
             
     	}catch (Exception e) {
@@ -44,8 +43,6 @@ public class ListControllerGardening extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		
 		try {
 			String pg = req.getParameter("pg");
 
@@ -56,7 +53,7 @@ public class ListControllerGardening extends HttpServlet {
 			int lastPageNum = (int) Math.ceil((double) total / pageSize);
 			int pageStartNum = total -(currentPageNum -1) * pageSize;
 			
-			List<ArticleDTO> articles = service.getPagedList(currentPageNum, pageSize);
+			List<ArticleDTO> articles = dao.getPagedList(currentPageNum, pageSize);
 			
             ArticleDTO dto = new ArticleDTO();
             ArticleDTO currentPage = service.get(dto);
@@ -65,14 +62,14 @@ public class ListControllerGardening extends HttpServlet {
            
             logger.debug("current: " + currentPageNum + ", start: " + pageStartNum + ", last: " + lastPageNum);
             
-            PageGroupDTO pageGroupDTO = getCurrentPageGroup(currentPage, lastPageNum);
+            PageGroupDTO pageGroupDTO = getCurrentPageGroup(currentPageNum, lastPageNum);
           
             //List<ArticleDTO> articles = service.getAll();
             
             logger.debug("articles: " + articles);
             
             req.setAttribute("articles", articles);
-    		req.setAttribute("currentPage", currentPage);
+    		req.setAttribute("currentPageNum", currentPage);
     		req.setAttribute("lastPageNum", lastPageNum);
     		req.setAttribute("pageGroupDTO", pageGroupDTO);
     		req.setAttribute("pageStartNum", pageStartNum);
@@ -93,15 +90,10 @@ public class ListControllerGardening extends HttpServlet {
 
 	}
 
-	private PageGroupDTO getCurrentPageGroup(ArticleDTO currentPage, int lastPageNum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-    public PageGroupDTO getCurrentPageGroup(int currentPageNum, int lastPageNum) {
+	public PageGroupDTO getCurrentPageGroup(int currentPageNum, int lastPageNum) {
         int groupSize = 10; // 한 그룹당 페이지 개수 (예: 1~5, 6~10)
 
-        int currentGroup = (currentPageNum - 1) / groupSize + 1; // 현재 페이지 그룹 번호
+        int currentGroup = (currentPageNum - 1) / groupSize +1 ; // 현재 페이지 그룹 번호
         int startPage = (currentGroup - 1) * groupSize + 1; // 해당 그룹의 첫 페이지
         int endPage = startPage + groupSize - 1; // 해당 그룹의 마지막 페이지
 

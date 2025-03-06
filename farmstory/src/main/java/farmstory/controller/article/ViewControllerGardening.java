@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import farmstory.dao.ArticleDAO;
+import farmstory.dao.CommentDAO;
 import farmstory.dto.ArticleDTO;
 import farmstory.dto.CommentDTO;
 import farmstory.exception.DataAccessException;
@@ -26,12 +27,15 @@ public class ViewControllerGardening extends HttpServlet{
 	private static final Logger logger = LoggerFactory.getLogger(ViewControllerGardening.class.getName());
 
 	private CountableDefaultService<ArticleDTO> service;
-	private DefaultService<CommentDTO> commentService;	
+	private CommentDAO commentDAO;
 	
 	@Override
 	public void init() throws ServletException {
 		try {
 			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
+			ArticleDAO dao = new ArticleDAO(helper);
+			commentDAO = new CommentDAO(helper);
+			this.service = new CountableDefaultService<>(dao);
 			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
@@ -42,7 +46,6 @@ public class ViewControllerGardening extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String id = req.getParameter("id");
-		
 		ArticleDTO dto = new ArticleDTO();
 		dto.setId(id);
 				
@@ -51,9 +54,8 @@ public class ViewControllerGardening extends HttpServlet{
 			ArticleDTO articleDTO = service.get(dto);
 			logger.debug("articleDTO : " + articleDTO);
 			
-			List <CommentDTO> comments = commentService.getAll();
+			List<CommentDTO> comments = commentDAO.selectAllComment(id);
 			logger.debug("comments : " + comments);
-			
 			
 			req.setAttribute("articleDTO", articleDTO);
 			req.setAttribute("comments", comments);
@@ -62,7 +64,6 @@ public class ViewControllerGardening extends HttpServlet{
 			dispatcher.forward(req, resp);
 			
 		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
