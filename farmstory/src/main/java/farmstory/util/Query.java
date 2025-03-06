@@ -18,6 +18,9 @@ public final class Query {
   public static final String UPDATE_TERM = "UPDATE `term` SET `title`=? `content`=? WHERE `id`=?;";
   public static final String DELETE_TERM = "DELETE FROM `term` WHERE `id` = ?;";
 
+  public static final String INSERT_PROD_IMAGE =
+      "INSERT INTO `product_image` (`product_id`, `thumbnail_location`, `info_location`, `detail_location`) VALUES (?,?,?,?)";
+
   private Query() {
     // Empty constructor
   }
