@@ -40,3 +40,6 @@ INSERT INTO `comment` VALUES (3, 3, "뭘봐", "댓글 쓰기 테스트 입니다
 INSERT INTO `comment` VALUES (4, 4, "뭘봐", "댓글 쓰기 테스트 입니다4", NOW());
 INSERT INTO `comment` VALUES (5, 5, "뭘봐", "댓글 쓰기 테스트 입니다5", NOW());
 SELECT * FROM `comment`;
+
+INSERT INTO `term` VALUES (1, "이용약관", "이용약관 테스트 입니다.");
+INSERT INTO `term` VALUES (2, "개인정보 처리방침", "개인정보 처리방침 테스트 입니다.");
