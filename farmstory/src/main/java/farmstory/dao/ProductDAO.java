@@ -45,25 +45,44 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
     image.setInfoLocation(rs.getString("info_location"));
     image.setDetailLocation(rs.getString("detail_location"));
     product.setImage(image);
-    product.setRegisterDate("register_date");
+    product.setRegisterDate(rs.getString("register_date"));
     return product;
   }
 
   @Override
   public void insert(ProductDTO dto) throws DataAccessException {
     try (Connection conn = helper.getConnection();) {
-      conn.setAutoCommit(false);
+      // conn.setAutoCommit(false);
       CompanyDTO company = dto.getCompany();
       ProductImageDTO image = dto.getImage();
 
-      PreparedStatement companyPsmt = conn.prepareStatement(Query.INSERT_COMPANY);
+      PreparedStatement companyPsmt =
+          conn.prepareStatement(Query.INSERT_COMPANY, Statement.RETURN_GENERATED_KEYS);
       companyPsmt.setString(1, company.getCompanyName());
       companyPsmt.setString(2, company.getManagerName());
       companyPsmt.setString(3, company.getContact());
       companyPsmt.setString(4, company.getAddress());
+      companyPsmt.executeUpdate();
+      ResultSet companyRs = companyPsmt.getGeneratedKeys();
+      int compId = 0;
+      if (companyRs.next()) {
+        compId = companyRs.getInt(1);
+      }
+
+      PreparedStatement imagePsmt =
+          conn.prepareStatement(Query.INSERT_PROD_IMAGE, Statement.RETURN_GENERATED_KEYS);
+      imagePsmt.setString(1, image.getThumbnailLocation());
+      imagePsmt.setString(2, image.getInfoLocation());
+      imagePsmt.setString(3, image.getDetailLocation());
+      imagePsmt.executeUpdate();
+      ResultSet imageRs = imagePsmt.getGeneratedKeys();
+      int imageId = 0;
+      if (imageRs.next()) {
+        imageId = imageRs.getInt(1);
+      }
 
       PreparedStatement productPsmt = conn.prepareStatement(Query.INSERT_PRODUCT);
-      productPsmt.setInt(1, company.getId());
+      productPsmt.setInt(1, compId);
       productPsmt.setString(2, dto.getName());
       productPsmt.setString(3, dto.getCategory());
       productPsmt.setInt(4, dto.getPrice());
@@ -71,23 +90,15 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
       productPsmt.setFloat(6, dto.getDiscountRate());
       productPsmt.setInt(7, dto.getDeliveryFee());
       productPsmt.setInt(8, dto.getStock());
-      productPsmt.setInt(9, image.getId());
-
-      PreparedStatement imagePsmt = conn.prepareStatement(Query.INSERT_PROD_IMAGE);
-      imagePsmt.setInt(1, dto.getId());
-      imagePsmt.setString(2, image.getThumbnailLocation());
-      imagePsmt.setString(3, image.getInfoLocation());
-      imagePsmt.setString(4, image.getDetailLocation());
-
-      companyPsmt.executeUpdate();
+      productPsmt.setInt(9, imageId);
       productPsmt.executeUpdate();
-      imagePsmt.executeUpdate();
+
+      // conn.commit();
 
       companyPsmt.close();
       productPsmt.close();
       imagePsmt.close();
 
-      conn.commit();
     } catch (NamingException | SQLException e) {
       throw new DataAccessException("상품을 등록하는 도중 예외가 발생했습니다.", e);
     }

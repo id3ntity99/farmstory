@@ -50,18 +50,14 @@ public class ProductController extends HttpServlet {
       if (productId == null) { // pid 쿼리 스트링이 없는 경우, 상품 리스트 출력
         LOGGER.debug("상품 리스트를 출력합니다...");
         List<ProductDTO> products = prodService.getAll();
-        // TODO 상품 이미지 불러오기
         req.setAttribute("products", products);
+        req.getRequestDispatcher("/WEB-INF/shopping/list.jsp").forward(req, resp);
       } else { // pid 쿼리 스트링이 있는 경우, pid에 해당하는 상품의 상세 페이지 출력
         ProductDTO target = new ProductDTO();
         target.setId(Integer.parseInt(productId));
 
         ProductDTO product = prodService.get(target);
         if (product.getName() != null) {// 조회 결과가 있는 경우
-
-          //ProductImageDTO image = imageService.get(product.getImage());
-
-          //req.setAttribute("image", image);
           req.setAttribute("product", product);
           req.getRequestDispatcher("/WEB-INF/shopping/detail.jsp").forward(req, resp);
         } else { // 조회 결과가 없는 경우
@@ -69,7 +65,8 @@ public class ProductController extends HttpServlet {
               resp);
         }
       }
-    } catch (DataAccessException e) {
+    } catch (DataAccessException | NumberFormatException e) {
+      LOGGER.error(e.getMessage(), e);
       ResponseBodyWriter.write(false, "Internal Server Error",
           HttpServletResponse.SC_INTERNAL_SERVER_ERROR, resp);
     }
