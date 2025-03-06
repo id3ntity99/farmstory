@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>관리자 메인</title>
-	<link rel="stylesheet" href="/farmstory/style/admin.css">
+<meta charset="UTF-8" />
+<title>관리자 메인</title>
+<link rel="stylesheet" href="/farmstory/style/admin.css">
 </head>
 
 <body>
@@ -52,30 +53,18 @@
 							<th>재고</th>
 							<th>등록일</th>
 						</tr>
-						<tr>
-							<th>1011</th>
-							<th>사과 500g</th>
-							<th>과일</th>
-							<th>4,000원</th>
-							<th>100</th>
-							<th>2023-01-01</th>
-						</tr>
-						<tr>
-							<th>1011</th>
-							<th>사과 500g</th>
-							<th>과일</th>
-							<th>4,000원</th>
-							<th>100</th>
-							<th>2023-01-01</th>
-						</tr>
-						<tr>
-							<th>1011</th>
-							<th>사과 500g</th>
-							<th>과일</th>
-							<th>4,000원</th>
-							<th>100</th>
-							<th>2023-01-01</th>
-						</tr>
+
+						<c:forEach var="product" items="${products}">
+							<tr>
+								<td>${product.id}</td>
+								<td>${product.name}</td>
+								<td>${product.category}</td>
+								<td>${product.price}원</td>
+								<td>${product.stock}개</td>
+								<td>${product.registerDate.substring(0,10)}개</td>
+							</tr>
+						</c:forEach>
+
 					</table>
 
 				</article>
@@ -97,39 +86,19 @@
 							<th>주문자</th>
 							<th>주문일</th>
 						</tr>
+						<c:forEach var="order" items="${orders}">
+							<tr>
+								<td>${order.id}</td>
+								<td>${order.product.name}</td>
+								<td>${order.product.price}원</td>
+								<td>${order.amount}</td>
+								<td>${order.product.deliveryFee}</td>
+								<td>${order.totalPrice}</td>
+								<td>${order.user.name}</td>
+								<td>${order.placedDate}</td>
+							</tr>
+						</c:forEach>
 
-						<tr>
-							<th>1011</th>
-							<th>사과 500g</th>
-							<th>4,000원</th>
-							<th>2개</th>
-							<th>3,000원</th>
-							<th>8,000원</th>
-							<th>홍길동</th>
-							<th>2023-01-01</th>
-						</tr>
-
-						<tr>
-							<th>1011</th>
-							<th>사과 500g</th>
-							<th>4,000원</th>
-							<th>2개</th>
-							<th>3,000원</th>
-							<th>8,000원</th>
-							<th>홍길동</th>
-							<th>2023-01-01</th>
-						</tr>
-
-						<tr>
-							<th>1011</th>
-							<th>사과 500g</th>
-							<th>4,000원</th>
-							<th>2개</th>
-							<th>3,000원</th>
-							<th>8,000원</th>
-							<th>홍길동</th>
-							<th>2023-01-01</th>
-						</tr>
 					</table>
 				</article>
 				<article>
@@ -148,33 +117,19 @@
 							<th>등급</th>
 							<th>회원가입일</th>
 						</tr>
-						<tr>
-							<th>a101</th>
-							<th>김유신</th>
-							<th>유신123</th>
-							<th>010-1234-1001</th>
-							<th>yusin123@naver.com</th>
-							<th>2</th>
-							<th>2023-01-01</th>
-						</tr>
-						<tr>
-							<th>a101</th>
-							<th>김유신</th>
-							<th>유신123</th>
-							<th>010-1234-1001</th>
-							<th>yusin123@naver.com</th>
-							<th>2</th>
-							<th>2023-01-01</th>
-						</tr>
-						<tr>
-							<th>a101</th>
-							<th>김유신</th>
-							<th>유신123</th>
-							<th>010-1234-1001</th>
-							<th>yusin123@naver.com</th>
-							<th>2</th>
-							<th>2023-01-01</th>
-						</tr>
+
+						<c:forEach var="user" items="${users}">
+							<tr>
+								<td>${user.id}</td>
+								<td>${user.name}</td>
+								<td>${user.nickname}</td>
+								<td>${user.phoneNum}</td>
+								<td>${user.email}</td>
+								<td>${user.level}</td>
+								<td>${user.registerDate}</td>
+							</tr>
+						</c:forEach>
+
 					</table>
 				</article>
 			</section>

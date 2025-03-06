@@ -80,6 +80,9 @@
 						<input type="submit" value="선택 삭제"
 							style="border: none; background: none; cursor: pointer; padding: 10px;"
 							onclick="return confirm('선택한 주문을 삭제하시겠습니까?');">
+							
+						<a href="/farmstory/admin/product-enroll.do"
+							class="productRegister">상품등록</a>
 
 						<div class="pagination">
 							<%-- 이전 페이지 --%>
