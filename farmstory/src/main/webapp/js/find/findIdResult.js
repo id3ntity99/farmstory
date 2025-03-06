@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </tr>
             <tr>
                 <td>가입일</td>
-                <td>${userInfo.register_date || "정보 없음"}</td>
+                <td>${userInfo.registerDate || "정보 없음"}</td>
             </tr>
         `;
         } else {
