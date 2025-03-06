@@ -2,13 +2,13 @@ package farmstory.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
-import farmstory.controller.admin.Product_enrollController;
 import farmstory.dto.ProductImageDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
@@ -47,8 +47,25 @@ public class ProductImageDAO implements CountableDAO<ProductImageDTO> {
 
   @Override
   public ProductImageDTO select(ProductImageDTO dto) throws DataAccessException {
-    // TODO Auto-generated method stub
-    return null;
+    ProductImageDTO image = new ProductImageDTO();
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.SELECT_PROD_IMAGE)) {
+      psmt.setInt(1, dto.getProductid());
+
+      ResultSet rs = psmt.executeQuery();
+      if (rs.next()) {
+        image.setId(rs.getInt(1));
+        image.setProductid(rs.getInt(2));
+        image.setThumbnailLocation(rs.getString(3));
+        image.setInfoLocation(rs.getString(4));
+        image.setDetailLocation(rs.getString(5));
+      }
+      rs.close();
+    } catch (NamingException | SQLException e) {
+      String msg = String.format("데이터베이스 작업 중 예외가 발생하였습니다: %s", e.getMessage());
+      throw new DataAccessException(msg, e);
+    }
+    return image;
   }
 
   @Override
