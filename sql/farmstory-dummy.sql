@@ -1,5 +1,9 @@
 USE farmstory;
 
+INSERT INTO `user` VALUES ("abc123", SHA2("abc@123", 256), "김철수", "뭘봐", 0, 0, "abc123@example.com", "010-1111-2222", "12345", "부산광역시 유엔평화로 1번길 2", "행복빌라 426호", NOW(), NULL);
+
+INSERT INTO company VALUES (1, "화북과수원", "홍길동", "010-1234-5677", "경상북도 상주시 화북면");
+
 DESCRIBE product;
 INSERT INTO product VALUES (1, 1, "사과 100g", "과일", 4000, 4, 1.0, 2500, 23, 2, NOW());
 INSERT INTO product VALUES (2, 1, "사과 200g", "과일", 5000, 5, 2.0, 2500, 33, 3, NOW());
