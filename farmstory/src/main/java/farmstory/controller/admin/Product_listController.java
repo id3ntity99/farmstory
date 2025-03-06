@@ -63,6 +63,8 @@ public class Product_listController extends HttpServlet {
 			req.setAttribute("articles", currentPageproducts);
 			req.setAttribute("currentPage", currentPage);
 			req.setAttribute("lastPageNum", lastPageNum);
+			
+			req.setAttribute("pageName", "product-list");
 
 			// 페이지 범위 계산 (예: 1, 2, 3, 4, 5 페이지 범위)
 			int startPage = ((currentPage - 1) / 5) * 5 + 1;

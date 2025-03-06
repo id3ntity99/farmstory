@@ -16,16 +16,19 @@
 				<ul>
 					<li><span>상품관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/product-list.do">상품목록</a></li>
-							<li><a href="/farmstory/admin/product-enroll.do">상품등록</a></li>
+							<li class="${pageName == 'product-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/product-list.do">상품목록</a></li>
+							<li class="${pageName == 'product-enroll' ? 'active' : ''}"><a
+								href="/farmstory/admin/product-enroll.do">상품등록</a></li>
 						</ol></li>
 					<li><span>주문관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/order-list.do">주문목록</a></li>
+							<li class="${pageName == 'order-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/order-list.do">주문목록</a></li>
 						</ol></li>
 					<li><span>회원관리</span>
 						<ol>
-							<li><a href="/farmstory/admin/user-list.do">회원목록</a></li>
+							<li class="${pageName == 'user-list' ? 'active' : ''}"><a href="/farmstory/admin/user-list.do">회원목록</a></li>
 							<li><a href="#">회원등록</a></li>
 						</ol></li>
 				</ul>
@@ -57,8 +60,9 @@
 										<tr>
 											<td><input type="checkbox" name="productIds"
 												value="${product.id}"></td>
-											<td><img src="${pageContext.request.contextPath}${product.thumbnailLocation}" alt="${product.name}" class="thumb">
-												</td>
+											<td><img
+												src="${pageContext.request.contextPath}${product.thumbnailLocation}"
+												alt="${product.name}" class="thumb"></td>
 											<td>${product.id}</td>
 											<td>${product.name}</td>
 											<td>${product.category}</td>
@@ -79,10 +83,8 @@
 
 						<input type="submit" value="선택 삭제"
 							style="border: none; background: none; cursor: pointer; padding: 10px;"
-							onclick="return confirm('선택한 주문을 삭제하시겠습니까?');">
-							
-						<a href="/farmstory/admin/product-enroll.do"
-							class="productRegister">상품등록</a>
+							onclick="return confirm('선택한 주문을 삭제하시겠습니까?');" /> <a
+							href="/farmstory/admin/product-enroll.do" class="productRegister">상품등록</a>
 
 						<div class="pagination">
 							<%-- 이전 페이지 --%>
@@ -114,3 +116,11 @@
 	</div>
 </body>
 </html>
+<script>
+	// 전체 선택/해제 처리
+	function selectAll(source) {
+		checkboxes = document.getElementsByName('productIds');
+		for ( var i in checkboxes)
+			checkboxes[i].checked = source.checked;
+	}
+</script>
