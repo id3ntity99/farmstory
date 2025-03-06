@@ -32,6 +32,7 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   public ArticleDAO(ConnectionHelper helper) {
     this.helper = helper;
   }
+  
 
   @Override
   public void insert(ArticleDTO dto) {
@@ -103,7 +104,7 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
   @Override
   public List<ArticleDTO> selectAll() {
-    String sql = "select * from `article` order by `id` desc";
+    String sql = "select `id`, `title`, `content`,`author`, `register_date` from `article` order by `id` desc";
     List<ArticleDTO> articles = new ArrayList<>();
 
     try {
@@ -118,11 +119,13 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
         articleDTO.setTitle(rs.getString("title"));
         articleDTO.setContent(rs.getString("content"));
         articleDTO.setAuthor(rs.getString("author"));
-        articleDTO.setRegisterDate(rs.getString("registerDate"));
+        articleDTO.setRegisterDate(rs.getString("register_date"));
 
         articles.add(articleDTO);
       }
-
+      
+      LOGGER.debug("게시글 수 : " + articles.size());
+      
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
     }
@@ -240,13 +243,13 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   }
 
   public int count() {
+	int count = 0;
     String sql = "select count(*) from `article`";
-    int count = 0;
-
+    
     try {
       Connection conn = helper.getConnection();
-      PreparedStatement psmt = conn.prepareStatement(sql);
-      ResultSet rs = psmt.executeQuery();
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(sql);
 
       if (rs.next()) {
         count = rs.getInt(1);
@@ -257,31 +260,5 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
     }
 
     return count;
-  }
-
-  // 추가 메서드: 특정 게시글 번호로 조회
-  public ArticleDTO findByNo(int id) {
-    String sql = "SELECT * FROM `article` WHERE `id` = ?";
-    ArticleDTO article = null;
-
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql)) {
-
-      psmt.setInt(1, id);
-      ResultSet rs = psmt.executeQuery();
-
-      if (rs.next()) {
-        article = new ArticleDTO();
-        article.setId(rs.getInt("id"));
-        article.setTitle(rs.getString("title"));
-        article.setContent(rs.getString("content"));
-        article.setAuthor(rs.getString("author"));
-        article.setRegisterDate(rs.getString("regitserDate"));
-      }
-    } catch (Exception e) {
-      LOGGER.error("게시글 번호 조회 중 오류 발생: " + e.getMessage());
-    }
-
-    return article;
   }
 }

@@ -1,7 +1,6 @@
 package farmstory.controller.article;
 
 import java.io.IOException;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.dao.ArticleDAO;
@@ -30,10 +29,10 @@ public class WriteControllerGardening extends HttpServlet {
     try {
       ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
       ArticleDAO dao = new ArticleDAO(helper);
-      ArticleDAO fileDAO = new ArticleDAO(helper);
+      //ArticleDAO fileDAO = new ArticleDAO(helper);
       
       this.service = new DefaultService<>(dao);
-      this.fileService = new DefaultService<>(fileDAO);
+      //this.fileService = new DefaultService<>(fileDAO);
 
     } catch (Exception e) {
       logger.error(e.getMessage());
@@ -66,9 +65,10 @@ public class WriteControllerGardening extends HttpServlet {
       dto.setContent(content);
       //dto.setFile(files.size());
       dto.setAuthor(author);
-      service.create(dto);
       
       logger.debug(dto.toString());
+      
+      service.create(dto);
       
       /*
       int fileId = dto.getId();      

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import farmstory.dao.ArticleDAO;
 import farmstory.dto.ArticleDTO;
+import farmstory.dto.PageGroupDTO;
 import farmstory.service.CountableDefaultService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
@@ -24,13 +25,16 @@ public class ListControllerGardening extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(ListControllerGardening.class.getName());
 
     private CountableDefaultService<ArticleDTO> service;
+    private PageGroupDTO pageService;
     
+
     @Override
     public void init() throws ServletException {
     	try {
             ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
             ArticleDAO dao = new ArticleDAO(helper);
             this.service = new CountableDefaultService<>(dao);
+            
     	}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -39,25 +43,40 @@ public class ListControllerGardening extends HttpServlet {
     
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+		
 		try {
+			String pg = req.getParameter("pg");
 
-            List<ArticleDTO> articles = service.getAll();
-
-            String pg = req.getParameter("pg");
+			int total = service.getAll().size(); // 전체 게시글 개수 가져오기
+			int pageSize = 10; // 한 페이지당 보여줄 게시글 개수
+			
+			int currentPageNum = (pg != null) ? Integer.parseInt(pg) : 1;
+			int lastPageNum = (int) Math.ceil((double) total / pageSize);
+			int pageStartNum = total -(currentPageNum -1) * pageSize;
+			
+			List<ArticleDTO> articles = service.getPagedList(currentPageNum, pageSize);
+			
+            ArticleDTO dto = new ArticleDTO();
+            ArticleDTO currentPage = service.get(dto);
             
-            int currentPage = (pg != null) ? Integer.parseInt(pg) : 1;
             
-            int total = service.getAll().size(); // 전체 게시글 개수 가져오기
+           
+            logger.debug("current: " + currentPageNum + ", start: " + pageStartNum + ", last: " + lastPageNum);
             
-            int pageSize = 10; // 한 페이지당 보여줄 게시글 개수
+            PageGroupDTO pageGroupDTO = getCurrentPageGroup(currentPage, lastPageNum);
+          
+            //List<ArticleDTO> articles = service.getAll();
             
-            int lastPageNum = (int) Math.ceil((double) total / pageSize);
+            logger.debug("articles: " + articles);
             
             req.setAttribute("articles", articles);
-            req.setAttribute("currentPage", currentPage);
-            req.setAttribute("lastPageNum", lastPageNum);
-
-
+    		req.setAttribute("currentPage", currentPage);
+    		req.setAttribute("lastPageNum", lastPageNum);
+    		req.setAttribute("pageGroupDTO", pageGroupDTO);
+    		req.setAttribute("pageStartNum", pageStartNum);
+    		
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningList.jsp");
             dispatcher.forward(req, resp);
 
@@ -67,9 +86,31 @@ public class ListControllerGardening extends HttpServlet {
         }
 	}
 
+	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 	}
 
+	private PageGroupDTO getCurrentPageGroup(ArticleDTO currentPage, int lastPageNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+    public PageGroupDTO getCurrentPageGroup(int currentPageNum, int lastPageNum) {
+        int groupSize = 10; // 한 그룹당 페이지 개수 (예: 1~5, 6~10)
+
+        int currentGroup = (currentPageNum - 1) / groupSize + 1; // 현재 페이지 그룹 번호
+        int startPage = (currentGroup - 1) * groupSize + 1; // 해당 그룹의 첫 페이지
+        int endPage = startPage + groupSize - 1; // 해당 그룹의 마지막 페이지
+
+        // 마지막 페이지 번호보다 크면 마지막 페이지 번호로 제한
+        if (endPage > lastPageNum) {
+            endPage = lastPageNum;
+        }
+
+        return new PageGroupDTO(startPage, endPage, currentGroup);
+    }
+    
 }

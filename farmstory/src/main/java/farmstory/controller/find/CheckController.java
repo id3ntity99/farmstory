@@ -1,5 +1,6 @@
 package farmstory.controller.find;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,10 @@ public class CheckController extends HttpServlet {
         HttpSession session = req.getSession();
         String savedCode = (String) session.getAttribute("authCode");
         
+        logger.debug("입력된 인증번호: " + inputCode);
+        logger.debug("세션 ID: " + session.getId());
+        logger.debug("세션 저장된 인증번호: " + savedCode);
+        
         JsonObject json = new JsonObject();
 
         if (savedCode == null) {
@@ -40,8 +45,12 @@ public class CheckController extends HttpServlet {
         } else {
             json.addProperty("status", "error");
             json.addProperty("message", "인증번호가 일치하지 않습니다.");
-        }logger.debug("savedCode" + savedCode);
+        }
 
-        resp.getWriter().write(json.toString());
+        // JSON 응답 반환
+        try (PrintWriter out = resp.getWriter()) {
+            out.write(json.toString());
+        }
     }
 }
+    

@@ -65,13 +65,13 @@
                   	<select name="searchType">
                     	<option value="title">제목</option>
                     	<option value="content">내용</option>
-                    	<option value="writer">글쓴이</option>
+                    	<option value="author">글쓴이</option>
                    	</select>
                     <input type="text" name="keyword" placeholder="검색 키워드 입력">
                     <input type="submit" value="검색">
                 </form>
              </nav>
-             <table border="0">                    
+             <table border="0" style="width: 100%; text-align: center;">                    
              <tr>
                 <th>번호</th>
                 <th>제목</th>
@@ -80,14 +80,14 @@
                 <th>조회</th>
              </tr>
              <c:choose>
-             <c:when test="${not empty requestScope.article}">     
-	             <c:forEach var="article" items="${requestScope.article}">               
+             <c:when test="${not empty requestScope.articles}">     
+	             <c:forEach var="articles" items="${requestScope.articles}">               
 			         <tr>
 			            <td>${pageStartNum}</td>
-			            <td><a href="/farmstory/article/view.do?no=${article.id}">${article.title}[${article.comment}]</a></td>
-			            <td>${article.nickname}</td>
-			            <td>${article.register_date.substring(0,10)}</td>
-			            <td>${article.view_number}</td>
+			            <td><a href="/farmstory/article/view.do?no=${articles.id}">${articles.title}[${articles.commentNumber}]</a></td>
+			            <td>${articles.author}</td>
+			            <td>${articles.registerDate.substring(0,10)}</td>
+			            <td>${articles.viewNumber}</td>
 			       	 </tr>
 		       		<c:set var="pageStartNum" value="${pageStartNum - 1}" />
 	            </c:forEach>
