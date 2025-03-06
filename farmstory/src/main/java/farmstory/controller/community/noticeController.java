@@ -1,6 +1,4 @@
-package farmstory.controller.admin;
-
-import java.io.IOException;
+package farmstory.controller.community;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -8,23 +6,29 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-@WebServlet("/admin/product-list.do")
-public class Product_listController extends HttpServlet{
+/**
+ * Servlet implementation class noticeController
+ */
+@WebServlet("/notice.do")
+public class noticeController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1421234456356053821L;
-	
-	@Override
+    public noticeController() {
+
+    }
+
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-list.jsp");
+		//Viewport
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/community/notice.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
-	@Override
+
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 	}
-	
-	
 
 }

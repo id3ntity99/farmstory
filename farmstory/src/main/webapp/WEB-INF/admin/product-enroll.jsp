@@ -34,7 +34,8 @@
 					<h3>상품목록</h3>
 				</nav>
 				<article>
-					<form action="/farmstory/admin/product-enroll.do" method="post" enctype="multipart/form-data">
+					<form action="/farmstory/admin/product-enroll.do" method="post"
+						enctype="multipart/form-data">
 						<table border="0">
 							<tr>
 								<td>상품명</td>
