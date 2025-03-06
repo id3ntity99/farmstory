@@ -23,34 +23,33 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/main.do")
-public class MainController extends HttpServlet{
+public class MainController extends HttpServlet {
 
 	private static final long serialVersionUID = 1574381268514961003L;
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class.getName());
 	private CountableDefaultService<OrderDTO> orderservice;
 	private CountableDefaultService<ProductDTO> productservice;
 	private CountableDefaultService<UserDTO> userservice;
-	
-	
+
 	@Override
 	public void init() throws ServletException {
 		try {
 			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-			
+
 			OrderDAO orderDAO = new OrderDAO(helper);
 			this.orderservice = new CountableDefaultService<>(orderDAO);
-			
+
 			ProductDAO productDAO = new ProductDAO(helper);
-	        this.productservice = new CountableDefaultService<>(productDAO);
-	        
-	        UserDAO userDAO = new UserDAO(helper);
-	        this.userservice = new CountableDefaultService<>(userDAO);
-			
+			this.productservice = new CountableDefaultService<>(productDAO);
+
+			UserDAO userDAO = new UserDAO(helper);
+			this.userservice = new CountableDefaultService<>(userDAO);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -67,7 +66,6 @@ public class MainController extends HttpServlet{
 			int pageSize = 3; // 한 페이지에 보여줄 데이터 수
 			int total = orders.size(); // 전체 데이터 개수
 			int lastPageNum = (int) Math.ceil((double) total / pageSize); // 마지막 페이지 번호 계산
-
 			// 현재 페이지에 해당하는 데이터만 추출
 			int startIndex = (currentPage - 1) * pageSize;
 			int endIndex = Math.min(startIndex + pageSize, total); // 페이지 마지막 인덱스
@@ -75,25 +73,30 @@ public class MainController extends HttpServlet{
 			// 페이지에 맞는 데이터만 가져오기 (subList)
 			List<OrderDTO> currentPageOrders = orders.subList(startIndex, endIndex);
 
+			int productTotal = products.size();
+			int productEndIndex = Math.min(startIndex + pageSize, productTotal);
+			List<ProductDTO> currentPageProducts = products.subList(startIndex, productEndIndex);
+
 			// 페이지네이션 처리
 			req.setAttribute("orders", currentPageOrders);
-	        req.setAttribute("users", users);
-	        req.setAttribute("products", products);
-	        req.setAttribute("currentPage", currentPage);
-	        req.setAttribute("lastPageNum", lastPageNum);
+			req.setAttribute("users", users);
+			req.setAttribute("products", currentPageProducts);
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("lastPageNum", lastPageNum);
+			
 
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/main.jsp");
 			dispatcher.forward(req, resp);
-			
+
 		} catch (Exception e) {
 			logger.error("게시글 목록 조회 중 오류 발생", e);
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "서버 오류 발생");
 		}
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 	}
 
 }

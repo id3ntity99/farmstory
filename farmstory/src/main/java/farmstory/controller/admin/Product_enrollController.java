@@ -48,6 +48,7 @@ public class Product_enrollController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("pageName", "product-enroll");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/product-enroll.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -83,21 +84,32 @@ public class Product_enrollController extends HttpServlet {
 				uploadDirectory.mkdir();
 			}
 
-			String thumbnailLocation = saveImage(req.getPart("multImage1 "), uploadDir);
+			String thumbnailLocation = saveImage(req.getPart("multImage1"), uploadDir);
 			String infoLocation = saveImage(req.getPart("multImage2"), uploadDir);
 			String detailLocation = saveImage(req.getPart("multImage3"), uploadDir);
-
 
 			// 상품 이미지 DTO 생성 및 저장
 			ProductImageDTO imageDTO = new ProductImageDTO();
 			imageDTO.setProductid(productId);
-			imageDTO.setThumbnailLocation(thumbnailLocation);
-			imageDTO.setInfoLocation(infoLocation);
-			imageDTO.setDetailLocation(detailLocation);
+			if (thumbnailLocation != null) {
+				imageDTO.setThumbnailLocation(thumbnailLocation);
+			}
+			if (infoLocation != null) {
+				imageDTO.setInfoLocation(infoLocation);
+			}
+			if (detailLocation != null) {
+				imageDTO.setDetailLocation(detailLocation);
+			}
 
-			productImageDAO.insertProductImage(imageDTO);
+			// 이미지 DTO가 유효하면 DB에 저장
+			if (imageDTO.getThumbnailLocation() != null || imageDTO.getInfoLocation() != null
+					|| imageDTO.getDetailLocation() != null) {
+
+				productImageDAO.insertProductImage(imageDTO);
+			}
 
 			resp.sendRedirect("/farmstory/admin/product-list.do");
+			
 
 		} catch (DataAccessException e) {
 			logger.error("상품 등록 오류", e);
@@ -113,13 +125,14 @@ public class Product_enrollController extends HttpServlet {
 	}
 
 	private String saveImage(Part part, String uploadDir) throws IOException {
+		if (part == null || part.getSize() == 0) {
+			return null; // 이미지가 없으면 null 반환
+		}
 		String fileName = UUID.randomUUID().toString(); // 파일 이름을 UUID로 생성하여 충돌 방지
 		String fileExtension = getFileExtension(part.getSubmittedFileName());
 		String filePath = uploadDir + File.separator + fileName + fileExtension;
 
-		if (part.getSize() > 0) {
-			part.write(filePath); // 파일을 지정된 위치에 저장
-		}
+		part.write(filePath);
 
 		return "/uploads/" + fileName + fileExtension; // 저장된 파일 경로 반환
 	}
