@@ -53,6 +53,7 @@ public class UserDAO implements CountableDAO<UserDTO> {
     UserDTO user = new UserDTO();
     try (Connection conn = helper.getConnection();
         PreparedStatement psmt = conn.prepareStatement(Query.SELECT_USER)) {
+      psmt.setString(1, dto.getId());
       ResultSet rs = psmt.executeQuery();
       if (rs.next()) {
         user.setId(rs.getString(1));
@@ -158,69 +159,69 @@ public class UserDAO implements CountableDAO<UserDTO> {
     }
   }
 
-  public UserDTO findUser(String name, String email) throws DataAccessException {
+  public UserDTO findUser(String name, String email) {
+	  String sql = "SELECT id, name, email FROM users WHERE name = ? AND email = ?";
+	  try {
+		  Connection conn = helper.getConnection();
+		  PreparedStatement psmt = conn.prepareStatement(sql);
+		  psmt.setString(1, name);
+		  psmt.setString(2, email);
+		  ResultSet rs = psmt.executeQuery();
+		  if (rs.next()) {
+			UserDTO user = new UserDTO();
+			user.setId(rs.getString("id"));
+			user.setName(rs.getString("name"));
+			user.setEmail(rs.getString("email"));
+			return user;
+		}
+	} catch (Exception e) {
+		java.util.logging.Logger.getLogger(e.getMessage());
+	}
+	return null;
+  }
+
+  public UserDTO findPass(String id, String email) {
     UserDTO user = null;
-    String sql = "SELECT id FROM user WHERE name = ? AND email = ?";
+    String sql = "SELECT * FROM user WHERE `id` = ? AND `email` = ?";
 
     try (Connection conn = helper.getConnection();
         PreparedStatement psmt = conn.prepareStatement(sql)) {
-      psmt.setString(1, name);
+      psmt.setString(1, id);
       psmt.setString(2, email);
       ResultSet rs = psmt.executeQuery();
 
       if (rs.next()) {
         user = new UserDTO();
         user.setId(rs.getString("id"));
+        user.setEmail(rs.getString("email"));
+
       }
-    } catch (NamingException | SQLException e) {
-      String msg =
-          String.format("모든 사용자 아이디 조회 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
-      throw new DataAccessException(msg, e);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
     return user;
 
   }
-  public UserDTO findPass(String id, String email) {
-	  UserDTO user = null;
-	  String sql = "SELECT * FROM user WHERE `id` = ? AND `email` = ?";
-	  
-	  try (Connection conn = helper.getConnection();
-			  PreparedStatement psmt = conn.prepareStatement(sql)) {
-		  psmt.setString(1, id);
-		  psmt.setString(2, email);
-		  ResultSet rs = psmt.executeQuery();
-		  
-		  if (rs.next()) {
-			  user = new UserDTO();
-			  user.setId(rs.getString("id"));
-              user.setEmail(rs.getString("email"));
 
-		  }
-	  } catch (Exception e) {
-		  e.printStackTrace();
-	  }
-	  return user;
-	  
-  }
   public boolean isUserValid(String id, String email) {
-	  
-	  String sql = "select count(*) from `user` where `id`=? and `email`=?";
-	  
-	  try {
-		  Connection conn = helper.getConnection();
-          PreparedStatement psmt = conn.prepareStatement(sql);
-          ResultSet rs = psmt.executeQuery();
-          
-          psmt.setString(1, id);
-          psmt.setString(2, email);
-          
-          if(rs.next()) {
-        	  return rs.getInt(1) > 0;
-          }
-	} catch (Exception e) {
-		LOGGER.error(e.getMessage());
-	}
-	return false;
+
+    String sql = "select count(*) from `user` where `id`=? and `email`=?";
+
+    try {
+      Connection conn = helper.getConnection();
+      PreparedStatement psmt = conn.prepareStatement(sql);
+      ResultSet rs = psmt.executeQuery();
+
+      psmt.setString(1, id);
+      psmt.setString(2, email);
+
+      if (rs.next()) {
+        return rs.getInt(1) > 0;
+      }
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+    }
+    return false;
   }
 
   @Override
