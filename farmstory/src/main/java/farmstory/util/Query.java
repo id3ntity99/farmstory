@@ -20,6 +20,8 @@ public final class Query {
 
   public static final String INSERT_PROD_IMAGE =
       "INSERT INTO `product_image` (`product_id`, `thumbnail_location`, `info_location`, `detail_location`) VALUES (?,?,?,?)";
+  public static final String SELECT_PROD_IMAGE =
+      "SELECT * FROM `product_image` WHERE `product_id` = ?";
 
   private Query() {
     // Empty constructor
