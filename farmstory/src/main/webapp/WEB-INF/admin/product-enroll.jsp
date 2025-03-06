@@ -55,7 +55,7 @@
 							</tr>
 							<tr>
 								<td>포인트</td>
-								<td><input type="text" name="point" id="point" /> 포인트는 가격의
+								<td><input type="text" name="point" id="point" value="100"/> 포인트는 가격의
 									1%</td>
 							</tr>
 							<tr>
