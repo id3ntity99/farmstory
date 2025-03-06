@@ -143,6 +143,28 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public void insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
+        String sql = "INSERT INTO product_image (product_id, thumbnail_location, info_location, detail_location) "
+                   + "VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = helper.getConnection(); PreparedStatement psmt = conn.prepareStatement(sql)) {
+            psmt.setInt(1, imageDTO.getProductid());
+            psmt.setString(2, imageDTO.getThumbnailLocation());
+            psmt.setString(3, imageDTO.getInfoLocation());
+            psmt.setString(4, imageDTO.getDetailLocation());
+
+            int rowsAffected = psmt.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new DataAccessException("상품 이미지 등록에 실패했습니다.", null);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("SQL Error: " + e.getMessage(), e);
+            throw new DataAccessException("상품 이미지를 등록하는 도중 예외가 발생했습니다.", e);
+        } catch (NamingException e1) {
+			e1.printStackTrace();
+		}
+    }
 
 	public void insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
 		String sql = "INSERT INTO product_image (product_id, thumbnail_location, info_location, detail_location) "
@@ -165,5 +187,4 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 			e1.printStackTrace();
 		}
 	}
-
 }
