@@ -59,9 +59,9 @@ public class ProductController extends HttpServlet {
         ProductDTO product = prodService.get(target);
         if (product.getName() != null) {// 조회 결과가 있는 경우
 
-          ProductImageDTO image = imageService.get(product.getImage());
+          //ProductImageDTO image = imageService.get(product.getImage());
 
-          req.setAttribute("image", image);
+          //req.setAttribute("image", image);
           req.setAttribute("product", product);
           req.getRequestDispatcher("/WEB-INF/shopping/detail.jsp").forward(req, resp);
         } else { // 조회 결과가 없는 경우

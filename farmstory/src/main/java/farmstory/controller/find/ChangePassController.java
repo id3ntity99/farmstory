@@ -45,7 +45,7 @@ public class ChangePassController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		try {
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
 		String confirmPassword = req.getParameter("confirmPassword");
@@ -73,5 +73,9 @@ public class ChangePassController extends HttpServlet{
         PrintWriter out = resp.getWriter();
         out.write(json.toString());
         out.flush();
+		}catch (Exception e) {
+			e.printStackTrace();
+			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}
     }
 }

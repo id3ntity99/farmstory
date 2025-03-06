@@ -46,22 +46,38 @@ public class ViewControllerGardening extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String id = req.getParameter("id");
+		
+		logger.debug("requestID: " + id);
+
+		
 		ArticleDTO dto = new ArticleDTO();
 		dto.setId(id);
+		CommentDTO commentDTO = new CommentDTO();
+		
 				
 		
 		try {
-			ArticleDTO articleDTO = service.get(dto);
-			logger.debug("articleDTO : " + articleDTO);
 			
-			List<CommentDTO> comments = commentDAO.selectAllComment(id);
-			logger.debug("comments : " + comments);
+			//int articleId = Integer.parseInt("articleId");
+			//commentDTO.setArticleId(articleId);
+			
+			//logger.debug("requestArticleID1: " + articleId);
+			ArticleDTO articleDTO = service.get(dto);
+			
+			
+
+			//List<CommentDTO> comments = commentDAO.selectAllComment(articleId);
+	
+			
 			
 			req.setAttribute("articleDTO", articleDTO);
-			req.setAttribute("comments", comments);
+			//req.setAttribute("comments", comments);
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningView.jsp");
 			dispatcher.forward(req, resp);
+			
+			logger.debug("articleDTO : " + articleDTO);
+
 			
 		} catch (DataAccessException e) {
 			e.printStackTrace();

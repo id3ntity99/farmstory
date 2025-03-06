@@ -41,7 +41,7 @@ public class CommentDAO implements DataAccessObject<CommentDTO>{
 		try {
 			Connection conn = helper.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			psmt.setInt(1, dto.getArticle_id());
+			psmt.setInt(1, dto.getArticleId());
 			psmt.setString(2, dto.getAuthor());
 			psmt.setString(3, dto.getContent());
 			psmt.executeUpdate();
@@ -71,7 +71,7 @@ public class CommentDAO implements DataAccessObject<CommentDTO>{
 	
 	public CommentDTO selectComment(int id) {
 		CommentDTO dto = null;
-		String sql = "select * from `comment` where `id`=?";
+		String sql = "select * from `comment` where `article_id`=?";
 		
 		try {
 			Connection conn = helper.getConnection();
@@ -83,7 +83,7 @@ public class CommentDAO implements DataAccessObject<CommentDTO>{
 			if(rs.next()) {
 				dto = new CommentDTO();
 				dto.setId(rs.getInt(1));
-				dto.setArticle_id(rs.getInt(2));
+				dto.setArticleId(rs.getInt(2));
 				dto.setAuthor(rs.getString(3));
 				dto.setContent(rs.getString(4));
 				dto.setRegister_date(rs.getString(5));
@@ -107,20 +107,20 @@ public class CommentDAO implements DataAccessObject<CommentDTO>{
 		return null;
 	}
 	
-	public List<CommentDTO> selectAllComment(String articleId){
+	public List<CommentDTO> selectAllComment(int articleId){
 		String sql = "select * from `comment` where `article_id`=? order by `id` asc;";
 		
 		List<CommentDTO> comments = new ArrayList<CommentDTO>();
 		try {
 			Connection conn = helper.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(sql);
-			psmt.setString(1, articleId);
+			psmt.setInt(1, articleId);
 			ResultSet rs = psmt.executeQuery();
 			
 			while(rs.next()) {
 				CommentDTO dto = new CommentDTO();
 				dto.setId(rs.getInt(1));
-				dto.setArticle_id(rs.getInt(2));
+				dto.setArticleId(rs.getInt(2));
 				dto.setAuthor(rs.getString(3));
 				dto.setContent(rs.getString(4));
 				dto.setRegister_date(rs.getString(5));

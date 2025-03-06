@@ -56,7 +56,7 @@ public class ModifyControllerGardening extends HttpServlet{
 			
 			if (articleDTO == null) {
 	            logger.error("Article not found for id: " + id);
-	            resp.sendRedirect("/farmstory/story/listGardening.do"); // 글이 없는 경우 목록으로 리다이렉트
+	            resp.sendRedirect("/farmstory/story/listGardening"); // 글이 없는 경우 목록으로 리다이렉트
 	            return;
 	        }
 			

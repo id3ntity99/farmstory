@@ -76,10 +76,5 @@ public class Product_listController extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-
-  }
-
-
-
+      throws ServletException, IOException {}
 }
