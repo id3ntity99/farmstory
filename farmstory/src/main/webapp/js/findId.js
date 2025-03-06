@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const sendCodeBtn = document.getElementById("sendCodeBtn");
     const verifyCodeBtn = document.getElementById("verifyCodeBtn");
     const authCodeInput = document.getElementById("authCode");
+	const nextBtn = document.getElementById("nextBtn");
+	
 
     // "인증번호 받기" 버튼 클릭 이벤트
     sendCodeBtn.addEventListener("click", function(event) {
@@ -25,12 +27,15 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                alert("인증번호가 이메일로 발송되었습니다.");
+			
+			console.log(data);
+			
+            if (data.status == 'success') {
+                alert(data.message);
                 // 예제용: 서버에서 발송된 인증번호를 클라이언트 변수에 저장(실제에서는 보안상 클라이언트에 전달하지 않습니다)
                 window.authCode = data.authCode;
             } else {
-                alert("입력한 이름과 이메일이 일치하지 않습니다.");
+                alert(data.message);
             }
         })
         .catch(error => {
@@ -38,24 +43,75 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("인증번호 발송 중 오류가 발생했습니다.");
         });
     });
+	
+	verifyCodeBtn.addEventListener("click", function(event) {
+	        event.preventDefault();
 
-    // "확인" 버튼 클릭 이벤트
-    verifyCodeBtn.addEventListener("click", function(event) {
-        event.preventDefault();
+	        const inputCode = authCodeInput.value.trim(); // 입력 필드에서 인증번호 가져오기
 
-        const inputCode = authCodeInput.value.trim();
-        if (!inputCode) {
-            alert("인증번호를 입력해주세요.");
-            return;
-        }
+	        if (!inputCode) {
+	            alert("인증번호를 입력해주세요.");
+	            return;
+	        }
 
-        // 예제용 클라이언트 비교 (실제 서비스에서는 서버측에서 검증)
-        if (window.authCode && inputCode === window.authCode) {
-            alert("인증번호가 확인되었습니다.");
-            window.isVerified = true; // 추후 폼 제출 시 검증 여부 활용 가능
-        } else {
-            alert("인증번호가 일치하지 않습니다. 다시 확인해주세요.");
-            window.isVerified = false;
-        }
-    });
-});
+	// 서버로 인증번호 검증 요청 (AJAX)
+	    fetch("/farmstory/find/check.do", {
+	        method: "POST",
+	        headers: {
+	            "Content-Type": "application/x-www-form-urlencoded",
+	        },
+	        body: "code=" + encodeURIComponent(inputCode),
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+			
+			console.log(data);
+			
+	        if (data.status === "success") {
+	            alert(data.message);
+	            window.isVerified = true;
+	        } else {
+	            alert(data.message);
+	            window.isVerified = false;
+	        }
+	    })
+	    .catch(error => console.error("Error:", error));
+	});
+	nextBtn.addEventListener("click", function (event) {
+	        event.preventDefault(); // 기본 이동 방지
+
+	        if (!window.isVerified) {
+	            alert("인증을 완료해주세요.");
+	            return;
+	        }
+
+	        const email = document.getElementById("email").value.trim();
+
+	        fetch("/farmstory/find/findIdResult.do", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/x-www-form-urlencoded"
+	            },
+	            body: new URLSearchParams({ email }).toString(),
+	        })
+	        .then(response => response.json())
+	        .then(data => {
+				console.log("서버 응답 데이터 : ", data);
+	            if (data.status === "success") {
+	                // 사용자 정보를 sessionStorage에 저장
+	                sessionStorage.setItem("userInfo", JSON.stringify({
+						name: data.name,
+		                id: data.id,  // 여기서 id 저장 확인
+		                email: data.email,
+		                registerDate: data.register_date  // 여기서 날짜 저장 확인
+					}));
+
+	                // 아이디 찾기 결과 페이지로 이동
+	                window.location.href = "/farmstory/find/findIdResult.do";
+	            } else {
+	                alert(data.message);
+	            }
+	        })
+	        .catch(error => console.error("사용자 정보 가져오기 오류:", error));
+	    });
+	});

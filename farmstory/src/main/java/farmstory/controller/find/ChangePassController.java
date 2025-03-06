@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/my/changePass.do")
+@WebServlet("/find/changePass.do")
 public class ChangePassController extends HttpServlet{
 
 	private static final long serialVersionUID = 124541214445412446L;
@@ -17,8 +17,7 @@ public class ChangePassController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//viewpost
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/my/change-pass.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/find/change-pass.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

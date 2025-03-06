@@ -111,29 +111,27 @@ public class UserDAO implements CountableDAO<UserDTO> {
     return users;
   }
 
-  public List<UserDTO> selectResult() throws DataAccessException {
-    List<UserDTO> dtos = new ArrayList<UserDTO>();
-    String sql = "SELECT `name`, `id`, `email`, `register_date` FROM `user`";
+ public UserDTO selectResult(String email) {
+    UserDTO user = null;
+    String sql = "SELECT `name`, `id`, `email`, `register_date` FROM `user` where `email` = ?";
 
     try (Connection conn = helper.getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        ResultSet rs = pstmt.executeQuery()) {
+        PreparedStatement psmt = conn.prepareStatement(sql)) {
 
-      while (rs.next()) {
-        UserDTO user = new UserDTO();
-        user.setName(rs.getString("name"));
-        user.setId(rs.getString("id"));
-        user.setEmail(rs.getString("email"));
-        user.setRegisterDate(rs.getString("register_Date"));
-        dtos.add(user);
-      }
-    } catch (NamingException | SQLException e) {
-      String msg =
-          String.format("사용자 이름, 아이디, 이메일 조회 중 예외가 발생하였습니다.%n%s%n%s", e.getCause(), e.getMessage());
-      throw new DataAccessException(msg, e);
+    	psmt.setString(1, email);
+        try (ResultSet rs = psmt.executeQuery()) {
+            if (rs.next()) {
+                user = new UserDTO();
+                user.setName(rs.getString("name"));
+                user.setId(rs.getString("id"));
+                user.setEmail(rs.getString("email"));
+                user.setRegisterDate(rs.getString("register_date"));
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-
-    return dtos;
+    return user;
   }
 
   @Override
@@ -181,25 +179,26 @@ public class UserDAO implements CountableDAO<UserDTO> {
   }
 
   public UserDTO findPass(String id, String email) {
-    UserDTO user = null;
-    String sql = "SELECT * FROM user WHERE `id` = ? AND `email` = ?";
+    
+    String sql = "SELECT pass, id, email FROM user WHERE `id` = ? AND `email` = ?";
 
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql)) {
-      psmt.setString(1, id);
-      psmt.setString(2, email);
-      ResultSet rs = psmt.executeQuery();
-
-      if (rs.next()) {
-        user = new UserDTO();
-        user.setId(rs.getString("id"));
-        user.setEmail(rs.getString("email"));
-
-      }
+    try {
+		  Connection conn = helper.getConnection();
+		  PreparedStatement psmt = conn.prepareStatement(sql);
+		  psmt.setString(1, id);
+		  psmt.setString(2, email);
+		  ResultSet rs = psmt.executeQuery();
+		  if (rs.next()) {
+			UserDTO user = new UserDTO();
+			user.setId(rs.getString("pass"));
+			user.setName(rs.getString("id"));
+			user.setEmail(rs.getString("email"));
+			return user;
+		}
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return user;
+    return null;
 
   }
 
