@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>어드민 - 상품목록</title>
-	<link rel="stylesheet" href="/farmstory/style/admin.css">
+<meta charset="UTF-8">
+<title>어드민 - 상품목록</title>
+<link rel="stylesheet" href="/farmstory/style/admin.css">
 </head>
 <body>
 	<div id="container">
@@ -27,7 +28,8 @@
 						</ol></li>
 					<li><span>회원관리</span>
 						<ol>
-							<li class="${pageName == 'user-list' ? 'active' : ''}"><a href="/farmstory/admin/user-list.do">회원목록</a></li>
+							<li class="${pageName == 'user-list' ? 'active' : ''}"><a
+								href="/farmstory/admin/user-list.do">회원목록</a></li>
 							<li><a href="#">회원등록</a></li>
 						</ol></li>
 				</ul>
