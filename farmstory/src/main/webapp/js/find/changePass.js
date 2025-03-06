@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 2️⃣ '비밀번호 변경' 버튼 클릭 이벤트
-    document.getElementById("changePassBtn").addEventListener("click", function (event) {
+    changePassBtn.addEventListener("click", function(event){
         event.preventDefault();
 
         const userId = userInfo.id;  // 가져온 사용자 ID
@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (newPassword.length < 8) {
-            alert("비밀번호는 최소 8자 이상 입력해야 합니다.");
+        if (newPassword.length < 8 || !/[A-Za-z]/.test(newPassword) || !/\d/.test(newPassword) || !/[!@#$%^&*]/.test(newPassword)) {
+            alert("비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다.");
             return;
         }
 
@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("새 비밀번호가 일치하지 않습니다.");
             return;
         }
+		
 
         // 4️⃣ 서버에 비밀번호 변경 요청 (AJAX)
         fetch("/farmstory/find/changePass.do", {
@@ -47,27 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
             body: new URLSearchParams({
                 userId: userId,
                 newPassword: newPassword,
-                confirmPassword: confirmPassword
             }).toString()
+			
         })
         .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-            if (data.status === "success") {
-                isPasswordChanged = true; // 비밀번호 변경 성공 표시
-            }
-        })
-        .catch(error => console.error("비밀번호 변경 오류:", error));
-    });
-
-    // 5️⃣ '다음' 버튼 클릭 시 로그인 페이지로 이동 (비밀번호 변경 완료 후)
-    changePassBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        if (isPasswordChanged) {
-            sessionStorage.removeItem("userInfo"); // 세션스토리지 초기화
-            window.location.href = "/farmstory/signin.do"; // 로그인 페이지로 이동
-        } else {
-            alert("비밀번호 변경을 먼저 완료해주세요.");
-        }
-    });
-});
+		.then(data => {
+		            alert(data.message);
+		            if (data.status === "success") {
+		                sessionStorage.removeItem("userInfo"); // 세션 스토리지 초기화
+		                window.location.href = "/farmstory/signin.do"; // 로그인 페이지로 이동
+		            }
+		        })
+		        .catch(error => console.error("비밀번호 변경 오류:", error));
+				console.log("userId:", userId);
+									console.log("newPassword:", newPassword);
+		    });
+			
+		});

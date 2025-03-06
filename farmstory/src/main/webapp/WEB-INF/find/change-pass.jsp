@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -93,7 +92,7 @@
                     </section>
                     <section class="mainbtn">
                         <a href="#">취소</a>
-                        <a href="/farmstory/user/signin" id="signInBtn">다음</a>
+                        <a href="/farmstory/signin" id="signInBtn">다음</a>
                     </section>
 
                 </section>
