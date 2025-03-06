@@ -10,17 +10,17 @@ main .container .content-area .content > h4 {
 }
 
 main > .container .side-content > a:nth-child(1) {
-  background: url(/static/images/sub_cate1_lnb1.png);
+  background: url(/farmstory/images/sub_cate1_lnb1.png);
 }
 
 main > .container .side-content > a:nth-child(2) {
-  background: url(/static/images/sub_cate1_lnb2.png);
+  background: url(/farmstory/images/sub_cate1_lnb2.png);
 }
 
 main > .container .side-content > a:nth-child(1):hover {
-  background: url(/static/images/sub_cate1_lnb1_ov.png);
+  background: url(/farmstory/images/sub_cate1_lnb1_ov.png);
 }
 
 main > .container .side-content > a:nth-child(2):hover {
-  background: url(/static/images/sub_cate1_lnb2_ov.png);
+  background: url(/farmstory/images/sub_cate1_lnb2_ov.png);
 }
