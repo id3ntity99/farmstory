@@ -24,6 +24,11 @@ public class ArticleDTO implements DataTransferObject {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public void setId(String id) {
+		if(id != null) {
+			this.id = Integer.parseInt(id);
+		}
+	}
 	public String getUserId() {
 		return userId;
 	}

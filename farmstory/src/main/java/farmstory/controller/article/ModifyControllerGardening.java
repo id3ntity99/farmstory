@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import farmstory.dao.ArticleDAO;
 import farmstory.dto.ArticleDTO;
 import farmstory.exception.DataAccessException;
+import farmstory.service.CountableDefaultService;
 import farmstory.service.DefaultService;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
@@ -22,14 +23,12 @@ public class ModifyControllerGardening extends HttpServlet{
 	private static final long serialVersionUID = -8195123407449469536L;
 	private static final Logger logger = LoggerFactory.getLogger(ModifyControllerGardening.class.getName());
 	
-	private DefaultService<ArticleDTO> service;
+	private CountableDefaultService<ArticleDTO> service;
 	
 	@Override
 	public void init() throws ServletException {
 		try {
 			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-			ArticleDAO dao = new ArticleDAO(helper);
-			this.service = new DefaultService<>(dao);
 			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
@@ -38,8 +37,42 @@ public class ModifyControllerGardening extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningModify.jsp");
-		dispatcher.forward(req, resp);
+		String id = req.getParameter("id");		
+		System.out.println("ModifyController - 게시글번호 id : " + id);
+		
+        if (id == null || id.isEmpty()) {
+        	logger.warn("No article found for id: " + id);
+            resp.sendRedirect("/farmstory/story/listGardening"); // 게시글 목록으로 이동
+            return;
+        }
+		
+        ArticleDTO dto = new ArticleDTO();
+		dto.setId(id);
+        
+        
+		try {
+			ArticleDTO articleDTO = service.get(dto);
+			
+			logger.debug("articleDTO : " + articleDTO);
+			
+			
+			if (articleDTO == null) {
+	            logger.error("Article not found for id: " + id);
+	            resp.sendRedirect("/farmstory/story/listGardening.do"); // 글이 없는 경우 목록으로 리다이렉트
+	            return;
+	        }
+			
+	        req.setAttribute("articleDTO", articleDTO);
+			
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningModify.jsp");
+			dispatcher.forward(req, resp);
+			
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
 	}
 	
 	
@@ -47,18 +80,20 @@ public class ModifyControllerGardening extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
-		try {
-			String title = req.getParameter("title");
-			String content = req.getParameter("content");
-			String author = req.getParameter("author");
-			
+		String id = req.getParameter("id");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		String author = req.getParameter("author");
+		
+		try {	
 			ArticleDTO dto = new ArticleDTO();
+			dto.setId(id);
 			dto.setTitle(title);
 			dto.setContent(content);
 			dto.setAuthor(author);
 			dto.setViewNumber(0);
 			
-			service.create(dto);
+			service.update(dto);
 			
 			resp.sendRedirect(req.getContextPath() + "/listGardening");
 			
@@ -67,6 +102,7 @@ public class ModifyControllerGardening extends HttpServlet{
 		}
 		
 		
+		resp.sendRedirect("/farmstory/story/viewGardening?id="+id);
 		
 		
 	}

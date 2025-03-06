@@ -21,6 +21,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/*
+ * 날짜 : 2025
+ * 이름 : 홍길동
+ * 내용 : 
+ * 
+ */
+
 @WebServlet("/index.do")
 public class IndexPageController extends HttpServlet {
   private static final long serialVersionUID = UUID.randomUUID().version();
