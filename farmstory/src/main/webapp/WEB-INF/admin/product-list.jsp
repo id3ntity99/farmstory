@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>어드민 - 상품목록</title>
-<link rel="stylesheet" href="/farmstory/style/admin.css">
+	<meta charset="UTF-8">
+	<title>어드민 - 상품목록</title>
+	<link rel="stylesheet" href="/farmstory/style/admin.css">
 </head>
 <body>
 	<div id="container">

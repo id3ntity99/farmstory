@@ -211,6 +211,10 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public void insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
+        String sql = "INSERT INTO product_image (product_id, thumbnail_location, info_location, detail_location) "
+                   + "VALUES (?, ?, ?, ?)";
 
 	public int insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
 		// 이미지 경로가 모두 null인 경우 등록하지 않도록 처리
@@ -251,5 +255,4 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
 
 		return 0; // 실패한 경우 0 반환
 	}
-
 }
