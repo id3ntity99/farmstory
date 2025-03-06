@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- Table `Farmstory`.`company`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Farmstory`.`company` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `company_name` VARCHAR(30) NOT NULL,
   `manager_name` VARCHAR(45) NOT NULL,
   `contact` VARCHAR(20) NOT NULL,
@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`product` (
   CONSTRAINT `fk_product_company1`
     FOREIGN KEY (`company_id`)
     REFERENCES `Farmstory`.`company` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -90,8 +90,8 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`product_image` (
   CONSTRAINT `fk_product_image_product`
     FOREIGN KEY (`product_id`)
     REFERENCES `Farmstory`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -133,13 +133,13 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`wishlist` (
   CONSTRAINT `fk_wishlist_product1`
     FOREIGN KEY (`product_id`)
     REFERENCES `Farmstory`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_wishlist_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `Farmstory`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -180,8 +180,8 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`comment` (
   CONSTRAINT `fk_comment_article1`
     FOREIGN KEY (`article_id`)
     REFERENCES `Farmstory`.`article` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -197,8 +197,8 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`article_file` (
   CONSTRAINT `fk_article_file_article1`
     FOREIGN KEY (`article_id`)
     REFERENCES `Farmstory`.`article` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -216,8 +216,8 @@ CREATE TABLE IF NOT EXISTS `Farmstory`.`point_history` (
   CONSTRAINT `fk_point_history_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `Farmstory`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
