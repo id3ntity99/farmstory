@@ -260,7 +260,7 @@ public class UserDAO implements CountableDAO<UserDTO> {
           return false; // 입력값이 잘못된 경우 변경 불가
       }
 	  
-	  	String sql = "update user set password = ? where id = ?";
+	  	String sql = "update user set password = SHA2(?, 256) where id = ?";
 	  	
 	  	try {
 	  		Connection conn = helper.getConnection();

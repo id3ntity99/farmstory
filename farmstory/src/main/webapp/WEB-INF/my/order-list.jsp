@@ -101,20 +101,28 @@
                                 <th>주문일</th>
                                 <th>확인</th>
                             </tr>
-                            <tr>
-                                <td>상품 구매 내역이 없습니다.</td>
-                            </tr>
-                            <tr>
-                                <th>1001</th>
-                                <td><img src="/farmstory/images/market_item1.jpg" alt="사과"></td>
-                                <td>사과<br>500g</td>
-                                <td>4,000<br>원</td>
-                                <td>2</td>
-                                <td>11,000<br>원</td>
-                                <td>김유신</td>
-                                <td>2023-01-01 13:06:14</td>
-                                <td>[상세확인]</td>
-                            </tr> 
+                            <c:choose>
+                           		<c:when test="${empty selectAllOrder}">
+	                            <tr>
+	                               	<td>상품 구매 내역이 없습니다.</td>
+	                            </tr>
+	                            </c:when>
+	                            <c:otherwise>
+                                	<c:forEach var="product" items="${selectAllOrder}">
+		                            <tr>
+		                                <th>${product.id}</th>
+		                                <td><img src="/farmstory/images/${product.image}" alt="{product.name}"></td>
+		                                <td>${product.name}</td>
+		                                <td>${product.price}<br> 원</td>
+		                                <td>${product.amount}</td>
+		                                <td>${product.price * product.amount}<br>원</td>
+		                                <td>${product.userId}</td>
+		                                <td>${product.placedDate}</td>
+		                                <td><button class="detail-btn" data-id="${product.id}">상세확인</button></td>
+		                            </tr>
+                            		</c:forEach>
+                           		</c:otherwise>
+                        	</c:choose>
                         </tbody>
                     </table>
                 </section>
