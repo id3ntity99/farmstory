@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.dao.ProductDAO;
 import farmstory.dao.ProductImageDAO;
+import farmstory.dto.CompanyDTO;
 import farmstory.dto.ProductDTO;
 import farmstory.dto.ProductImageDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.util.ConnectionHelper;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 @WebServlet("/admin/product-enroll.do")
+@MultipartConfig
 public class Product_enrollController extends HttpServlet {
   private static final long serialVersionUID = 587656470097925202L;
   private static final Logger logger =
@@ -59,19 +62,11 @@ public class Product_enrollController extends HttpServlet {
       int deliveryFee = Integer.parseInt(req.getParameter("delivery"));
       int stock = Integer.parseInt(req.getParameter("prodStock"));
 
-      ProductDTO productDTO = new ProductDTO();
-      productDTO.setName(name);
-      productDTO.setCategory(category);
-      productDTO.setPrice(price);
-      productDTO.setPoint(point);
-      productDTO.setDiscountRate(discountRate);
-      productDTO.setDeliveryFee(deliveryFee);
-      productDTO.setStock(stock);
-
-      productDAO.insert(productDTO);
-
-      int productId = productDTO.getId();
-      logger.info("상품 등록 성공: ID = {}", productId);
+      CompanyDTO company = new CompanyDTO();
+      company.setCompanyName("테스트 회사");
+      company.setManagerName("최지현");
+      company.setContact("010-9999-9999");
+      company.setAddress("행복광역시 행운구 천국동 101-11");
 
       String uploadDir = getServletContext().getRealPath("/uploads");
       File uploadDirectory = new File(uploadDir);
@@ -85,7 +80,6 @@ public class Product_enrollController extends HttpServlet {
 
       // 상품 이미지 DTO 생성 및 저장
       ProductImageDTO imageDTO = new ProductImageDTO();
-      imageDTO.setProductid(productId);
       if (thumbnailLocation != null) {
         imageDTO.setThumbnailLocation(thumbnailLocation);
       }
@@ -95,12 +89,25 @@ public class Product_enrollController extends HttpServlet {
       if (detailLocation != null) {
         imageDTO.setDetailLocation(detailLocation);
       }
-
       // 이미지 DTO가 유효하면 DB에 저장
       if (imageDTO.getThumbnailLocation() != null || imageDTO.getInfoLocation() != null
           || imageDTO.getDetailLocation() != null) {
 
-        productImageDAO.insert(imageDTO);
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setImage(imageDTO);
+        productDTO.setCompany(company);
+        productDTO.setName(name);
+        productDTO.setCategory(category);
+        productDTO.setPrice(price);
+        productDTO.setPoint(point);
+        productDTO.setDiscountRate(discountRate);
+        productDTO.setDeliveryFee(deliveryFee);
+        productDTO.setStock(stock);
+
+        productDAO.insert(productDTO);
+
+        int productId = productDTO.getId();
+        logger.info("상품 등록 성공: ID = {}", productId);
       }
 
       resp.sendRedirect("/farmstory/admin/product-list.do");

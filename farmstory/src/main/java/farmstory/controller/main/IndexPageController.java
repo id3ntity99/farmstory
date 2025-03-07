@@ -22,9 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /*
- * 날짜 : 2025
- * 이름 : 홍길동
- * 내용 : 
+ * 날짜 : 2025 이름 : 홍길동 내용 :
  * 
  */
 
@@ -51,13 +49,13 @@ public class IndexPageController extends HttpServlet {
     try {
       // ATTENTION Insert dummy data into product and article tables, or null pointer exception will
       // be thrown
-      // TODO Upload real images for products and retrieve them
       List<ProductDTO> products = prodService.getAll();
       List<ArticleDTO> articles = artService.getAll();
       req.setAttribute("products", products);
       req.setAttribute("articles", articles);
       req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
     } catch (DataAccessException | ServletException | IOException e) {
+      LOGGER.error(e.getMessage(), e);
       ResponseBodyWriter.write(false, "Internal server error",
           HttpServletResponse.SC_INTERNAL_SERVER_ERROR, resp);
     }

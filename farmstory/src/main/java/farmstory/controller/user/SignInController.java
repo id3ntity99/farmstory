@@ -93,7 +93,7 @@ public class SignInController extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("sessUser", result);
         session.setMaxInactiveInterval(60 * 10 * 6); // 1시간 동안 세션 유지. 이후 세션 만료(다시 로그인해야함)
-        resp.sendRedirect("/farmstory/index.jsp");
+        resp.sendRedirect("/farmstory/index.do");
       }
 
     } catch (DataAccessException | NoSuchAlgorithmException e) {

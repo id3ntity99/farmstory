@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
 import farmstory.dto.CompanyDTO;
 import farmstory.dto.ProductDTO;
@@ -19,7 +17,6 @@ import farmstory.util.ConnectionHelper;
 import farmstory.util.Query;
 
 public class ProductDAO implements CountableDAO<ProductDTO> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(ProductDAO.class.getName());
   private final ConnectionHelper helper;
 
   public ProductDAO(ConnectionHelper helper) {
@@ -48,82 +45,62 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
     image.setInfoLocation(rs.getString("info_location"));
     image.setDetailLocation(rs.getString("detail_location"));
     product.setImage(image);
-    product.setRegisterDate("register_date");
+    product.setRegisterDate(rs.getString("register_date"));
     return product;
   }
 
-  // TODO Use ACID transaction to insert company, product, and product_image data
   @Override
   public void insert(ProductDTO dto) throws DataAccessException {
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt =
-            conn.prepareStatement(Query.INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
-      psmt.setInt(1, dto.getId());
-      psmt.setString(2, dto.getName());
-      psmt.setString(3, dto.getCategory());
-      psmt.setInt(4, dto.getPrice());
-      psmt.setInt(5, dto.getPoint());
-      psmt.setInt(6, dto.getDiscountRate());
-      psmt.setInt(7, dto.getDeliveryFee());
-      psmt.setInt(8, dto.getStock());
-      psmt.setInt(9, dto.getImageId());
+    try (Connection conn = helper.getConnection();) {
+      // conn.setAutoCommit(false);
+      CompanyDTO company = dto.getCompany();
+      ProductImageDTO image = dto.getImage();
 
-      int rowsAffected = psmt.executeUpdate();
-
-      if (rowsAffected > 0) {
-        // 상품이 정상적으로 추가되면, 자동 생성된 product_id를 반환받는다.
-        ResultSet rs = psmt.getGeneratedKeys();
-        if (rs.next()) {
-          int generatedId = rs.getInt(1);
-          dto.setId(generatedId); // 반환된 product_id를 dto에 세팅
-        }
-        rs.close();
-
-        // 이미지 등록 후, product_image 테이블의 id를 받아서 productDTO에 설정
-        ProductImageDTO imageDTO = new ProductImageDTO();
-        imageDTO.setProductid(dto.getId());
-        imageDTO.setThumbnailLocation(dto.getThumbnailLocation());
-        imageDTO.setInfoLocation(dto.getInfoLocation());
-        imageDTO.setDetailLocation(dto.getDetailLocation());
-        // 상품 이미지 등록
-        int imageId = 0;
-
-        // 이미지 경로가 null이 아닌 경우에만 상품 이미지를 등록
-        if (imageDTO.getThumbnailLocation() != null || imageDTO.getInfoLocation() != null
-            || imageDTO.getDetailLocation() != null) {
-          imageId = insertProductImage(imageDTO);
-        }
-
-        // 만약 이미지 ID가 유효하다면, 해당 ID를 상품에 설정하고 상품 테이블에서 이미지 ID를 업데이트
-        if (imageId > 0) {
-          dto.setImageId(imageId); // 등록된 이미지 ID를 상품에 설정
-          updateProductImageId(dto); // 상품 테이블에서 이미지 ID 업데이트
-        } else {
-          // 이미지 등록이 실패한 경우, 로그를 남기거나 예외를 던질 수 있음
-          LOGGER.warn("상품 이미지 등록 실패: 이미지 ID가 0으로 반환됨");
-        }
-      } else {
-        throw new DataAccessException("상품 등록에 실패했습니다.", null);
+      PreparedStatement companyPsmt =
+          conn.prepareStatement(Query.INSERT_COMPANY, Statement.RETURN_GENERATED_KEYS);
+      companyPsmt.setString(1, company.getCompanyName());
+      companyPsmt.setString(2, company.getManagerName());
+      companyPsmt.setString(3, company.getContact());
+      companyPsmt.setString(4, company.getAddress());
+      companyPsmt.executeUpdate();
+      ResultSet companyRs = companyPsmt.getGeneratedKeys();
+      int compId = 0;
+      if (companyRs.next()) {
+        compId = companyRs.getInt(1);
       }
+
+      PreparedStatement imagePsmt =
+          conn.prepareStatement(Query.INSERT_PROD_IMAGE, Statement.RETURN_GENERATED_KEYS);
+      imagePsmt.setString(1, image.getThumbnailLocation());
+      imagePsmt.setString(2, image.getInfoLocation());
+      imagePsmt.setString(3, image.getDetailLocation());
+      imagePsmt.executeUpdate();
+      ResultSet imageRs = imagePsmt.getGeneratedKeys();
+      int imageId = 0;
+      if (imageRs.next()) {
+        imageId = imageRs.getInt(1);
+      }
+
+      PreparedStatement productPsmt = conn.prepareStatement(Query.INSERT_PRODUCT);
+      productPsmt.setInt(1, compId);
+      productPsmt.setString(2, dto.getName());
+      productPsmt.setString(3, dto.getCategory());
+      productPsmt.setInt(4, dto.getPrice());
+      productPsmt.setInt(5, dto.getPoint());
+      productPsmt.setFloat(6, dto.getDiscountRate());
+      productPsmt.setInt(7, dto.getDeliveryFee());
+      productPsmt.setInt(8, dto.getStock());
+      productPsmt.setInt(9, imageId);
+      productPsmt.executeUpdate();
+
+      // conn.commit();
+
+      companyPsmt.close();
+      productPsmt.close();
+      imagePsmt.close();
+
     } catch (NamingException | SQLException e) {
       throw new DataAccessException("상품을 등록하는 도중 예외가 발생했습니다.", e);
-    }
-  }
-
-  public void updateProductImageId(ProductDTO dto) throws DataAccessException {
-    String sql = "UPDATE product SET image_id = ? WHERE id = ?";
-
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql)) {
-      psmt.setInt(1, dto.getImageId()); // 새로 저장된 이미지의 id
-      psmt.setInt(2, dto.getId()); // 상품의 id
-
-      int rowsAffected = psmt.executeUpdate();
-      if (rowsAffected == 0) {
-        throw new DataAccessException("상품 이미지 ID 업데이트에 실패했습니다.", null);
-      }
-    } catch (NamingException | SQLException e) {
-      throw new DataAccessException("상품 이미지 ID를 업데이트하는 도중 예외가 발생했습니다.", e);
     }
   }
 
@@ -160,107 +137,46 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
   }
 
   @Override
-  public void update(ProductDTO dto) {
-    // TODO Auto-generated method stub
+  public void update(ProductDTO dto) throws DataAccessException {
+    try (Connection conn = helper.getConnection();
+        PreparedStatement psmt = conn.prepareStatement(Query.UPDATE_PRODUCT)) {
+      psmt.setInt(1, dto.getCompany().getId());
+      psmt.setString(2, dto.getName());
+      psmt.setString(3, dto.getCategory());
+      psmt.setInt(4, dto.getPrice());
+      psmt.setInt(5, dto.getPoint());
+      psmt.setFloat(6, dto.getDiscountRate());
+      psmt.setInt(7, dto.getDeliveryFee());
+      psmt.setInt(8, dto.getStock());
+      psmt.setInt(9, dto.getImage().getId());
+
+      psmt.executeUpdate();
+    } catch (NamingException | SQLException e) {
+      throw new DataAccessException("상품 데이터를 수정하는 도중 예외가 발생했습니다.", e);
+    }
   }
 
   @Override
-  public void delete(ProductDTO dto) {
-    String sql = "DELETE FROM `product` WHERE id = ?";
-
+  public void delete(ProductDTO dto) throws DataAccessException {
     try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql)) {
+        PreparedStatement psmt = conn.prepareStatement(Query.DELETE_PRODUCT)) {
       psmt.setInt(1, dto.getId());
-      int rowsAffected = psmt.executeUpdate();
-
-      if (rowsAffected > 0) {
-        LOGGER.info("상품 번호 " + dto.getId() + " 삭제 완료");
-      } else {
-        LOGGER.warn("상품 번호 " + dto.getId() + " 삭제 실패");
-      }
-
-    } catch (SQLException e) {
-      LOGGER.error("상품 삭제 오류: " + e.getMessage());
-    } catch (NamingException e1) {
-      e1.printStackTrace();
+    } catch (NamingException | SQLException e) {
+      throw new DataAccessException("상품 데이터를 삭제하는 도중 예외가 발생했습니다.", e);
     }
-
   }
 
   @Override
   public int count() throws DataAccessException {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public int insertProductImage(ProductImageDTO imageDTO) throws DataAccessException {
-    // 이미지 경로가 모두 null인 경우 등록하지 않도록 처리
-    if (imageDTO.getThumbnailLocation() == null && imageDTO.getInfoLocation() == null
-        && imageDTO.getDetailLocation() == null) {
-      return 0; // 유효한 이미지 경로가 없으므로 0을 반환
-    }
-
-    String sql =
-        "INSERT INTO product_image (product_id, thumbnail_location, info_location, detail_location) "
-            + "VALUES (?, ?, ?, ?)";
-
-    try (Connection conn = helper.getConnection();
-        PreparedStatement psmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-      psmt.setInt(1, imageDTO.getProductid());
-      psmt.setString(2, imageDTO.getThumbnailLocation());
-      psmt.setString(3, imageDTO.getInfoLocation());
-      psmt.setString(4, imageDTO.getDetailLocation());
-
-      int rowsAffected = psmt.executeUpdate();
-
-      if (rowsAffected > 0) {
-        ResultSet rs = psmt.getGeneratedKeys();
-        if (rs.next()) {
-          int generatedImageId = rs.getInt(1); // 삽입된 이미지의 id를 반환
-          LOGGER.info("생성된 이미지 ID: {}", generatedImageId); // 로그로 확인
-          return generatedImageId;
-        }
+    int count = 0;
+    try (Connection conn = helper.getConnection(); Statement stmt = conn.createStatement()) {
+      ResultSet rs = stmt.executeQuery(Query.COUNT_PRODUCT);
+      if (rs.next()) {
+        count = rs.getInt(1);
       }
-
-      throw new DataAccessException("상품 이미지 등록에 실패했습니다.", null);
-    } catch (SQLException e) {
-      LOGGER.error("SQL Error: " + e.getMessage(), e);
-      throw new DataAccessException("상품 이미지를 등록하는 도중 예외가 발생했습니다.", e);
-    } catch (NamingException e1) {
-      e1.printStackTrace();
+    } catch (NamingException | SQLException e) {
+      throw new DataAccessException("상품 데이터 수량을 조회하는 도중 예외가 발생했습니다.", e);
     }
-
-    return 0; // 실패한 경우 0 반환
-  }
-  private List<ProductDTO> productList(String id){
-	  List<ProductDTO> products = new ArrayList<ProductDTO>();
-	  String sql = "SELECT p.id, p.name, p.price, p.image_id, p.category, o.amount, o.placed_date " +
-              "FROM product p " +
-              "JOIN orders o ON p.id = o.product_id " +
-              "WHERE o.id = ? " +
-              "ORDER BY o.placed_date DESC";
-	  try {
-		  Connection conn = helper.getConnection();
-		  PreparedStatement psmt = conn.prepareStatement(sql);
-		  
-		  psmt.setString(1, id);
-		  ResultSet rs = psmt.executeQuery();
-		  
-		  while(rs.next()) {
-			  ProductDTO product = new ProductDTO();
-			  product.setId(rs.getInt("id"));
-			  product.setName(rs.getString("name"));
-			  product.setPrice(rs.getInt("price"));
-			  product.setImageId(rs.getInt("image_id"));
-			  product.setCategory(rs.getString("category"));
-			  product.setAmount(rs.getInt("amount"));
-			  product.setPlacedDate(rs.getString("placed_date"));
-			  products.add(product);
-		  }
-	} catch (Exception e) {
-		LOGGER.error(e.getMessage());
-	}
-	  return products;
+    return count;
   }
 }
