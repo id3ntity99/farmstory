@@ -16,8 +16,17 @@ public class ProductDTO implements DataTransferObject {
   private String registerDate;
   private int amount;
   private String placedDate;
+  private String userId;
 
-  public int getId() {
+  public String getUserId() {
+	return userId;
+}
+
+public void setUserId(String userId) {
+	this.userId = userId;
+}
+
+public int getId() {
     return id;
   }
 

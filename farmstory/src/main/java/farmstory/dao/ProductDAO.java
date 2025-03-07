@@ -179,4 +179,41 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
     }
     return count;
   }
+  
+  public List<ProductDTO> selectAllOrder(String id){
+	  List<ProductDTO> products = new ArrayList<ProductDTO>();
+	  String sql = "SELECT p.id, p.name, p.price, p.image_id, p.category, o.amount, u.nickname ,o.placedDate " +
+              "FROM product p " +
+              "JOIN orders o ON p.id = o.productId " +
+              "JOIN user u ON p.point = u.point " +
+              "WHERE o.user_id = ? " +
+              "ORDER BY o.placed_date DESC";
+	  
+	  try {
+		  Connection conn = helper.getConnection();
+		  PreparedStatement psmt = conn.prepareStatement(sql);
+		  
+		  psmt.setString(1, id);
+		  ResultSet rs = psmt.executeQuery();
+		  
+		  while(rs.next()) {
+			  ProductImageDTO image = new ProductImageDTO();
+			  ProductDTO product = new ProductDTO();
+			  product.setId(rs.getInt("id"));
+			  product.setName(rs.getString("name"));
+			  product.setPrice(rs.getInt("price"));
+			  product.setImage(image);
+			  product.setCategory(rs.getString("category"));
+			  product.setAmount(rs.getInt("amount"));
+			  product.setUserId(rs.getString("user_id"));
+			  product.setPlacedDate(rs.getString("placed_date"));
+		  }
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	  
+	return null;
+	  
+  }
 }
