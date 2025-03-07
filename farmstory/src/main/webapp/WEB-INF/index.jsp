@@ -101,8 +101,8 @@
               <ul>
               <c:forEach var="product" items="${requestScope.products}">
                 <li>
-                  <a href="#">
-                    <img src="/farmstory/images/market_item1.jpg" alt="사과" />
+                  <a href="/farmstory/product.do?pid=${product.id}">
+                    <img src="${pageContext.request.contextPath}${product.image.thumbnailLocation}" alt="사과" />
                     <p class="category">${product.category}</p>
                     <p>
                    	  ${product.name}

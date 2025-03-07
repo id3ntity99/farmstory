@@ -1,4 +1,11 @@
+<%@page import="farmstory.dto.ProductDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%
+	ArrayList products = (ArrayList<ProductDTO>) request.getAttribute("products");
+	pageContext.setAttribute("products", products);
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -103,83 +110,21 @@
                       <th>포인트</th>
                       <th>판매가격</th>
                     </tr>
+                    <c:forEach var="product" items="${requestScope.products}">
                     <tr>
                       <td>
-                        <img src="/farmstory/images/market_item1.jpg" alt="" />
+                        <img src="${pageContext.request.contextPath}${product.image.thumbnailLocation}" alt="" />
                       </td>
-                      <td>과일</td>
-                      <td><a href="#">사과 500g</a></td>
-                      <td>10%</td>
-                      <td>400P</td>
+                      <td>${product.category}</td>
+                      <td><a href="/farmstory/product.do?pid=${product.id}">${product.name}</a></td>
+                      <td>${product.discountRate}</td>
+                      <td>${product.point}</td>
                       <td>
-                        <span>3,600원</span>
-                        <span><u>4,000원</u></span>
+                        <span>${product.price - (product.price * (product.discountRate / 100))}</span>
+                        <span><u>${product.price}</u></span>
                       </td>
                     </tr>
-
-                    <tr>
-                      <td>
-                        <img src="/farmstory/images/market_item2.jpg" alt="" />
-                      </td>
-                      <td>과일</td>
-                      <td>
-                        <a href="#"> 전남 완주 배 5kg </a>
-                      </td>
-                      <td>10%</td>
-                      <td>400P</td>
-                      <td>
-                        <span>3,600원</span>
-                        <span><u>4,000원</u></span>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <img src="/farmstory/images/market_item3.jpg" alt="" />
-                      </td>
-                      <td>과일</td>
-                      <td>
-                        <a href="#"> 방울 토마토 </a>
-                      </td>
-                      <td>10%</td>
-                      <td>400P</td>
-                      <td>
-                        <span>3,600원</span>
-                        <span><u>4,000원</u></span>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <img src="/farmstory/images/market_item4.jpg" alt="" />
-                      </td>
-                      <td>곡류</td>
-                      <td>
-                        <a href="#"> 무농약 현미 </a>
-                      </td>
-                      <td>10%</td>
-                      <td>400P</td>
-                      <td>
-                        <span>3,600원</span>
-                        <span><u>4,000원</u></span>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <img src="/farmstory/images/market_item5.jpg" alt="" />
-                      </td>
-                      <td>야채</td>
-                      <td>
-                        <a href="#"> 팜스토리 하루야채 샐러드 </a>
-                      </td>
-                      <td>10%</td>
-                      <td>400P</td>
-                      <td>
-                        <span>3,600원</span>
-                        <span><u>4,000원</u></span>
-                      </td>
-                    </tr>
+                    </c:forEach>
                   </tbody>
                 </table>
                 <span>

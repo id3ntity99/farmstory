@@ -1,5 +1,8 @@
 <%@page import="farmstory.dto.UserDTO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<% 
+	UserDTO user = (UserDTO) request.getAttribute("user");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,11 +12,8 @@
         <link rel="stylesheet" href="/farmstory/style/modify-info.css" />
         <link rel="stylesheet" href="/farmstory/style/common/header.css" />
         <link rel="stylesheet" href="/farmstory/style/common/footer.css" />
+	    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     	<script src="/farmstory/js/my/modifyInfo.js"></script>
-    	<% 
-    		HttpSession sessionObj = request.getSession();
-    		UserDTO user = (UserDTO) sessionObj.getAttribute("user");
-    	%>
     </head>
     <body>
         <div id="wrapper">
@@ -99,7 +99,7 @@
                         <tbody>
                             <tr>
                                 <td>아이디</td>
-                                <td id="userId" value="<%= user.getId() %>" readonly>wnstj050505</td>
+                                <td id="userId" value="<%= user.getId() %>" readonly><%= user.getId() %></td>
                             </tr>
                             <tr class="pass">
                                 <td>비밀번호</td>
@@ -108,7 +108,7 @@
                             <tr class="passacc">
                                 <td>비밀번호 확인</td>
                                 <td><input type="password" name="passok" id="passwordConfirm" placeholder="비밀번호 입력 확인"></td>
-                                <td><a href="#" id="updatePasswordBtn">비밀번호 수정</a></td>
+                                <td><a href="/farmstory/find/changePass.do" id="updatePasswordBtn">비밀번호 수정</a></td>
                             </tr>
                             <tr>
                                 <td>회원가입날짜</td>

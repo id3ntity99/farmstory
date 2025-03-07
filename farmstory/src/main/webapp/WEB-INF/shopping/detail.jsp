@@ -1,4 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="farmstory.dto.ProductDTO"%> <%@ page
+contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%> <% ProductDTO
+product = (ProductDTO) request.getAttribute("product");
+pageContext.setAttribute("product", product); %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -80,7 +83,10 @@
             </aside>
             <div class="content-area">
               <div class="content-title">
-                <img src="/farmstory/images/sub_nav_tit_cate2_tit1.png" alt="" />
+                <img
+                  src="/farmstory/images/sub_nav_tit_cate2_tit1.png"
+                  alt=""
+                />
                 <span>
                   <a href="#">HOME </a>
                   <a href="#">> 장보기 > </a>
@@ -90,33 +96,39 @@
               <div class="content">
                 <h3>기본정보</h3>
                 <div class="prod-info">
-                  <img src="/farmstory//images/market_item_thumb.jpg" alt="" />
+                  <img
+                    src="${pageContext.request.contextPath}${product.image.infoLocation}"
+                    alt=""
+                  />
                   <table>
                     <tr>
                       <td>상품명</td>
-                      <td>딸기 500g</td>
+                      <td>${product.name}</td>
                     </tr>
                     <tr>
                       <td>상품코드</td>
-                      <td>01</td>
+                      <td>${product.id}</td>
                     </tr>
                     <tr>
                       <td>배송비</td>
-                      <td>5,000원 <span>3만원 이상 무료 배송</span></td>
+                      <td>
+                        ${product.deliveryFee}원
+                        <span>3만원 이상 무료 배송</span>
+                      </td>
                     </tr>
                     <tr>
                       <td>판매가격</td>
-                      <td>4,000원</td>
+                      <td>${product.price}원</td>
                     </tr>
                     <tr>
                       <td>구매수량</td>
                       <td>
-                        <input type="number" value="1" />
+                        <input id="amount" type="number" value="1" />
                       </td>
                     </tr>
                     <tr class="info-end">
                       <td>합계</td>
-                      <td>4,000원</td>
+                      <td></td>
                     </tr>
                     <tr>
                       <td></td>
@@ -135,7 +147,10 @@
                   </table>
                 </div>
                 <div class="detail">
-                  <img src="/farmstory/images/market_detail_sample.jpg" alt="" />
+                  <img
+                    src="${pageContext.request.contextPath}${product.image.detailLocation}"
+                    alt=""
+                  />
                 </div>
                 <div class="delivery-info">
                   <h3>배송정보</h3>

@@ -52,7 +52,7 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
   @Override
   public void insert(ProductDTO dto) throws DataAccessException {
     try (Connection conn = helper.getConnection();) {
-      // conn.setAutoCommit(false);
+      conn.setAutoCommit(false);
       CompanyDTO company = dto.getCompany();
       ProductImageDTO image = dto.getImage();
 
@@ -93,7 +93,7 @@ public class ProductDAO implements CountableDAO<ProductDTO> {
       productPsmt.setInt(9, imageId);
       productPsmt.executeUpdate();
 
-      // conn.commit();
+      conn.commit();
 
       companyPsmt.close();
       productPsmt.close();

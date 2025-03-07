@@ -1,9 +1,9 @@
 main > .container .side-content > a:nth-child(1) {
-  background: url(/static/images/sub_cate2_lnb1.png);
+  background: url(/farmstory/images/sub_cate2_lnb1.png);
 }
 
 main > .container .side-content > a:nth-child(1):hover {
-  background: url(/static/images/sub_cate2_lnb1_ov.png);
+  background: url(/farmstory/images/sub_cate2_lnb1_ov.png);
 }
 
 main > .container .content > table {

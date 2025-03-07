@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import farmstory.CountableDAO;
@@ -32,44 +31,34 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   public ArticleDAO(ConnectionHelper helper) {
     this.helper = helper;
   }
-  
+
 
   @Override
   public void insert(ArticleDTO dto) {
-	String sql = "insert into `article` set "
-			+ "`title` = ?, "
-    		+ "`content` = ?, "
-    		+ "`author` = ?, "
-    		+ "`user_id` = ?, "
-    		+ "`register_date` = NOW()";
+    String sql = "insert into `article` set " + "`title` = ?, " + "`content` = ?, "
+        + "`author` = ?, " + "`user_id` = ?, " + "`register_date` = NOW()";
 
     try {
       Connection conn = helper.getConnection();
       PreparedStatement psmt = conn.prepareStatement(sql);
-      
-      LOGGER.info("DB에 저장할 데이터: title={}, content={}, author={}", dto.getTitle(), dto.getContent(), dto.getAuthor());
-      
+
+      LOGGER.info("DB에 저장할 데이터: title={}, content={}, author={}", dto.getTitle(), dto.getContent(),
+          dto.getAuthor());
+
       psmt.setString(1, dto.getTitle());
       psmt.setString(2, dto.getContent());
       psmt.setString(3, dto.getAuthor());
       psmt.setString(4, dto.getUserId());
 
       psmt.executeUpdate();
-      
-      //글번호
-      ResultSet rs = psmt.getGeneratedKeys();
-      if(rs.next()) {
-    	 int id = rs.getInt(1);
-      }
-     
-      rs.close();
+
       psmt.close();
       conn.close();
 
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
     }
-    
+
   }
 
   @Override
@@ -92,7 +81,7 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
         articleDTO.setAuthor(rs.getString("author"));
         articleDTO.setRegisterDate(rs.getString("registerDate"));
       }
-      
+
       rs.close();
       psmt.close();
       conn.close();
@@ -104,12 +93,13 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
     return articleDTO;
 
   }
-  
+
   public List<ArticleDTO> getPagedList(int currentPageNum, int pageSize) {
-	List<ArticleDTO> articles = new ArrayList<>();
-	int offset = (currentPageNum -1 ) * pageSize;
-    String sql = "select `id`, `title`, `content`,`author`, `register_date` from `article` order by `id` desc limit ? offset ?";
- 
+    List<ArticleDTO> articles = new ArrayList<>();
+    int offset = (currentPageNum - 1) * pageSize;
+    String sql =
+        "select `id`, `title`, `content`,`author`, `register_date` from `article` order by `id` desc limit ? offset ?";
+
 
     try {
       Connection conn = helper.getConnection();
@@ -128,14 +118,14 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
         articleDTO.setRegisterDate(rs.getString("register_date"));
 
         articles.add(articleDTO);
-        
-        
+
+
       }
       rs.close();
       psmt.close();
       conn.close();
       LOGGER.debug("게시글 수 : " + articles.size());
-      
+
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
     }
@@ -145,7 +135,8 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
   @Override
   public List<ArticleDTO> selectAll() {
-    String sql = "select `id`, `title`, `content`,`author`, `register_date` from `article` order by `id` desc";
+    String sql =
+        "select `id`, `title`, `content`,`author`, `register_date` from `article` order by `id` desc";
     List<ArticleDTO> articles = new ArrayList<>();
 
     try {
@@ -164,9 +155,9 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
 
         articles.add(articleDTO);
       }
-      
+
       LOGGER.debug("게시글 수 : " + articles.size());
-      
+
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
     }
@@ -175,80 +166,81 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   }
 
   public List<ArticleDTO> uploadFile(HttpServletRequest req) {
-	 List<ArticleDTO> files = new ArrayList<ArticleDTO>();
-	 
-	 ServletContext ctx = req.getServletContext();
-	 String uploadPath = ctx.getRealPath("/uploads");
-	 
-	 
-	 File uploadDir = new File(uploadPath);
-	 if(!uploadDir.exists()) {
-		 uploadDir.mkdir();
-	 }
-	 
-	 LOGGER.debug("uploadPath : " + uploadPath);
-	 
-	 try {
-		 Collection<Part> parts = req.getParts();
-		 
-		 for(Part part : parts) {
-			 LOGGER.debug(part.toString());
-			 
-			 String oName = part.getSubmittedFileName();
-			 LOGGER.debug(oName);
-			 
-			 if(oName != null && !oName.isEmpty()) {
-				 int idx = oName.lastIndexOf(".");
-				 String ext = oName.substring(idx);
-				 String sName = UUID.randomUUID().toString() + ext;
-				 part.write(uploadPath + File.separator + sName);
-				 
-				 ArticleDTO dto = new ArticleDTO();
-				 dto.setoName(oName);
-				 dto.setsName(sName);
-				 
-				 files.add(dto);
-			 }
-		 }
-		 
-	 }catch (Exception e) {
-		LOGGER.error(e.getMessage());
-	}
-	  
-	 return files;
+    List<ArticleDTO> files = new ArrayList<ArticleDTO>();
+
+    ServletContext ctx = req.getServletContext();
+    String uploadPath = ctx.getRealPath("/uploads");
+
+
+    File uploadDir = new File(uploadPath);
+    if (!uploadDir.exists()) {
+      uploadDir.mkdir();
+    }
+
+    LOGGER.debug("uploadPath : " + uploadPath);
+
+    try {
+      Collection<Part> parts = req.getParts();
+
+      for (Part part : parts) {
+        LOGGER.debug(part.toString());
+
+        String oName = part.getSubmittedFileName();
+        LOGGER.debug(oName);
+
+        if (oName != null && !oName.isEmpty()) {
+          int idx = oName.lastIndexOf(".");
+          String ext = oName.substring(idx);
+          String sName = UUID.randomUUID().toString() + ext;
+          part.write(uploadPath + File.separator + sName);
+
+          ArticleDTO dto = new ArticleDTO();
+          dto.setoName(oName);
+          dto.setsName(sName);
+
+          files.add(dto);
+        }
+      }
+
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+    }
+
+    return files;
   }
-  
+
   public void downloadFile(HttpServletRequest req, HttpServletResponse resp) {
-		
-		//공유참조된 파일 정보 객체 가져오기
-		ArticleDTO fileDTO = (ArticleDTO) req.getAttribute("articleDTO");
-		
-		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/uploads");
-		File target = new File(path + File.separator + fileDTO.getsName());	//경로 + 구분자 + 파일명
-		
-		
-		try{
-			//response 파일 다운로드 헤더 정보
-			resp.setContentType("application/octet-stream");
-			resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(fileDTO.getoName(), "utf-8"));
-			resp.setHeader("Content-Transfer-Encoding", "binary");
-			resp.setHeader("Pragma", "no-cache");
-			resp.setHeader("Cache-Control", "private");
-			
-			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(target));
-			BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
-			
-			//파일 전송
-			bis.transferTo(bos);
-			bos.flush();
-			bos.close();
-			bis.close();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+
+    // 공유참조된 파일 정보 객체 가져오기
+    ArticleDTO fileDTO = (ArticleDTO) req.getAttribute("articleDTO");
+
+    ServletContext ctx = req.getServletContext();
+    String path = ctx.getRealPath("/uploads");
+    File target = new File(path + File.separator + fileDTO.getsName()); // 경로 + 구분자 + 파일명
+
+
+    try {
+      // response 파일 다운로드 헤더 정보
+      resp.setContentType("application/octet-stream");
+      resp.setHeader("Content-Disposition",
+          "attachment; filename=" + URLEncoder.encode(fileDTO.getoName(), "utf-8"));
+      resp.setHeader("Content-Transfer-Encoding", "binary");
+      resp.setHeader("Pragma", "no-cache");
+      resp.setHeader("Cache-Control", "private");
+
+      BufferedInputStream bis = new BufferedInputStream(new FileInputStream(target));
+      BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
+
+      // 파일 전송
+      bis.transferTo(bos);
+      bos.flush();
+      bos.close();
+      bis.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
   @Override
   public void update(ArticleDTO dto) {
@@ -284,9 +276,9 @@ public class ArticleDAO implements CountableDAO<ArticleDTO> {
   }
 
   public int count() {
-	int count = 0;
+    int count = 0;
     String sql = "select count(*) from `article`";
-    
+
     try {
       Connection conn = helper.getConnection();
       Statement stmt = conn.createStatement();

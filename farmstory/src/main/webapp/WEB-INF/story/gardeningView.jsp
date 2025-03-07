@@ -113,7 +113,7 @@
                 <section class="commentForm">
                     <h3>댓글쓰기</h3>
                     <form name="formComment" action="#">
-                    	<input type="hidden" name="parent" value="${articleDTO.articleId}">
+                    	<input type="hidden" name="parent" value="${articleDTO.id}">
                     	<input type="hidden" name="writer" value="${articleDTO.author}">
                         <textarea class="textarea" name="content" placeholder="댓글 내용 입력"></textarea>
                     	<div class="btnComment">
