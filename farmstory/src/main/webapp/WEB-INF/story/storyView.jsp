@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/farmstory/style/index.css" />
     <link rel="stylesheet" href="/farmstory/style/common/header.css" />
-    <link rel="stylesheet" href="/farmstory/style/gardening.css" />
+    <link rel="stylesheet" href="/farmstory/style/story.css" />
     <title>팜스토리</title>
     <style></style>
   </head>
@@ -18,8 +18,8 @@
 
       <main class="article">
         <nav class="background">
-          <div class="subtop"><img src="/farmstory/images/sub_top_bg.jpg" alt="메인배경" /></div>
-          <div class="croptalk"><img src="/farmstory/images/sub_top_tit3.png" alt="CropTalk" /></div>
+        	<div class="subtop"><img src="/farmstory/images/sub_top_bg.jpg" alt="메인배경" /></div>
+         	<div class="croptalk"><img src="/farmstory/images/sub_top_tit3.png" alt="CropTalk" /></div>
         </nav>
         <aside>
           <a href="#">
@@ -29,18 +29,18 @@
             <img src="/farmstory/images/sub_aside_cate3_tit.png" alt="농작물이야기" />
           </a>
           <a href="/farmstory/listStory">
-            <img src="/farmstory/images/sub_cate3_lnb1.png" alt="농작물이야기" />
+            <img src="/farmstory/images/sub_cate3_lnb1_ov.png" alt="농작물이야기" />
           </a>
           <a href="/farmstory/listGardening">
+            <img src="/farmstory/images/sub_cate3_lnb2.png" alt="텃밭가꾸기" />
+          </a>
+          <a href="/farmstory/listSchool">
             <img
-              src="/farmstory/images/sub_cate3_lnb2_ov.png"
-              alt="텃밭가꾸기"
+              src="/farmstory/images/sub_cate3_lnb3.png"
+              alt="귀농학교"
               width="175px"
               height="29px"
             />
-          </a>
-          <a href="/farmstory/listSchool">
-            <img src="/farmstory/images/sub_cate3_lnb3.png" alt="귀농학교" />
           </a>
           <a href="#">
             <img src="/farmstory/images/sub_aside_bg_lnb.png" alt="사이드메뉴" />
@@ -51,13 +51,14 @@
             <a href="#">
               <img
               	class="subnav"
-                src="/farmstory/images/sub_nav_tit_cate3_tit2.png"
-                alt="텃밭가꾸기"
+                src="/farmstory/images/sub_nav_tit_cate3_tit1.png"
+                alt="농작물이야기"
               />
             </a>
-            <span>텃밭가꾸기</span>
+            <span>농작물이야기</span>
             <a href="#">HOME > 농작물이야기 > </a>
           </div>
+          
           <div class="write">
             <nav>
               <h5>글보기</h5><br>
@@ -83,19 +84,20 @@
 				</table>
 				
 				<div class="btn">
-					<a href="/farmstory/deleteGardening?id=${articleDTO.id}" class="btn btnRemove">삭제</a>
+					<a href="/farmstory/deleteGardening" class="btn btnRemove">삭제</a>
 					<a href="/farmstory/modifyGardening?id=${articleDTO.id}" class="btn btnModify">수정</a>
 					<a href="/farmstory/listGardening" class="btn btnList">목록</a>
 				</div>
 			
 				<!-- 댓글목록 -->
                 <section class="commentList">
-                    <h3>댓글목록</h3>
+                    <h3>댓글목록</h3>               
+
 					<c:forEach var="comment" items="${comments}">
 	                    <article>
 	                    	<span class="date">${comment.registerDate}</span>
 	                        <span class="author">${comment.author}</span>
-	                        <p class="content">${comment.content}</p>
+	                        <p class="content">${comment.content}</p>                        
 	                        <div>
 	                            <a href="#" class="remove">삭제</a>
 	                            <a href="#" class="modify">수정</a>
@@ -121,8 +123,7 @@
                         </div>
                     </form>
                 </section>
-          </div>
-          
+          	</div>
         </section>
       </main>
       <%@ include file="./_footer.jsp" %>

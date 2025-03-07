@@ -21,10 +21,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/viewGardening")
-public class ViewControllerGardening extends HttpServlet{
-	private static final long serialVersionUID = -8195125407449469536L;
-	private static final Logger logger = LoggerFactory.getLogger(ViewControllerGardening.class.getName());
+@WebServlet("/viewSchool")
+public class ViewControllerSchool extends HttpServlet{
+	private static final long serialVersionUID = -8195175407449469536L;
+	private static final Logger logger = LoggerFactory.getLogger(ViewControllerSchool.class.getName());
+
 	private CountableDefaultService<ArticleDTO> service;
 	private CommentDAO commentDAO;
 	
@@ -54,7 +55,6 @@ public class ViewControllerGardening extends HttpServlet{
 				
 		
 		try {
-
 			int articleId = Integer.parseInt(id);
 			ArticleDTO dto = new ArticleDTO();
 			dto.setId(id);
@@ -71,7 +71,7 @@ public class ViewControllerGardening extends HttpServlet{
 			List<CommentDTO> comments = commentDAO.selectAllComment(articleId);
 			req.setAttribute("comments", comments);
 			
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningView.jsp");
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/schoolView.jsp");
 			dispatcher.forward(req, resp);
 			
 			logger.debug("articleDTO : " + articleDTO);

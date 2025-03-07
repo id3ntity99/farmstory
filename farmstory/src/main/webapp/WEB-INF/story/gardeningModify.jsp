@@ -63,7 +63,7 @@
               <h1>수정하기</h1>
             </nav>
 			<form action="/farmstory/writeGardening" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="no" value="${articleDTO.id}" readonly>
+				<input type="hidden" name="id" value="${articleDTO.id}" readonly>
 				<input type="hidden" name="userId" value="${sessUser.id}" readonly>
 				<table border=0>
 					<tr>
@@ -72,7 +72,7 @@
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="author" value="${articleDTO.user_id}(${articleDTO.author})" readonly></td>
+						<td><input type="text" name="author" value="${articleDTO.userId}(${articleDTO.author})" readonly></td>
 					</tr>
 					<tr>
 						<th>내용</th>
@@ -80,20 +80,11 @@
 							<textarea name="content">${articleDTO.content}</textarea>
 						</td>
 					</tr>
-					<tr>
-						<th>파일</th>
-						<td>
-							<p style="margin-bottom: 6px;">
-								최대 2개 파일 첨부 가능, 각 파일 당 최대 10MB
-							</p>
-							<input type="file" name="file1">
-							<input type="file" name="file2">
-						</td>
-					</tr>	
+					
 				</table>
 				
 				<div class="btnWrite">
-					<a href="/farmstory/viewGardening?no=${articleDTO.id}" class="btn btnCancel">취소</a>
+					<a href="/farmstory/viewGardening?id=${articleDTO.id}" class="btn btnCancel">취소</a>
 					<input type="submit" value="수정완료" class="btn btnComplete"/>
 				</div>
 			</form>

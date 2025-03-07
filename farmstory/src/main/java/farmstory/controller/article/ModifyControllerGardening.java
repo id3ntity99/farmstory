@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import farmstory.dao.ArticleDAO;
 import farmstory.dto.ArticleDTO;
 import farmstory.exception.DataAccessException;
 import farmstory.service.CountableDefaultService;
@@ -27,7 +28,8 @@ public class ModifyControllerGardening extends HttpServlet{
 	public void init() throws ServletException {
 		try {
 			ConnectionHelper helper = new ConnectionHelper("jdbc/farmstory");
-			
+			ArticleDAO dao = new ArticleDAO(helper);
+			this.service = new CountableDefaultService<>(dao);
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -35,6 +37,7 @@ public class ModifyControllerGardening extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String id = req.getParameter("id");		
 		System.out.println("ModifyController - 게시글번호 id : " + id);
 		
@@ -44,11 +47,13 @@ public class ModifyControllerGardening extends HttpServlet{
             return;
         }
 		
-        ArticleDTO dto = new ArticleDTO();
-		dto.setId(id);
+        
         
         
 		try {
+			
+			ArticleDTO dto = new ArticleDTO();
+			dto.setId(id);
 			ArticleDTO articleDTO = service.get(dto);
 			
 			logger.debug("articleDTO : " + articleDTO);
@@ -83,6 +88,12 @@ public class ModifyControllerGardening extends HttpServlet{
 		String content = req.getParameter("content");
 		String author = req.getParameter("author");
 		
+		if(id == null || id.isEmpty()) {
+			logger.error("Article not found for id: " + id);
+            resp.sendRedirect("/farmstory/story/listGardening"); // 글이 없는 경우 목록으로 리다이렉트
+            return;
+		}
+		
 		try {	
 			ArticleDTO dto = new ArticleDTO();
 			dto.setId(id);
@@ -93,14 +104,12 @@ public class ModifyControllerGardening extends HttpServlet{
 			
 			service.update(dto);
 			
-			resp.sendRedirect(req.getContextPath() + "/listGardening");
+			resp.sendRedirect(req.getContextPath() + "/viewGardening?id=" + id);
 			
 		} catch (DataAccessException e) {
 			logger.error(e.getMessage());
+			resp.sendRedirect(req.getContextPath() + "/listGardening");
 		}
-		
-		
-		resp.sendRedirect("/farmstory/story/viewGardening?id="+id);
 		
 		
 	}

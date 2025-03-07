@@ -84,7 +84,7 @@
 	             <c:forEach var="articles" items="${requestScope.articles}">               
 			         <tr>
 			            <td>${pageStartNum}</td>
-			            <td><a href="/farmstory/article/view.do?no=${articles.id}">${articles.title}[${articles.commentNumber}]</a></td>
+			            <td><a href="/farmstory/viewSchool?id=${articles.id}">${articles.title}[${articles.commentNumber}]</a></td>
 			            <td>${articles.author}</td>
 			            <td>${articles.registerDate.substring(0,10)}</td>
 			            <td>${articles.viewNumber}</td>
@@ -101,13 +101,13 @@
           	</table>
           	<div class="page">
               	<c:if test="${pageGroupDTO.start >1}">
-                  	<a href="/farmstory/listGardening?pg=${pageGroupDTO.start - 1}" class="prev">이전</a>
+                  	<a href="/farmstory/listSchool?pg=${pageGroupDTO.start - 1}" class="prev">이전</a>
                 </c:if>
                 <c:forEach var="num" begin="${pageGroupDTO.start}" end="${pageGroupDTO.end}">
-                   	<a href="/farmstory/listGardening?pg=${num}" class="num ${currentPageNum == num ? 'current':''}">${num}</a>
+                   	<a href="/farmstory/listSchool?pg=${num}" class="num ${currentPageNum == num ? 'current':''}">${num}</a>
                 </c:forEach>
              	<c:if test="${pageGroupDTO.end < lastPageNum}">
-                  	<a href="/farmstory/listGardening?pg=${pageGroupDTO.end + 1}" class="next">다음</a>
+                  	<a href="/farmstory/listSchool?pg=${pageGroupDTO.end + 1}" class="next">다음</a>
                	</c:if>
             </div>
 
