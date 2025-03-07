@@ -84,7 +84,7 @@
 	             <c:forEach var="articles" items="${requestScope.articles}">               
 			         <tr>
 			            <td>${pageStartNum}</td>
-			            <td><a href="/farmstory/viewGardening?no=${articles.id}">${articles.title}[${articles.commentNumber}]</a></td>
+			            <td><a href="/farmstory/viewGardening?id=${articles.id}">${articles.title}[${articles.commentNumber}]</a></td>
 			            <td>${articles.author}</td>
 			            <td>${articles.registerDate.substring(0,10)}</td>
 			            <td>${articles.viewNumber}</td>

@@ -35,19 +35,19 @@
           <img src="/farmstory/images/head_top_line.png" alt="" />
           <div>
             <p>
-              <a href="">HOME | </a>
-              <a href="">로그인 | </a>
-              <a href="">회원가입 | </a>
-              <a href="">나의정보 | </a>
-              <a href="">로그아웃 | </a>
-              <a href="">관리자 | </a>
-              <a href="">고객센터</a>
+              <a href="/farmstory/index.do">HOME | </a>
+              <a href="/farmstory/signin">로그인 | </a>
+              <a href="/farmstory/signup">회원가입 | </a>
+              <a href="#">나의정보 | </a>
+              <a href="#">로그아웃 | </a>
+              <a href="#">관리자 | </a>
+              <a href="#">고객센터</a>
             </p>
           </div>
         </section>
         <section class="logo">
           <div>
-            <a href="#">
+            <a href="/farmstory/index.do">
               <img src="/farmstory/images/logo.png" />
             </a>
             <a href="#">
@@ -91,7 +91,7 @@
           <a href="#">
             <img src="/farmstory/images/sub_aside_cate4_tit.png" alt="이벤트" />
           </a>
-          <a href="/event/event-calendar.html">
+          <a href="/farmstory/events">
             <img
               src="/farmstory/images/sub_cate4_lnb1_ov.png"
               alt="이벤트"

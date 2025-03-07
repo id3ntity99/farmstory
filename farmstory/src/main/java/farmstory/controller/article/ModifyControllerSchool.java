@@ -17,10 +17,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/modifyGardening")
-public class ModifyControllerGardening extends HttpServlet{
+@WebServlet("/modifySchool")
+public class ModifyControllerSchool extends HttpServlet{
 	private static final long serialVersionUID = -8195123407449469536L;
-	private static final Logger logger = LoggerFactory.getLogger(ModifyControllerGardening.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(ModifyControllerSchool.class.getName());
 	
 	private CountableDefaultService<ArticleDTO> service;
 	
@@ -43,7 +43,7 @@ public class ModifyControllerGardening extends HttpServlet{
 		
         if (id == null || id.isEmpty()) {
         	logger.warn("No article found for id: " + id);
-            resp.sendRedirect("/farmstory/story/listGardening"); // 게시글 목록으로 이동
+            resp.sendRedirect("/farmstory/story/listSchool"); // 게시글 목록으로 이동
             return;
         }
 		
@@ -61,13 +61,13 @@ public class ModifyControllerGardening extends HttpServlet{
 			
 			if (articleDTO == null) {
 	            logger.error("Article not found for id: " + id);
-	            resp.sendRedirect("/farmstory/story/listGardening"); // 글이 없는 경우 목록으로 리다이렉트
+	            resp.sendRedirect("/farmstory/story/listSchool"); // 글이 없는 경우 목록으로 리다이렉트
 	            return;
 	        }
 			
 	        req.setAttribute("articleDTO", articleDTO);
 			
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/gardeningModify.jsp");
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/story/schoolModify.jsp");
 			dispatcher.forward(req, resp);
 			
 		} catch (DataAccessException e) {
@@ -90,7 +90,7 @@ public class ModifyControllerGardening extends HttpServlet{
 		
 		if(id == null || id.isEmpty()) {
 			logger.error("Article not found for id: " + id);
-            resp.sendRedirect("/farmstory/story/listGardening"); // 글이 없는 경우 목록으로 리다이렉트
+            resp.sendRedirect("/farmstory/story/listSchool"); // 글이 없는 경우 목록으로 리다이렉트
             return;
 		}
 		
@@ -104,11 +104,11 @@ public class ModifyControllerGardening extends HttpServlet{
 			
 			service.update(dto);
 			
-			resp.sendRedirect(req.getContextPath() + "/viewGardening?id=" + id);
+			resp.sendRedirect(req.getContextPath() + "/viewSchool?id=" + id);
 			
 		} catch (DataAccessException e) {
 			logger.error(e.getMessage());
-			resp.sendRedirect(req.getContextPath() + "/listGardening");
+			resp.sendRedirect(req.getContextPath() + "/listSchool");
 		}
 		
 		

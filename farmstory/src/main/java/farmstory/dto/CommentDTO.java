@@ -8,7 +8,7 @@ public class CommentDTO implements DataTransferObject {
 	private int articleId;
 	private String author;
 	private String content;
-	private String register_date;
+	private String registerDate;
 	
 	public int getId() {
 		return id;
@@ -34,16 +34,16 @@ public class CommentDTO implements DataTransferObject {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRegister_date() {
-		return register_date;
+	public String getRegisterDate() {
+		return registerDate;
 	}
-	public void setRegister_date(String register_date) {
-		this.register_date = register_date;
+	public void setRegister_date(String registerDate) {
+		this.registerDate = registerDate;
 	}
 	@Override
 	public String toString() {
 		return "CommentDAO [id=" + id + ", article_id=" + articleId + ", author=" + author + ", content=" + content
-				+ ", register_date=" + register_date + "]";
+				+ ", registerDate=" + registerDate + "]";
 	}
 	
 	

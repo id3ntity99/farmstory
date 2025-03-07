@@ -3,8 +3,8 @@
         <section class="links">
           <div>
             <p>
-              <a href="/farmstory/index.html">HOME | </a>
-              <a href="/farmstory/user/login.html">로그아웃 | </a>
+              <a href="/farmstory/index.do">HOME | </a>
+              <a href="/farmstory/index.do">로그아웃 | </a>
               <a href="/farmstory/user/register.html">회원정보 | </a>
               <a href="/farmstory/community/qna.html">고객센터</a>
             </p>
@@ -12,7 +12,7 @@
         </section>
         <section class="logo">
           <div>
-            <a href="#">
+            <a href="/farmstory/index.do">
               <img src="/farmstory/images/logo.png" alt="로고" />
             </a>
             <a href="#">
@@ -23,7 +23,7 @@
         <section class="services">
           <article>
             <div>
-              <a href="/farmstory/intro/greeting.html">
+              <a href="/farmstory/intro/greeting.jsp">
                 <img src="/farmstory/images/head_menu1.png" alt="팜스토리소개" />
               </a>
             </div>
@@ -39,12 +39,12 @@
               </a>
             </div>
             <div>
-              <a href="/farmstory/event/event-calendar.html">
+              <a href="/farmstory/events">
                 <img src="/farmstory/images/head_menu4.png" alt="이벤트" />
               </a>
             </div>
             <div>
-              <a href="/farmstory/community/notice.html">
+              <a href="/farmstory/notice.do">
                 <img src="/farmstory/images/head_menu5.png" alt="커뮤니티" />
               </a>
             </div>
